@@ -1,0 +1,92 @@
+{ config, lib, pkgs, ... }:
+
+let
+  domain = "adguard.${baseDomain}";
+  baseDomain = config.homelab.baseDomain;
+  tlsKey = "${config.security.acme.certs."${baseDomain}".directory}/key.pem";
+  tlsCert = "${config.security.acme.certs."${baseDomain}".directory}/fullchain.pem";
+  lanDomain = config.homelab.lanDomain;
+  lanIP = config.homelab.lanIP;
+  routerIP = config.homelab.routerIP;
+in
+{
+  users = {
+    groups.adguardhome = { };
+    users.adguardhome = {
+      isSystemUser = true;
+      group = "adguardhome";
+    };
+  };
+
+  sops.secrets."adguardhome/pass".owner = "adguardhome";
+
+  networking.firewall = {
+    allowedTCPPorts = [ 53 853 ];
+    allowedUDPPorts = [ 53 853 ];
+  };
+
+  networking.hosts."::1" = [ domain ];
+  networking.hosts."127.0.0.1" = [ domain ];
+
+  systemd.services.adguardhome = {
+    serviceConfig.SupplementaryGroups = [ "acme" ];
+    after = [ "time-sync.target" ];
+    wants = [ "time-sync.target" ];
+    preStart = lib.mkAfter ''
+      PASSWORD=$(cat ${config.sops.secrets."adguardhome/pass".path})
+      ${lib.getExe pkgs.gnused} -i "s,PLACEHOLDER,$PASSWORD," "$STATE_DIRECTORY/AdGuardHome.yaml"
+    '';
+  };
+
+  services.caddy.virtualHosts."https://${domain}".extraConfig = ''
+    tls ${tlsCert} ${tlsKey}
+    @lan not remote_ip private_ranges
+    respond @lan "Hi! sorry not allowed :(" 403
+    reverse_proxy http://${domain}:8086
+  '';
+
+  services.adguardhome = {
+    enable = true;
+    mutableSettings = true;
+    host = "127.0.0.1";
+    port = 8086;
+    settings = {
+      users = [
+        {
+          name = "david";
+          password = "PLACEHOLDER";
+        }
+      ];
+      filtering = {
+        rewrites = [
+          {
+            domain = "*.${baseDomain}";
+            answer = "${lanIP}";
+          }
+          {
+            domain = baseDomain;
+            answer = "${lanIP}";
+          }
+        ];
+      };
+      dns = {
+        upstream_dns = [
+          "[//]${routerIP}"
+          "[/${lanDomain}/]${routerIP}"
+          "tls://dot.ffmuc.net"
+          "https://dns10.quad9.net/dns-query"
+        ];
+        bootstrap_dns = [
+          "2001:678:e68:f000::"
+          "2001:678:ed0:f000::"
+          "5.1.66.255"
+          "185.150.99.255"
+          "9.9.9.10"
+          "149.112.112.10"
+          "2620:fe::10"
+          "2620:fe::fe:10"
+        ];
+      };
+    };
+  };
+}
