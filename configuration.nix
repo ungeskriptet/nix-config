@@ -93,6 +93,7 @@ in
     ./caddy.nix
     ./esphome.nix
     ./home-assistant.nix
+    ./mdns-scan.nix
     ./mollysocket.nix
     ./networking.nix
     ./nextcloud.nix
