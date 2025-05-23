@@ -97,6 +97,7 @@ in
     ./networking.nix
     ./nextcloud.nix
     ./ntfy-sh.nix
+    ./pixeldrain-cli.nix
     ./postgresql.nix
     ./samfirm-js.nix
     ./samsung-update-bot.nix
