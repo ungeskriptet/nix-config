@@ -42,6 +42,7 @@ in
     git
     htop
     inetutils
+    internetarchive
     ripgrep
     sops
     tmux
