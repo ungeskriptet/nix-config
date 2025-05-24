@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   domain = "nextcloud.${baseDomain}";
@@ -13,10 +13,12 @@ in
   systemd.services.nextcloud-setup = {
     requires = [ "postgresql.service" ];
     after = [ "postgresql.service" ];
-    script = ''
+    script = lib.mkAfter ''
       if [[ -e /var/lib/nextcloud/config/config.php ]]; then
           ${config.services.nextcloud.occ}/bin/nextcloud-occ maintenance:repair --include-expensive
       fi
+
+      ${lib.getExe config.services.nextcloud.occ} app:enable twofactor_totp
     '';
   };
 
@@ -72,8 +74,16 @@ in
     webfinger = true;
     configureRedis = true;
     https = true;
-    extraApps = {
-      inherit (pkgs.nextcloud31Packages.apps) notify_push;
+    extraApps = with pkgs.nextcloud31Packages.apps; {
+      inherit
+        calendar
+        contacts
+        mail
+        notify_push
+        phonetrack
+        previewgenerator
+        tasks
+      ;
     };
     caching.apcu = true;
     caching.redis = true;
