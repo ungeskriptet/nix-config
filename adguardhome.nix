@@ -7,6 +7,7 @@ let
   tlsCert = "${config.security.acme.certs."${baseDomain}".directory}/fullchain.pem";
   lanDomain = config.homelab.lanDomain;
   lanIP = config.homelab.lanIP;
+  lanIPv6 = config.homelab.lanIPv6;
   routerIP = config.homelab.routerIP;
 in
 {
@@ -67,6 +68,14 @@ in
             domain = baseDomain;
             answer = "${lanIP}";
           }
+          {
+            domain = "*.${baseDomain}";
+            answer = "${lanIPv6}";
+          }
+          {
+            domain = baseDomain;
+            answer = "${lanIPv6}";
+          }
         ];
       };
       dns = {
@@ -85,6 +94,10 @@ in
           "149.112.112.10"
           "2620:fe::10"
           "2620:fe::fe:10"
+        ];
+        trusted_proxies = [
+          "127.0.0.1/32"
+          "::1/128"
         ];
       };
       tls = {
