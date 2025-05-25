@@ -9,6 +9,7 @@ in
 {
   networking.hosts."::1" = [ domain ];
   networking.hosts."127.0.0.1" = [ domain ];
+  networking.firewall.allowedUDPPorts = [ 5353 ];
 
   systemd.services.home-assistant = {
     serviceConfig.SupplementaryGroups = [ "acme" ];
