@@ -5,6 +5,7 @@ let
   baseDomain = config.homelab.baseDomain;
   tlsKey = "${config.security.acme.certs."${baseDomain}".directory}/key.pem";
   tlsCert = "${config.security.acme.certs."${baseDomain}".directory}/fullchain.pem";
+  occ = lib.getExe config.services.nextcloud.occ;
 in
 {
   networking.hosts."::1" = [ domain ];
@@ -13,13 +14,18 @@ in
   systemd.services.nextcloud-setup = {
     requires = [ "postgresql.service" ];
     after = [ "postgresql.service" ];
+    preStart = lib.mkBefore ''
+      if [[ -e /var/lib/nextcloud/config/config.php ]]; then
+          ${occ} maintenance:mode --no-interaction --quiet --off
+      fi
+    '';
     script = lib.mkAfter ''
       if [[ -e /var/lib/nextcloud/config/config.php ]]; then
-          ${config.services.nextcloud.occ}/bin/nextcloud-occ maintenance:repair --include-expensive
+          ${occ} maintenance:repair --include-expensive
       fi
 
-      ${lib.getExe config.services.nextcloud.occ} app:enable twofactor_totp
-      ${lib.getExe config.services.nextcloud.occ} app:disable survey_client
+      ${occ} app:enable twofactor_totp
+      ${occ} app:disable survey_client
     '';
   };
 
