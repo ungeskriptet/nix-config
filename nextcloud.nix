@@ -19,6 +19,7 @@ in
       fi
 
       ${lib.getExe config.services.nextcloud.occ} app:enable twofactor_totp
+      ${lib.getExe config.services.nextcloud.occ} app:disable survey_client
     '';
   };
 
