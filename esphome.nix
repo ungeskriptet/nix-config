@@ -12,6 +12,9 @@ in
     users.esphome = {
       isSystemUser = true;
       group = "esphome";
+      home = "/var/lib/esphome";
+      homeMode = "750";
+      createHome = true;
     };
   };
 
@@ -25,7 +28,15 @@ in
   };
 
   systemd.services.esphome = {
-    serviceConfig.EnvironmentFile = config.sops.secrets."esphome/env".path;
+    serviceConfig = {
+      EnvironmentFile = config.sops.secrets."esphome/env".path;
+      User = "esphome";
+      Group = "esphome";
+      DynamicUser = lib.mkForce false;
+      PrivateTmp = lib.mkForce true;
+      RemoveIPC = lib.mkForce true;
+      RestrictSUIDSGID = lib.mkForce true;
+    };
   };
 
   services.caddy.virtualHosts = {
