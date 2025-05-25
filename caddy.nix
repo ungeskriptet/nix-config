@@ -29,10 +29,10 @@ in
     virtualHosts = {
       "https://${baseDomain}".extraConfig = ''
         tls ${tlsCert} ${tlsKey}
-        rewrite /files /files/
         root * /var/lib/caddy/www/
         file_server
-        file_server /files/ browse
+        rewrite /files /files/
+        file_server /files/* browse
       '';
       "https://${primRouterDomain}".extraConfig = ''
         tls ${tlsCert} ${tlsKey}
