@@ -17,6 +17,8 @@ in
     allowedTCPPorts = [ 443 ];
   };
 
+  sops.secrets."caddy/basicauth".owner = "caddy";
+
   systemd.services.caddy = {
     serviceConfig.SupplementaryGroups = [ "acme" ];
   };
@@ -31,8 +33,18 @@ in
         tls ${tlsCert} ${tlsKey}
         root * /var/lib/caddy/www/
         file_server
-        rewrite /files /files/
+
+        redir /files /files/ permanent
         file_server /files/* browse
+
+        redir /private /private/ permanent
+        handle_path /private/* {
+          basic_auth {
+            import ${config.sops.secrets."caddy/basicauth".path}
+          }
+          root * /var/lib/caddy/private
+          file_server browse
+        }
       '';
       "https://${primRouterDomain}".extraConfig = ''
         tls ${tlsCert} ${tlsKey}
