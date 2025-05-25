@@ -42,7 +42,7 @@ in
     tls ${tlsCert} ${tlsKey}
     @lan not remote_ip private_ranges
     respond @lan "Hi! sorry not allowed :(" 403
-    reverse_proxy http://${domain}:8086
+    reverse_proxy https://${domain}:8084
   '';
 
   services.adguardhome = {
@@ -86,6 +86,17 @@ in
           "2620:fe::10"
           "2620:fe::fe:10"
         ];
+      };
+      tls = {
+        enabled = true;
+        server_name = "adguard.david-w.eu";
+        certificate_path = tlsCert;
+        private_key_path = tlsKey;
+        force_https = true;
+        port_dns_over_tls = 853;
+        port_dns_over_quic = 853;
+        port_dnscrypt = 0;
+        port_https = 8084;
       };
     };
   };
