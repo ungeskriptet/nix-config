@@ -104,6 +104,7 @@ in
     ./samfirm-js.nix
     ./samsung-update-bot.nix
     ./soju.nix
+    ./sshwifty.nix
     ./stalwart-mail.nix
     ./vars.nix
     ./vaultwarden.nix
