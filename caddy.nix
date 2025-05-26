@@ -26,7 +26,7 @@ in
   services.caddy = {
     enable = true;
     globalConfig = ''
-      auto_https disable_certs
+      auto_https off
     '';
     virtualHosts = {
       "https://${baseDomain}".extraConfig = ''
