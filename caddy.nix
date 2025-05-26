@@ -29,6 +29,10 @@ in
       auto_https off
     '';
     virtualHosts = {
+      "https://*.${baseDomain}".extraConfig = ''
+        tls ${tlsCert} ${tlsKey}
+        redir * https://${baseDomain}/ permanent
+      '';
       "https://${baseDomain}".extraConfig = ''
         tls ${tlsCert} ${tlsKey}
         root * /var/lib/caddy/www/
