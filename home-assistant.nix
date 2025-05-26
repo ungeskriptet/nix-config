@@ -40,21 +40,25 @@ in
     enable = true;
     extraComponents = [
       "analytics"
+      "androidtv"
+      "androidtv_remote"
       "bthome"
       "default_config"
       "esphome"
+      "fritz"
       "google_translate"
       "isal"
       "met"
       "oralb"
+      "ping"
       "radio_browser"
-      "shopping_list"
       "zha"
     ];
     extraPackages = ps: with ps; [ psycopg2 ];
     config = {
-      default_config = {};
+      default_config = { };
       automation = "!include automations.yaml";
+      script = "!include scripts.yaml";
       http = {
         server_host = [ "::1" "127.0.0.1" ];
         server_port = 8083;
@@ -64,6 +68,7 @@ in
         trusted_proxies = [ "::1" "127.0.0.1" ];
       };
       recorder.db_url = "postgresql://@/hass";
+      wake_on_lan = { };
     };
   };
 }
