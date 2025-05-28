@@ -36,20 +36,6 @@ in
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    dig
-    file
-    git
-    htop
-    inetutils
-    internetarchive
-    ripgrep
-    sops
-    tmux
-    unzip
-    zip
-  ];
-
   programs.vim.enable = true;
   programs.vim.defaultEditor = true;
 
@@ -99,6 +85,7 @@ in
     ./networking.nix
     ./nextcloud.nix
     ./ntfy-sh.nix
+    ./packages.nix
     ./pixeldrain-cli.nix
     ./postgresql.nix
     ./samfirm-js.nix
