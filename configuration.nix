@@ -16,7 +16,21 @@ in
     secrets."users/david".owner = "root";
   };
 
-  boot.kernelParams = [ "video=HDMI-A-1:1280x720M@60" ];
+  boot = {
+    kernelParams = [ "video=HDMI-A-1:1280x720M@60" ];
+    kernel.sysctl = {
+      "kernel.panic" = 60;
+      "kernel.hung_task_panic" = true;
+    };
+  };
+
+  services.udev.packages = [
+    (pkgs.raspberrypi-udev-rules.override { withCpuGovernorConfig = true; })
+  ];
+
+  systemd.tmpfiles.packages = [
+    (pkgs.raspberrypi-udev-rules.override { withCpuGovernorConfig = true; })
+  ];
 
   fileSystems = {
     "/boot/firmware" = {
