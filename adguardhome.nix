@@ -9,6 +9,7 @@ let
   lanIP = config.homelab.lanIP;
   lanIPv6 = config.homelab.lanIPv6;
   routerIP = config.homelab.routerIP;
+  hostName = config.networking.hostName;
 in
 {
   users = {
@@ -59,24 +60,13 @@ in
         }
       ];
       filtering = {
-        rewrites = [
-          {
-            domain = "*.${baseDomain}";
-            answer = "${lanIP}";
-          }
-          {
-            domain = baseDomain;
-            answer = "${lanIP}";
-          }
-          {
-            domain = "*.${baseDomain}";
-            answer = "${lanIPv6}";
-          }
-          {
-            domain = baseDomain;
-            answer = "${lanIPv6}";
-          }
-        ];
+        rewrites = lib.concatLists (
+          lib.map (ip:
+            lib.map (domain:
+              { domain = domain; answer = ip; }
+            ) [ "*.${baseDomain}" baseDomain hostName ])
+          [ lanIP lanIPv6 ]
+        );
       };
       dns = {
         upstream_dns = [
