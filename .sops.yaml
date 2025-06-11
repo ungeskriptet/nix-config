@@ -1,0 +1,7 @@
+keys:
+  - &bitwarden age1x67zpr06facj4aefzlx0d3nj56qpprm43jpvry8dxf9vn6u44dpqqj7k0f
+creation_rules:
+  - path_regex: secrets/.+.yaml$
+    key_groups:
+    - age:
+      - *bitwarden
