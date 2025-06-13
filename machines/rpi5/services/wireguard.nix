@@ -9,6 +9,8 @@ in
     "wireguard/rpi5/psk-1"
     "wireguard/rpi5/psk-2"
     "wireguard/rpi5/psk-3"
+    "wireguard/support/privkey"
+    "wireguard/support/psk-1"
   ] (secret: { owner = "systemd-network"; });
 
   networking.nat = {
@@ -53,6 +55,26 @@ in
           }
         ];
       };
+      "51-wg1" = {
+        netdevConfig = {
+          Kind = "wireguard";
+          MTUBytes = "1420";
+          Name = "wg1";
+        };
+        wireguardConfig = {
+          ListenPort = 53286;
+          PrivateKeyFile = config.sops.secrets."wireguard/support/privkey".path;
+        };
+        wireguardPeers = [
+          {
+            AllowedIPs = [ "192.168.3.4" ];
+            PersistentKeepalive = 25;
+            PresharedKeyFile = config.sops.secrets."wireguard/support/psk-1".path;
+            PublicKey = "4wC5jefLRAvgsqSWX0XOtRCJ1HFKsjCD211JMnTgM3I=";
+          }
+        ];
+      };
+
     };
     networks.wg0 = {
       matchConfig.Name = "wg0";
@@ -60,6 +82,10 @@ in
       networkConfig = {
         IPMasquerade = "both";
       };
+    };
+    networks.wg1 = {
+      matchConfig.Name = "wg1";
+      address = [ "192.168.3.1/24" ];
     };
   };
 }
