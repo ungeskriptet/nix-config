@@ -34,6 +34,19 @@
   outputs = { self, nixpkgs, nixos-raspberrypi, sops-nix, lanzaboote, ... }@inputs: let
     forAllSystems = nixpkgs.lib.genAttrs [ "x86_64-linux" "aarch64-linux" ];
   in {
+    nixosConfigurations.ryuzu = nixpkgs.lib.nixosSystem {
+      specialArgs = {
+        inherit inputs;
+	vars = import ./vars.nix;
+      };
+      system = "x86_64-linux";
+      modules = [
+        ./machines/ryuzu
+        ./modules/secureboot.nix
+	sops-nix.nixosModules.sops
+	lanzaboote.nixosModules.lanzaboote
+      ];
+    };
     nixosConfigurations.xiatian = nixpkgs.lib.nixosSystem {
       specialArgs = {
         inherit inputs;
