@@ -61,6 +61,8 @@ in
 
       mkdir -p $HOME/.cache/zsh
 
+      export WORDCHARS="''${WORDCHARS//\/}"
+
       libneeds () {${readelf} -d $1 |grep '\(NEEDED\)' | sed -r 's/.*\[(.*)\]/\1/'}
       precmd () {
           gitinfo=$(${git} branch --show-current 2> /dev/null)
