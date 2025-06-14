@@ -4,7 +4,10 @@ let
   selfPkgs = inputs.self.packages.${pkgs.system};
 in
 {
-  services.udev.packages = [ pkgs.edl ];
+  services.udev.packages = with pkgs; [
+    edl
+    heimdall.udev
+  ];
 
   programs = {
     thunderbird.enable = true;
@@ -28,6 +31,7 @@ in
     bitwarden-desktop
     edl
     gimp3-with-plugins
+    heimdall
     hunspellDicts.de_DE
     hunspellDicts.en_US
     hunspellDicts.pl_PL
