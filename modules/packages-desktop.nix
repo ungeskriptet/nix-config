@@ -40,6 +40,7 @@ in
     vlc
     yt-dlp
 
+    selfPkgs.dumpyara
     selfPkgs.itgmania-zmod
     selfPkgs.odin4
     selfPkgs.outfox-alpha5
