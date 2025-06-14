@@ -5,6 +5,7 @@ let
 in
 {
   services.udev.packages = with pkgs; [
+    android-udev-rules
     edl
     heimdall.udev
   ];
