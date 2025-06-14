@@ -29,6 +29,7 @@ in
     file
     inetutils
     internetarchive
+    ncdu
     p7zip
     pciutils
     picocom
