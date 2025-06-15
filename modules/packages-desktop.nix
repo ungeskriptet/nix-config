@@ -46,6 +46,7 @@ in
     yt-dlp
 
     selfPkgs.dumpyara
+    selfPkgs.ida-pro
     selfPkgs.itgmania-zmod
     selfPkgs.odin4
     selfPkgs.outfox-alpha5

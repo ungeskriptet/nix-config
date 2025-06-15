@@ -83,6 +83,7 @@
       samfirm-js = nixpkgs.legacyPackages.${system}.callPackage ./packages/samfirm-js.nix { };
     })) {
       x86_64-linux = {
+        ida-pro = nixpkgs.legacyPackages.x86_64-linux.callPackage ./packages/ida-pro.nix { };
         itgmania-zmod = nixpkgs.legacyPackages.x86_64-linux.callPackage ./packages/itgmania-zmod.nix {
           inherit (inputs) zmod;
         };
