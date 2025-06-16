@@ -1,4 +1,4 @@
-{ config, lib, pkgs, vars, ... }:
+{ config, lib, inputs, vars, ... }:
 
 let
   domain = "ssh.${baseDomain}";
@@ -6,20 +6,8 @@ let
   tlsKey = "${config.security.acme.certs."${baseDomain}".directory}/key.pem";
   tlsCert = "${config.security.acme.certs."${baseDomain}".directory}/fullchain.pem";
 
-  sshwifty = let
-    version = "0.3.23-beta-release-prebuild";
-    url = "https://github.com/nirui/sshwifty/releases/download/0.3.23-beta-release-prebuild/sshwifty_0.3.23-beta-release_linux_arm64.tar.gz";
-    src = pkgs.fetchzip {
-    inherit url;
-      sha256 = "sha256-pQpHjODjP7ic6M/hrufKNBCJlYzDvcBcP8cKyQSBkzE=";
-      stripRoot = false;
-    };
-  in pkgs.runCommandLocal "sshwifty" {
-    meta.mainProgram = "sshwifty";
-  } ''
-    mkdir -p $out/bin
-    ln -s ${src}/sshwifty_linux_arm64 $out/bin/sshwifty
-  '';
+  arch = config.nixpkgs.hostPlatform.system;
+  sshwifty = lib.getExe inputs.self.packages.${arch}.sshwifty;
 in
 {
   networking.hosts."::1" = [ domain ];
@@ -48,7 +36,7 @@ in
       SSHWIFTY_LISTENPORT = "8089";
     };
     serviceConfig = {
-      ExecStart = lib.getExe sshwifty;
+      ExecStart = sshwifty;
       EnvironmentFile = config.sops.secrets."sshwifty/sharedkey".path;
       DynamicUser = true;
       ProtectSystem = "strict";
