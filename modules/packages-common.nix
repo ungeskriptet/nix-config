@@ -2,7 +2,6 @@
 
 let
   selfPkgs = inputs.self.packages.${pkgs.system};
-  samsung-grab = inputs.samsung-grab.packages.${pkgs.system}.default;
 in
 {
   programs = {
@@ -44,7 +43,6 @@ in
     usbutils
     zip
 
-    samsung-grab
     selfPkgs.mdns-scan
     (selfPkgs.pixeldrain-cli.override {
       apiKeyFile = config.sops.secrets."pixeldrain/apikey".path;

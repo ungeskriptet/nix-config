@@ -11,6 +11,7 @@
     ./nextcloud.nix
     ./ntfy-sh.nix
     ./postgresql.nix
+    ./samsung-grab.nix
     ./samsung-update-bot.nix
     ./soju.nix
     ./sshwifty.nix
