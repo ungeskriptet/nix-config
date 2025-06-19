@@ -23,6 +23,7 @@ in
     binutils
     binwalk
     dig
+    dnsmasq
     dtc
     ffmpeg
     file
