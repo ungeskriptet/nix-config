@@ -40,6 +40,7 @@ in
       enable-signup = false;
       enable-login = true;
       keepalive-interval = "70s";
+      visitor-request-limit-exempt-hosts = baseDomain;
     };
   };
 }
