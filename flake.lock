@@ -148,11 +148,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1749156319,
-        "narHash": "sha256-Eilhss+fV1Fp88Sua5LwPnxGJ2A1/3TEDI1cMQja/+w=",
+        "lastModified": 1750433245,
+        "narHash": "sha256-s0FKw387jGDPzsNfRUk6LCPTa3WvVV+OnNmXjPKPM4E=",
         "owner": "nvmd",
         "repo": "nixos-raspberrypi",
-        "rev": "dc5ff85af8a5c1e0913bfdc15e419ae430fd0df2",
+        "rev": "cc8f87e471541e4aafa93f59d6a8e88abf2c3bc5",
         "type": "github"
       },
       "original": {
@@ -164,11 +164,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1748882666,
-        "narHash": "sha256-z2uanxifOXGEqdiprquIGZu0XaRYih3FHXDQwLc1xis=",
+        "lastModified": 1750272410,
+        "narHash": "sha256-iJ6YkbuSbRTj1R1puvFPzkLvCNAOJW/YtffkqUItZG0=",
         "owner": "nvmd",
         "repo": "nixpkgs",
-        "rev": "d2e9e5abf6308b83487d26e383799f7520dc5cdf",
+        "rev": "fb3751164f6eead0265234da8ee854b59d5ca353",
         "type": "github"
       },
       "original": {
@@ -180,11 +180,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1749794982,
-        "narHash": "sha256-Kh9K4taXbVuaLC0IL+9HcfvxsSUx8dPB5s5weJcc9pc=",
+        "lastModified": 1750506804,
+        "narHash": "sha256-VLFNc4egNjovYVxDGyBYTrvVCgDYgENp5bVi9fPTDYc=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "ee930f9755f58096ac6e8ca94a1887e0534e2d81",
+        "rev": "4206c4cb56751df534751b058295ea61357bbbaa",
         "type": "github"
       },
       "original": {
@@ -258,11 +258,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1750168415,
-        "narHash": "sha256-F+x2mh7/qYJWA/7BfrXONtqYiHeJBGKjNixnBnXNWsY=",
+        "lastModified": 1750827162,
+        "narHash": "sha256-IngpagqE+emvKxklYsLb1rm7jHIMMcUPRrGvN2RPBuQ=",
         "owner": "ungeskriptet",
         "repo": "samsung-grab",
-        "rev": "b9a09d17116a29a5bc3cb430f246fe0ed477365c",
+        "rev": "c73ecc524225ec561dd340448934b5a82becc363",
         "type": "github"
       },
       "original": {
@@ -294,11 +294,11 @@
     "zmod": {
       "flake": false,
       "locked": {
-        "lastModified": 1749711851,
-        "narHash": "sha256-YS+GkWnHmyzjCb6Y8M7wyQT98bwH9T026IczBLDofG0=",
+        "lastModified": 1750742720,
+        "narHash": "sha256-2h4WzrpTtE1xTpmBXbsh8xDkluMCS/Z6nOhKSjot/T0=",
         "owner": "zarzob",
         "repo": "Simply-Love-SM5",
-        "rev": "0b5441576505309d3c591aee04b3252c565bc99a",
+        "rev": "098b010be0cfe2ded5b59cf0cbd7bd154f88d8d0",
         "type": "github"
       },
       "original": {
