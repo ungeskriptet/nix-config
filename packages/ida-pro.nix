@@ -93,7 +93,7 @@ stdenv.mkDerivation rec {
     mv ida.hexlic idapro.hexlic
     popd
 
-    patchelf --add-needed libpython3.12.so $out/lib/libida.so
+    patchelf --add-needed libpython3.13.so $out/lib/libida.so
     patchelf --add-needed libcrypto.so $out/lib/libida.so
 
     addAutoPatchelfSearchPath $IDADIR
