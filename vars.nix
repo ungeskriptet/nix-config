@@ -5,7 +5,7 @@
 
   sshPubKeys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP+HHP+nC6vrDwqEbTgiNhFnaqD3WEBgZMq7FUPWV0Ls main@bitwarden"
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINOyckAtDOO5eRG9xYOzRWLNnGtBCq/Om/sLPEFLBtT8 david@key4"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDwbbh5g3ustRbSg1T8etYXTwVLC5QRTuhGhhT23sJwE david@key4"
   ];
 
   rpi5 = {
