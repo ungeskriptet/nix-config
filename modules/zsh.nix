@@ -71,6 +71,9 @@ in
 	    sleep 1
 	done
       }
+      last-journalctl () {
+        journalctl _SYSTEMD_INVOCATION_ID=`systemctl show -p InvocationID --value $1`
+      }
       libneeds () {${readelf} -d $1 |grep '\(NEEDED\)' | sed -r 's/.*\[(.*)\]/\1/'}
       precmd () {
           gitinfo=$(${git} branch --show-current 2> /dev/null)
