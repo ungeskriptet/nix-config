@@ -41,6 +41,7 @@ in
     hyphenDicts.en_US
     kdePackages.sddm-kcm
     libreoffice-qt6-fresh
+    meld
     qbittorrent
     signal-desktop
     vlc
