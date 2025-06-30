@@ -1,4 +1,4 @@
-{ config, vars, ... }:
+{ config, lib, vars, ... }:
 let
   lanIP = vars.rpi5.lanIP;
   lanIPv6 = vars.rpi5.lanIPv6;
@@ -24,7 +24,13 @@ in
       DHCP = "no";
       address = [ "${lanIP}/24" "${lanIPv6}/64" ];
       gateway = [ routerIP ];
-      dns = [ "5.1.66.255" "2001:678:e68:f000::" ];
+      dns = lib.optionals config.services.adguardhome.enable [
+        "::1"
+	"127.0.0.1"
+      ] ++ [
+        "2001:678:e68:f000::"
+        "5.1.66.255"
+      ];
       networkConfig = {
         IPv6AcceptRA = true;
       };
