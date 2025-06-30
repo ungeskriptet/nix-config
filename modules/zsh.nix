@@ -65,6 +65,9 @@ in
 
       export WORDCHARS="''${WORDCHARS//\/}"
 
+      duplines () {
+        sort $1 | uniq --count --repeated
+      }
       heimdall-wait-for-device () {
 	echo "< waiting for any device >"
 	while ! ${heimdall} detect > /dev/null 2>&1; do
