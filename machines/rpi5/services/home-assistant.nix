@@ -49,6 +49,7 @@ in
       "google_translate"
       "isal"
       "met"
+      "nfandroidtv"
       "oralb"
       "ping"
       "radio_browser"
