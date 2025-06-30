@@ -6,6 +6,7 @@
     ./adguardhome.nix
     ./caddy.nix
     ./esphome.nix
+    ./firefox.nix
     ./home-assistant.nix
     ./mollysocket.nix
     ./nextcloud.nix
