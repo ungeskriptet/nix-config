@@ -19,7 +19,7 @@ in
   systemd.network = {
     enable = true;
     networks."10-lan" = {
-      matchConfig.Type = "ether";
+      matchConfig.Name = "end0";
       linkConfig.RequiredForOnline = "routable";
       DHCP = "no";
       address = [ "${lanIP}/24" "${lanIPv6}/64" ];
