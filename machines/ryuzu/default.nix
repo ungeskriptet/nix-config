@@ -11,6 +11,7 @@
   sops.defaultSopsFile = "${inputs.self}/secrets/secrets-ryuzu.yaml";
 
   networking.hostName = "ryuzu";
+  networking.interfaces.enp4s0.wakeOnLan.enable = true;
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.loader.efi.canTouchEfiVariables = true;
