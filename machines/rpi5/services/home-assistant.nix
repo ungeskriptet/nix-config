@@ -43,6 +43,7 @@ in
       "androidtv"
       "androidtv_remote"
       "bthome"
+      "cast"
       "default_config"
       "esphome"
       "fritz"
