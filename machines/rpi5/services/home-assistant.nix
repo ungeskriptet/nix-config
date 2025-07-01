@@ -1,10 +1,11 @@
-{ config, vars, ... }:
+{ config, lib, pkgs, vars, ... }:
 
 let
   domain = "home.${baseDomain}";
   baseDomain = vars.baseDomain;
   tlsKey = "${config.security.acme.certs."${baseDomain}".directory}/key.pem";
   tlsCert = "${config.security.acme.certs."${baseDomain}".directory}/fullchain.pem";
+  ssh = lib.getExe pkgs.openssh;
 in
 {
   networking.hosts."::1" = [ domain ];
@@ -61,6 +62,9 @@ in
       default_config = { };
       automation = "!include automations.yaml";
       script = "!include scripts.yaml";
+      shell_command = {
+        poweroff_ryuzu = "${ssh} -i /var/lib/hass/ssh/id_ed25519 -o StrictHostKeyChecking=no david@ryuzu sudo poweroff";
+      };
       http = {
         server_host = [ "::1" "127.0.0.1" ];
         server_port = 8083;
