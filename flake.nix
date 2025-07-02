@@ -18,7 +18,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     samsung-grab = {
-      url = "github:ungeskriptet/samsung-grab";
+      url = "git+https://codeberg.org/ungeskriptet/samsung-grab";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     sops-nix = {
