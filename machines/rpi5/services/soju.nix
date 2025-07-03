@@ -34,8 +34,8 @@ in
   };
 
   systemd.services.soju = {
-    requires = [ "postgresql.service" ];
-    after = [ "postgresql.service" ];
+    requires = [ "postgresql.target" ];
+    after = [ "postgresql.target" ];
     postStart = ''
       while [[ ! -S /run/soju/socket ]]; do
         sleep 1

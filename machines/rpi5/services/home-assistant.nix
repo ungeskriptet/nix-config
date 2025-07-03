@@ -14,8 +14,8 @@ in
 
   systemd.services.home-assistant = {
     serviceConfig.SupplementaryGroups = [ "acme" ];
-    requires = [ "postgresql.service" ];
-    after = [ "postgresql.service" ];
+    requires = [ "postgresql.target" ];
+    after = [ "postgresql.target" ];
   };
 
   services.caddy.virtualHosts = {

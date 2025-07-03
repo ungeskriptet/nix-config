@@ -37,15 +37,15 @@ in
 
   systemd.services.stalwart-mail = {
     serviceConfig.SupplementaryGroups = [ "acme" "stalwart-pw" ];
-    requires = [ "postgresql.service" ];
-    after = [ "postgresql.service" ];
+    requires = [ "postgresql.target" ];
+    after = [ "postgresql.target" ];
   };
 
-  systemd.services.postgresql = {
+  systemd.services.postgresql-setup = {
     serviceConfig.SupplementaryGroups = [ "stalwart-pw" ];
-    postStart = lib.mkAfter ''
+    script = lib.mkAfter ''
       PASSWORD=$(cat ${config.sops.secrets."stalwart/dbpass".path})
-      $PSQL -tAc "ALTER USER \"stalwart-mail\" WITH PASSWORD '$PASSWORD';"
+      psql -tAc "ALTER USER \"stalwart-mail\" WITH PASSWORD '$PASSWORD';"
     '';
   };
 

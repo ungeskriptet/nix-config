@@ -12,8 +12,8 @@ in
   networking.hosts."127.0.0.1" = [ domain ];
 
   systemd.services.nextcloud-setup = {
-    requires = [ "postgresql.service" ];
-    after = [ "postgresql.service" ];
+    requires = [ "postgresql.target" ];
+    after = [ "postgresql.target" ];
     preStart = lib.mkBefore ''
       if [[ -e /var/lib/nextcloud/config/config.php ]]; then
           ${occ} maintenance:mode --no-interaction --quiet --off
