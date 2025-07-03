@@ -145,7 +145,9 @@
       "inputs": {
         "argononed": "argononed",
         "nixos-images": "nixos-images",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": [
+          "rpipkgs"
+        ]
       },
       "locked": {
         "lastModified": 1751407842,
@@ -163,22 +165,6 @@
       }
     },
     "nixpkgs": {
-      "locked": {
-        "lastModified": 1750272410,
-        "narHash": "sha256-iJ6YkbuSbRTj1R1puvFPzkLvCNAOJW/YtffkqUItZG0=",
-        "owner": "nvmd",
-        "repo": "nixpkgs",
-        "rev": "fb3751164f6eead0265234da8ee854b59d5ca353",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nvmd",
-        "ref": "modules-with-keys-25.05",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_2": {
       "locked": {
         "lastModified": 1751271578,
         "narHash": "sha256-P/SQmKDu06x8yv7i0s8bvnnuJYkxVGBWLWHaU+tt4YY=",
@@ -224,10 +210,27 @@
       "inputs": {
         "lanzaboote": "lanzaboote",
         "nixos-raspberrypi": "nixos-raspberrypi",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs",
+        "rpipkgs": "rpipkgs",
         "samsung-grab": "samsung-grab",
         "sops-nix": "sops-nix",
         "zmod": "zmod"
+      }
+    },
+    "rpipkgs": {
+      "locked": {
+        "lastModified": 1751538838,
+        "narHash": "sha256-J9MYACBtiFr3eq8HzLa0SOft4Chei/YmfdoVsINk/qc=",
+        "owner": "ungeskriptet",
+        "repo": "nixpkgs",
+        "rev": "f71a617340af14075adc9bb35ce2c038daa8b12e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ungeskriptet",
+        "ref": "rpi5",
+        "repo": "nixpkgs",
+        "type": "github"
       }
     },
     "rust-overlay": {
@@ -258,10 +261,10 @@
         ]
       },
       "locked": {
-        "lastModified": 1750827162,
-        "narHash": "sha256-IngpagqE+emvKxklYsLb1rm7jHIMMcUPRrGvN2RPBuQ=",
+        "lastModified": 1751436080,
+        "narHash": "sha256-C/VS0aNVTJkogk40MQ9fgPuHCNHtOVXX1MWzcoCKTSk=",
         "ref": "refs/heads/master",
-        "rev": "c73ecc524225ec561dd340448934b5a82becc363",
+        "rev": "0d2f441cc02e4ebc7f2c8c2fbef07d6f93090560",
         "revCount": 1,
         "type": "git",
         "url": "https://codeberg.org/ungeskriptet/samsung-grab"

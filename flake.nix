@@ -12,10 +12,14 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixos-raspberrypi.url = "github:nvmd/nixos-raspberrypi/develop";
+    rpipkgs.url = "github:ungeskriptet/nixpkgs/rpi5";
     lanzaboote = {
       url = "github:nix-community/lanzaboote";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nixos-raspberrypi = {
+      url = "github:nvmd/nixos-raspberrypi/develop";
+      inputs.nixpkgs.follows = "rpipkgs";
     };
     samsung-grab = {
       url = "git+https://codeberg.org/ungeskriptet/samsung-grab";
@@ -61,6 +65,7 @@
       ];
     };
     nixosConfigurations.rpi5 = nixos-raspberrypi.lib.nixosSystem {
+      nixpkgs = inputs.rpipkgs;
       specialArgs = {
         inherit inputs nixos-raspberrypi;
         vars = import ./vars.nix;
