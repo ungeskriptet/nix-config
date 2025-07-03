@@ -79,12 +79,12 @@ in
         private-key = "%{file:${tlsKey}}%";
         default = true;
       };
+      http = {
+        url = "protocol + '://${domain}:443'";
+        use-x-forwarded = true;
+      };
       server = {
         hostname = domain;
-        http = {
-          url = "protocol + '://${domain}:443'";
-          use-x-forwarded = true;
-        };
         listener.http = {
           protocol = "http";
           bind = [ "[::1]:8087" "127.0.0.1:8087" ];
