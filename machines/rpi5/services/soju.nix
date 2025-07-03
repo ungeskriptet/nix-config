@@ -24,6 +24,15 @@ in
   networking.hosts."::1" = [ domain ];
   networking.hosts."127.0.0.1" = [ domain ];
 
+  users = {
+    groups.soju = { };
+    users.soju = {
+      group = "soju";
+      isSystemUser = true;
+      createHome = false;
+    };
+  };
+
   systemd.services.soju = {
     requires = [ "postgresql.service" ];
     after = [ "postgresql.service" ];
