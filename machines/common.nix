@@ -41,7 +41,7 @@
   console.keyMap = "de";
   services.xserver.xkb.layout = "de";
   i18n = {
-    defaultLocale = "en_US.UTF-8";
+    defaultLocale = lib.mkDefault "en_US.UTF-8";
     extraLocaleSettings = lib.genAttrs [
       "LC_ADDRESS" "LC_IDENTIFICATION"
       "LC_NAME"    "LC_MEASUREMENT"
