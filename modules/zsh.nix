@@ -68,6 +68,9 @@ in
       duplines () {
         sort $1 | uniq --count --repeated
       }
+      gh-cherry-pick () {
+        curl https://github.com/$1/commit/$2.patch | git am
+      }
       heimdall-wait-for-device () {
 	echo "< waiting for any device >"
 	while ! ${heimdall} detect > /dev/null 2>&1; do
