@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 let
   selfPkgs = inputs.self.packages.${pkgs.system};
@@ -6,6 +6,7 @@ in
 {
   programs = {
     git.enable = true;
+    pixeldrain-cli.enable = lib.mkDefault true;
     htop.enable = true;
     neovim = {
       enable = true;
@@ -45,14 +46,6 @@ in
     zip
 
     selfPkgs.mdns-scan
-    (selfPkgs.pixeldrain-cli.override {
-      apiKeyFile = config.sops.secrets."pixeldrain/apikey".path;
-    })
     selfPkgs.samfirm-js
   ];
-
-  sops = {
-    secrets."pixeldrain/apikey".owner = "root";
-    secrets."pixeldrain/apikey".mode = "0444";
-  };
 }
