@@ -64,6 +64,19 @@
         lanzaboote.nixosModules.lanzaboote
       ];
     };
+    nixosConfigurations.daruma = nixpkgs.lib.nixosSystem {
+      specialArgs = {
+        inherit inputs;
+        vars = import ./vars.nix;
+      };
+      system = "x86_64-linux";
+      modules = [
+        ./machines/daruma
+        ./modules/secureboot.nix
+        sops-nix.nixosModules.sops
+        lanzaboote.nixosModules.lanzaboote
+      ];
+    };
     nixosConfigurations.rpi5 = nixos-raspberrypi.lib.nixosSystem {
       nixpkgs = inputs.rpipkgs;
       specialArgs = {
