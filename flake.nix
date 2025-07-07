@@ -12,7 +12,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    rpipkgs.url = "github:ungeskriptet/nixpkgs/rpi5";
+    rpipkgs.url = "git+https://codeberg.org/ungeskriptet/nixpkgs?ref=rpi5";
     lanzaboote = {
       url = "github:nix-community/lanzaboote";
       inputs.nixpkgs.follows = "nixpkgs";
