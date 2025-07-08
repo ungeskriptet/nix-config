@@ -49,6 +49,7 @@ in
 
     samsung-grab
     selfPkgs.dumpyara
+    selfPkgs.extract-dtb
     selfPkgs.ida-pro
     selfPkgs.itgmania-zmod
     selfPkgs.odin4
