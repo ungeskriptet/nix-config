@@ -6,6 +6,7 @@
   imports = [
     ./hardware-configuration.nix
     ../desktop.nix
+    ../../modules/minecraft-server.nix
   ];
 
   sops.defaultSopsFile = "${inputs.self}/secrets/secrets-ryuzu.yaml";
