@@ -42,6 +42,7 @@ in
     kdePackages.sddm-kcm
     libreoffice-qt6-fresh
     meld
+    prismlauncher
     qbittorrent
     signal-desktop
     vlc
