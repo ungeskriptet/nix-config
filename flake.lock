@@ -166,11 +166,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1751792365,
-        "narHash": "sha256-J1kI6oAj25IG4EdVlg2hQz8NZTBNYvIS0l4wpr9KcUo=",
+        "lastModified": 1751984180,
+        "narHash": "sha256-LwWRsENAZJKUdD3SpLluwDmdXY9F45ZEgCb0X+xgOL0=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "1fd8bada0b6117e6c7eb54aad5813023eed37ccb",
+        "rev": "9807714d6944a957c2e036f84b0ff8caf9930bc0",
         "type": "github"
       },
       "original": {
@@ -219,11 +219,11 @@
     },
     "rpipkgs": {
       "locked": {
-        "lastModified": 1751870182,
-        "narHash": "sha256-dXwWnV3tD5Ck5qSFVA1XmHIAqA2U2UGRa/av09sa7lc=",
+        "lastModified": 1752150853,
+        "narHash": "sha256-psPVaIgjRoqaj6ShvActFoi00bvPblZ/gJY0bxEgW1c=",
         "ref": "rpi5",
-        "rev": "c20dfb25c9f59e6ad0bd7dee039224f4bcc9307e",
-        "revCount": 826399,
+        "rev": "69c95b797a253da55cbd8ef10a8d29407122d786",
+        "revCount": 827796,
         "type": "git",
         "url": "https://codeberg.org/ungeskriptet/nixpkgs"
       },
