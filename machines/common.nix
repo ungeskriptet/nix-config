@@ -11,7 +11,10 @@
 
   sops.age.keyFile = "/var/lib/sops-nix/key.txt";
 
-  boot.kernel.sysctl."kernel.dmesg_restrict" = false;
+  boot.kernel.sysctl = {
+    "kernel.dmesg_restrict" = false;
+    "kernel.sysrq" = true;
+  };
   boot.tmp.cleanOnBoot = true;
 
   security.rtkit.enable = true;
