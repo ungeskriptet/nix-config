@@ -30,6 +30,7 @@ in
     file
     inetutils
     internetarchive
+    lz4
     ncdu
     p7zip
     pciutils
