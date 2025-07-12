@@ -44,6 +44,7 @@ in
     meld
     prismlauncher
     qbittorrent
+    scrcpy
     signal-desktop
     vlc
     yt-dlp
