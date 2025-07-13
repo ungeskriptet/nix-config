@@ -30,7 +30,7 @@ in
   };
 
   networking.firewall = {
-    allowedTCPPorts = [ 25 465 993 ];
+    allowedTCPPorts = [ 25 465 993 4190 ];
   };
 
   networking.hosts."127.0.0.1" = [ domain ];
@@ -102,6 +102,11 @@ in
         listener.imap = {
           protocol = "imap";
           bind = [ "[::]:993" ];
+          tls.implicit = true;
+        };
+        listener.sieve = {
+          protocol = "managesieve";
+          bind = [ "[::]:4190" ];
           tls.implicit = true;
         };
       };
