@@ -20,6 +20,16 @@
   };
 
   environment.sessionVariables.SSH_ASKPASS_REQUIRE = "prefer";
+  systemd.user.services.ssh-add = {
+    wantedBy = [ "default.target" ];
+    requires = [ "ssh-agent.service" ];
+    after = [ "ssh-agent.service" ];
+    script = ''
+      ${pkgs.openssh}/bin/ssh-add -q < /dev/null
+    '';
+    unitConfig.ConditionUser = "!@system";
+    serviceConfig.Restart = "on-failure";
+  };
 
   networking.networkmanager.enable = true;
 
