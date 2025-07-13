@@ -110,6 +110,13 @@ in
           tls.implicit = true;
         };
       };
+      email.folders = {
+        archive = {
+	  name = "Archive";
+	  create = true;
+	  subscribe = true;
+	};
+      };
     };
   };
 
