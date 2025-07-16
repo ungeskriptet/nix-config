@@ -15,4 +15,6 @@
   networking.hostName = "rpi5";
 
   security.sudo.wheelNeedsPassword = false;
+
+  nix.settings.max-jobs = 1;
 }
