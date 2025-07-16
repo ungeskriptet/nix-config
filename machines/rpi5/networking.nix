@@ -1,5 +1,6 @@
 { config, lib, vars, ... }:
 let
+  lanDomain = vars.lanDomain;
   lanIP = vars.rpi5.lanIP;
   lanIPv6 = vars.rpi5.lanIPv6;
   routerIP = vars.routerIP;
@@ -24,6 +25,7 @@ in
       DHCP = "no";
       address = [ "${lanIP}/24" "${lanIPv6}/64" ];
       gateway = [ routerIP ];
+      domains = [ lanDomain ];
       dns = lib.optionals config.services.adguardhome.enable [
         "::1"
 	"127.0.0.1"
