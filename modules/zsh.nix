@@ -1,9 +1,12 @@
 { config, lib, pkgs, ... }:
 
 let
+  adb = lib.getExe' pkgs.android-tools "adb";
+  curl = lib.getExe pkgs.curl;
   ffmpeg = lib.getExe pkgs.ffmpeg;
   git = lib.getExe pkgs.git;
   heimdall = lib.getExe pkgs.heimdall;
+  jq = lib.getExe pkgs.jq;
   readelf = lib.getExe' pkgs.binutils "readelf";
   yt-dlp = lib.getExe pkgs.yt-dlp;
 in
@@ -67,6 +70,14 @@ in
 
       duplines () {
         sort $1 | uniq --count --repeated
+      }
+      fdroid-install () {
+        echo "< waiting for any device >"
+        ${adb} wait-for-device &&
+        rm -f "$1.apk"
+        ${curl} https://f-droid.org/repo/$1_$(${curl} -s https://f-droid.org/api/v1/packages/$1 | ${jq} .suggestedVersionCode).apk -o "$1.apk"
+        ${adb} install "$1.apk"
+        [[ $2 = "--no-rm" ]] || rm -f "$1.apk"
       }
       gh-cherry-pick () {
         curl https://github.com/$1/commit/$2.patch | git am
