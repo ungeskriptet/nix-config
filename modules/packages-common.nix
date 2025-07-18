@@ -26,6 +26,7 @@ in
     dig
     dnsmasq
     dtc
+    exfat
     ffmpeg
     file
     inetutils
