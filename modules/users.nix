@@ -32,7 +32,8 @@ in
           [ "wheel" ]
           ++ lib.optionals config.networking.networkmanager.enable [ "networkmanager" ]
           ++ lib.optionals config.programs.wireshark.enable [ "wireshark" ]
-          ++ lib.optionals config.virtualisation.libvirtd.enable [ "libvirt" ];
+          ++ lib.optionals config.virtualisation.libvirtd.enable [ "libvirt" ]
+          ++ lib.optionals config.virtualisation.podman.enable [ "podman" ];
         hashedPasswordFile = config.sops.secrets."users/${cfg.userName}".path;
         openssh.authorizedKeys.keys = vars.sshPubKeys
           ++ lib.optionals (config.networking.hostName == "ryuzu") [
