@@ -85,7 +85,9 @@ in
       inherit
         calendar
         contacts
+        dav_push
         mail
+        notes
         notify_push
         phonetrack
         previewgenerator
