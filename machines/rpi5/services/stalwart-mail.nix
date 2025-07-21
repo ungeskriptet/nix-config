@@ -117,6 +117,17 @@ in
 	  subscribe = true;
 	};
       };
+      report.analysis = {
+        addresses = [
+          "abuse@*"
+          "dmarc@*"
+          "noreply-dmarc-support@*"
+          "noreply-smtp-tls-reporting@*"
+          "postmaster@*"
+        ];
+        forward = true;
+        store = "30d";
+      };
     };
   };
 
