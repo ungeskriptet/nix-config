@@ -111,5 +111,9 @@
         outfox-alpha5 = nixpkgs.legacyPackages.x86_64-linux.callPackage ./packages/outfox-alpha5.nix { };
       };
     };
+
+    formatter = forAllSystems (system:
+      nixpkgs.legacyPackages.${system}.nixfmt-tree
+    );
   };
 }
