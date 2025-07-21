@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   interfaceName = "end0";
@@ -20,6 +20,10 @@ in
   };
 
   networking.firewall.allowedUDPPorts = [ 33434 ];
+
+  environment.systemPackages = with pkgs; [
+    wireguard-tools
+  ];
 
   systemd.network = {
     enable = true;
