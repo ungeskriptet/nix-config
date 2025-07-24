@@ -16,6 +16,10 @@ in
     };
     ssh = {
       startAgent = true;
+      extraConfig = ''
+        Host git-ssh.mainlining.org
+          ProxyCommand ${lib.getExe pkgs.cloudflared} access ssh --hostname %h
+      '';
     };
   };
 
