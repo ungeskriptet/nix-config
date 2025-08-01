@@ -21,6 +21,12 @@ in
           ProxyCommand ${lib.getExe pkgs.cloudflared} access ssh --hostname %h
       '';
     };
+    tmux = {
+      enable = true;
+      extraConfig = ''
+        set -g mouse on
+      '';
+    };
   };
 
   environment.systemPackages = with pkgs; [
@@ -45,7 +51,6 @@ in
     ripgrep
     rsync
     sops
-    tmux
     unrar
     unzip
     usbutils
