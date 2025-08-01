@@ -55,7 +55,7 @@ in
             AllowedIPs = [ "192.168.128.4/32" "fd96::4/128"]; # e3q
             PersistentKeepalive = 25;
             PresharedKeyFile = config.sops.secrets."wireguard/rpi5/psk-3".path;
-            PublicKey = "qNNlD2WXie101mhvDqgBWLQHLOEnl8MRLRtdeNhXEDE=";
+            PublicKey = "lWicyBn8SEltKKGSVNZMJ4KodIDdnGqNO5DtiaGzqT0=";
           }
         ];
       };
