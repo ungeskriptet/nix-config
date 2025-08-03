@@ -18,6 +18,7 @@ in
         "wireguard/rpi5/psk-3"
         "wireguard/support/privkey"
         "wireguard/support/psk-1"
+        "wireguard/support/psk-2"
       ]
       (secret: {
         owner = "systemd-network";
@@ -29,7 +30,10 @@ in
     internalInterfaces = [ "wg0" ];
   };
 
-  networking.firewall.allowedUDPPorts = [ 33434 ];
+  networking.firewall.allowedUDPPorts = [
+    33434
+    53286
+  ];
 
   environment.systemPackages = with pkgs; [
     wireguard-tools
@@ -90,10 +94,16 @@ in
         };
         wireguardPeers = [
           {
-            AllowedIPs = [ "192.168.3.4" ];
+            AllowedIPs = [ "192.168.3.4/32" ];
             PersistentKeepalive = 25;
             PresharedKeyFile = config.sops.secrets."wireguard/support/psk-1".path;
             PublicKey = "4wC5jefLRAvgsqSWX0XOtRCJ1HFKsjCD211JMnTgM3I=";
+          }
+          {
+            AllowedIPs = [ "192.168.3.2/32" ];
+            PersistentKeepalive = 25;
+            PresharedKeyFile = config.sops.secrets."wireguard/support/psk-2".path;
+            PublicKey = "4oTuxNTPPqamD9fuQkdzpPILoDufM0Bh18jxrg1uZFM=";
           }
         ];
       };
