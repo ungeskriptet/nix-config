@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   updateBot = pkgs.python3.pkgs.buildPythonPackage rec {
@@ -6,7 +11,7 @@ let
     version = "0.0.1";
     pyproject = true;
     nativeBuildInputs = [ pkgs.python3Packages.setuptools ];
-    propagatedBuildInputs  = [ pkgs.python3Packages.requests ];
+    propagatedBuildInputs = [ pkgs.python3Packages.requests ];
     src = pkgs.fetchFromGitHub {
       owner = "samsung-sm8650";
       repo = "update-bot";

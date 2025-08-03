@@ -1,4 +1,10 @@
-{ config, lib, pkgs, vars, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  vars,
+  ...
+}:
 
 let
   domain = "adguard.${baseDomain}";
@@ -23,8 +29,14 @@ in
   sops.secrets."adguardhome/pass".owner = "adguardhome";
 
   networking.firewall = {
-    allowedTCPPorts = [ 53 853 ];
-    allowedUDPPorts = [ 53 853 ];
+    allowedTCPPorts = [
+      53
+      853
+    ];
+    allowedUDPPorts = [
+      53
+      853
+    ];
   };
 
   networking.hosts."::1" = [ domain ];
@@ -61,11 +73,24 @@ in
       ];
       filtering = {
         rewrites = lib.concatLists (
-          lib.map (ip:
-            lib.map (domain:
-              { domain = domain; answer = ip; }
-            ) [ "*.${baseDomain}" baseDomain hostName ])
-          [ lanIP lanIPv6 ]
+          lib.map
+            (
+              ip:
+              lib.map
+                (domain: {
+                  domain = domain;
+                  answer = ip;
+                })
+                [
+                  "*.${baseDomain}"
+                  baseDomain
+                  hostName
+                ]
+            )
+            [
+              lanIP
+              lanIPv6
+            ]
         );
       };
       dns = {

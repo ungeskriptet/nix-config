@@ -1,6 +1,11 @@
 # ASRock B550M Pro4 AMD Desktop
 
-{ inputs, pkgs, lib, ... }:
+{
+  inputs,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   imports = [

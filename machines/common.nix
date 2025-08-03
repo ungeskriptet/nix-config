@@ -34,10 +34,10 @@
   };
 
   environment.sessionVariables = {
-    XDG_CACHE_HOME  = "$HOME/.cache";
+    XDG_CACHE_HOME = "$HOME/.cache";
     XDG_CONFIG_HOME = "$HOME/.config";
-    XDG_DATA_HOME   = "$HOME/.local/share";
-    XDG_STATE_HOME  = "$HOME/.local/state";
+    XDG_DATA_HOME = "$HOME/.local/share";
+    XDG_STATE_HOME = "$HOME/.local/state";
     PATH = [ "$HOME/.local/bin" ];
   };
 
@@ -47,16 +47,23 @@
   i18n = {
     defaultLocale = lib.mkDefault "en_US.UTF-8";
     extraLocaleSettings = lib.genAttrs [
-      "LC_ADDRESS" "LC_IDENTIFICATION"
-      "LC_NAME"    "LC_MEASUREMENT"
-      "LC_NUMERIC" "LC_MONETARY"
-      "LC_PAPER"   "LC_TELEPHONE"
+      "LC_ADDRESS"
+      "LC_IDENTIFICATION"
+      "LC_NAME"
+      "LC_MEASUREMENT"
+      "LC_NUMERIC"
+      "LC_MONETARY"
+      "LC_PAPER"
+      "LC_TELEPHONE"
       "LC_TIME"
     ] (var: "de_DE.UTF-8");
   };
 
   nix = {
-    settings.experimental-features = [ "nix-command" "flakes" ];
+    settings.experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
     gc.automatic = true;
     gc.dates = "weekly";
     gc.options = "--delete-older-than 7d";

@@ -1,7 +1,7 @@
 {
   stdenv,
   fetchurl,
-  p7zip
+  p7zip,
 }:
 
 stdenv.mkDerivation rec {

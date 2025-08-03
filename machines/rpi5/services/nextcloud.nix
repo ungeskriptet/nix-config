@@ -1,4 +1,10 @@
-{ config, lib, pkgs, vars, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  vars,
+  ...
+}:
 
 let
   domain = "nextcloud.${baseDomain}";
@@ -66,7 +72,7 @@ in
 
   sops.templates."nextcloud/secretconfig" = {
     content = builtins.toJSON {
-        mail_smtppassword = config.sops.placeholder."nextcloud/smtppass";
+      mail_smtppassword = config.sops.placeholder."nextcloud/smtppass";
     };
     owner = "nextcloud";
   };
@@ -92,7 +98,7 @@ in
         phonetrack
         previewgenerator
         tasks
-      ;
+        ;
     };
     caching.apcu = true;
     caching.redis = true;
@@ -104,8 +110,15 @@ in
     settings = {
       default_phone_region = "DE";
       maintenance_window_start = 1;
-      trusted_proxies = [ "::1" "127.0.0.1" ];
-      trusted_domains = [ "::1" "127.0.0.1" "localhost" ];
+      trusted_proxies = [
+        "::1"
+        "127.0.0.1"
+      ];
+      trusted_domains = [
+        "::1"
+        "127.0.0.1"
+        "localhost"
+      ];
       mail_domain = "${baseDomain}";
       mail_from_address = "nextcloud";
       mail_smtpmode = "smtp";

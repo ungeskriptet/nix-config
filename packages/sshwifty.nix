@@ -25,10 +25,10 @@ let
     npmBuildScript = "generate";
 
     postInstall = ''
-      for i in static_pages static_pages.go; do
-        cp -r application/controller/$i \
-	  $out/lib/node_modules/sshwifty-ui/application/controller
-      done
+            for i in static_pages static_pages.go; do
+              cp -r application/controller/$i \
+      	  $out/lib/node_modules/sshwifty-ui/application/controller
+            done
     '';
 
     nativeBuildInputs = [ go ];

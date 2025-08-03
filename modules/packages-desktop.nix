@@ -1,4 +1,9 @@
-{ inputs, lib, pkgs, ... }:
+{
+  inputs,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   samsung-grab = inputs.samsung-grab.packages.${pkgs.system}.samsung-grab;

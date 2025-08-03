@@ -1,4 +1,10 @@
-{ config, lib, pkgs, vars, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  vars,
+  ...
+}:
 
 let
   domain = "mail.${baseDomain}";
@@ -30,13 +36,21 @@ in
   };
 
   networking.firewall = {
-    allowedTCPPorts = [ 25 465 993 4190 ];
+    allowedTCPPorts = [
+      25
+      465
+      993
+      4190
+    ];
   };
 
   networking.hosts."127.0.0.1" = [ domain ];
 
   systemd.services.stalwart-mail = {
-    serviceConfig.SupplementaryGroups = [ "acme" "stalwart-pw" ];
+    serviceConfig.SupplementaryGroups = [
+      "acme"
+      "stalwart-pw"
+    ];
     requires = [ "postgresql.target" ];
     after = [ "postgresql.target" ];
   };
@@ -87,7 +101,10 @@ in
         hostname = domain;
         listener.http = {
           protocol = "http";
-          bind = [ "[::1]:8087" "127.0.0.1:8087" ];
+          bind = [
+            "[::1]:8087"
+            "127.0.0.1:8087"
+          ];
           tls.implicit = true;
         };
         listener.smtp = {
@@ -112,10 +129,10 @@ in
       };
       email.folders = {
         archive = {
-	  name = "Archive";
-	  create = true;
-	  subscribe = true;
-	};
+          name = "Archive";
+          create = true;
+          subscribe = true;
+        };
       };
       report.analysis = {
         addresses = [
@@ -132,12 +149,13 @@ in
   };
 
   services.caddy.virtualHosts = {
-    "https://${domain}, https://autodiscover.${baseDomain}, https://autoconfig.${baseDomain}, https://mta-sts.${baseDomain}" = {
-      extraConfig = ''
-        tls ${tlsCert} ${tlsKey}
-        reverse_proxy https://${domain}:8087
-      '';
-    };
+    "https://${domain}, https://autodiscover.${baseDomain}, https://autoconfig.${baseDomain}, https://mta-sts.${baseDomain}" =
+      {
+        extraConfig = ''
+          tls ${tlsCert} ${tlsKey}
+          reverse_proxy https://${domain}:8087
+        '';
+      };
     "https://${baseDomain}" = {
       extraConfig = "reverse_proxy /.well-known/jmap https://${domain}:8087";
     };

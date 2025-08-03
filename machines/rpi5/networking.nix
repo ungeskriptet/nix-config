@@ -1,4 +1,9 @@
-{ config, lib, vars, ... }:
+{
+  config,
+  lib,
+  vars,
+  ...
+}:
 let
   lanDomain = vars.lanDomain;
   lanIP = vars.rpi5.lanIP;
@@ -23,16 +28,21 @@ in
       matchConfig.Name = "end0";
       linkConfig.RequiredForOnline = "routable";
       DHCP = "no";
-      address = [ "${lanIP}/24" "${lanIPv6}/64" ];
+      address = [
+        "${lanIP}/24"
+        "${lanIPv6}/64"
+      ];
       gateway = [ routerIP ];
       domains = [ lanDomain ];
-      dns = lib.optionals config.services.adguardhome.enable [
-        "::1"
-	"127.0.0.1"
-      ] ++ [
-        "2001:678:e68:f000::"
-        "5.1.66.255"
-      ];
+      dns =
+        lib.optionals config.services.adguardhome.enable [
+          "::1"
+          "127.0.0.1"
+        ]
+        ++ [
+          "2001:678:e68:f000::"
+          "5.1.66.255"
+        ];
       networkConfig = {
         IPv6AcceptRA = true;
       };

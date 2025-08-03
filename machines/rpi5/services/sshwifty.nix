@@ -1,4 +1,11 @@
-{ config, lib, pkgs, inputs, vars, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  vars,
+  ...
+}:
 
 let
   domain = "ssh.${baseDomain}";

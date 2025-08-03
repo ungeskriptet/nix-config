@@ -47,18 +47,18 @@ in
 
   services.caddy.virtualHosts = {
     "https://${domain}".extraConfig = ''
-      tls ${tlsCert} ${tlsKey}
-      @lan not remote_ip private_ranges
-      respond @lan "Hi! sorry not allowed :(" 403
-      basic_auth {
-        import ${config.sops.secrets."firefox/basicauth".path}
-      }
-      reverse_proxy https://${domain}:8090 {
-        transport http {
-	  tls
-	  tls_insecure_skip_verify
-	}
-      }
+            tls ${tlsCert} ${tlsKey}
+            @lan not remote_ip private_ranges
+            respond @lan "Hi! sorry not allowed :(" 403
+            basic_auth {
+              import ${config.sops.secrets."firefox/basicauth".path}
+            }
+            reverse_proxy https://${domain}:8090 {
+              transport http {
+      	  tls
+      	  tls_insecure_skip_verify
+      	}
+            }
     '';
   };
 }

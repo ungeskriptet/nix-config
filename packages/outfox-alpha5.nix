@@ -32,14 +32,14 @@ stdenv.mkDerivation rec {
   ];
 
   buildInputs = [
-   alsa-lib
-   libglvnd
-   libjack2
-   libpulseaudio
-   libssh2
-   libxkbcommon
-   mesa_glu
-   openldap
+    alsa-lib
+    libglvnd
+    libjack2
+    libpulseaudio
+    libssh2
+    libxkbcommon
+    mesa_glu
+    openldap
   ];
 
   desktopItems = [
@@ -52,7 +52,10 @@ stdenv.mkDerivation rec {
       terminal = false;
       icon = "outfox-alpha5";
       type = "Application";
-      categories = [ "Game" "ArcadeGame" ];
+      categories = [
+        "Game"
+        "ArcadeGame"
+      ];
     })
   ];
 

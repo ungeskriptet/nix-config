@@ -1,4 +1,10 @@
-{ config, lib, pkgs, vars, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  vars,
+  ...
+}:
 
 let
   domain = "tg.${baseDomain}";
@@ -13,7 +19,7 @@ let
     version = "0.0.1";
     pyproject = true;
     nativeBuildInputs = [ pkgs.python3Packages.setuptools ];
-    propagatedBuildInputs  = [
+    propagatedBuildInputs = [
       pkgs.python3Packages.aiogram
       pkgs.python3Packages.beautifulsoup4
       pkgs.python3Packages.requests

@@ -1,6 +1,11 @@
 # HP EliteBook 840 G7
 
-{ inputs, pkgs, lib, ... }:
+{
+  inputs,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   imports = [
@@ -28,12 +33,14 @@
   };
 
   services.fprintd.enable = true;
-  security.pam.services = lib.genAttrs [ "kde-fingerprint" "polkit-1" "sudo" ] (service: {
-    rules.auth.fprintd.settings = {
-      max-tries = 15;
-      timeout = -1;
+  security.pam.services =
+    lib.genAttrs [ "kde-fingerprint" "polkit-1" "sudo" ] (service: {
+      rules.auth.fprintd.settings = {
+        max-tries = 15;
+        timeout = -1;
+      };
+    })
+    // {
+      login.fprintAuth = false;
     };
-  }) // {
-    login.fprintAuth = false;
-  };
 }

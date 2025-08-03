@@ -23,16 +23,21 @@
     "/boot" = {
       device = "/dev/disk/by-partlabel/EFI";
       fsType = "vfat";
-      options = [ "fmask=0077" "dmask=0077" ];
+      options = [
+        "fmask=0077"
+        "dmask=0077"
+      ];
     };
   };
 
   zramSwap.enable = true;
-  swapDevices = [{
-    device = "/var/lib/swapfile";
-    size = 32*1024;
-    randomEncryption.enable = true;
-  }];
+  swapDevices = [
+    {
+      device = "/var/lib/swapfile";
+      size = 32 * 1024;
+      randomEncryption.enable = true;
+    }
+  ];
 
   hardware = {
     bluetooth.enable = true;

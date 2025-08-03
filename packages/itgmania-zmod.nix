@@ -9,13 +9,11 @@ itgmania.overrideAttrs (old: {
   buildCommand = ''
     set -euo pipefail
 
-    ${lib.concatStringsSep "\n"
-      (map
-        (outputName: ''
-            cp -rs --no-preserve=mode "${itgmania.${outputName}}" "''$${outputName}"
-        '') [ "out" ]
-      )
-    }
+    ${lib.concatStringsSep "\n" (
+      map (outputName: ''
+        cp -rs --no-preserve=mode "${itgmania.${outputName}}" "''$${outputName}"
+      '') [ "out" ]
+    )}
     rm $out/bin/itgmania
     makeWrapper $out/itgmania/itgmania $out/bin/itgmania \
       --chdir $out/itgmania

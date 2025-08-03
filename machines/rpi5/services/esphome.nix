@@ -1,4 +1,10 @@
-{ config, pkgs, lib, vars, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  vars,
+  ...
+}:
 
 let
   domain = "esp.${baseDomain}";
@@ -51,7 +57,7 @@ in
   };
 
   services.esphome = {
-      enable = true;
-      enableUnixSocket = true;
+    enable = true;
+    enableUnixSocket = true;
   };
 }

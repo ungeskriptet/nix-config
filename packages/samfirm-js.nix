@@ -24,4 +24,3 @@ buildNpmPackage rec {
     mainprogram = pname;
   };
 }
-

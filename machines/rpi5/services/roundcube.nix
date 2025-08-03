@@ -1,4 +1,9 @@
-{ config, pkgs, vars, ... }:
+{
+  config,
+  pkgs,
+  vars,
+  ...
+}:
 
 let
   domain = "webmail.${baseDomain}";
@@ -18,7 +23,11 @@ in
   services.roundcube = {
     enable = true;
     hostName = domain;
-    dicts = with pkgs.aspellDicts; [ en de pl ];
+    dicts = with pkgs.aspellDicts; [
+      en
+      de
+      pl
+    ];
     extraConfig = ''
       $config['imap_host'] = [
         'ssl://mail.${baseDomain}:993' => 'Stalwart'

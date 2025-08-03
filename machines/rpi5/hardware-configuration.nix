@@ -17,7 +17,6 @@
     (pkgs.raspberrypi-udev-rules.override { withCpuGovernorConfig = true; })
   ];
 
-
   fileSystems = {
     "/boot/firmware" = {
       device = "/dev/disk/by-label/FIRMWARE";
@@ -36,11 +35,13 @@
     };
   };
 
-  swapDevices = [{
-    device = "/var/lib/swapfile";
-    size = 8*1024;
-    randomEncryption.enable = true;
-  }];
+  swapDevices = [
+    {
+      device = "/var/lib/swapfile";
+      size = 8 * 1024;
+      randomEncryption.enable = true;
+    }
+  ];
   zramSwap.enable = true;
 
   hardware.enableRedistributableFirmware = true;

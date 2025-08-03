@@ -1,17 +1,27 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   interfaceName = "end0";
 in
 {
-  sops.secrets = lib.genAttrs [
-    "wireguard/rpi5/privkey"
-    "wireguard/rpi5/psk-1"
-    "wireguard/rpi5/psk-2"
-    "wireguard/rpi5/psk-3"
-    "wireguard/support/privkey"
-    "wireguard/support/psk-1"
-  ] (secret: { owner = "systemd-network"; });
+  sops.secrets =
+    lib.genAttrs
+      [
+        "wireguard/rpi5/privkey"
+        "wireguard/rpi5/psk-1"
+        "wireguard/rpi5/psk-2"
+        "wireguard/rpi5/psk-3"
+        "wireguard/support/privkey"
+        "wireguard/support/psk-1"
+      ]
+      (secret: {
+        owner = "systemd-network";
+      });
 
   networking.nat = {
     enable = true;
@@ -40,19 +50,28 @@ in
         };
         wireguardPeers = [
           {
-            AllowedIPs = [ "192.168.128.2/32" "fd96::2/128" ]; # xiatian
+            AllowedIPs = [
+              "192.168.128.2/32"
+              "fd96::2/128"
+            ]; # xiatian
             PersistentKeepalive = 25;
             PresharedKeyFile = config.sops.secrets."wireguard/rpi5/psk-1".path;
             PublicKey = "ucC5RYVWTZWuJPjJjdAgq2Vw4kCnlLTdftnll0GOgzU=";
           }
           {
-            AllowedIPs = [ "192.168.128.3/32" "fd96::3/128"]; # surya
+            AllowedIPs = [
+              "192.168.128.3/32"
+              "fd96::3/128"
+            ]; # surya
             PersistentKeepalive = 25;
             PresharedKeyFile = config.sops.secrets."wireguard/rpi5/psk-2".path;
             PublicKey = "3aqGBPeBmtL9n4yqX7kG5TZ8yugsr0iQWq2WZlBxbzk=";
           }
           {
-            AllowedIPs = [ "192.168.128.4/32" "fd96::4/128"]; # e3q
+            AllowedIPs = [
+              "192.168.128.4/32"
+              "fd96::4/128"
+            ]; # e3q
             PersistentKeepalive = 25;
             PresharedKeyFile = config.sops.secrets."wireguard/rpi5/psk-3".path;
             PublicKey = "lWicyBn8SEltKKGSVNZMJ4KodIDdnGqNO5DtiaGzqT0=";
@@ -82,7 +101,10 @@ in
     };
     networks.wg0 = {
       matchConfig.Name = "wg0";
-      address = [ "192.168.128.1/24" "fd96::1/64" ];
+      address = [
+        "192.168.128.1/24"
+        "fd96::1/64"
+      ];
       networkConfig = {
         IPMasquerade = "both";
       };

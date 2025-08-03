@@ -1,6 +1,12 @@
 # Acer Aspire E5-574G
 
-{ config, inputs, pkgs, lib, ... }:
+{
+  config,
+  inputs,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   imports = [
@@ -11,7 +17,7 @@
   sops.defaultSopsFile = "${inputs.self}/secrets/secrets-daruma.yaml";
 
   networking.hostName = "daruma";
-  
+
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.systemd-boot.enable = lib.mkDefault true;
