@@ -56,6 +56,7 @@ in
     python3
     ripgrep
     rsync
+    samfirm-js
     sops
     unrar
     unzip
@@ -63,6 +64,5 @@ in
     zip
 
     selfPkgs.mdns-scan
-    selfPkgs.samfirm-js
   ];
 }

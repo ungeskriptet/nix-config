@@ -113,7 +113,6 @@
             extract-dtb = nixpkgs.legacyPackages.${system}.callPackage ./packages/extract-dtb.nix { };
             mdns-scan = nixpkgs.legacyPackages.${system}.callPackage ./packages/mdns-scan.nix { };
             pixeldrain-cli = nixpkgs.legacyPackages.${system}.callPackage ./packages/pixeldrain-cli.nix { };
-            samfirm-js = nixpkgs.legacyPackages.${system}.callPackage ./packages/samfirm-js.nix { };
             sshwifty = nixpkgs.legacyPackages.${system}.callPackage ./packages/sshwifty.nix { };
             ttf-ms-win11 = nixpkgs.legacyPackages.${system}.callPackage ./packages/ttf-ms-win11.nix { };
           }))
