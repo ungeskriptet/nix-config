@@ -97,7 +97,7 @@ in
             AllowedIPs = [ "192.168.3.4/32" ];
             PersistentKeepalive = 25;
             PresharedKeyFile = config.sops.secrets."wireguard/support/psk-1".path;
-            PublicKey = "4wC5jefLRAvgsqSWX0XOtRCJ1HFKsjCD211JMnTgM3I=";
+            PublicKey = "66ooPFrN5/ce2sAkm96mz2kShgsT0WTZm77ghzFCMno=";
           }
           {
             AllowedIPs = [ "192.168.3.2/32" ];
