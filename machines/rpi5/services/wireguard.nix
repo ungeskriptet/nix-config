@@ -19,6 +19,9 @@ in
         "wireguard/support/privkey"
         "wireguard/support/psk-1"
         "wireguard/support/psk-2"
+        "wireguard/support/psk-3"
+        "wireguard/support/psk-4"
+        "wireguard/support/psk-5"
       ]
       (secret: {
         owner = "systemd-network";
@@ -91,6 +94,7 @@ in
         wireguardConfig = {
           ListenPort = 53286;
           PrivateKeyFile = config.sops.secrets."wireguard/support/privkey".path;
+          RouteTable = "main";
         };
         wireguardPeers = [
           {
@@ -104,6 +108,27 @@ in
             PersistentKeepalive = 25;
             PresharedKeyFile = config.sops.secrets."wireguard/support/psk-2".path;
             PublicKey = "4oTuxNTPPqamD9fuQkdzpPILoDufM0Bh18jxrg1uZFM=";
+          }
+          {
+            AllowedIPs = [ "192.168.3.11/32" ];
+            PersistentKeepalive = 25;
+            PresharedKeyFile = config.sops.secrets."wireguard/support/psk-3".path;
+            PublicKey = "4hgNyQxySCsFnee8t4nCZX16hqkgs+P16dku1tngkCo=";
+          }
+          {
+            AllowedIPs = [ "192.168.3.12/32" ];
+            PersistentKeepalive = 25;
+            PresharedKeyFile = config.sops.secrets."wireguard/support/psk-4".path;
+            PublicKey = "77JDO2aRLAHOMbQTx6KqxJ1f3ulnm3CWXfe+BK+7H14=";
+          }
+          {
+            AllowedIPs = [
+              "192.168.3.13/32"
+              "192.168.96.0/24"
+            ];
+            PersistentKeepalive = 25;
+            PresharedKeyFile = config.sops.secrets."wireguard/support/psk-5".path;
+            PublicKey = "OwTjaAnS6j5HvG+o2ysloZRxpD2buUkzOPVCsaQSYBo=";
           }
         ];
       };
