@@ -33,10 +33,16 @@ in
     internalInterfaces = [ "wg0" ];
   };
 
-  networking.firewall.allowedUDPPorts = [
-    33434
-    53286
-  ];
+  networking.firewall = {
+    allowedUDPPorts = [
+      33434
+      53286
+    ];
+    extraForwardRules = ''
+      iifname end0 oifname wg1 accept
+      iifname wg0 oifname wg1 accept
+    '';
+  };
 
   environment.systemPackages = with pkgs; [
     wireguard-tools
