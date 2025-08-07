@@ -28,6 +28,7 @@
   '';
 
   networking.nftables.enable = true;
+  networking.firewall.filterForward = true;
 
   services.openssh = {
     enable = true;
