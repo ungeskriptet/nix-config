@@ -11,11 +11,6 @@ let
   baseDomain = vars.baseDomain;
   tlsKey = "${config.security.acme.certs."${baseDomain}".directory}/key.pem";
   tlsCert = "${config.security.acme.certs."${baseDomain}".directory}/fullchain.pem";
-
-  # Fix Stalwart on systems with a 16 KiB page size
-  stalwart-mail = pkgs.stalwart-mail.overrideAttrs (old: {
-    env.JEMALLOC_SYS_WITH_LG_PAGE = 16;
-  });
 in
 {
   users = {
@@ -75,7 +70,6 @@ in
 
   services.stalwart-mail = {
     enable = true;
-    package = stalwart-mail;
     settings = {
       authentication.fallback-admin = {
         user = "admin";
