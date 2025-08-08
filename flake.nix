@@ -110,7 +110,6 @@
         nixpkgs.lib.recursiveUpdate
           (forAllSystems (system: {
             dumpyara = nixpkgs.legacyPackages.${system}.callPackage ./packages/dumpyara.nix { };
-            extract-dtb = nixpkgs.legacyPackages.${system}.callPackage ./packages/extract-dtb.nix { };
             mdns-scan = nixpkgs.legacyPackages.${system}.callPackage ./packages/mdns-scan.nix { };
             pixeldrain-cli = nixpkgs.legacyPackages.${system}.callPackage ./packages/pixeldrain-cli.nix { };
             sshwifty = nixpkgs.legacyPackages.${system}.callPackage ./packages/sshwifty.nix { };

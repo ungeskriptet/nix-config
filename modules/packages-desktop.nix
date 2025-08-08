@@ -38,6 +38,7 @@ in
   environment.systemPackages = with pkgs; [
     bitwarden-desktop
     edl
+    extract-dtb
     gimp3-with-plugins
     heimdall
     hunspellDicts.de_DE
@@ -57,7 +58,6 @@ in
 
     samsung-grab
     selfPkgs.dumpyara
-    selfPkgs.extract-dtb
     selfPkgs.ida-pro
     selfPkgs.itgmania-zmod
     selfPkgs.odin4
