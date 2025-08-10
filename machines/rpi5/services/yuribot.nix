@@ -3,6 +3,7 @@
   lib,
   pkgs,
   vars,
+  inputs,
   ...
 }:
 
@@ -14,25 +15,7 @@ let
   tlsKey = "${config.security.acme.certs."${baseDomain}".directory}/key.pem";
   tlsCert = "${config.security.acme.certs."${baseDomain}".directory}/fullchain.pem";
   stateDir = "/var/lib/yuribot/";
-  yuriBot = pkgs.python3.pkgs.buildPythonPackage rec {
-    pname = "yuribot";
-    version = "0.0.1";
-    pyproject = true;
-    nativeBuildInputs = [ pkgs.python3Packages.setuptools ];
-    propagatedBuildInputs = [
-      pkgs.python3Packages.aiogram
-      pkgs.python3Packages.beautifulsoup4
-      pkgs.python3Packages.requests
-      pkgs.python3Packages.yt-dlp
-    ];
-    src = pkgs.fetchFromGitHub {
-      owner = "ungeskriptet";
-      repo = "yuribot";
-      rev = "3190de7e723fc0e68b56b5f2c3e9cd9f06182f27";
-      hash = "sha256-kJSrIE3V6UofDrtWVktitvEEMqoEFCh3RJGHleYrhRE=";
-    };
-    meta.mainProgram = "yuribot";
-  };
+  yuribot = inputs.yuribot.packages.${pkgs.system}.yuribot;
 in
 {
   sops.secrets."yuribot/env".owner = "root";
@@ -77,7 +60,7 @@ in
       PrivateTmp = true;
       WorkingDirectory = "/tmp";
       EnvironmentFile = config.sops.secrets."yuribot/env".path;
-      ExecStart = lib.getExe yuriBot;
+      ExecStart = lib.getExe yuribot;
       Restart = "always";
       RestartSec = 60;
     };
