@@ -29,6 +29,10 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    yuribot = {
+      url = "git+https://codeberg.org/ungeskriptet/yuribot";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     zmod = {
       url = "github:zarzob/Simply-Love-SM5/itgmania-release";
       flake = false;
