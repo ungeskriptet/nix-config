@@ -71,7 +71,8 @@ in
 
             mkdir -p $HOME/.cache/zsh
 
-            export WORDCHARS="''${WORDCHARS//\/}"
+            export WORDCHARS="''${WORDCHARS/\/}"
+            export WORDCHARS="''${WORDCHARS/.}"
 
             duplines () {
               sort $1 | uniq --count --repeated
