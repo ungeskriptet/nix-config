@@ -20,6 +20,10 @@ in
     reverse_proxy http://${domain}:8091
   '';
 
+  systemd.tmpfiles.rules = [
+    "d /var/lib/roundcube/enigma 0750 roundcube roundcube -"
+  ];
+
   services.roundcube = {
     enable = true;
     hostName = domain;
@@ -36,9 +40,15 @@ in
       $config['smtp_user'] = "%u";
       $config['smtp_pass'] = "%p";
       $config['managesieve_host'] = 'ssl://mail.${baseDomain}:4190';
+      $config['enigma_passwordless'] = true;
+      $config['enigma_pgp_agent'] = '${pkgs.gnupg}/bin/gpg-agent';
+      $config['enigma_pgp_binary'] = '${pkgs.gnupg}/bin/gpg';
+      $config['enigma_pgp_gpgconf'] = '${pkgs.gnupg}/bin/gpgconf';
+      $config['enigma_pgp_homedir'] = '/var/lib/roundcube/enigma';
     '';
     plugins = [
       "archive"
+      "enigma"
       "managesieve"
       "newmail_notifier"
     ];
