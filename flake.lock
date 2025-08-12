@@ -220,11 +220,11 @@
     },
     "rpipkgs": {
       "locked": {
-        "lastModified": 1754630960,
-        "narHash": "sha256-TzjykK2Rq/jue1m6e3zLQbGAO2wFbEC6rWckk7mP0Ik=",
+        "lastModified": 1754987061,
+        "narHash": "sha256-l12F69Uc7IgzFkCtyMiyEKkVo0wpXMDHJdMMTgNKtrc=",
         "ref": "rpi5",
-        "rev": "fc817e34d4257a325991b9f9d6eef30ad824fe7d",
-        "revCount": 840656,
+        "rev": "b614edf6f76197b5071d92e3572ee44caafb9359",
+        "revCount": 841810,
         "type": "git",
         "url": "https://codeberg.org/ungeskriptet/nixpkgs"
       },
@@ -282,11 +282,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1754328224,
-        "narHash": "sha256-glPK8DF329/dXtosV7YSzRlF4n35WDjaVwdOMEoEXHA=",
+        "lastModified": 1754978331,
+        "narHash": "sha256-MT+03/h6v2eXFLON9aI8W09wxBdudm5pkFPs+S0UOog=",
         "owner": "Mic92",
         "repo": "sops-nix",
-        "rev": "49021900e69812ba7ddb9e40f9170218a7eca9f4",
+        "rev": "89556f8fda884c5ea5aa31602d67c52d12aec018",
         "type": "github"
       },
       "original": {
