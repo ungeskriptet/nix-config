@@ -19,9 +19,11 @@
     };
   };
 
-  environment.plasma6.excludePackages = [
-    pkgs.kdePackages.baloo
-    pkgs.kdePackages.baloo-widgets
+  environment.plasma6.excludePackages = with pkgs.kdePackages; [
+    baloo
+    baloo-widgets
+    elisa
+    khelpcenter
   ];
 
   environment.etc."xdg/baloofilerc".source = (pkgs.formats.ini { }).generate "baloorc" {
