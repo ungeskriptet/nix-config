@@ -19,6 +19,17 @@
     };
   };
 
+  environment.plasma6.excludePackages = [
+    pkgs.kdePackages.baloo
+    pkgs.kdePackages.baloo-widgets
+  ];
+
+  environment.etc."xdg/baloofilerc".source = (pkgs.formats.ini { }).generate "baloorc" {
+    "Basic Settings" = {
+      "Indexing-Enabled" = false;
+    };
+  };
+
   environment.sessionVariables.SSH_ASKPASS_REQUIRE = "prefer";
   systemd.user.services.ssh-add = {
     wantedBy = [ "default.target" ];
