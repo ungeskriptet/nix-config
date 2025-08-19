@@ -21,6 +21,10 @@
       url = "github:nvmd/nixos-raspberrypi/develop";
       inputs.nixpkgs.follows = "rpipkgs";
     };
+    pmbootstrap-git = {
+      url = "git+https://gitlab.postmarketos.org/postmarketOS/pmbootstrap.git";
+      flake = false;
+    };
     samsung-grab = {
       url = "git+https://codeberg.org/ungeskriptet/samsung-grab";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -116,6 +120,9 @@
             dumpyara = nixpkgs.legacyPackages.${system}.callPackage ./packages/dumpyara.nix { };
             mdns-scan = nixpkgs.legacyPackages.${system}.callPackage ./packages/mdns-scan.nix { };
             pixeldrain-cli = nixpkgs.legacyPackages.${system}.callPackage ./packages/pixeldrain-cli.nix { };
+            pmbootstrap-git = nixpkgs.legacyPackages.${system}.callPackage ./packages/pmbootstrap-git.nix {
+              inherit (inputs) pmbootstrap-git;
+            };
             sshwifty = nixpkgs.legacyPackages.${system}.callPackage ./packages/sshwifty.nix { };
             ttf-ms-win11 = nixpkgs.legacyPackages.${system}.callPackage ./packages/ttf-ms-win11.nix { };
           }))

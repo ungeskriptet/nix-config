@@ -180,6 +180,22 @@
         "type": "github"
       }
     },
+    "pmbootstrap-git": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1755504184,
+        "narHash": "sha256-nLtB/Zw/ab0vytOF8JBFnBCHrfrxbYafAKWONt1tBCw=",
+        "ref": "refs/heads/master",
+        "rev": "b4641a085f1fbd629ea58fd267c89bba713633a1",
+        "revCount": 3369,
+        "type": "git",
+        "url": "https://gitlab.postmarketos.org/postmarketOS/pmbootstrap.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://gitlab.postmarketos.org/postmarketOS/pmbootstrap.git"
+      }
+    },
     "pre-commit-hooks-nix": {
       "inputs": {
         "flake-compat": [
@@ -211,6 +227,7 @@
         "lanzaboote": "lanzaboote",
         "nixos-raspberrypi": "nixos-raspberrypi",
         "nixpkgs": "nixpkgs",
+        "pmbootstrap-git": "pmbootstrap-git",
         "rpipkgs": "rpipkgs",
         "samsung-grab": "samsung-grab",
         "sops-nix": "sops-nix",
