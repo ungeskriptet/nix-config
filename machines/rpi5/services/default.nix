@@ -13,7 +13,6 @@
     ./ntfy-sh.nix
     ./postgresql.nix
     ./roundcube.nix
-    ./samsung-grab.nix
     ./samsung-update-bot.nix
     ./soju.nix
     ./sshwifty.nix
