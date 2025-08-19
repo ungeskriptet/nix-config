@@ -9,6 +9,9 @@ in
 {
   networking.hosts."::1" = [ domain ];
   networking.hosts."127.0.0.1" = [ domain ];
+  networking.firewall.extraForwardRules = ''
+    iifname podman0 oifname end0 accept
+  '';
 
   sops.secrets."firefox/basicauth".owner = "caddy";
 
