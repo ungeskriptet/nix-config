@@ -123,7 +123,6 @@
             pmbootstrap-git = nixpkgs.legacyPackages.${system}.callPackage ./packages/pmbootstrap-git.nix {
               inherit (inputs) pmbootstrap-git;
             };
-            sshwifty = nixpkgs.legacyPackages.${system}.callPackage ./packages/sshwifty.nix { };
             ttf-ms-win11 = nixpkgs.legacyPackages.${system}.callPackage ./packages/ttf-ms-win11.nix { };
           }))
           {

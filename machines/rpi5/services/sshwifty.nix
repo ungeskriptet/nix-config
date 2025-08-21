@@ -14,7 +14,7 @@ let
   tlsCert = "${config.security.acme.certs."${baseDomain}".directory}/fullchain.pem";
 
   arch = config.nixpkgs.hostPlatform.system;
-  sshwifty = lib.getExe inputs.self.packages.${arch}.sshwifty;
+  sshwifty = lib.getExe pkgs.sshwifty;
   hostKey = "/etc/ssh/ssh_host_rsa_key.pub";
   genPreset = pkgs.writers.writePython3 "sshwifty-genpreset" { } ''
     from base64 import b64decode, b64encode
