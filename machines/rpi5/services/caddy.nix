@@ -32,7 +32,6 @@ in
   services.caddy = {
     enable = true;
     globalConfig = ''
-      admin off
       auto_https off
     '';
     virtualHosts = {
