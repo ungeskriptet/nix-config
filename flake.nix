@@ -98,21 +98,28 @@
           lanzaboote.nixosModules.lanzaboote
         ];
       };
-      nixosConfigurations.rpi5 = nixos-raspberrypi.lib.nixosSystem {
-        nixpkgs = inputs.rpipkgs;
-        specialArgs = {
-          inherit inputs nixos-raspberrypi;
-          vars = import ./vars.nix;
-        };
-        system = "aarch64-linux";
-        modules = [
-          ./machines/rpi5
-          sops-nix.nixosModules.sops
-          nixos-raspberrypi.nixosModules.raspberry-pi-5.base
-          nixos-raspberrypi.nixosModules.raspberry-pi-5.display-vc4
-          nixos-raspberrypi.nixosModules.raspberry-pi-5.bluetooth
-        ];
-      };
+      nixosConfigurations.rpi5 =
+        nixos-raspberrypi.lib.int.nixosSystemRPi
+          {
+            nixpkgs = inputs.rpipkgs;
+            rpiModules = [
+              nixos-raspberrypi.lib.inject-overlays
+              nixos-raspberrypi.nixosModules.nixpkgs-rpi
+              nixos-raspberrypi.nixosModules.raspberry-pi-5.base
+              nixos-raspberrypi.nixosModules.raspberry-pi-5.bluetooth
+            ];
+          }
+          {
+            specialArgs = {
+              inherit inputs nixos-raspberrypi;
+              vars = import ./vars.nix;
+            };
+            system = "aarch64-linux";
+            modules = [
+              ./machines/rpi5
+              sops-nix.nixosModules.sops
+            ];
+          };
 
       packages =
         nixpkgs.lib.recursiveUpdate
