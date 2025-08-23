@@ -48,12 +48,11 @@ in
           ++ lib.optionals (config.networking.hostName == "ryuzu") [
             "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHCo1aBmLiSmZrjtnFVYczuv4/cNXjxF+4soUTSIeZla hass"
           ];
-      }
-      // lib.optionalAttrs config.programs.zsh.enable { shell = pkgs.zsh; };
+      };
       users.root = {
         openssh.authorizedKeys.keys = vars.sshPubKeys;
-      }
-      // lib.optionalAttrs config.programs.zsh.enable { shell = pkgs.zsh; };
-    };
+      };
+    }
+    // lib.optionalAttrs config.programs.zsh.enable { defaultUserShell = pkgs.zsh; };
   };
 }
