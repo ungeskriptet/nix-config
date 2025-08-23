@@ -11,6 +11,7 @@
     ./mollysocket.nix
     ./nextcloud.nix
     ./ntfy-sh.nix
+    ./openvscode-server.nix
     ./postgresql.nix
     ./roundcube.nix
     ./samsung-update-bot.nix
