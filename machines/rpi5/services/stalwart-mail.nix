@@ -71,6 +71,36 @@ in
   services.stalwart-mail = {
     enable = true;
     settings = {
+      config.local-keys = [
+        "authentication.fallback-admin.*"
+        "certificate.*"
+        "cluster.*"
+        "config.local-keys.*"
+        "directory.*"
+        "email.folders.archive.create"
+        "email.folders.archive.name"
+        "email.folders.archive.subscribe"
+        "http.url"
+        "http.use-x-forwarded"
+        "report.analysis.addresses.*"
+        "report.analysis.forward"
+        "report.analysis.store"
+        "resolver.public-suffix.*"
+        "resolver.type"
+        "server.*"
+        "!server.allowed-ip.*"
+        "!server.blocked-ip.*"
+        "spam-filter.resource"
+        "storage.blob"
+        "storage.data"
+        "storage.directory"
+        "storage.fts"
+        "storage.lookup"
+        "store.*"
+        "tracer.*"
+        "webadmin.path"
+        "webadmin.resource"
+      ];
       authentication.fallback-admin = {
         user = "admin";
         secret = "%{file:${config.sops.secrets."stalwart/pass".path}}%";
