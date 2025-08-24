@@ -166,7 +166,7 @@ in
           "noreply-smtp-tls-reporting@*"
           "postmaster@*"
         ];
-        forward = true;
+        forward = false;
         store = "30d";
       };
     };
