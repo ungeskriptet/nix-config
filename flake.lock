@@ -183,11 +183,11 @@
     "pmbootstrap-git": {
       "flake": false,
       "locked": {
-        "lastModified": 1755681622,
-        "narHash": "sha256-uHqYoqhvPS7yXhdmHZVi/oTTFBDhv15SDCPqaZ/GlSk=",
+        "lastModified": 1755942502,
+        "narHash": "sha256-WzJvIgKCu2AvsjumOENWaYAFhkS3CQZQzEFS/DrI8ec=",
         "ref": "refs/heads/master",
-        "rev": "2ee586fc0c3965a92cd62a394c2897442a61cf3b",
-        "revCount": 3370,
+        "rev": "4f2547c15ee3ffc140964a1b329fcd005db51fd9",
+        "revCount": 3374,
         "type": "git",
         "url": "https://gitlab.postmarketos.org/postmarketOS/pmbootstrap.git"
       },
@@ -279,11 +279,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1752558351,
-        "narHash": "sha256-/hrXaviYr215d4FDIehRZ6Rz7sWnEKqcFJGRa3gq1rY=",
+        "lastModified": 1756029496,
+        "narHash": "sha256-3C+oF9wzcdeyvC3q5IL0WT3gDzmKQJ483tcH8/WvGYY=",
         "ref": "refs/heads/master",
-        "rev": "a94c7368624afd1b0565d6a02bba08173ff5fa21",
-        "revCount": 3,
+        "rev": "cb1bb7e196ff34d3ca80a6df8333fdadbe4d20a8",
+        "revCount": 5,
         "type": "git",
         "url": "https://codeberg.org/ungeskriptet/samsung-grab"
       },
