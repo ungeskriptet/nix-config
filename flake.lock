@@ -166,11 +166,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1755615617,
-        "narHash": "sha256-HMwfAJBdrr8wXAkbGhtcby1zGFvs+StOp19xNsbqdOg=",
+        "lastModified": 1756125398,
+        "narHash": "sha256-XexyKZpf46cMiO5Vbj+dWSAXOnr285GHsMch8FBoHbc=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "20075955deac2583bb12f07151c2df830ef346b4",
+        "rev": "3b9f00d7a7bf68acd4c4abb9d43695afb04e03a5",
         "type": "github"
       },
       "original": {
@@ -183,11 +183,11 @@
     "pmbootstrap-git": {
       "flake": false,
       "locked": {
-        "lastModified": 1755942502,
-        "narHash": "sha256-WzJvIgKCu2AvsjumOENWaYAFhkS3CQZQzEFS/DrI8ec=",
+        "lastModified": 1756079097,
+        "narHash": "sha256-2TeNvlzlr4zKgwuioX/CnvmRcFCERIUFWm8nZ0ptwdw=",
         "ref": "refs/heads/master",
-        "rev": "4f2547c15ee3ffc140964a1b329fcd005db51fd9",
-        "revCount": 3374,
+        "rev": "597fb18ee03a6cd52d19959dbb8c9421ea4d6893",
+        "revCount": 3381,
         "type": "git",
         "url": "https://gitlab.postmarketos.org/postmarketOS/pmbootstrap.git"
       },
@@ -237,11 +237,11 @@
     },
     "rpipkgs": {
       "locked": {
-        "lastModified": 1755711952,
-        "narHash": "sha256-4VzLUHuN01au/R7WSQs0p35Husd7V8wHRe3jcCjzlfs=",
+        "lastModified": 1756185279,
+        "narHash": "sha256-hBx5YsCFA397iJqOuZ4GQCG/DjB2+S1e2UVajfXEjHU=",
         "ref": "rpi5",
-        "rev": "90d255ff1880104d4dc70a71606df140f453dc07",
-        "revCount": 846537,
+        "rev": "bfdaf8ae446e9c3be27771e41ed961bdacdd64a2",
+        "revCount": 851352,
         "type": "git",
         "url": "https://codeberg.org/ungeskriptet/nixpkgs"
       },
