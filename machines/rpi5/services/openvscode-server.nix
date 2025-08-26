@@ -48,7 +48,9 @@ in
     };
     extraPackages = with pkgs; [
       cargo
+      delve
       gcc
+      go
       lld
       nixd
       pkg-config
