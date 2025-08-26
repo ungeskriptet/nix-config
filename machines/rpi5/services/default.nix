@@ -8,6 +8,7 @@
     ./esphome.nix
     ./firefox.nix
     ./home-assistant.nix
+    ./immich.nix
     ./mollysocket.nix
     ./nextcloud.nix
     ./ntfy-sh.nix
