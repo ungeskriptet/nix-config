@@ -13,6 +13,7 @@
     ./nextcloud.nix
     ./ntfy-sh.nix
     ./openvscode-server.nix
+    ./phonetrack-notify.nix
     ./postgresql.nix
     ./roundcube.nix
     ./samsung-update-bot.nix

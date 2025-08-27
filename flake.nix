@@ -21,6 +21,10 @@
       url = "github:nvmd/nixos-raspberrypi/develop";
       inputs.nixpkgs.follows = "rpipkgs";
     };
+    phonetrack-notify = {
+      url = "git+https://codeberg.org/ungeskriptet/phonetrack-notify.git";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     pmbootstrap-git = {
       url = "git+https://gitlab.postmarketos.org/postmarketOS/pmbootstrap.git";
       flake = false;

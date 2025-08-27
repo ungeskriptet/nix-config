@@ -180,6 +180,26 @@
         "type": "github"
       }
     },
+    "phonetrack-notify": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1756214999,
+        "narHash": "sha256-VXh6Dsumdhhkr+kom8NDmCKoynxl8Q47Lsvdn1UfWL0=",
+        "ref": "refs/heads/master",
+        "rev": "82f74a7d58587be4baf13b32d0eb95781c968923",
+        "revCount": 2,
+        "type": "git",
+        "url": "https://codeberg.org/ungeskriptet/phonetrack-notify.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://codeberg.org/ungeskriptet/phonetrack-notify.git"
+      }
+    },
     "pmbootstrap-git": {
       "flake": false,
       "locked": {
@@ -227,6 +247,7 @@
         "lanzaboote": "lanzaboote",
         "nixos-raspberrypi": "nixos-raspberrypi",
         "nixpkgs": "nixpkgs",
+        "phonetrack-notify": "phonetrack-notify",
         "pmbootstrap-git": "pmbootstrap-git",
         "rpipkgs": "rpipkgs",
         "samsung-grab": "samsung-grab",
