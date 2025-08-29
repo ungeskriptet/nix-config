@@ -103,12 +103,7 @@
         nixos-raspberrypi.lib.int.nixosSystemRPi
           {
             nixpkgs = inputs.rpipkgs;
-            rpiModules = [
-              nixos-raspberrypi.lib.inject-overlays
-              nixos-raspberrypi.nixosModules.nixpkgs-rpi
-              nixos-raspberrypi.nixosModules.raspberry-pi-5.base
-              nixos-raspberrypi.nixosModules.raspberry-pi-5.bluetooth
-            ];
+            rpiModules = import ./modules/rpimodules.nix { inherit nixos-raspberrypi; };
           }
           {
             specialArgs = {
