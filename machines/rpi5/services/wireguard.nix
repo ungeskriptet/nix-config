@@ -18,6 +18,7 @@
         "wireguard/support/psk-3"
         "wireguard/support/psk-4"
         "wireguard/support/psk-5"
+        "wireguard/support/psk-6"
       ]
       (secret: {
         owner = "systemd-network";
@@ -131,6 +132,12 @@
             PersistentKeepalive = 25;
             PresharedKeyFile = config.sops.secrets."wireguard/support/psk-5".path;
             PublicKey = "OwTjaAnS6j5HvG+o2ysloZRxpD2buUkzOPVCsaQSYBo=";
+          }
+          {
+            AllowedIPs = [ "192.168.3.3/32" ];
+            PersistentKeepalive = 25;
+            PresharedKeyFile = config.sops.secrets."wireguard/support/psk-6".path;
+            PublicKey = "GHsPXL5bpeb4VyAhDtULlACzAlDRyxVT8Ht+W4aOEkc=";
           }
         ];
       };
