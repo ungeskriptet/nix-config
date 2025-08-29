@@ -38,6 +38,20 @@ in
           ListenPort = 80;
         }
       ];
+      Presets = [
+        {
+          Title = "rpi5";
+          Type = "SSH";
+          Host = "rpi5:22";
+          TabColor = "110000";
+          Meta = {
+            User = "root";
+            Encoding = "utf-8";
+            Authentication = "Private Key";
+            Fingerprint = "SHA256:35mSb4euaL49ndfSQQdYr5RV0TIlvb42/r8H3ryROYc";
+          };
+        }
+      ];
     };
   };
 }
