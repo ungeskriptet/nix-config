@@ -12,6 +12,7 @@
     ./nextcloud.nix
     ./ntfy-sh.nix
     ./openvscode-server.nix
+    ./paperless-ngx.nix
     ./phonetrack-notify.nix
     ./postgresql.nix
     ./roundcube.nix
