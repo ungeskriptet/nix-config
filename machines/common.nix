@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, inputs, ... }:
 {
   imports = [
     ../modules/packages-common.nix
@@ -7,6 +7,7 @@
     ../modules/vars.nix
     ../modules/virtualization.nix
     ../modules/zsh.nix
+    inputs.sops-nix.nixosModules.sops
   ];
 
   sops.age.keyFile = "/var/lib/sops-nix/key.txt";

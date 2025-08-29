@@ -10,6 +10,8 @@
     ./hardware-configuration.nix
     ../desktop.nix
     ../../modules/minecraft-server.nix
+    ../../modules/secureboot.nix
+    inputs.lanzaboote.nixosModules.lanzaboote
   ];
 
   sops.defaultSopsFile = "${inputs.self}/secrets/secrets-ryuzu.yaml";

@@ -49,11 +49,8 @@
 
   outputs =
     {
-      self,
       nixpkgs,
       nixos-raspberrypi,
-      sops-nix,
-      lanzaboote,
       ...
     }@inputs:
     let
@@ -70,9 +67,6 @@
         system = "x86_64-linux";
         modules = [
           ./machines/ryuzu
-          ./modules/secureboot.nix
-          sops-nix.nixosModules.sops
-          lanzaboote.nixosModules.lanzaboote
         ];
       };
       nixosConfigurations.xiatian = nixpkgs.lib.nixosSystem {
@@ -82,9 +76,6 @@
         system = "x86_64-linux";
         modules = [
           ./machines/xiatian
-          ./modules/secureboot.nix
-          sops-nix.nixosModules.sops
-          lanzaboote.nixosModules.lanzaboote
         ];
       };
       nixosConfigurations.daruma = nixpkgs.lib.nixosSystem {
@@ -94,9 +85,6 @@
         system = "x86_64-linux";
         modules = [
           ./machines/daruma
-          ./modules/secureboot.nix
-          sops-nix.nixosModules.sops
-          lanzaboote.nixosModules.lanzaboote
         ];
       };
       nixosConfigurations.rpi5 =
@@ -112,7 +100,6 @@
             system = "aarch64-linux";
             modules = [
               ./machines/rpi5
-              sops-nix.nixosModules.sops
             ];
           };
 
