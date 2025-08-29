@@ -57,7 +57,6 @@ in
     yt-dlp
 
     samsung-grab
-    selfPkgs.dumpyara
     selfPkgs.ida-pro
     selfPkgs.itgmania-zmod
     selfPkgs.odin4
