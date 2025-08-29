@@ -48,6 +48,7 @@ in
     kdePackages.sddm-kcm
     libreoffice-qt6-fresh
     meld
+    nixd
     prismlauncher
     qbittorrent
     scrcpy
