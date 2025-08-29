@@ -1,17 +1,11 @@
 {
   config,
-  pkgs,
-  lib,
-  vars,
   ...
 }:
-
 let
-  domain = "molly.${baseDomain}";
-  pushServer = "https://ntfy.${baseDomain}";
-  baseDomain = vars.baseDomain;
-  tlsKey = "${config.security.acme.certs."${baseDomain}".directory}/key.pem";
-  tlsCert = "${config.security.acme.certs."${baseDomain}".directory}/fullchain.pem";
+  fqdn = "molly.${domain}";
+  pushServer = config.services.ntfy-sh.settings.base-url;
+  domain = config.networking.domain;
 in
 {
   users = {
@@ -24,14 +18,14 @@ in
 
   sops.secrets."mollysocket/env".owner = "mollysocket";
 
-  networking.hosts."::1" = [ domain ];
-  networking.hosts."127.0.0.1" = [ domain ];
+  networking.hosts."::1" = [ fqdn ];
+  networking.hosts."127.0.0.1" = [ fqdn ];
 
   services.caddy.virtualHosts = {
-    "https://${domain}" = {
+    "https://${fqdn}" = {
       extraConfig = ''
-        tls ${tlsCert} ${tlsKey}
-        reverse_proxy http://${domain}:8085
+        tls ${config.acme.tlsCert} ${config.acme.tlsKey}
+        reverse_proxy http://${fqdn}:8085
       '';
     };
   };

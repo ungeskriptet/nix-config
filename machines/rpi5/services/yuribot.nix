@@ -2,40 +2,34 @@
   config,
   lib,
   pkgs,
-  vars,
   inputs,
   ...
 }:
 
 let
-  domain = "tg.${baseDomain}";
-  webhookPort = "8088";
-
-  baseDomain = vars.baseDomain;
-  tlsKey = "${config.security.acme.certs."${baseDomain}".directory}/key.pem";
-  tlsCert = "${config.security.acme.certs."${baseDomain}".directory}/fullchain.pem";
-  stateDir = "/var/lib/yuribot/";
+  fqdn = "tg.${domain}";
+  domain = config.networking.domain;
   yuribot = inputs.yuribot.packages.${pkgs.system}.yuribot;
 in
 {
   sops.secrets."yuribot/env".owner = "root";
 
-  networking.hosts."::1" = [ domain ];
-  networking.hosts."127.0.0.1" = [ domain ];
+  networking.hosts."::1" = [ fqdn ];
+  networking.hosts."127.0.0.1" = [ fqdn ];
 
   users = {
     groups.yuribot = { };
     users.yuribot = {
       isSystemUser = true;
       group = "yuribot";
-      home = stateDir;
+      home = "/var/lib/yuribot/";
       createHome = true;
     };
   };
 
-  services.caddy.virtualHosts."https://${domain}".extraConfig = ''
-    tls ${tlsCert} ${tlsKey}
-    reverse_proxy http://${domain}:${webhookPort}
+  services.caddy.virtualHosts."https://${fqdn}".extraConfig = ''
+    tls ${config.acme.tlsCert} ${config.acme.tlsKey}
+    reverse_proxy http://${fqdn}:8088
   '';
 
   systemd.services.yuribot = {
@@ -49,9 +43,9 @@ in
       TG_ADMIN = "804152306";
       TG_ADMIN_CHANNEL = "-1002490639407";
       TG_CHANNEL = "-1002386461399";
-      TG_BASE_WEBHOOK_URL = "https://${domain}";
+      TG_BASE_WEBHOOK_URL = "https://${fqdn}";
       TG_HOST = "127.0.0.1";
-      TG_PORT = webhookPort;
+      TG_PORT = "8088";
       TG_WEBHOOK_PATH = "/webhook";
     };
     serviceConfig = {

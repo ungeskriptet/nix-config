@@ -1,14 +1,11 @@
-{ config, vars, ... }:
-
+{ config, ... }:
 let
-  domain = "firefox.${baseDomain}";
-  baseDomain = vars.baseDomain;
-  tlsKey = "${config.security.acme.certs."${baseDomain}".directory}/key.pem";
-  tlsCert = "${config.security.acme.certs."${baseDomain}".directory}/fullchain.pem";
+  fqdn = "firefox.${domain}";
+  domain = config.networking.domain;
 in
 {
-  networking.hosts."::1" = [ domain ];
-  networking.hosts."127.0.0.1" = [ domain ];
+  networking.hosts."::1" = [ fqdn ];
+  networking.hosts."127.0.0.1" = [ fqdn ];
   networking.firewall.extraForwardRules = ''
     iifname podman0 oifname end0 accept
   '';
@@ -49,12 +46,12 @@ in
   };
 
   services.caddy.virtualHosts = {
-    "https://${domain}".extraConfig = ''
-            tls ${tlsCert} ${tlsKey}
+    "https://${fqdn}".extraConfig = ''
+            tls ${config.acme.tlsCert} ${config.acme.tlsKey}
             basic_auth {
               import ${config.sops.secrets."firefox/basicauth".path}
             }
-            reverse_proxy https://${domain}:8090 {
+            reverse_proxy https://${fqdn}:8090 {
               transport http {
       	  tls
       	  tls_insecure_skip_verify

@@ -2,7 +2,6 @@
   stdenv,
   fetchFromGitHub,
 }:
-
 stdenv.mkDerivation rec {
   pname = "mdns-scan";
   version = "2020-07-15";

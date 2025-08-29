@@ -14,8 +14,7 @@
   openldap,
   makeDesktopItem,
 }:
-
-stdenv.mkDerivation rec {
+stdenv.mkDerivation {
   pname = "outfox-alpha5";
   version = "0.5.0-pre043-a34";
 

@@ -1,5 +1,4 @@
 { config, inputs, ... }:
-
 {
   imports = [
     inputs.samsung-grab.nixosModules.samsung-grab

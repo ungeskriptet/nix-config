@@ -1,14 +1,11 @@
-{ config, vars, ... }:
-
+{ config, ... }:
 let
-  domain = "ntfy.${baseDomain}";
-  baseDomain = vars.baseDomain;
-  tlsKey = "${config.security.acme.certs."${baseDomain}".directory}/key.pem";
-  tlsCert = "${config.security.acme.certs."${baseDomain}".directory}/fullchain.pem";
+  fqdn = "ntfy.${domain}";
+  domain = config.networking.domain;
 in
 {
-  networking.hosts."::1" = [ domain ];
-  networking.hosts."127.0.0.1" = [ domain ];
+  networking.hosts."::1" = [ fqdn ];
+  networking.hosts."127.0.0.1" = [ fqdn ];
 
   systemd.services.ntfy-sh = {
     serviceConfig.RuntimeDirectory = "ntfy-sh";
@@ -19,9 +16,9 @@ in
   };
 
   services.caddy.virtualHosts = {
-    "https://${domain}" = {
+    "https://${fqdn}" = {
       extraConfig = ''
-        tls ${tlsCert} ${tlsKey}
+        tls ${config.acme.tlsCert} ${config.acme.tlsKey}
         reverse_proxy unix/${config.services.ntfy-sh.settings.listen-unix}
       '';
     };
@@ -30,7 +27,7 @@ in
   services.ntfy-sh = {
     enable = true;
     settings = {
-      base-url = "https://${domain}";
+      base-url = "https://${fqdn}";
       listen-unix = "/run/ntfy-sh/ntfy.sock";
       listen-unix-mode = 432; # 0660 in octal
       listen-http = "";
@@ -40,7 +37,7 @@ in
       enable-signup = false;
       enable-login = true;
       keepalive-interval = "70s";
-      visitor-request-limit-exempt-hosts = baseDomain;
+      visitor-request-limit-exempt-hosts = domain;
     };
   };
 }

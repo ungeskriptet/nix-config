@@ -3,9 +3,7 @@
   lib,
   requireFile,
 }:
-
 with pkgs;
-
 let
   pythonForIDA = python3.withPackages (ps: with ps; [ rpyc ]);
 in

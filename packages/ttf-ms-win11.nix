@@ -3,7 +3,6 @@
   fetchurl,
   p7zip,
 }:
-
 stdenv.mkDerivation rec {
   name = "ttf-ms-win11";
 

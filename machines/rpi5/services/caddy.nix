@@ -1,22 +1,13 @@
 {
   config,
-  pkgs,
-  lib,
-  vars,
   ...
 }:
-
 let
-  baseDomain = vars.baseDomain;
-
-  primRouterDomain = "fritz.${baseDomain}";
-  primRouterIP = vars.routerIP;
-
-  secRouterDomain = "7590.${baseDomain}";
-  secRouterIP = "192.168.64.15";
-
-  tlsKey = "${config.security.acme.certs."${baseDomain}".directory}/key.pem";
-  tlsCert = "${config.security.acme.certs."${baseDomain}".directory}/fullchain.pem";
+  domain = config.networking.domain;
+  primRouterFqdn = "fritz.${domain}";
+  primRouterIP = config.networking.gatewayIP;
+  secRouterFqdn = "7590.${domain}";
+  secRouterIP = config.networking.secGatewayIP;
 in
 {
   networking.firewall = {
@@ -35,12 +26,12 @@ in
       auto_https off
     '';
     virtualHosts = {
-      "https://*.${baseDomain}".extraConfig = ''
-        tls ${tlsCert} ${tlsKey}
-        redir * https://${baseDomain}/ permanent
+      "https://*.${domain}".extraConfig = ''
+        tls ${config.acme.tlsCert} ${config.acme.tlsKey}
+        redir * https://${domain}/ permanent
       '';
-      "https://${baseDomain}".extraConfig = ''
-        tls ${tlsCert} ${tlsKey}
+      "https://${domain}".extraConfig = ''
+        tls ${config.acme.tlsCert} ${config.acme.tlsKey}
         root * /var/lib/caddy/www/
         file_server
 
@@ -56,8 +47,8 @@ in
           file_server browse
         }
       '';
-      "https://${primRouterDomain}".extraConfig = ''
-        tls ${tlsCert} ${tlsKey}
+      "https://${primRouterFqdn}".extraConfig = ''
+        tls ${config.acme.tlsCert} ${config.acme.tlsKey}
         @lan not remote_ip private_ranges
         respond @lan "Hi! sorry not allowed :(" 403
         reverse_proxy https://${primRouterIP}:443 {
@@ -67,8 +58,8 @@ in
           }
         }
       '';
-      "https://${secRouterDomain}".extraConfig = ''
-        tls ${tlsCert} ${tlsKey}
+      "https://${secRouterFqdn}".extraConfig = ''
+        tls ${config.acme.tlsCert} ${config.acme.tlsKey}
         @lan not remote_ip private_ranges
         respond @lan "Hi! sorry not allowed :(" 403
         reverse_proxy https://${secRouterIP}:443 {

@@ -5,7 +5,6 @@
   pkgs,
   ...
 }:
-
 let
   cfg = config.programs.pixeldrain-cli;
   selfPkgs = inputs.self.packages.${pkgs.system};

@@ -1,5 +1,4 @@
 { config, lib, ... }:
-
 let
   arch = config.nixpkgs.hostPlatform.system;
 in

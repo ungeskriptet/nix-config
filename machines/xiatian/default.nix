@@ -1,12 +1,10 @@
 # HP EliteBook 840 G7
-
 {
   inputs,
   pkgs,
   lib,
   ...
 }:
-
 {
   imports = [
     ./hardware-configuration.nix

@@ -4,7 +4,6 @@
   autoPatchelfHook,
   unzip,
 }:
-
 stdenv.mkDerivation rec {
   pname = "odin4";
   version = "1.2.1.dc05e3ea0";
@@ -29,7 +28,6 @@ stdenv.mkDerivation rec {
 
   meta = {
     description = "Odin4 Samsung firmware flasher";
-    homepage = "https://github.com/alteholz/mdns-scan";
     mainprogram = pname;
   };
 }

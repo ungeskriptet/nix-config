@@ -1,12 +1,10 @@
 # ASRock B550M Pro4 AMD Desktop
-
 {
   inputs,
   pkgs,
   lib,
   ...
 }:
-
 {
   imports = [
     ./hardware-configuration.nix

@@ -4,10 +4,6 @@
   pkgs,
   ...
 }:
-
-let
-  interfaceName = "end0";
-in
 {
   sops.secrets =
     lib.genAttrs

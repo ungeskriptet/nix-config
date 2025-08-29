@@ -2,14 +2,11 @@
   config,
   pkgs,
   inputs,
-  vars,
   ...
 }:
 let
-  domain = "code.${baseDomain}";
-  baseDomain = vars.baseDomain;
-  tlsKey = "${config.security.acme.certs."${baseDomain}".directory}/key.pem";
-  tlsCert = "${config.security.acme.certs."${baseDomain}".directory}/fullchain.pem";
+  fqdn = "code.${domain}";
+  domain = config.networking.domain;
   openvscode-server = inputs.nixpkgs.legacyPackages.${pkgs.system}.openvscode-server;
 in
 {
@@ -18,8 +15,8 @@ in
     "openvscode-server/token".owner = "openvscode-server";
   };
 
-  networking.hosts."::1" = [ domain ];
-  networking.hosts."127.0.0.1" = [ domain ];
+  networking.hosts."::1" = [ fqdn ];
+  networking.hosts."127.0.0.1" = [ fqdn ];
 
   systemd.tmpfiles.rules = [
     "d /var/lib/openvscode-server/extensions 0755 openvscode-server openvscode-server -"
@@ -28,9 +25,9 @@ in
   ];
 
   services.caddy.virtualHosts = {
-    "https://${domain}".extraConfig = ''
-      tls ${tlsCert} ${tlsKey}
-      reverse_proxy http://${domain}:8092
+    "https://${fqdn}".extraConfig = ''
+      tls ${config.acme.tlsCert} ${config.acme.tlsKey}
+      reverse_proxy http://${fqdn}:8092
       basic_auth {
         import ${config.sops.secrets."openvscode-server/basicauth".path}
       }

@@ -1,5 +1,4 @@
 # Acer Aspire E5-574G
-
 {
   config,
   inputs,
@@ -7,7 +6,6 @@
   lib,
   ...
 }:
-
 {
   imports = [
     ./hardware-configuration.nix

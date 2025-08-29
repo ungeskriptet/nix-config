@@ -1,15 +1,12 @@
 {
   config,
-  vars,
   pkgs,
   inputs,
   ...
 }:
 let
-  domain = "photos.${baseDomain}";
-  baseDomain = vars.baseDomain;
-  tlsKey = "${config.security.acme.certs."${baseDomain}".directory}/key.pem";
-  tlsCert = "${config.security.acme.certs."${baseDomain}".directory}/fullchain.pem";
+  fqdn = "photos.${domain}";
+  domain = config.networking.domain;
   port = builtins.toString config.services.immich.port;
   immich = inputs.nixpkgs.legacyPackages.${pkgs.system}.immich;
 in
@@ -22,18 +19,18 @@ in
           "enabled": false
         },
         "server": {
-          "externalDomain": "https://${domain}"
+          "externalDomain": "https://${fqdn}"
         },
         "notifications": {
           "smtp": {
             "enabled": true,
-            "from": "immich@${baseDomain}",
-            "replyTo": "immich@${baseDomain}",
+            "from": "immich@${domain}",
+            "replyTo": "immich@${domain}",
             "transport": {
               "ignoreCert": false,
-              "host": "mail.${baseDomain}",
+              "host": "mail.${domain}",
               "port": 465,
-              "username": "immich@${baseDomain}",
+              "username": "immich@${domain}",
               "password": "${config.sops.placeholder."immich/smtppass"}"
             }
           }
@@ -43,13 +40,13 @@ in
   };
   sops.secrets."immich/smtppass" = { };
 
-  networking.hosts."::1" = [ domain ];
-  networking.hosts."127.0.0.1" = [ domain ];
+  networking.hosts."::1" = [ fqdn ];
+  networking.hosts."127.0.0.1" = [ fqdn ];
 
   services.caddy.virtualHosts = {
-    "https://${domain}".extraConfig = ''
-      tls ${tlsCert} ${tlsKey}
-      reverse_proxy http://${domain}:${port}
+    "https://${fqdn}".extraConfig = ''
+      tls ${config.acme.tlsCert} ${config.acme.tlsKey}
+      reverse_proxy http://${fqdn}:${port}
     '';
   };
 

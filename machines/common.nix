@@ -1,10 +1,10 @@
 { lib, ... }:
-
 {
   imports = [
     ../modules/packages-common.nix
     ../modules/pixeldrain-cli.nix
     ../modules/users.nix
+    ../modules/vars.nix
     ../modules/virtualization.nix
     ../modules/zsh.nix
   ];
@@ -27,6 +27,7 @@
     });
   '';
 
+  networking.domain = "david-w.eu";
   networking.nftables.enable = true;
   networking.firewall.filterForward = true;
 

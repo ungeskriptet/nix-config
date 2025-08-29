@@ -1,11 +1,9 @@
 {
-  config,
   lib,
   pkgs,
   inputs,
   ...
 }:
-
 let
   selfPkgs = inputs.self.packages.${pkgs.system};
 in
@@ -47,6 +45,7 @@ in
     file
     inetutils
     internetarchive
+    jq
     lz4
     ncdu
     p7zip

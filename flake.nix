@@ -66,7 +66,6 @@
       nixosConfigurations.ryuzu = nixpkgs.lib.nixosSystem {
         specialArgs = {
           inherit inputs;
-          vars = import ./vars.nix;
         };
         system = "x86_64-linux";
         modules = [
@@ -79,7 +78,6 @@
       nixosConfigurations.xiatian = nixpkgs.lib.nixosSystem {
         specialArgs = {
           inherit inputs;
-          vars = import ./vars.nix;
         };
         system = "x86_64-linux";
         modules = [
@@ -92,7 +90,6 @@
       nixosConfigurations.daruma = nixpkgs.lib.nixosSystem {
         specialArgs = {
           inherit inputs;
-          vars = import ./vars.nix;
         };
         system = "x86_64-linux";
         modules = [
@@ -116,7 +113,6 @@
           {
             specialArgs = {
               inherit inputs nixos-raspberrypi;
-              vars = import ./vars.nix;
             };
             system = "aarch64-linux";
             modules = [
@@ -128,7 +124,6 @@
       packages =
         nixpkgs.lib.recursiveUpdate
           (forAllSystems (system: {
-            dumpyara = nixpkgs.legacyPackages.${system}.callPackage ./packages/dumpyara.nix { };
             mdns-scan = nixpkgs.legacyPackages.${system}.callPackage ./packages/mdns-scan.nix { };
             pixeldrain-cli = nixpkgs.legacyPackages.${system}.callPackage ./packages/pixeldrain-cli.nix { };
             pmbootstrap-git = nixpkgs.legacyPackages.${system}.callPackage ./packages/pmbootstrap-git.nix {

@@ -1,5 +1,4 @@
 { pkgs, ... }:
-
 {
   boot = {
     kernelParams = [ "video=HDMI-A-1:1280x720M@60" ];

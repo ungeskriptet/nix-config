@@ -2,20 +2,11 @@
   config,
   lib,
   pkgs,
-  vars,
   ...
 }:
-
 let
-  domain = "adguard.${baseDomain}";
-  baseDomain = vars.baseDomain;
-  tlsKey = "${config.security.acme.certs."${baseDomain}".directory}/key.pem";
-  tlsCert = "${config.security.acme.certs."${baseDomain}".directory}/fullchain.pem";
-  lanDomain = vars.lanDomain;
-  lanIP = vars.rpi5.lanIP;
-  lanIPv6 = vars.rpi5.lanIPv6;
-  routerIP = vars.routerIP;
-  hostName = config.networking.hostName;
+  fqdn = "adguard.${domain}";
+  domain = config.networking.domain;
 in
 {
   users = {
@@ -39,8 +30,8 @@ in
     ];
   };
 
-  networking.hosts."::1" = [ domain ];
-  networking.hosts."127.0.0.1" = [ domain ];
+  networking.hosts."::1" = [ fqdn ];
+  networking.hosts."127.0.0.1" = [ fqdn ];
 
   systemd.services.adguardhome = {
     serviceConfig.SupplementaryGroups = [ "acme" ];
@@ -52,11 +43,11 @@ in
     '';
   };
 
-  services.caddy.virtualHosts."https://${domain}".extraConfig = ''
-    tls ${tlsCert} ${tlsKey}
+  services.caddy.virtualHosts."https://${fqdn}".extraConfig = ''
+    tls ${config.acme.tlsCert} ${config.acme.tlsKey}
     @lan not remote_ip private_ranges
     respond @lan "Hi! sorry not allowed :(" 403
-    reverse_proxy https://${domain}:8084
+    reverse_proxy https://${fqdn}:8084
   '';
 
   services.adguardhome = {
@@ -82,21 +73,22 @@ in
                   answer = ip;
                 })
                 [
-                  "*.${baseDomain}"
-                  baseDomain
-                  hostName
+                  "*.${domain}"
+                  domain
+                  config.networking.hostName
+                  config.networking.fqdn
                 ]
             )
             [
-              lanIP
-              lanIPv6
+              config.networking.lanIPv4
+              config.networking.lanIPv6
             ]
         );
       };
       dns = {
         upstream_dns = [
-          "[//]${routerIP}"
-          "[/${lanDomain}/]${routerIP}"
+          "[//]${config.networking.gatewayIP}"
+          "[/${config.networking.lanDomain}/]${config.networking.gatewayIP}"
           "tls://dot.ffmuc.net"
           "https://dns10.quad9.net/dns-query"
         ];
@@ -117,9 +109,9 @@ in
       };
       tls = {
         enabled = true;
-        server_name = "adguard.david-w.eu";
-        certificate_path = tlsCert;
-        private_key_path = tlsKey;
+        server_name = fqdn;
+        certificate_path = config.acme.tlsCert;
+        private_key_path = config.acme.tlsKey;
         force_https = true;
         port_dns_over_tls = 853;
         port_dns_over_quic = 853;

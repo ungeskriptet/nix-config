@@ -1,23 +1,19 @@
 {
   config,
   pkgs,
-  vars,
   ...
 }:
-
 let
-  domain = "webmail.${baseDomain}";
-  baseDomain = vars.baseDomain;
-  tlsKey = "${config.security.acme.certs."${baseDomain}".directory}/key.pem";
-  tlsCert = "${config.security.acme.certs."${baseDomain}".directory}/fullchain.pem";
+  fqdn = "webmail.${domain}";
+  domain = config.networking.domain;
 in
 {
-  networking.hosts."::1" = [ domain ];
-  networking.hosts."127.0.0.1" = [ domain ];
+  networking.hosts."::1" = [ fqdn ];
+  networking.hosts."127.0.0.1" = [ fqdn ];
 
-  services.caddy.virtualHosts."https://${domain}".extraConfig = ''
-    tls ${tlsCert} ${tlsKey}
-    reverse_proxy http://${domain}:8091
+  services.caddy.virtualHosts."https://${fqdn}".extraConfig = ''
+    tls ${config.acme.tlsCert} ${config.acme.tlsKey}
+    reverse_proxy http://${fqdn}:8091
   '';
 
   systemd.tmpfiles.rules = [
@@ -26,7 +22,7 @@ in
 
   services.roundcube = {
     enable = true;
-    hostName = domain;
+    hostName = fqdn;
     dicts = with pkgs.aspellDicts; [
       en
       de
@@ -34,12 +30,12 @@ in
     ];
     extraConfig = ''
       $config['imap_host'] = [
-        'ssl://mail.${baseDomain}:993' => 'Stalwart'
+        'ssl://mail.${domain}:993' => 'Stalwart'
       ];
-      $config['smtp_host'] = 'ssl://mail.${baseDomain}:465';
+      $config['smtp_host'] = 'ssl://mail.${domain}:465';
       $config['smtp_user'] = "%u";
       $config['smtp_pass'] = "%p";
-      $config['managesieve_host'] = 'ssl://mail.${baseDomain}:4190';
+      $config['managesieve_host'] = 'ssl://mail.${domain}:4190';
       $config['enigma_passwordless'] = true;
       $config['enigma_pgp_agent'] = '${pkgs.gnupg}/bin/gpg-agent';
       $config['enigma_pgp_binary'] = '${pkgs.gnupg}/bin/gpg';
@@ -54,7 +50,7 @@ in
     ];
   };
 
-  services.nginx.virtualHosts.${domain} = {
+  services.nginx.virtualHosts.${fqdn} = {
     forceSSL = false;
     enableACME = false;
     listen = [

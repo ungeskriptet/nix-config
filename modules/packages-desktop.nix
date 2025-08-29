@@ -4,7 +4,6 @@
   pkgs,
   ...
 }:
-
 let
   samsung-grab = inputs.samsung-grab.packages.${pkgs.system}.samsung-grab;
   selfPkgs = inputs.self.packages.${pkgs.system};

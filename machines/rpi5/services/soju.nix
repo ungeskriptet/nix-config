@@ -1,16 +1,11 @@
 {
   config,
   pkgs,
-  lib,
-  vars,
   ...
 }:
-
 let
-  domain = "irc.${baseDomain}";
-  baseDomain = vars.baseDomain;
-  tlsKey = "${config.security.acme.certs."${baseDomain}".directory}/key.pem";
-  tlsCert = "${config.security.acme.certs."${baseDomain}".directory}/fullchain.pem";
+  fqdn = "irc.${domain}";
+  domain = config.networking.domain;
 
   gamjaIcon = pkgs.stdenv.mkDerivation {
     name = "gamja-icon";
@@ -27,8 +22,8 @@ in
     allowedTCPPorts = [ 6697 ];
   };
 
-  networking.hosts."::1" = [ domain ];
-  networking.hosts."127.0.0.1" = [ domain ];
+  networking.hosts."::1" = [ fqdn ];
+  networking.hosts."127.0.0.1" = [ fqdn ];
 
   users = {
     groups.soju = { };
@@ -66,9 +61,9 @@ in
   };
 
   services.caddy.virtualHosts = {
-    "https://${domain}" = {
+    "https://${fqdn}" = {
       extraConfig = ''
-        tls ${tlsCert} ${tlsKey}
+        tls ${config.acme.tlsCert} ${config.acme.tlsKey}
         @uploads path /uploads /uploads/*
         reverse_proxy @uploads unix//run/soju/socket
         reverse_proxy /socket unix//run/soju/socket
@@ -86,8 +81,8 @@ in
       listen http+unix:///run/soju/socket
       listen ircs://:6697
       listen unix+admin:///run/soju/admin
-      hostname ${domain}
-      tls ${tlsCert} ${tlsKey}
+      hostname ${fqdn}
+      tls ${config.acme.tlsCert} ${config.acme.tlsKey}
       db postgres "host=/run/postgresql dbname=soju"
       message-store db
       accept-proxy-ip localhost

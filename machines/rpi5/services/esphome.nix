@@ -1,16 +1,11 @@
 {
   config,
-  pkgs,
   lib,
-  vars,
   ...
 }:
-
 let
-  domain = "esp.${baseDomain}";
-  baseDomain = vars.baseDomain;
-  tlsKey = "${config.security.acme.certs."${baseDomain}".directory}/key.pem";
-  tlsCert = "${config.security.acme.certs."${baseDomain}".directory}/fullchain.pem";
+  fqdn = "esp.${domain}";
+  domain = config.networking.domain;
 in
 {
   users = {
@@ -26,8 +21,8 @@ in
 
   sops.secrets."esphome/env".owner = "esphome";
 
-  networking.hosts."::1" = [ domain ];
-  networking.hosts."127.0.0.1" = [ domain ];
+  networking.hosts."::1" = [ fqdn ];
+  networking.hosts."127.0.0.1" = [ fqdn ];
 
   systemd.services.caddy = {
     serviceConfig.SupplementaryGroups = "esphome";
@@ -46,9 +41,9 @@ in
   };
 
   services.caddy.virtualHosts = {
-    "https://${domain}" = {
+    "https://${fqdn}" = {
       extraConfig = ''
-        tls ${tlsCert} ${tlsKey}
+        tls ${config.acme.tlsCert} ${config.acme.tlsKey}
         @lan not remote_ip private_ranges
         respond @lan "Hi! sorry not allowed :(" 403
         reverse_proxy unix//run/esphome/esphome.sock

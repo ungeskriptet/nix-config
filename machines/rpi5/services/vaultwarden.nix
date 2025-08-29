@@ -1,16 +1,13 @@
-{ config, vars, ... }:
-
+{ config, ... }:
 let
-  domain = "bitwarden.${baseDomain}";
-  baseDomain = vars.baseDomain;
-  tlsKey = "${config.security.acme.certs."${baseDomain}".directory}/key.pem";
-  tlsCert = "${config.security.acme.certs."${baseDomain}".directory}/fullchain.pem";
+  fqdn = "bitwarden.${domain}";
+  domain = config.networking.domain;
 in
 {
   sops.secrets."vaultwarden/env".owner = "vaultwarden";
 
-  networking.hosts."::1" = [ domain ];
-  networking.hosts."127.0.0.1" = [ domain ];
+  networking.hosts."::1" = [ fqdn ];
+  networking.hosts."127.0.0.1" = [ fqdn ];
 
   systemd.services.vaultwarden = {
     serviceConfig.SupplementaryGroups = [ "acme" ];
@@ -19,15 +16,15 @@ in
   };
 
   services.caddy.virtualHosts = {
-    "https://${domain}" = {
+    "https://${fqdn}" = {
       extraConfig = ''
-        tls ${tlsCert} ${tlsKey}
+        tls ${config.acme.tlsCert} ${config.acme.tlsKey}
         @lan {
           path /admin*
           not remote_ip private_ranges
         }
         respond @lan "Hi! sorry not allowed :(" 403
-        reverse_proxy https://${domain}:8082
+        reverse_proxy https://${fqdn}:8082
       '';
     };
   };
@@ -48,13 +45,13 @@ in
     environmentFile = config.sops.secrets."vaultwarden/env".path;
     config = {
       DATABASE_URL = "postgresql:///vaultwarden?host=/run/postgresql";
-      DOMAIN = "https://${domain}";
+      DOMAIN = "https://${fqdn}";
       SIGNUPS_ALLOWED = false;
       ROCKET_ADDRESS = "127.0.0.1";
       ROCKET_PORT = 8082;
-      ROCKET_TLS = ''{certs="${tlsCert}",key="${tlsKey}"}'';
-      SMTP_HOST = baseDomain;
-      SMTP_FROM = "vaultwarden@${baseDomain}";
+      ROCKET_TLS = ''{certs="${config.acme.tlsCert}",key="${config.acme.tlsKey}"}'';
+      SMTP_HOST = domain;
+      SMTP_FROM = "vaultwarden@${domain}";
       SMTP_USERNAME = "vaultwarden";
       SMTP_SECURITY = "force_tls";
       SMTP_PORT = 465;

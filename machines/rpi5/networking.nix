@@ -1,21 +1,17 @@
 {
   config,
   lib,
-  vars,
   ...
 }:
-let
-  lanDomain = vars.lanDomain;
-  lanIP = vars.rpi5.lanIP;
-  lanIPv6 = vars.rpi5.lanIPv6;
-  routerIP = vars.routerIP;
-in
 {
   networking = {
     hostName = "rpi5";
     useDHCP = false;
     useNetworkd = true;
     firewall.enable = true;
+    lanIPv4 = "192.168.64.2";
+    lanIPv6 = "fd64::2";
+    gatewayIP = "192.168.64.1";
   };
 
   services.resolved = {
@@ -29,11 +25,11 @@ in
       linkConfig.RequiredForOnline = "routable";
       DHCP = "no";
       address = [
-        "${lanIP}/24"
-        "${lanIPv6}/64"
+        "${config.networking.lanIPv4}/24"
+        "${config.networking.lanIPv6}/64"
       ];
-      gateway = [ routerIP ];
-      domains = [ lanDomain ];
+      gateway = [ config.networking.gatewayIP ];
+      domains = [ config.networking.lanDomain ];
       dns =
         lib.optionals config.services.adguardhome.enable [
           "::1"

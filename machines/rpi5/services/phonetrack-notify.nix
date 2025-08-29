@@ -1,4 +1,7 @@
 { config, inputs, ... }:
+let
+  hassUrl = "https://home.${config.networking.domain}";
+in
 {
   imports = [
     inputs.phonetrack-notify.nixosModules.phonetrack-notify
@@ -8,7 +11,8 @@
 
   services.phonetrack-notify = {
     enable = true;
-    hassUrl = "https://home.david-w.eu";
+    address = "[::1]:8094";
+    hassUrl = hassUrl;
     hassTokenFile = config.sops.secrets."phonetrack-notify/token".path;
   };
 }

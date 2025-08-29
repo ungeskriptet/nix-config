@@ -4,9 +4,8 @@
   pkgs,
   ...
 }:
-
 let
-  updateBot = pkgs.python3.pkgs.buildPythonPackage rec {
+  updateBot = pkgs.python3.pkgs.buildPythonPackage {
     pname = "samsung-update-bot";
     version = "0.0.1";
     pyproject = true;
@@ -20,7 +19,6 @@ let
     };
     meta.mainProgram = "samsung-update-bot";
   };
-
   stateDir = "/var/lib/samsung-update-bot/";
 in
 {

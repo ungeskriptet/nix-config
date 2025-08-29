@@ -2,20 +2,16 @@
   config,
   lib,
   pkgs,
-  vars,
   ...
 }:
-
 let
-  domain = "nextcloud.${baseDomain}";
-  baseDomain = vars.baseDomain;
-  tlsKey = "${config.security.acme.certs."${baseDomain}".directory}/key.pem";
-  tlsCert = "${config.security.acme.certs."${baseDomain}".directory}/fullchain.pem";
+  fqdn = "nextcloud.${domain}";
+  domain = config.networking.domain;
   occ = lib.getExe config.services.nextcloud.occ;
 in
 {
-  networking.hosts."::1" = [ domain ];
-  networking.hosts."127.0.0.1" = [ domain ];
+  networking.hosts."::1" = [ fqdn ];
+  networking.hosts."127.0.0.1" = [ fqdn ];
 
   systemd.services.nextcloud-setup = {
     requires = [ "postgresql.target" ];
@@ -36,10 +32,10 @@ in
   };
 
   services.caddy.virtualHosts = {
-    "https://${domain}" = {
+    "https://${fqdn}" = {
       extraConfig = ''
-        tls ${tlsCert} ${tlsKey}
-        reverse_proxy http://${domain}:8081
+        tls ${config.acme.tlsCert} ${config.acme.tlsKey}
+        reverse_proxy http://${fqdn}:8081
       '';
     };
   };
@@ -57,7 +53,7 @@ in
   };
 
   services.nginx = {
-    virtualHosts.${domain}.listen = [
+    virtualHosts.${fqdn}.listen = [
       {
         addr = "127.0.0.1";
         port = 8081;
@@ -80,7 +76,7 @@ in
   services.nextcloud = {
     enable = true;
     package = pkgs.nextcloud31;
-    hostName = domain;
+    hostName = fqdn;
     maxUploadSize = "50G";
     appstoreEnable = true;
     extraAppsEnable = true;
@@ -105,7 +101,7 @@ in
     autoUpdateApps.enable = true;
     notify_push = {
       enable = true;
-      nextcloudUrl = "http://${domain}:8081";
+      nextcloudUrl = "http://${fqdn}:8081";
     };
     settings = {
       default_phone_region = "DE";
@@ -114,15 +110,15 @@ in
         "::1"
         "127.0.0.1"
       ];
-      trusted_domains = [
+      trusted_fqdns = [
         "::1"
         "127.0.0.1"
         "localhost"
       ];
-      mail_domain = "${baseDomain}";
+      mail_fqdn = "${domain}";
       mail_from_address = "nextcloud";
       mail_smtpmode = "smtp";
-      mail_smtphost = "mail.${baseDomain}";
+      mail_smtphost = "mail.${domain}";
       mail_smtpsecure = "ssl";
       mail_smtpauth = "true";
       mail_smtpport = 465;

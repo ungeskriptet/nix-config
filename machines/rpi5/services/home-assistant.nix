@@ -2,20 +2,16 @@
   config,
   lib,
   pkgs,
-  vars,
   ...
 }:
-
 let
-  domain = "home.${baseDomain}";
-  baseDomain = vars.baseDomain;
-  tlsKey = "${config.security.acme.certs."${baseDomain}".directory}/key.pem";
-  tlsCert = "${config.security.acme.certs."${baseDomain}".directory}/fullchain.pem";
+  fqdn = "home.${domain}";
+  domain = config.networking.domain;
   ssh = lib.getExe pkgs.openssh;
 in
 {
-  networking.hosts."::1" = [ domain ];
-  networking.hosts."127.0.0.1" = [ domain ];
+  networking.hosts."::1" = [ fqdn ];
+  networking.hosts."127.0.0.1" = [ fqdn ];
   networking.firewall.allowedUDPPorts = [ 5353 ];
 
   systemd.services.home-assistant = {
@@ -25,10 +21,10 @@ in
   };
 
   services.caddy.virtualHosts = {
-    "https://${domain}" = {
+    "https://${fqdn}" = {
       extraConfig = ''
-        tls ${tlsCert} ${tlsKey}
-        reverse_proxy https://${domain}:8083
+        tls ${config.acme.tlsCert} ${config.acme.tlsKey}
+        reverse_proxy https://${fqdn}:8083
       '';
     };
   };
@@ -77,8 +73,8 @@ in
           "127.0.0.1"
         ];
         server_port = 8083;
-        ssl_key = tlsKey;
-        ssl_certificate = tlsCert;
+        ssl_key = config.acme.tlsKey;
+        ssl_certificate = config.acme.tlsCert;
         use_x_forwarded_for = true;
         trusted_proxies = [
           "::1"

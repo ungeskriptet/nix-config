@@ -1,5 +1,4 @@
 { lib, pkgs, ... }:
-
 {
   services.minecraft-server = {
     enable = true;

@@ -4,7 +4,6 @@
   lib,
   curl,
 }:
-
 writeShellScriptBin "pixeldrain-cli" ''
   APIKEY=$(cat ${apiKeyFile})
   ${lib.getExe curl} \

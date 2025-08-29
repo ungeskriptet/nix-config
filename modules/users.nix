@@ -1,12 +1,9 @@
 {
   config,
-  inputs,
   lib,
   pkgs,
-  vars,
   ...
 }:
-
 let
   cfg = config.users;
 in
@@ -44,13 +41,13 @@ in
         ++ lib.optionals config.virtualisation.podman.enable [ "podman" ];
         hashedPasswordFile = config.sops.secrets."users/${cfg.userName}".path;
         openssh.authorizedKeys.keys =
-          vars.sshPubKeys
+          config.vars.sshPubKeys
           ++ lib.optionals (config.networking.hostName == "ryuzu") [
             "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHCo1aBmLiSmZrjtnFVYczuv4/cNXjxF+4soUTSIeZla hass"
           ];
       };
       users.root = {
-        openssh.authorizedKeys.keys = vars.sshPubKeys;
+        openssh.authorizedKeys.keys = config.vars.sshPubKeys;
       };
     }
     // lib.optionalAttrs config.programs.zsh.enable { defaultUserShell = pkgs.zsh; };

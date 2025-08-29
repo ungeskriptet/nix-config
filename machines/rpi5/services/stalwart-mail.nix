@@ -1,16 +1,11 @@
 {
   config,
   lib,
-  pkgs,
-  vars,
   ...
 }:
-
 let
-  domain = "mail.${baseDomain}";
-  baseDomain = vars.baseDomain;
-  tlsKey = "${config.security.acme.certs."${baseDomain}".directory}/key.pem";
-  tlsCert = "${config.security.acme.certs."${baseDomain}".directory}/fullchain.pem";
+  fqdn = "mail.${domain}";
+  domain = config.networking.domain;
 in
 {
   users = {
@@ -39,7 +34,7 @@ in
     ];
   };
 
-  networking.hosts."127.0.0.1" = [ domain ];
+  networking.hosts."127.0.0.1" = [ fqdn ];
 
   systemd.services.stalwart-mail = {
     serviceConfig.SupplementaryGroups = [
@@ -113,16 +108,16 @@ in
         db.password = "%{file:${config.sops.secrets."stalwart/dbpass".path}}%";
       };
       certificate.default = {
-        cert = "%{file:${tlsCert}}%";
-        private-key = "%{file:${tlsKey}}%";
+        cert = "%{file:${config.acme.tlsCert}}%";
+        private-key = "%{file:${config.acme.tlsKey}}%";
         default = true;
       };
       http = {
-        url = "protocol + '://${domain}:443'";
+        url = "protocol + '://${fqdn}:443'";
         use-x-forwarded = true;
       };
       server = {
-        hostname = domain;
+        hostname = fqdn;
         listener.http = {
           protocol = "http";
           bind = [
@@ -173,15 +168,15 @@ in
   };
 
   services.caddy.virtualHosts = {
-    "https://${domain}, https://autodiscover.${baseDomain}, https://autoconfig.${baseDomain}, https://mta-sts.${baseDomain}" =
+    "https://${fqdn}, https://autodiscover.${domain}, https://autoconfig.${domain}, https://mta-sts.${domain}" =
       {
         extraConfig = ''
-          tls ${tlsCert} ${tlsKey}
-          reverse_proxy https://${domain}:8087
+          tls ${config.acme.tlsCert} ${config.acme.tlsKey}
+          reverse_proxy https://${fqdn}:8087
         '';
       };
-    "https://${baseDomain}" = {
-      extraConfig = "reverse_proxy /.well-known/jmap https://${domain}:8087";
+    "https://${domain}" = {
+      extraConfig = "reverse_proxy /.well-known/jmap https://${fqdn}:8087";
     };
   };
 }
