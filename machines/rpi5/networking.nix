@@ -41,6 +41,7 @@
         ];
       networkConfig = {
         IPv6AcceptRA = true;
+        IPv6PrivacyExtensions = false;
       };
       ipv6AcceptRAConfig = {
         Token = "prefixstable";
