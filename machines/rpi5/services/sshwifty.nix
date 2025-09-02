@@ -38,6 +38,7 @@ in
           ListenPort = 80;
         }
       ];
+      OnlyAllowPresetRemotes = true;
       Presets = [
         {
           Title = "rpi5";
@@ -49,6 +50,18 @@ in
             Encoding = "utf-8";
             Authentication = "Private Key";
             Fingerprint = "SHA256:35mSb4euaL49ndfSQQdYr5RV0TIlvb42/r8H3ryROYc";
+          };
+        }
+        {
+          Title = "ryuzu";
+          Type = "SSH";
+          Host = "ryuzu:22";
+          TabColor = "000011";
+          Meta = {
+            User = "david";
+            Encoding = "utf-8";
+            Authentication = "Private Key";
+            Fingerprint = "SHA256:joNUIEw6X8A/3zwN/wNygS8Ag9DKcxffwOsiaQjmRbs";
           };
         }
       ];
