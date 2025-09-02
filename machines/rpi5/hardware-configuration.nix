@@ -1,6 +1,7 @@
 { pkgs, ... }:
 {
   boot = {
+    loader.raspberryPi.bootloader = "kernel";
     kernelParams = [ "video=HDMI-A-1:1280x720M@60" ];
     kernel.sysctl = {
       "kernel.panic" = 60;
