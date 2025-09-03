@@ -39,6 +39,9 @@
       iifname end0 oifname wg1 accept
       iifname wg0 oifname wg1 accept
     '';
+    extraReversePathFilterRules = ''
+      iifname wg1 accept
+    '';
   };
 
   environment.systemPackages = with pkgs; [
@@ -97,7 +100,7 @@
         wireguardConfig = {
           ListenPort = 53286;
           PrivateKeyFile = config.sops.secrets."wireguard/support/privkey".path;
-          RouteTable = "main";
+          RouteTable = 96;
         };
         wireguardPeers = [
           {
@@ -127,7 +130,7 @@
           {
             AllowedIPs = [
               "192.168.3.13/32"
-              "192.168.96.0/24"
+              "0.0.0.0/0"
             ];
             PersistentKeepalive = 25;
             PresharedKeyFile = config.sops.secrets."wireguard/support/psk-5".path;
@@ -155,7 +158,26 @@
     };
     networks.wg1 = {
       matchConfig.Name = "wg1";
-      address = [ "192.168.3.1/24" ];
+      addresses = [
+        {
+          Address = "192.168.3.1/24";
+          AddPrefixRoute = false;
+        }
+      ];
+      routingPolicyRules = [
+        {
+          To = "192.168.3.0/24";
+          Table = 96;
+        }
+        {
+          To = "192.168.96.0/24";
+          Table = 96;
+        }
+        {
+          From = "192.168.64.10";
+          Table = 96;
+        }
+      ];
     };
   };
 }
