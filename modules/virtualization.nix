@@ -17,5 +17,12 @@ lib.mkMerge [
       dockerCompat = true;
       autoPrune.enable = true;
     };
+    security.polkit.extraConfig = ''
+      polkit.addRule((action, subject) => {
+          if (action.id === "org.libvirt.unix.manage" && subject.isInGroup("wheel")) {
+              return polkit.Result.YES;
+          }
+      });
+    '';
   })
 ]
