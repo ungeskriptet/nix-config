@@ -18,11 +18,12 @@ lib.mkMerge [
       autoPrune.enable = true;
     };
     security.polkit.extraConfig = ''
-      polkit.addRule((action, subject) => {
-          if (action.id === "org.libvirt.unix.manage" && subject.isInGroup("wheel")) {
+      polkit.addRule(function(action, subject) {
+          if (action.id == "org.libvirt.unix.manage" && subject.isInGroup("wheel")) {
               return polkit.Result.YES;
           }
       });
     '';
+    networking.firewall.trustedInterfaces = [ "virbr0" ];
   })
 ]
