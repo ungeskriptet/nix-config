@@ -44,6 +44,7 @@ in
       RUST_SRC_PATH = "${pkgs.rustPlatform.rustLibSrc}";
     };
     extraPackages = with pkgs; [
+      biome
       cargo
       delve
       gcc
