@@ -10,7 +10,7 @@
   imports = [
     ./hardware-configuration.nix
     ../desktop.nix
-    ../modules/secureboot.nix
+    ../../modules/secureboot.nix
     inputs.lanzaboote.nixosModules.lanzaboote
   ];
 
