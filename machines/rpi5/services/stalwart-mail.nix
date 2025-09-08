@@ -96,6 +96,14 @@ in
         "webadmin.path"
         "webadmin.resource"
       ];
+      session.mta-sts = {
+        mode = "enforce";
+        max-age = "1h";
+        mx = [
+          domain
+          "*.${domain}"
+        ];
+      };
       authentication.fallback-admin = {
         user = "admin";
         secret = "%{file:${config.sops.secrets."stalwart/pass".path}}%";
