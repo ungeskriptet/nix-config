@@ -12,14 +12,13 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    rpipkgs.url = "git+https://codeberg.org/ungeskriptet/nixpkgs?ref=rpi5";
     lanzaboote = {
       url = "github:nix-community/lanzaboote";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-raspberrypi = {
       url = "github:nvmd/nixos-raspberrypi/develop";
-      inputs.nixpkgs.follows = "rpipkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     phonetrack-notify = {
       url = "git+https://codeberg.org/ungeskriptet/phonetrack-notify.git";
@@ -90,7 +89,22 @@
       nixosConfigurations.rpi5 =
         nixos-raspberrypi.lib.int.nixosSystemRPi
           {
-            nixpkgs = inputs.rpipkgs;
+            nixpkgs =
+              let
+                pkgs = import nixpkgs { system = "aarch64-linux"; };
+                pkgsPatched = pkgs.applyPatches {
+                  name = "rpipkgs";
+                  src = nixpkgs;
+                  patches = [
+                    (pkgs.fetchpatch {
+                      url = "https://github.com/NixOS/nixpkgs/pull/398456.patch";
+                      hash = "sha256-N4gry4cH0UqumhTmOH6jyHNWpvW11eRDlGsnj5uSi+0=";
+                    })
+                  ];
+                };
+                rpipkgs = (import "${pkgsPatched}/flake.nix").outputs { self = inputs.self; };
+              in
+              rpipkgs;
             rpiModules = import ./modules/rpimodules.nix { inherit nixos-raspberrypi; };
           }
           {
