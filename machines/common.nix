@@ -23,6 +23,7 @@
     useGlobalPkgs = true;
     useUserPackages = true;
     extraSpecialArgs = { inherit inputs; };
+    backupFileExtension = "hmbak";
     users.david = lib.mkDefault ../home/david/common.nix;
   };
 
