@@ -2,7 +2,7 @@ keys:
   - &bitwarden age1x67zpr06facj4aefzlx0d3nj56qpprm43jpvry8dxf9vn6u44dpqqj7k0f
   - &daruma age1gm5hfzyf3t4r3ajue70lvdrkqwvfe3rdjs9ej86je6af64u0g3fqyhfarn
 creation_rules:
-  - path_regex: secrets/secrets-(ryuzu|xiatian|rpi5).yaml
+  - path_regex: secrets/secrets-(david|ryuzu|xiatian|rpi5).yaml
     key_groups:
     - age:
       - *bitwarden

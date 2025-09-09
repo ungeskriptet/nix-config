@@ -1,4 +1,9 @@
-{ lib, inputs, ... }:
+{
+  config,
+  lib,
+  inputs,
+  ...
+}:
 {
   imports = [
     ../modules/packages-common.nix
@@ -7,10 +12,19 @@
     ../modules/vars.nix
     ../modules/virtualization.nix
     ../modules/zsh.nix
+    inputs.home-manager.nixosModules.home-manager
+    inputs.nur.modules.nixos.default
     inputs.sops-nix.nixosModules.sops
   ];
 
   sops.age.keyFile = "/var/lib/sops-nix/key.txt";
+
+  home-manager = lib.mkIf (config.users.userName == "david") {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    extraSpecialArgs = { inherit inputs; };
+    users.david = lib.mkDefault ../home/david/common.nix;
+  };
 
   boot.kernel.sysctl = {
     "kernel.dmesg_restrict" = false;

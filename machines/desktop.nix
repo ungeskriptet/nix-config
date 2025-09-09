@@ -1,9 +1,18 @@
-{ pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   imports = [
     ./common.nix
     ../modules/packages-desktop.nix
   ];
+
+  home-manager = lib.mkIf (config.users.userName == "david") {
+    users.david = lib.mkForce ../home/david/desktop.nix;
+  };
 
   services = {
     desktopManager.plasma6.enable = true;
