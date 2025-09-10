@@ -12,12 +12,17 @@ in
     git.enable = true;
     htop.enable = true;
     pixeldrain-cli.enable = lib.mkDefault true;
-    ssh.startAgent = true;
     neovim = {
       enable = true;
       defaultEditor = true;
       viAlias = true;
       vimAlias = true;
+    };
+    ssh = {
+      startAgent = true;
+      extraConfig = ''
+        AddKeysToAgent yes
+      '';
     };
     tmux = {
       enable = true;
