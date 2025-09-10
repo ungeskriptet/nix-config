@@ -73,6 +73,8 @@ in
       export WORDCHARS="''${WORDCHARS/\/}"
       export WORDCHARS="''${WORDCHARS/.}"
 
+      [ $UID = 0 ] && [ -z $SSH_AGENT_PID ] && eval $(ssh-agent -s)
+
       duplines () {
         sort $1 | uniq --count --repeated
       }
