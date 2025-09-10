@@ -1,4 +1,10 @@
-{ config, inputs, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  inputs,
+  ...
+}:
 {
   imports = [
     inputs.sops-nix.homeManagerModules.sops
@@ -30,7 +36,7 @@
     homeDirectory = "/home/david";
     stateVersion = "25.05";
     file = {
-      ".ssh/config".source = ./ssh/config;
+      ".ssh/config".text = import ./ssh/config.nix { inherit lib pkgs; };
       ".ssh/id_ed25519.pub".source = ./ssh/id_ed25519.pub;
     };
   };

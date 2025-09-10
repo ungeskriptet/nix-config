@@ -10,20 +10,14 @@ in
 {
   programs = {
     git.enable = true;
-    pixeldrain-cli.enable = lib.mkDefault true;
     htop.enable = true;
+    pixeldrain-cli.enable = lib.mkDefault true;
+    ssh.startAgent = true;
     neovim = {
       enable = true;
       defaultEditor = true;
       viAlias = true;
       vimAlias = true;
-    };
-    ssh = {
-      startAgent = true;
-      extraConfig = ''
-        Host git-ssh.mainlining.org
-          ProxyCommand ${lib.getExe pkgs.cloudflared} access ssh --hostname %h
-      '';
     };
     tmux = {
       enable = true;
