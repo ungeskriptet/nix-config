@@ -108,6 +108,10 @@
                       url = "https://github.com/NixOS/nixpkgs/pull/398456.patch";
                       hash = "sha256-N4gry4cH0UqumhTmOH6jyHNWpvW11eRDlGsnj5uSi+0=";
                     })
+                    (pkgs.fetchpatch {
+                      url = "https://github.com/NixOS/nixpkgs/pull/437851.patch";
+                      hash = "sha256-ty4vBfTHyu+PL4jjSKwNX52bdjrIGzDv7dceh5X5RyY=";
+                    })
                   ];
                 };
                 rpipkgs = (import "${pkgsPatched}/flake.nix").outputs { self = inputs.self; };

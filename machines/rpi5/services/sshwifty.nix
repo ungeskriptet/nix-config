@@ -7,16 +7,12 @@ let
   domain = config.networking.domain;
 in
 {
-  imports = [
-    ../../../modules/sshwifty.nix
-  ];
-
   networking.hosts."::1" = [ fqdn ];
   networking.hosts."127.0.0.1" = [ fqdn ];
 
   sops.secrets = {
     "sshwifty/basicauth".owner = "caddy";
-    "sshwifty/sharedkey".owner = "sshwifty";
+    "sshwifty/sharedkey".owner = "root";
   };
 
   services.caddy.virtualHosts."https://${fqdn}".extraConfig = ''
