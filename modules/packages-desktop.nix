@@ -5,7 +5,6 @@
   ...
 }:
 let
-  samsung-grab = inputs.samsung-grab.packages.${pkgs.system}.samsung-grab;
   selfPkgs = inputs.self.packages.${pkgs.system};
 in
 {
@@ -51,7 +50,6 @@ in
     vlc
     yt-dlp
 
-    samsung-grab
     selfPkgs.ida-pro
     selfPkgs.itgmania-zmod
     selfPkgs.odin4
