@@ -31,6 +31,8 @@
     home-manager.enable = true;
   };
 
+  xdg.enable = true;
+
   home = {
     username = "david";
     homeDirectory = "/home/david";
