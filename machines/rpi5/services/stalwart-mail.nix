@@ -72,19 +72,14 @@ in
         "cluster.*"
         "config.local-keys.*"
         "directory.*"
-        "email.folders.archive.create"
-        "email.folders.archive.name"
-        "email.folders.archive.subscribe"
-        "http.url"
-        "http.use-x-forwarded"
-        "report.analysis.addresses.*"
-        "report.analysis.forward"
-        "report.analysis.store"
-        "resolver.public-suffix.*"
-        "resolver.type"
+        "email.*"
+        "http.*"
+        "report.*"
+        "resolver.*"
         "server.*"
         "!server.allowed-ip.*"
         "!server.blocked-ip.*"
+        "session.*"
         "spam-filter.resource"
         "storage.blob"
         "storage.data"
@@ -93,16 +88,28 @@ in
         "storage.lookup"
         "store.*"
         "tracer.*"
-        "webadmin.path"
-        "webadmin.resource"
+        "webadmin.*"
       ];
-      session.mta-sts = {
-        mode = "enforce";
-        max-age = "1h";
-        mx = [
-          domain
-          "*.${domain}"
-        ];
+      session = {
+        mta-sts = {
+          mode = "enforce";
+          max-age = "1h";
+          mx = [
+            domain
+            "*.${domain}"
+          ];
+        };
+        connect.greeting = "config_get('server.hostname') + ' Hi! :3'";
+        rcpt = {
+          catch-all = true;
+          rewrite = [
+            {
+              "if" = "is_local_domain(\"\", rcpt_domain)";
+              "then" = "moe@${domain}";
+            }
+            { "else" = false; }
+          ];
+        };
       };
       authentication.fallback-admin = {
         user = "admin";
