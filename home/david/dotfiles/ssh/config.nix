@@ -18,4 +18,7 @@
     User root
   Host git-ssh.mainlining.org
     ProxyCommand ${lib.getExe pkgs.cloudflared} access ssh --hostname %h
+  Host mainlining
+    Hostname mail.mainlining.org
+    User root
 ''
