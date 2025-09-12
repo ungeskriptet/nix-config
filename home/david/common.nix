@@ -10,6 +10,7 @@ let
 in
 {
   imports = [
+    ./email.nix
     ./vars.nix
     inputs.sops-nix.homeManagerModules.sops
   ];
