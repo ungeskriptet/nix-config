@@ -10,6 +10,7 @@ let
 in
 {
   imports = [
+    ./vars.nix
     inputs.sops-nix.homeManagerModules.sops
   ];
 
@@ -32,7 +33,7 @@ in
     git = {
       enable = true;
       lfs.enable = true;
-      userName = "David Wronek";
+      userName = config.myuser.realName;
       userEmail = "david.wronek@mainlining.org";
     };
     home-manager.enable = true;
