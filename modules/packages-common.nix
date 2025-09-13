@@ -35,6 +35,7 @@ in
 
   environment.systemPackages = with pkgs; [
     android-tools
+    b4
     binutils
     binwalk
     dig
