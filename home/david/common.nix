@@ -41,6 +41,7 @@ in
       userName = config.myuser.realName;
       userEmail = "david.wronek@mainlining.org";
       extraConfig = {
+        sendemail.identity = "mainlining";
         patatt = {
           signingkey = "ed25519:20250914";
           selector = "20250914";
