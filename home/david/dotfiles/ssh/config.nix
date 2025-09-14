@@ -21,4 +21,8 @@
   Host mainlining
     Hostname mail.mainlining.org
     User root
+  Host postmarketos
+    Hostname 172.16.42.1
+    StrictHostKeyChecking no
+    UserKnownHostsFile=/dev/null
 ''
