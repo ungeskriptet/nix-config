@@ -1,6 +1,7 @@
 # Raspberry Pi 5
 {
   inputs,
+  pkgsPatched,
   ...
 }:
 {
@@ -17,5 +18,8 @@
 
   security.sudo.wheelNeedsPassword = false;
 
-  nix.settings.max-jobs = 1;
+  nix = {
+    nixPath = [ "nixpkgs=${pkgsPatched}" ];
+    settings.max-jobs = 1;
+  };
 }
