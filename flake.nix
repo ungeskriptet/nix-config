@@ -1,15 +1,11 @@
 {
   description = "David's NixOS configs";
-
   nixConfig = {
-    extra-substituters = [
-      "https://nixos-raspberrypi.cachix.org"
-    ];
+    extra-substituters = [ "https://nixos-raspberrypi.cachix.org" ];
     extra-trusted-public-keys = [
       "nixos-raspberrypi.cachix.org-1:4iMO9LXa8BqhU+Rpg6LQKiGa2lsNh/j2oiYLNOQ5sPI="
     ];
   };
-
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager = {
@@ -53,73 +49,44 @@
       flake = false;
     };
   };
-
   outputs =
-    {
-      nixpkgs,
-      nixos-raspberrypi,
-      ...
-    }@inputs:
+    { nixpkgs, nixos-raspberrypi, ... }@inputs:
     let
+      lib = import ./lib.nix { inherit nixpkgs; };
       forAllSystems = nixpkgs.lib.genAttrs [
         "x86_64-linux"
         "aarch64-linux"
       ];
     in
     {
-      nixosConfigurations.ryuzu = nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit inputs;
-        };
-        system = "x86_64-linux";
-        modules = [
-          ./machines/ryuzu
-        ];
-      };
-      nixosConfigurations.xiatian = nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit inputs;
-        };
-        system = "x86_64-linux";
-        modules = [
-          ./machines/xiatian
-        ];
-      };
-      nixosConfigurations.daruma = nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit inputs;
-        };
-        system = "x86_64-linux";
-        modules = [
-          ./machines/daruma
-        ];
-      };
-      nixosConfigurations.rpi5 =
-        let
-          pkgs = import nixpkgs { system = "aarch64-linux"; };
-          pkgsPatched = pkgs.applyPatches {
-            name = "rpipkgs";
-            src = nixpkgs;
-            patches = [
-              (pkgs.fetchpatch {
-                url = "https://github.com/NixOS/nixpkgs/pull/398456.patch";
-                hash = "sha256-N4gry4cH0UqumhTmOH6jyHNWpvW11eRDlGsnj5uSi+0=";
-              })
-            ];
-          };
-          rpipkgs = (import "${pkgsPatched}/flake.nix").outputs { self = inputs.self; };
-        in
-        nixos-raspberrypi.lib.int.nixosSystemRPi
-          {
-            nixpkgs = rpipkgs;
-            rpiModules = import ./modules/rpimodules.nix { inherit nixos-raspberrypi; };
-          }
-          {
-            specialArgs = { inherit inputs nixos-raspberrypi pkgsPatched; };
-            system = "aarch64-linux";
-            modules = [ ./machines/rpi5 ];
-          };
-
+      nixosConfigurations = {
+        rpi5 =
+          let
+            pkgs = import nixpkgs { system = "aarch64-linux"; };
+            pkgsPatched = pkgs.applyPatches {
+              name = "rpipkgs";
+              src = nixpkgs;
+              patches = [
+                (pkgs.fetchpatch {
+                  url = "https://github.com/NixOS/nixpkgs/pull/398456.patch";
+                  hash = "sha256-N4gry4cH0UqumhTmOH6jyHNWpvW11eRDlGsnj5uSi+0=";
+                })
+              ];
+            };
+            rpipkgs = (import "${pkgsPatched}/flake.nix").outputs { self = inputs.self; };
+          in
+          nixos-raspberrypi.lib.int.nixosSystemRPi
+            {
+              nixpkgs = rpipkgs;
+              rpiModules = import ./modules/rpimodules.nix { inherit nixos-raspberrypi; };
+            }
+            {
+              specialArgs = { inherit inputs nixos-raspberrypi pkgsPatched; };
+              system = "aarch64-linux";
+              modules = [ ./machines/rpi5 ];
+            };
+      }
+      // lib.mkNixos [ "daruma" "ryuzu" "xiatian" ] inputs;
       packages =
         nixpkgs.lib.recursiveUpdate
           (forAllSystems (system: {
@@ -140,7 +107,6 @@
               outfox-alpha5 = nixpkgs.legacyPackages.x86_64-linux.callPackage ./packages/outfox-alpha5.nix { };
             };
           };
-
       formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-tree);
     };
 }
