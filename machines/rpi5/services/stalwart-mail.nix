@@ -191,7 +191,10 @@ in
         '';
       };
     "https://${domain}" = {
-      extraConfig = "reverse_proxy /.well-known/jmap https://${fqdn}:8087";
+      extraConfig = ''
+        reverse_proxy /.well-known/jmap https://${fqdn}:8087
+        reverse_proxy /jmap/* https://${fqdn}:8087
+      '';
     };
   };
 }
