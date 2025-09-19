@@ -19,6 +19,14 @@
   networking.hostName = "ryuzu";
   networking.interfaces.enp4s0.wakeOnLan.enable = true;
 
+  security.polkit.extraConfig = ''
+    polkit.addRule(function(action, subject) {
+        if (action.id == "com.bitwarden.Bitwarden.unlock" && subject.isInGroup("wheel")) {
+            return polkit.Result.YES;
+        }
+    });
+  '';
+
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.systemd-boot.enable = lib.mkDefault true;
