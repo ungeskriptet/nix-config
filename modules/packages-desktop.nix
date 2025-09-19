@@ -34,6 +34,7 @@ in
     firefox
     gimp3-with-plugins
     heimdall
+    hunspell
     hunspellDicts.de_DE
     hunspellDicts.en_US
     hunspellDicts.pl_PL
