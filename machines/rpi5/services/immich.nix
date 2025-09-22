@@ -8,7 +8,6 @@ let
   fqdn = "photos.${domain}";
   domain = config.networking.domain;
   port = builtins.toString config.services.immich.port;
-  immich = inputs.nixpkgs.legacyPackages.${pkgs.system}.immich;
 in
 {
   sops.templates."immich.json" = {
@@ -54,7 +53,6 @@ in
     enable = true;
     port = 8093;
     host = "::1";
-    package = immich;
     database = {
       enableVectorChord = true;
       enableVectors = false;
