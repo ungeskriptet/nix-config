@@ -22,8 +22,6 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.systemd-boot.enable = lib.mkDefault true;
 
-  programs.pixeldrain-cli.enable = lib.mkForce false;
-
   i18n.defaultLocale = lib.mkForce "de_DE.UTF-8";
 
   users.userName = "grazyna";

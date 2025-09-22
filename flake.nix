@@ -91,7 +91,6 @@
         nixpkgs.lib.recursiveUpdate
           (forAllSystems (system: {
             mdns-scan = nixpkgs.legacyPackages.${system}.callPackage ./packages/mdns-scan.nix { };
-            pixeldrain-cli = nixpkgs.legacyPackages.${system}.callPackage ./packages/pixeldrain-cli.nix { };
             pmbootstrap-git = nixpkgs.legacyPackages.${system}.callPackage ./packages/pmbootstrap-git.nix {
               inherit (inputs) pmbootstrap-git;
             };

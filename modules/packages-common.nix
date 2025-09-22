@@ -12,7 +12,6 @@ in
   programs = {
     git.enable = true;
     htop.enable = true;
-    pixeldrain-cli.enable = lib.mkDefault true;
     neovim = {
       enable = true;
       defaultEditor = true;

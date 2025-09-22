@@ -7,7 +7,6 @@
 {
   imports = [
     ../modules/packages-common.nix
-    ../modules/pixeldrain-cli.nix
     ../modules/users.nix
     ../modules/vars.nix
     ../modules/virtualization.nix
