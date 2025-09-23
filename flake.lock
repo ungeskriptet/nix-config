@@ -118,11 +118,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1758464306,
-        "narHash": "sha256-i56XRXqjwJRdVYmpzVUQ0ktqBBHqNzQHQMQvFRF/acQ=",
+        "lastModified": 1758593331,
+        "narHash": "sha256-p+904PfmINyekyA/LieX3IYGsiFtExC00v5gSYfJtpM=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "939e91e1cff1f99736c5b02529658218ed819a2a",
+        "rev": "9a2dc0efbc569ce9352a6ffb8e8ec8dbc098e142",
         "type": "github"
       },
       "original": {
@@ -191,11 +191,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1758109794,
-        "narHash": "sha256-lkg+1JSSGnrFuxhP7iUP3IzUsWeZIvdxb/8F9j2Bz+0=",
+        "lastModified": 1758583513,
+        "narHash": "sha256-v3n/3BKxgE1e9ccY0VDr7Mtcoyt4dPh+7Cay7Py7U8E=",
         "owner": "nvmd",
         "repo": "nixos-raspberrypi",
-        "rev": "9008360c60512ad6873d11ceb15c531ed15b90c7",
+        "rev": "ceb2d334023066e0f4d66fd2fbd043c08f09a9f2",
         "type": "github"
       },
       "original": {
@@ -207,11 +207,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1758277210,
-        "narHash": "sha256-iCGWf/LTy+aY0zFu8q12lK8KuZp7yvdhStehhyX1v8w=",
+        "lastModified": 1758427187,
+        "narHash": "sha256-pHpxZ/IyCwoTQPtFIAG2QaxuSm8jWzrzBGjwQZIttJc=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "8eaee110344796db060382e15d3af0a9fc396e0e",
+        "rev": "554be6495561ff07b6c724047bdd7e0716aa7b46",
         "type": "github"
       },
       "original": {
@@ -229,11 +229,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1758523683,
-        "narHash": "sha256-9pjMAJ/6teLlRP4LRpEwy3UGEox9RnAg2z/RmLiWvr0=",
+        "lastModified": 1758617501,
+        "narHash": "sha256-8OZj/u31/ZiRXa9POGmkMd3x3nMgrIQvjFNtZqdsQHs=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "7a4fcd0ad4cb2b5df779e21c0827926339cccee2",
+        "rev": "246a1a5e9000efa9695ddd0457e3db718bf26966",
         "type": "github"
       },
       "original": {
@@ -265,11 +265,11 @@
     "pmbootstrap-git": {
       "flake": false,
       "locked": {
-        "lastModified": 1758186954,
-        "narHash": "sha256-BVCv/uMkOgxJgLzZZ7pKeLn/Pqyf5oHxwYqZf4s0muI=",
+        "lastModified": 1758543596,
+        "narHash": "sha256-GuBVJyBMfL/luvdiG8bTvs7nWYZ7sosydtJo7RrlvDA=",
         "ref": "refs/heads/master",
-        "rev": "ed05cca6a0f4c5670cf66db0de5172cfeedb709e",
-        "revCount": 3389,
+        "rev": "b4338fd9efb3a5e1f306e79d5be08cff2fd96770",
+        "revCount": 3390,
         "type": "git",
         "url": "https://gitlab.postmarketos.org/postmarketOS/pmbootstrap.git"
       },
@@ -347,11 +347,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1758106058,
-        "narHash": "sha256-tZ+mehte1Cc44HBCDyUuEVFrq2Rtu/YXjSDzFsfz9K4=",
+        "lastModified": 1758618705,
+        "narHash": "sha256-vKb54yRZR6hatI9Noantke/aLwWI24Xs2JzBiX5OFBE=",
         "ref": "refs/heads/master",
-        "rev": "9310bbfeb451e3a08820b0c69ad9cdd70f356f28",
-        "revCount": 6,
+        "rev": "19a1c963b06a9bce7ef6b3c2b8f16078046891e1",
+        "revCount": 8,
         "type": "git",
         "url": "https://codeberg.org/ungeskriptet/samsung-grab"
       },
