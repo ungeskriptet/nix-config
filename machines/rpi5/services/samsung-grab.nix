@@ -8,7 +8,6 @@
 
   services.samsung-grab = {
     enable = true;
-    username = "ungeskriptet";
     notifyFile = config.sops.secrets."samsung-grab/url".path;
   };
 }
