@@ -49,6 +49,7 @@ in
     scrcpy
     signal-desktop
     vlc
+    xournalpp
     yt-dlp
 
     selfPkgs.ida-pro
