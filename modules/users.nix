@@ -33,6 +33,7 @@ in
         isNormalUser = true;
         description = cfg.userDescription;
         extraGroups = [
+          "dialout"
           "wheel"
         ]
         ++ lib.optionals config.networking.networkmanager.enable [ "networkmanager" ]
