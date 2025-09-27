@@ -1,6 +1,6 @@
 {
   stdenv,
-  fetchurl,
+  fetchzip,
   autoPatchelfHook,
   copyDesktopItems,
   makeWrapper,
@@ -16,12 +16,12 @@
 }:
 stdenv.mkDerivation {
   pname = "outfox-alpha5";
-  version = "0.5.0-pre043-a34";
+  version = "0.5.0-pre043-a41";
 
-  src = fetchurl {
-    url = "https://drive.usercontent.google.com/download?id=1-5iSYH_JS1stK5P2IGqx_QumTHdRuHVr&confirm=t";
-    name = "OutFox-alpha-0.5.0-pre043-a34-arch-btw-amd64-arch-date-20250420.tar.gz";
-    hash = "sha256-ekwSCLI+aJXAh6VIzSawe+504hvoqGX5Mh7wApOpLSs=";
+  src = fetchzip {
+    url = "https://drive.usercontent.google.com/download?id=1xQw9tvZbhnBpgWRfbJdMXgtfQnTlAl9A&confirm=t";
+    hash = "sha256-RzsHQlG7JYNOegoolCLLRx0zIbxwT2F2tDiS3WmOTQ4=";
+    extension = "tar.gz";
   };
 
   nativeBuildInputs = [
