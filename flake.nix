@@ -88,22 +88,25 @@
       }
       // lib.mkNixos [ "daruma" "ryuzu" "xiatian" ] inputs;
       packages =
+        let
+          pkgs = nixpkgs.legacyPackages;
+        in
         nixpkgs.lib.recursiveUpdate
           (forAllSystems (system: {
-            mdns-scan = nixpkgs.legacyPackages.${system}.callPackage ./packages/mdns-scan.nix { };
-            pmbootstrap-git = nixpkgs.legacyPackages.${system}.callPackage ./packages/pmbootstrap-git.nix {
+            mdns-scan = pkgs.${system}.callPackage ./packages/mdns-scan.nix { };
+            pmbootstrap-git = pkgs.${system}.callPackage ./packages/pmbootstrap-git.nix {
               inherit (inputs) pmbootstrap-git;
             };
-            ttf-ms-win11 = nixpkgs.legacyPackages.${system}.callPackage ./packages/ttf-ms-win11.nix { };
+            ttf-ms-win11 = pkgs.${system}.callPackage ./packages/ttf-ms-win11.nix { };
           }))
           {
             x86_64-linux = {
-              ida-pro = nixpkgs.legacyPackages.x86_64-linux.callPackage ./packages/ida-pro.nix { };
-              itgmania-zmod = nixpkgs.legacyPackages.x86_64-linux.callPackage ./packages/itgmania-zmod.nix {
+              ida-pro = pkgs.x86_64-linux.callPackage ./packages/ida-pro.nix { };
+              itgmania-zmod = pkgs.x86_64-linux.callPackage ./packages/itgmania-zmod.nix {
                 inherit (inputs) zmod;
               };
-              odin4 = nixpkgs.legacyPackages.x86_64-linux.callPackage ./packages/odin4.nix { };
-              outfox-alpha5 = nixpkgs.legacyPackages.x86_64-linux.callPackage ./packages/outfox-alpha5.nix { };
+              odin4 = pkgs.x86_64-linux.callPackage ./packages/odin4.nix { };
+              outfox-alpha5 = pkgs.x86_64-linux.callPackage ./packages/outfox-alpha5.nix { };
             };
           };
       formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-tree);
