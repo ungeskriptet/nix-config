@@ -68,6 +68,7 @@ in
     settings = {
       config.local-keys = [
         "authentication.fallback-admin.*"
+        "auth.spf.verify.*"
         "certificate.*"
         "cluster.*"
         "config.local-keys.*"
@@ -90,6 +91,22 @@ in
         "tracer.*"
         "webadmin.*"
       ];
+      auth.spf.verify = {
+        ehlo = [
+          {
+            "if" = "local_port == 25";
+            "then" = "strict";
+          }
+          { "else" = "disable"; }
+        ];
+        mail-from = [
+          {
+            "if" = "local_port == 25";
+            "then" = "strict";
+          }
+          { "else" = "disable"; }
+        ];
+      };
       session = {
         mta-sts = {
           mode = "enforce";
