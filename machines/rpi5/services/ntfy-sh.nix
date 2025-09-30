@@ -7,6 +7,8 @@ in
   networking.hosts."::1" = [ fqdn ];
   networking.hosts."127.0.0.1" = [ fqdn ];
 
+  sops.secrets."ntfy-sh/env".owner = "root";
+
   systemd.services.ntfy-sh = {
     serviceConfig.RuntimeDirectory = "ntfy-sh";
   };
@@ -26,6 +28,7 @@ in
 
   services.ntfy-sh = {
     enable = true;
+    environmentFile = config.sops.secrets."ntfy-sh/env".path;
     settings = {
       base-url = "https://${fqdn}";
       listen-unix = "/run/ntfy-sh/ntfy.sock";
@@ -38,6 +41,8 @@ in
       enable-login = true;
       keepalive-interval = "70s";
       visitor-request-limit-exempt-hosts = domain;
+      web-push-file = "/var/lib/ntfy-sh/webpush.db";
+      web-push-email-address = "webpush${domain}";
     };
   };
 }
