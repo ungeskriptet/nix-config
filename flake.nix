@@ -107,6 +107,7 @@
               };
               odin4 = pkgs.x86_64-linux.callPackage ./packages/odin4.nix { };
               outfox-alpha5 = pkgs.x86_64-linux.callPackage ./packages/outfox-alpha5.nix { };
+              silverfort-client = pkgs.x86_64-linux.callPackage ./packages/silverfort-client.nix { };
             };
           };
       formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-tree);

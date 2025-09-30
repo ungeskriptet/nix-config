@@ -19,6 +19,8 @@
   networking.hostName = "ryuzu";
   networking.interfaces.enp4s0.wakeOnLan.enable = true;
 
+  programs.silverfort.enable = true;
+
   security.polkit.extraConfig = ''
     polkit.addRule(function(action, subject) {
         if (action.id == "com.bitwarden.Bitwarden.unlock" && subject.isInGroup("wheel")) {

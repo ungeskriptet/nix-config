@@ -8,6 +8,7 @@
   imports = [
     ./common.nix
     ../modules/packages-desktop.nix
+    ../modules/silverfort.nix
   ];
 
   home-manager = lib.mkIf (config.users.userName == "david") {
