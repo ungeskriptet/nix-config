@@ -147,6 +147,8 @@ in
       http = {
         url = "protocol + '://${fqdn}:443'";
         use-x-forwarded = true;
+        hsts = true;
+        permissive-cors = false;
       };
       server = {
         hostname = fqdn;
