@@ -95,7 +95,7 @@ in
         ehlo = [
           {
             "if" = "local_port == 25";
-            "then" = "strict";
+            "then" = "relaxed";
           }
           { "else" = "disable"; }
         ];
