@@ -51,16 +51,6 @@ in
     home-manager.enable = true;
   };
 
-  xdg = {
-    enable = true;
-    autostart = {
-      enable = true;
-      entries = with pkgs; [
-        "${bitwarden}/share/applications/bitwarden.desktop"
-      ];
-    };
-  };
-
   home = {
     username = "david";
     homeDirectory = "/home/david";

@@ -23,6 +23,16 @@
     '';
   };
 
+  xdg = {
+    enable = true;
+    autostart = {
+      enable = true;
+      entries = with pkgs; [
+        "${bitwarden}/share/applications/bitwarden.desktop"
+      ];
+    };
+  };
+
   home.file = {
     ".itgmania/Save/LocalProfiles/00000000/GrooveStats.ini".source =
       config.lib.file.mkOutOfStoreSymlink
