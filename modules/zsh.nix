@@ -13,6 +13,7 @@ let
   jq = lib.getExe pkgs.jq;
   readelf = lib.getExe' pkgs.binutils "readelf";
   yt-dlp = lib.getExe pkgs.yt-dlp;
+  cfg = config.nix-config;
 in
 {
   environment.sessionVariables.ZDOTDIR = "$HOME/.config/zsh";
@@ -33,10 +34,12 @@ in
     syntaxHighlighting.enable = true;
 
     shellAliases = {
-      compress-vid = "${ffmpeg} -vcodec libx264 -crf 28 output.mp4 -i";
       rp = "realpath";
-      heimdall = "heimdall-wait-for-device && ${heimdall}";
       switch-nixos = "sudo nixos-rebuild switch --flake path:/etc/nixos#${config.networking.hostName} -L";
+    }
+    // lib.optionalAttrs cfg.david {
+      compress-vid = "${ffmpeg} -vcodec libx264 -crf 28 output.mp4 -i";
+      heimdall = "heimdall-wait-for-device && ${heimdall}";
       yt-dlp-mp4 = "${yt-dlp} -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'";
     };
 
@@ -78,27 +81,29 @@ in
       duplines () {
         sort $1 | uniq --count --repeated
       }
-      fdroid-install () {
-        echo "< waiting for any device >"
-        ${adb} wait-for-device &&
-        rm -f "$1.apk"
-        ${curl} https://f-droid.org/repo/$1_$(${curl} -s https://f-droid.org/api/v1/packages/$1 | ${jq} .suggestedVersionCode).apk -o "$1.apk"
-        ${adb} install "$1.apk"
-        [[ $2 = "--no-rm" ]] || rm -f "$1.apk"
-      }
+      ${lib.optionalString cfg.david ''
+        fdroid-install () {
+          echo "< waiting for any device >"
+          ${adb} wait-for-device &&
+          rm -f "$1.apk"
+          ${curl} https://f-droid.org/repo/$1_$(${curl} -s https://f-droid.org/api/v1/packages/$1 | ${jq} .suggestedVersionCode).apk -o "$1.apk"
+          ${adb} install "$1.apk"
+          [[ $2 = "--no-rm" ]] || rm -f "$1.apk"
+        }
+        heimdall-wait-for-device () {
+          echo "< waiting for any device >"
+          while ! ${heimdall} detect > /dev/null 2>&1; do
+            sleep 1
+          done
+        }
+        libneeds () {${readelf} -d $1 |grep '\(NEEDED\)' | sed -r 's/.*\[(.*)\]/\1/'}
+      ''}
       gh-cherry-pick () {
         curl https://github.com/$1/commit/$2.patch | git am
-      }
-      heimdall-wait-for-device () {
-      	echo "< waiting for any device >"
-      	while ! ${heimdall} detect > /dev/null 2>&1; do
-      	    sleep 1
-      	done
       }
       last-journalctl () {
         journalctl _SYSTEMD_INVOCATION_ID=`systemctl show -p InvocationID --value $1`
       }
-      libneeds () {${readelf} -d $1 |grep '\(NEEDED\)' | sed -r 's/.*\[(.*)\]/\1/'}
       precmd () {
           gitinfo=$(${git} branch --show-current 2> /dev/null)
           [[ -z $gitinfo ]] && return

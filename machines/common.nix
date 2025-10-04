@@ -16,13 +16,15 @@
     inputs.sops-nix.nixosModules.sops
   ];
 
-  sops.age.keyFile = "/var/lib/sops-nix/key.txt";
+  sops.age.keyFile = lib.mkDefault "/var/lib/sops-nix/key.txt";
 
-  home-manager = lib.mkIf (config.users.userName == "david") {
+  home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
     extraSpecialArgs = { inherit inputs; };
     backupFileExtension = "hmbak";
+  }
+  // lib.optionalAttrs (config.users.userName == "david") {
     users.david = lib.mkDefault ../home/david/common.nix;
   };
 
@@ -65,17 +67,19 @@
   services.xserver.xkb.layout = "de";
   i18n = {
     defaultLocale = lib.mkDefault "en_US.UTF-8";
-    extraLocaleSettings = lib.genAttrs [
-      "LC_ADDRESS"
-      "LC_IDENTIFICATION"
-      "LC_NAME"
-      "LC_MEASUREMENT"
-      "LC_NUMERIC"
-      "LC_MONETARY"
-      "LC_PAPER"
-      "LC_TELEPHONE"
-      "LC_TIME"
-    ] (var: "de_DE.UTF-8");
+    extraLocaleSettings = lib.mkDefault (
+      lib.genAttrs [
+        "LC_ADDRESS"
+        "LC_IDENTIFICATION"
+        "LC_NAME"
+        "LC_MEASUREMENT"
+        "LC_NUMERIC"
+        "LC_MONETARY"
+        "LC_PAPER"
+        "LC_TELEPHONE"
+        "LC_TIME"
+      ] (var: "de_DE.UTF-8")
+    );
   };
 
   nix = {

@@ -1,5 +1,4 @@
 {
-  pkgs,
   config,
   ...
 }:
@@ -7,6 +6,7 @@
   imports = [
     ./common.nix
     ./firefox
+    ../common-allusers.nix
   ];
 
   services.nextcloud-client = {
@@ -21,16 +21,6 @@
       ApiKey=${config.sops.placeholder."groovestats/apikey"}
       IsPadPlayer=1
     '';
-  };
-
-  xdg = {
-    enable = true;
-    autostart = {
-      enable = true;
-      entries = with pkgs; [
-        "${bitwarden}/share/applications/bitwarden.desktop"
-      ];
-    };
   };
 
   home.file = {

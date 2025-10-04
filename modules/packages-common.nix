@@ -1,10 +1,12 @@
 {
   lib,
   pkgs,
+  config,
   inputs,
   ...
 }:
 let
+  cfg = config.nix-config;
   samsung-grab = inputs.samsung-grab.packages.${pkgs.system}.samsung-grab;
   selfPkgs = inputs.self.packages.${pkgs.system};
 in
@@ -18,7 +20,7 @@ in
       viAlias = true;
       vimAlias = true;
     };
-    ssh = {
+    ssh = lib.mkIf (config.services.gnome.gcr-ssh-agent.enable == null) {
       startAgent = true;
       extraConfig = ''
         AddKeysToAgent yes
@@ -32,37 +34,41 @@ in
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    android-tools
-    b4
-    binutils
-    binwalk
-    dig
-    dnsmasq
-    dtc
-    exfat
-    ffmpeg
-    file
-    inetutils
-    internetarchive
-    jq
-    lz4
-    ncdu
-    p7zip
-    pciutils
-    picocom
-    pv
-    python3
-    ripgrep
-    rsync
-    samfirm-js
-    sops
-    unrar
-    unzip
-    usbutils
-    zip
+  environment.systemPackages =
+    with pkgs;
+    [
+      android-tools
+      binutils
+      dig
+      dnsmasq
+      exfat
+      ffmpeg
+      file
+      inetutils
+      jq
+      lz4
+      ncdu
+      p7zip
+      pciutils
+      picocom
+      pv
+      python3
+      ripgrep
+      rsync
+      unrar
+      unzip
+      usbutils
+      zip
+    ]
+    ++ lib.optionals cfg.david [
+      b4
+      binwalk
+      dtc
+      internetarchive
+      samfirm-js
+      sops
 
-    samsung-grab
-    selfPkgs.mdns-scan
-  ];
+      samsung-grab
+      selfPkgs.mdns-scan
+    ];
 }

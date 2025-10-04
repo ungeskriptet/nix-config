@@ -24,6 +24,12 @@
       description = "Secondary Gateway IP";
       default = "192.168.64.15";
     };
+    nix-config.enablePlasma = lib.mkEnableOption "Plasma" // {
+      default = true;
+    };
+    nix-config.david = lib.mkEnableOption "David's desktop configs" // {
+      default = true;
+    };
     vars.sshPubKeys = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       description = "Trusted SSH public keys";
