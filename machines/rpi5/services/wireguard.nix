@@ -140,7 +140,7 @@
             AllowedIPs = [ "192.168.3.3/32" ];
             PersistentKeepalive = 25;
             PresharedKeyFile = config.sops.secrets."wireguard/support/psk-6".path;
-            PublicKey = "GHsPXL5bpeb4VyAhDtULlACzAlDRyxVT8Ht+W4aOEkc=";
+            PublicKey = "0zU//E78ALwoiXfvGLU/OO1O8ZOj6UvqwP2bbzwJTT4=";
           }
         ];
       };
