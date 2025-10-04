@@ -34,8 +34,9 @@
   };
 
   home.file = {
-    ".itgmania/Save/LocalProfiles/00000000/GrooveStats.ini".source =
-      config.lib.file.mkOutOfStoreSymlink
-        config.sops.templates."GrooveStats.ini".path;
+    ".itgmania/Save/LocalProfiles/00000000/GrooveStats.ini" = {
+      source = config.lib.file.mkOutOfStoreSymlink config.sops.templates."GrooveStats.ini".path;
+      force = true;
+    };
   };
 }
