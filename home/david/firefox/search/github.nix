@@ -18,6 +18,6 @@
       }
     ];
     icon = "https://github.githubassets.com/assets/pinned-octocat-093da3e6fa40.svg";
-    definedAliases = [ "@gh" ];
+    definedAliases = [ ":gh" ];
   };
 }

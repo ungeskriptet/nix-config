@@ -18,7 +18,7 @@
       }
     ];
     icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-    definedAliases = [ "@no" ];
+    definedAliases = [ ":no" ];
   };
   nix-packages = {
     name = "Nix Packages";
@@ -38,6 +38,6 @@
       }
     ];
     icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-    definedAliases = [ "@np" ];
+    definedAliases = [ ":np" ];
   };
 }
