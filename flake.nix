@@ -86,7 +86,7 @@
               modules = [ ./machines/rpi5 ];
             };
       }
-      // lib.mkNixos [ "daruma" "ryuzu" "xiatian" ] inputs;
+      // lib.mkNixos [ "daruma" "ryuzu" "tsugaru" "xiatian" ] inputs;
       packages =
         let
           pkgs = nixpkgs.legacyPackages;
