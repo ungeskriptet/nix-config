@@ -11,7 +11,10 @@
       "nvme"
     ];
     initrd.kernelModules = [ "i915" ];
-    initrd.luks.devices."NIXOS_ROOTFS".device = "/dev/disk/by-partlabel/root";
+    initrd.luks.devices."NIXOS_ROOTFS" = {
+      device = "/dev/disk/by-partlabel/root";
+      preOpenCommands = "(sleep 120; poweroff -f) &";
+    };
   };
 
   fileSystems = {
