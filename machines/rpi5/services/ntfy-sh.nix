@@ -35,7 +35,7 @@ in
       listen-unix-mode = 432; # 0660 in octal
       listen-http = "";
       behind-proxy = true;
-      auth-file = "/var/lib/ntfy-sh/auth.db";
+      auth-access = [ "*:up*:wo" ];
       auth-default-access = "deny-all";
       enable-signup = false;
       enable-login = true;
