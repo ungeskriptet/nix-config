@@ -40,6 +40,10 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     yuribot = {
       url = "git+https://codeberg.org/ungeskriptet/yuribot";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -57,6 +61,16 @@
         "x86_64-linux"
         "aarch64-linux"
       ];
+      treefmtEval = forAllSystems (
+        system:
+        inputs.treefmt-nix.lib.evalModule nixpkgs.legacyPackages.${system} (
+          { pkgs, ... }:
+          {
+            projectRootFile = "flake.nix";
+            programs.nixfmt.enable = true;
+          }
+        )
+      );
     in
     {
       nixosConfigurations = {
@@ -110,6 +124,9 @@
               silverfort-client = pkgs.x86_64-linux.callPackage ./packages/silverfort-client.nix { };
             };
           };
-      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-tree);
+      formatter = forAllSystems (system: treefmtEval.${system}.config.build.wrapper);
+      checks = forAllSystems (system: {
+        formatting = treefmtEval.${system}.config.build.check inputs.self;
+      });
     };
 }
