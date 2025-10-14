@@ -75,7 +75,7 @@ in
 
   services.nextcloud = {
     enable = true;
-    package = pkgs.nextcloud31;
+    package = pkgs.nextcloud32;
     hostName = fqdn;
     maxUploadSize = "50G";
     appstoreEnable = true;
@@ -83,7 +83,7 @@ in
     webfinger = true;
     configureRedis = true;
     https = true;
-    extraApps = with pkgs.nextcloud31Packages.apps; {
+    extraApps = with pkgs.nextcloud32Packages.apps; {
       inherit
         calendar
         contacts
@@ -93,7 +93,6 @@ in
         notify_push
         phonetrack
         previewgenerator
-        tasks
         ;
     };
     caching.apcu = true;
