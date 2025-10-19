@@ -1,8 +1,9 @@
 { ... }:
 {
   boot = {
+    kernelModules = [ "kvm-amd" ];
     kernelParams = [ "amd_pstate=active" ];
-    initrd.kernelModules = [ "amdgpu" ];
+    loader.systemd-boot.consoleMode = "max";
     initrd.availableKernelModules = [
       "nvme"
       "xhci_pci"
@@ -12,7 +13,6 @@
       "sd_mod"
     ];
   };
-  boot.kernelModules = [ "kvm-amd" ];
 
   fileSystems = {
     "/" = {
