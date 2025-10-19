@@ -19,6 +19,8 @@
         "wireguard/support/psk-4"
         "wireguard/support/psk-5"
         "wireguard/support/psk-6"
+        "wireguard/netflix/privkey"
+        "wireguard/netflix/psk-1"
       ]
       (secret: {
         owner = "systemd-network";
@@ -34,10 +36,13 @@
     allowedUDPPorts = [
       33434
       53286
+      57349
     ];
     extraForwardRules = ''
-      iifname end0 oifname wg1 accept
+      iifname end0 oifname { wg1, wg2 } accept
       iifname wg0 oifname wg1 accept
+      iifname wg2 oifname end0 meta l4proto { tcp, udp } th dport { 80, 443 } ip daddr != 192.168.0.0/16 accept
+      iifname wg2 oifname end0 meta l4proto { tcp, udp } th dport { 80, 443 } ip6 daddr != fd00::/16 accept
     '';
     extraReversePathFilterRules = ''
       iifname wg1 accept
@@ -144,7 +149,29 @@
           }
         ];
       };
-
+      "52-wg2" = {
+        netdevConfig = {
+          Kind = "wireguard";
+          MTUBytes = "1420";
+          Name = "wg2";
+        };
+        wireguardConfig = {
+          ListenPort = 57349;
+          PrivateKeyFile = config.sops.secrets."wireguard/netflix/privkey".path;
+          RouteTable = 36;
+        };
+        wireguardPeers = [
+          {
+            AllowedIPs = [
+              "192.168.36.2/32"
+              "fd36::2"
+            ];
+            PersistentKeepalive = 25;
+            PresharedKeyFile = config.sops.secrets."wireguard/netflix/psk-1".path;
+            PublicKey = "Z+dpBU2imvHy/wlVckmpre7qVyEWnG3K6O6waOLcIn4=";
+          }
+        ];
+      };
     };
     networks.wg0 = {
       matchConfig.Name = "wg0";
@@ -178,6 +205,16 @@
           Table = 96;
         }
       ];
+    };
+    networks.wg2 = {
+      matchConfig.Name = "wg2";
+      address = [
+        "192.168.36.1/24"
+        "fd36::1/64"
+      ];
+      networkConfig = {
+        IPMasquerade = "both";
+      };
     };
   };
 }
