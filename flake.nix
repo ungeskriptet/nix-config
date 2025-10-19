@@ -67,7 +67,14 @@
           { pkgs, ... }:
           {
             projectRootFile = "flake.nix";
-            programs.nixfmt.enable = true;
+            programs = {
+              nixfmt.enable = true;
+              keep-sorted.enable = true;
+            };
+            settings = {
+              verbose = 1;
+              on-matched = "debug";
+            };
           }
         )
       );
