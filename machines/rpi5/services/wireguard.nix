@@ -40,7 +40,7 @@
     ];
     extraForwardRules = ''
       iifname end0 oifname { wg1, wg2 } accept
-      iifname wg0 oifname { wg1, wg2 } accept
+      iifname wg0 accept
       iifname wg2 oifname end0 meta l4proto { tcp, udp } th dport { 80, 443 } ip daddr != 192.168.0.0/16 accept
       iifname wg2 oifname end0 meta l4proto { tcp, udp } th dport { 80, 443 } ip6 daddr != fd00::/16 accept
     '';
