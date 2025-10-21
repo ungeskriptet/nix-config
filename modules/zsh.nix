@@ -36,6 +36,7 @@ in
     shellAliases = {
       rp = "realpath";
       switch-nixos = "sudo nixos-rebuild switch --flake path:/etc/nixos#${config.networking.hostName} -L";
+      wineprefix = "export WINEPREFIX=$(mktemp -d --suffix -wine)";
     }
     // lib.optionalAttrs cfg.david {
       compress-vid = "${ffmpeg} -vcodec libx264 -crf 28 output.mp4 -i";
