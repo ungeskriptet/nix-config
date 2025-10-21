@@ -16,6 +16,11 @@
       url = "github:nix-community/lanzaboote";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-on-droid = {
+      url = "github:nix-community/nix-on-droid";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
     nixos-raspberrypi = {
       url = "github:nvmd/nixos-raspberrypi/develop";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -54,7 +59,12 @@
     };
   };
   outputs =
-    { nixpkgs, nixos-raspberrypi, ... }@inputs:
+    {
+      nixpkgs,
+      nix-on-droid,
+      nixos-raspberrypi,
+      ...
+    }@inputs:
     let
       lib = import ./lib.nix { inherit nixpkgs; };
       forAllSystems = nixpkgs.lib.genAttrs [
@@ -108,12 +118,18 @@
             };
       }
       // lib.mkNixos [ "daruma" "ryuzu" "tsugaru" "xiatian" ] inputs;
+      nixOnDroidConfigurations.nix-on-droid = nix-on-droid.lib.nixOnDroidConfiguration {
+        pkgs = import nixpkgs { system = "aarch64-linux"; };
+        extraSpecialArgs = { inherit inputs; };
+        modules = [ ./machines/nix-on-droid ];
+      };
       packages =
         let
           pkgs = nixpkgs.legacyPackages;
         in
         nixpkgs.lib.recursiveUpdate
           (forAllSystems (system: {
+            openssh-nix-on-droid = pkgs.${system}.callPackage ./packages/openssh-nix-on-droid.nix { };
             mdns-scan = pkgs.${system}.callPackage ./packages/mdns-scan.nix { };
             pmbootstrap-git = pkgs.${system}.callPackage ./packages/pmbootstrap-git.nix {
               inherit (inputs) pmbootstrap-git;

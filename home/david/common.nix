@@ -17,7 +17,7 @@ in
 
   sops = {
     defaultSopsFile = ../../secrets/secrets-david.yaml;
-    age.keyFile = "/home/david/.config/sops-nix/key.txt";
+    age.keyFile = "${homeDir}/.config/sops-nix/key.txt";
     secrets = {
       "adb/privkey" = {
         path = "${homeDir}/.android/adbkey";
@@ -52,8 +52,8 @@ in
   };
 
   home = {
-    username = "david";
-    homeDirectory = "/home/david";
+    username = lib.mkDefault "david";
+    homeDirectory = lib.mkDefault "/home/david";
     stateVersion = "25.05";
     file = {
       ".android/adbkey.pub".source = ./dotfiles/adbkey.pub;

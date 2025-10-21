@@ -10,7 +10,7 @@
     ../modules/users.nix
     ../modules/vars.nix
     ../modules/virtualization.nix
-    ../modules/zsh.nix
+    ../modules/zsh/nixos
     inputs.home-manager.nixosModules.home-manager
     inputs.nur.modules.nixos.default
     inputs.sops-nix.nixosModules.sops
