@@ -2,7 +2,7 @@
 ''
   AddKeysToAgent yes
   Host rpi5
-    Hostname rpi5
+    Hostname fd64::2
     User root
     ForwardAgent yes
   Host ryuzu
