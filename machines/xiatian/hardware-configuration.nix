@@ -51,6 +51,7 @@
       pkgs.intel-compute-runtime
       pkgs.vpl-gpu-rt
     ];
+    sensor.iio.enable = true;
   };
 
   services.fstrim.enable = true;
