@@ -9,6 +9,7 @@ in
   programs.zsh = {
     initContent = cfg.zshrc;
     profileExtra = lib.mkIf cfg.nixOnDroid.enable ''
+      eval $(ssh-agent -s)
       ${lib.last config.systemd.user.services.sops-nix.Service.ExecStart}
     '';
     history = {
