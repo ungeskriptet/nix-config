@@ -43,6 +43,7 @@
       "extensions/gtk4-ding/show-volumes" = true;
 
       # Dash to Panel
+      "extensions/dash-to-panel/hide-overview-on-startup" = true;
       "extensions/dash-to-panel/panel-element-positions" = ''
         {
           "CMO-0x00000000": [
