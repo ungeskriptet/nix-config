@@ -90,7 +90,6 @@ in
         dav_push
         mail
         notes
-        notify_push
         phonetrack
         previewgenerator
         ;
