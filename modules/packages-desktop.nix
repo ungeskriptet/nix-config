@@ -13,7 +13,6 @@ in
   services.udev.packages = lib.optionals cfg.david (
     with pkgs;
     [
-      android-udev-rules
       edl
       heimdall.udev
     ]
