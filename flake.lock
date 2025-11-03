@@ -49,11 +49,11 @@
     },
     "flake-compat_2": {
       "locked": {
-        "lastModified": 1747046372,
-        "narHash": "sha256-CIVLLkVgvHYbgI2UpXvIIBJ12HWgX+fjA8Xf8PUmqCY=",
+        "lastModified": 1761588595,
+        "narHash": "sha256-XKUZz9zewJNUj46b4AJdiRZJAvSZ0Dqj2BNfXvFlJC4=",
         "owner": "edolstra",
         "repo": "flake-compat",
-        "rev": "9100a0f413b0c601e0533d1d94ffd501ce2e7885",
+        "rev": "f387cd2afec9419c8ee37694406ca490c3f34ee5",
         "type": "github"
       },
       "original": {
@@ -133,11 +133,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1761584077,
-        "narHash": "sha256-dISPEZahlfs5K6d58zR4akRRyogfE9P4WSyPPNT7HiE=",
+        "lastModified": 1762146130,
+        "narHash": "sha256-/XOEA0a61fZ45i/BpaSsyLNNbw/yKwjMbkB/IWSGLzU=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "e82585308aef3d4cc2c36c7b6946051c8cdf24ef",
+        "rev": "b5ed4afc2277339bdf0e9edf59befff7350cf075",
         "type": "github"
       },
       "original": {
@@ -260,11 +260,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1761226170,
-        "narHash": "sha256-lce31w157p43t/bhElVIZ/2N/XVwJZ3nChr5J23Gdbk=",
+        "lastModified": 1761934681,
+        "narHash": "sha256-/G4xIepjoOo1vhfPuQ2tjqT3s8wB196NkfOFbSWZr4g=",
         "owner": "nvmd",
         "repo": "nixos-raspberrypi",
-        "rev": "9f47b3065f218d33460d3b2bc29e4639d1fee7e4",
+        "rev": "d0e2a7a36b08e2049e3024bc23ab391ca9de454c",
         "type": "github"
       },
       "original": {
@@ -276,11 +276,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1761373498,
-        "narHash": "sha256-Q/uhWNvd7V7k1H1ZPMy/vkx3F8C13ZcdrKjO7Jv7v0c=",
+        "lastModified": 1761907660,
+        "narHash": "sha256-kJ8lIZsiPOmbkJypG+B5sReDXSD1KGu2VEPNqhRa/ew=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "6a08e6bb4e46ff7fcbb53d409b253f6bad8a28ce",
+        "rev": "2fb006b87f04c4d3bdf08cfdbc7fab9c13d94a15",
         "type": "github"
       },
       "original": {
@@ -368,11 +368,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1761587105,
-        "narHash": "sha256-xQQM/LokyzEHDtZLny/wR8oc7a91ttlGwYxfUEOUjj4=",
+        "lastModified": 1762162488,
+        "narHash": "sha256-yqbmIpwmzutEkakNy5mrecwbTFWpAmVMW+Sn/jUOtSo=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "6dff4a82d073dc3b5533ee3aab0495adaccd7a11",
+        "rev": "e2fefe665ee5cd9f5228864b75294a8295ec9a9b",
         "type": "github"
       },
       "original": {
@@ -385,14 +385,15 @@
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
-        ]
+        ],
+        "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1756214999,
-        "narHash": "sha256-VXh6Dsumdhhkr+kom8NDmCKoynxl8Q47Lsvdn1UfWL0=",
+        "lastModified": 1762157805,
+        "narHash": "sha256-CoOOEMG/5+7yc8Z3ISiZuju0TWbk2k+hPuhu6Xsp4hg=",
         "ref": "refs/heads/master",
-        "rev": "82f74a7d58587be4baf13b32d0eb95781c968923",
-        "revCount": 2,
+        "rev": "ab1d59fb7a8d499b35708bf5bbeb56c84cf0cbad",
+        "revCount": 6,
         "type": "git",
         "url": "https://codeberg.org/ungeskriptet/phonetrack-notify.git"
       },
@@ -404,11 +405,11 @@
     "pmbootstrap-git": {
       "flake": false,
       "locked": {
-        "lastModified": 1761318660,
-        "narHash": "sha256-Nzqcol5TCBWwTJt4/FCzKgFjEuUp6ab9zIE3CW5lICs=",
+        "lastModified": 1761904702,
+        "narHash": "sha256-1GBPdU5WSIuGp/dZ1D/SXZUhMnv/uxei4iiGG9EAROg=",
         "ref": "refs/heads/master",
-        "rev": "c11170a2a5e1cce7bc8e96496c3daeeb921da711",
-        "revCount": 3441,
+        "rev": "4635edb2cd68c152fd921eaab2900ca20e26c7df",
+        "revCount": 3451,
         "type": "git",
         "url": "https://gitlab.postmarketos.org/postmarketOS/pmbootstrap.git"
       },
@@ -455,7 +456,7 @@
         "pmbootstrap-git": "pmbootstrap-git",
         "samsung-grab": "samsung-grab",
         "sops-nix": "sops-nix",
-        "treefmt-nix": "treefmt-nix_2",
+        "treefmt-nix": "treefmt-nix_3",
         "yuribot": "yuribot",
         "zmod": "zmod"
       }
@@ -486,7 +487,7 @@
         "nixpkgs": [
           "nixpkgs"
         ],
-        "treefmt-nix": "treefmt-nix"
+        "treefmt-nix": "treefmt-nix_2"
       },
       "locked": {
         "lastModified": 1760422674,
@@ -541,6 +542,27 @@
     "treefmt-nix": {
       "inputs": {
         "nixpkgs": [
+          "phonetrack-notify",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1761311587,
+        "narHash": "sha256-Msq86cR5SjozQGCnC6H8C+0cD4rnx91BPltZ9KK613Y=",
+        "owner": "numtide",
+        "repo": "treefmt-nix",
+        "rev": "2eddae033e4e74bf581c2d1dfa101f9033dbd2dc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "treefmt-nix",
+        "type": "github"
+      }
+    },
+    "treefmt-nix_2": {
+      "inputs": {
+        "nixpkgs": [
           "samsung-grab",
           "nixpkgs"
         ]
@@ -559,7 +581,7 @@
         "type": "github"
       }
     },
-    "treefmt-nix_2": {
+    "treefmt-nix_3": {
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
