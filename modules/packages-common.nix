@@ -20,7 +20,7 @@ in
       viAlias = true;
       vimAlias = true;
     };
-    ssh = lib.mkIf (config.services.gnome.gcr-ssh-agent.enable == null) {
+    ssh = lib.mkIf (config.services.gnome.gcr-ssh-agent.enable == false) {
       startAgent = true;
       extraConfig = ''
         AddKeysToAgent yes
