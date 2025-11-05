@@ -59,6 +59,7 @@ in
       "oralb"
       "ping"
       "radio_browser"
+      "traccar"
       "zha"
     ];
     extraPackages = ps: with ps; [ psycopg2 ];
