@@ -41,6 +41,8 @@ in
       $config['enigma_pgp_binary'] = '${pkgs.gnupg}/bin/gpg';
       $config['enigma_pgp_gpgconf'] = '${pkgs.gnupg}/bin/gpgconf';
       $config['enigma_pgp_homedir'] = '/var/lib/roundcube/enigma';
+      $config['session_lifetime'] = 1440;
+      $config['message_show_email'] = true;
     '';
     plugins = [
       "archive"
