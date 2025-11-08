@@ -22,6 +22,9 @@
         "wireguard/support/psk-7"
         "wireguard/netflix/privkey"
         "wireguard/netflix/psk-1"
+        "wireguard/netflix/psk-2"
+        "wireguard/netflix/psk-3"
+        "wireguard/netflix/psk-4"
       ]
       (secret: {
         owner = "systemd-network";
@@ -171,11 +174,38 @@
           {
             AllowedIPs = [
               "192.168.36.2/32"
-              "fd36::2"
+              "fd36::2/128"
             ];
             PersistentKeepalive = 25;
             PresharedKeyFile = config.sops.secrets."wireguard/netflix/psk-1".path;
             PublicKey = "Z+dpBU2imvHy/wlVckmpre7qVyEWnG3K6O6waOLcIn4=";
+          }
+          {
+            AllowedIPs = [
+              "192.168.36.3/32"
+              "fd36::3/128"
+            ];
+            PersistentKeepalive = 25;
+            PresharedKeyFile = config.sops.secrets."wireguard/netflix/psk-2".path;
+            PublicKey = "D5uVvbROZ6r+H+DV+XlmGBTdznD7mLS8FPpjhFe7hFc=";
+          }
+          {
+            AllowedIPs = [
+              "192.168.36.4/32"
+              "fd36::4/128"
+            ];
+            PersistentKeepalive = 25;
+            PresharedKeyFile = config.sops.secrets."wireguard/netflix/psk-3".path;
+            PublicKey = "VNkHC2EdlNr92OsqShYPfPzBj54bxAhaT4TWQyG65kg=";
+          }
+          {
+            AllowedIPs = [
+              "192.168.36.5/32"
+              "fd36::5/128"
+            ];
+            PersistentKeepalive = 25;
+            PresharedKeyFile = config.sops.secrets."wireguard/netflix/psk-4".path;
+            PublicKey = "vBnjpb8OQJ1ZMh+OSt+x4IJRGWKAnLmL5oWd9UpBfk4=";
           }
         ];
       };
