@@ -41,7 +41,7 @@ in
       binutils
       dig
       dnsmasq
-      exfat
+      exfatprogs
       ffmpeg
       file
       inetutils
