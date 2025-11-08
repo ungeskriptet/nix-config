@@ -5,7 +5,7 @@
     autostart = {
       enable = true;
       entries = with pkgs; [
-        "${bitwarden}/share/applications/bitwarden.desktop"
+        "${bitwarden-desktop}/share/applications/bitwarden.desktop"
       ];
     };
   };
