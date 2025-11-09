@@ -129,8 +129,9 @@
         in
         nixpkgs.lib.recursiveUpdate
           (forAllSystems (system: {
-            openssh-nix-on-droid = pkgs.${system}.callPackage ./packages/openssh-nix-on-droid.nix { };
+            dumpyara = pkgs.${system}.callPackage ./packages/dumpyara.nix { };
             mdns-scan = pkgs.${system}.callPackage ./packages/mdns-scan.nix { };
+            openssh-nix-on-droid = pkgs.${system}.callPackage ./packages/openssh-nix-on-droid.nix { };
             phonetrack-patched = pkgs.${system}.callPackage ./packages/phonetrack-patched { };
             pmbootstrap-git = pkgs.${system}.callPackage ./packages/pmbootstrap-git.nix {
               inherit (inputs) pmbootstrap-git;
