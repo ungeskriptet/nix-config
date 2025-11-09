@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
 let
@@ -84,13 +85,13 @@ in
     configureRedis = true;
     https = true;
     extraApps = with pkgs.nextcloud32Packages.apps; {
+      phonetrack = inputs.self.packages.${pkgs.system}.phonetrack-patched;
       inherit
         calendar
         contacts
         dav_push
         mail
         notes
-        phonetrack
         previewgenerator
         ;
     };

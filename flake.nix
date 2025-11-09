@@ -131,6 +131,7 @@
           (forAllSystems (system: {
             openssh-nix-on-droid = pkgs.${system}.callPackage ./packages/openssh-nix-on-droid.nix { };
             mdns-scan = pkgs.${system}.callPackage ./packages/mdns-scan.nix { };
+            phonetrack-patched = pkgs.${system}.callPackage ./packages/phonetrack-patched { };
             pmbootstrap-git = pkgs.${system}.callPackage ./packages/pmbootstrap-git.nix {
               inherit (inputs) pmbootstrap-git;
             };
