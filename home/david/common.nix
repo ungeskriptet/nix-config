@@ -38,13 +38,15 @@ in
     git = {
       enable = true;
       lfs.enable = true;
-      userName = config.myuser.realName;
-      userEmail = "david.wronek@mainlining.org";
-      extraConfig = {
+      settings = {
         sendemail.identity = "mainlining";
         patatt = {
           signingkey = "ed25519:20250914";
           selector = "20250914";
+        };
+        user = {
+          name = config.myuser.realName;
+          email = "david.wronek@mainlining.org";
         };
       };
     };
