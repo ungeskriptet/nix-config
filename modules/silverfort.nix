@@ -7,7 +7,7 @@
 }:
 let
   cfg = config.programs.silverfort;
-  selfPkgs = inputs.self.packages.${pkgs.system};
+  selfPkgs = inputs.self.packages.${pkgs.stdenv.hostPlatform.system};
 in
 {
   options.programs.silverfort = {

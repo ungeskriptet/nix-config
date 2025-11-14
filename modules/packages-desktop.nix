@@ -7,7 +7,7 @@
 }:
 let
   cfg = config.nix-config;
-  selfPkgs = inputs.self.packages.${pkgs.system};
+  selfPkgs = inputs.self.packages.${pkgs.stdenv.hostPlatform.system};
 in
 {
   services.udev.packages = lib.optionals cfg.david (

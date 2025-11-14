@@ -7,7 +7,8 @@
 let
   fqdn = "code.${domain}";
   domain = config.networking.domain;
-  openvscode-server = inputs.nixpkgs.legacyPackages.${pkgs.system}.openvscode-server;
+  openvscode-server =
+    inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system}.openvscode-server;
 in
 {
   sops.secrets = {

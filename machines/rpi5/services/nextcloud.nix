@@ -85,7 +85,7 @@ in
     configureRedis = true;
     https = true;
     extraApps = with pkgs.nextcloud32Packages.apps; {
-      phonetrack = inputs.self.packages.${pkgs.system}.phonetrack-patched;
+      phonetrack = inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.phonetrack-patched;
       inherit
         calendar
         contacts

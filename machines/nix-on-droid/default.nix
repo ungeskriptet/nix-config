@@ -23,7 +23,7 @@
     which
     zip
 
-    inputs.self.packages.${pkgs.system}.openssh-nix-on-droid
+    inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.openssh-nix-on-droid
   ];
 
   environment.etcBackupExtension = ".bak";

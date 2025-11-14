@@ -24,7 +24,7 @@ in
     zsh-david = {
       nixOnDroid = {
         enable = true;
-        opensshPkg = inputs.self.packages.${pkgs.system}.openssh-nix-on-droid;
+        opensshPkg = inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.openssh-nix-on-droid;
       };
       david.enable = config.hm-config.david;
       homeManager.enable = true;

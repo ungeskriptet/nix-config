@@ -9,7 +9,7 @@
 let
   fqdn = "tg.${domain}";
   domain = config.networking.domain;
-  yuribot = inputs.yuribot.packages.${pkgs.system}.yuribot;
+  yuribot = inputs.yuribot.packages.${pkgs.stdenv.hostPlatform.system}.yuribot;
 in
 {
   sops.secrets."yuribot/env".owner = "root";
