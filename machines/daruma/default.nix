@@ -16,7 +16,10 @@
 
   sops.defaultSopsFile = "${inputs.self}/secrets/secrets-daruma.yaml";
 
-  networking.hostName = "daruma";
+  networking = {
+    hostName = "daruma";
+    firewall.allowedTCPPorts = [ 3389 ];
+  };
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.loader.efi.canTouchEfiVariables = true;
