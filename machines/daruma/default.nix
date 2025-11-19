@@ -28,9 +28,4 @@
   users.userDescription = "Grazyna";
   services.displayManager.autoLogin.enable = true;
   services.displayManager.autoLogin.user = config.users.userName;
-
-  services.printing = {
-    enable = true;
-    drivers = with pkgs; [ hplipWithPlugin ];
-  };
 }
