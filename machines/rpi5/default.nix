@@ -6,9 +6,10 @@
 }:
 {
   imports = [
-    ./services
     ./hardware-configuration.nix
+    ./kernel.nix
     ./networking.nix
+    ./services
     ../common.nix
   ];
 
