@@ -6,7 +6,7 @@
     User root
     ForwardAgent yes
   Host ryuzu
-    Hostname ryuzu
+    Hostname fd64::8
     User david
     ForwardAgent yes
   Host xiatian
