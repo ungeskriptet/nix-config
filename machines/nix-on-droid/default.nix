@@ -40,6 +40,8 @@
     ];
   };
 
+  build.extraProotOptions = [ "--kill-on-exit" ];
+
   time.timeZone = "Europe/Berlin";
 
   nix.extraOptions = ''
