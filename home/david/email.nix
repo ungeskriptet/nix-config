@@ -46,10 +46,12 @@ in
         myEmail = {
           primary = true;
           aerc.enable = true;
+          thunderbird.enable = true;
         }
         // genEmailConfig myEmailHost myEmail config.sops.secrets."email/${myEmail}".path;
         mainlining = {
           aerc.enable = true;
+          thunderbird.enable = true;
         }
         // genEmailConfig mainliningHost mainlining config.sops.secrets."email/${mainlining}".path;
       };
@@ -66,6 +68,10 @@ in
             "${pkgs.aerc}/libexec/aerc/filters/html -o display_link_number=true | ${pkgs.aerc}/libexec/aerc/filters/colorize";
         };
       };
+    };
+    thunderbird = {
+      enable = true;
+      profiles."Default".isDefault = true;
     };
   };
 }
