@@ -211,8 +211,11 @@ in
       };
     "https://${domain}" = {
       extraConfig = ''
-        reverse_proxy /.well-known/jmap https://${fqdn}:8087
+        reverse_proxy /dav/* https://${fqdn}:8087
         reverse_proxy /jmap/* https://${fqdn}:8087
+        reverse_proxy /.well-known/caldav https://${fqdn}:8087
+        reverse_proxy /.well-known/carddav https://${fqdn}:8087
+        reverse_proxy /.well-known/jmap https://${fqdn}:8087
       '';
     };
   };
