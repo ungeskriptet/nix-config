@@ -40,7 +40,10 @@ in
         OC_INSECURE = "false";
         OC_SHARING_PUBLIC_SHARE_MUST_HAVE_PASSWORD = "false";
         OC_SHARING_PUBLIC_WRITEABLE_SHARE_MUST_HAVE_PASSWORD = "false";
+        SEARCH_EXTRACTOR_TIKA_TIKA_URL = "http://localhost:9998";
+        SEARCH_EXTRACTOR_TYPE = "tika";
         START_ADDITIONAL_SERVICES = "notifications";
+        WEB_OPTION_DISABLE_FEEDBACK_LINK = "true";
       };
       settings = {
         proxy = {
@@ -51,6 +54,11 @@ in
           };
         };
       };
+    };
+
+    tika = {
+      enable = true;
+      enableOcr = true;
     };
 
     caddy.virtualHosts."https://${fqdn}".extraConfig = ''
