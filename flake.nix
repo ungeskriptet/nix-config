@@ -29,10 +29,6 @@
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    phonetrack-notify = {
-      url = "git+https://codeberg.org/ungeskriptet/phonetrack-notify.git";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     pmbootstrap-git = {
       url = "git+https://gitlab.postmarketos.org/postmarketOS/pmbootstrap.git";
       flake = false;
@@ -132,7 +128,6 @@
             dumpyara = pkgs.${system}.callPackage ./packages/dumpyara.nix { };
             mdns-scan = pkgs.${system}.callPackage ./packages/mdns-scan.nix { };
             openssh-nix-on-droid = pkgs.${system}.callPackage ./packages/openssh-nix-on-droid.nix { };
-            phonetrack-patched = pkgs.${system}.callPackage ./packages/phonetrack-patched { };
             pmbootstrap-git = pkgs.${system}.callPackage ./packages/pmbootstrap-git.nix {
               inherit (inputs) pmbootstrap-git;
             };

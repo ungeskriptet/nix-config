@@ -381,27 +381,6 @@
         "type": "github"
       }
     },
-    "phonetrack-notify": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "treefmt-nix": "treefmt-nix"
-      },
-      "locked": {
-        "lastModified": 1762326856,
-        "narHash": "sha256-XGjGcYBsxKftsu8rfoomBPVodSIyOqR+Z6DwPPqQ+VA=",
-        "ref": "refs/heads/master",
-        "rev": "60e14404810c34ea9fe29b09c8dc7664de290dc7",
-        "revCount": 8,
-        "type": "git",
-        "url": "https://codeberg.org/ungeskriptet/phonetrack-notify.git"
-      },
-      "original": {
-        "type": "git",
-        "url": "https://codeberg.org/ungeskriptet/phonetrack-notify.git"
-      }
-    },
     "pmbootstrap-git": {
       "flake": false,
       "locked": {
@@ -452,11 +431,10 @@
         "nixos-raspberrypi": "nixos-raspberrypi",
         "nixpkgs": "nixpkgs",
         "nur": "nur",
-        "phonetrack-notify": "phonetrack-notify",
         "pmbootstrap-git": "pmbootstrap-git",
         "samsung-grab": "samsung-grab",
         "sops-nix": "sops-nix",
-        "treefmt-nix": "treefmt-nix_3",
+        "treefmt-nix": "treefmt-nix_2",
         "yuribot": "yuribot",
         "zmod": "zmod"
       }
@@ -487,7 +465,7 @@
         "nixpkgs": [
           "nixpkgs"
         ],
-        "treefmt-nix": "treefmt-nix_2"
+        "treefmt-nix": "treefmt-nix"
       },
       "locked": {
         "lastModified": 1760422674,
@@ -542,27 +520,6 @@
     "treefmt-nix": {
       "inputs": {
         "nixpkgs": [
-          "phonetrack-notify",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1761311587,
-        "narHash": "sha256-Msq86cR5SjozQGCnC6H8C+0cD4rnx91BPltZ9KK613Y=",
-        "owner": "numtide",
-        "repo": "treefmt-nix",
-        "rev": "2eddae033e4e74bf581c2d1dfa101f9033dbd2dc",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "treefmt-nix",
-        "type": "github"
-      }
-    },
-    "treefmt-nix_2": {
-      "inputs": {
-        "nixpkgs": [
           "samsung-grab",
           "nixpkgs"
         ]
@@ -581,7 +538,7 @@
         "type": "github"
       }
     },
-    "treefmt-nix_3": {
+    "treefmt-nix_2": {
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
