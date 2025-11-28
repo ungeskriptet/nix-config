@@ -88,4 +88,17 @@ in
       wake_on_lan = { };
     };
   };
+
+  services.homer.settings.services = [
+    {
+      items = [
+        {
+          name = "Home Assistant";
+          subtitle = "Smart Home";
+          url = "https://${fqdn}";
+          logo = "https://cdn.jsdelivr.net/gh/selfhst/icons@master/svg/home-assistant.svg";
+        }
+      ];
+    }
+  ];
 }

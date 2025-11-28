@@ -60,4 +60,17 @@ in
       HTTP_REQUEST_BLOCK_NON_GLOBAL_IPS = false;
     };
   };
+
+  services.homer.settings.services = [
+    {
+      items = [
+        {
+          name = "Vaultwarden";
+          subtitle = "Password manager";
+          url = "https://${fqdn}";
+          logo = "https://cdn.jsdelivr.net/gh/selfhst/icons@master/svg/vaultwarden-light.svg";
+        }
+      ];
+    }
+  ];
 }

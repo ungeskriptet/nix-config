@@ -63,4 +63,17 @@ in
       "HF_HOME" = "${config.services.immich.mediaLocation}/huggingface";
     };
   };
+
+  services.homer.settings.services = [
+    {
+      items = [
+        {
+          name = "Immich";
+          subtitle = "Photos and videos";
+          url = "https://${fqdn}";
+          logo = "https://cdn.jsdelivr.net/gh/selfhst/icons@master/svg/immich.svg";
+        }
+      ];
+    }
+  ];
 }

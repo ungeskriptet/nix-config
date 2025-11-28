@@ -69,6 +69,19 @@ in
       }
       reverse_proxy https://${fqdn}:8096
     '';
+
+    homer.settings.services = [
+      {
+        items = [
+          {
+            name = "OpenCloud";
+            subtitle = "Cloud storage";
+            url = "https://${fqdn}";
+            logo = "https://cdn.jsdelivr.net/gh/selfhst/icons@master/svg/opencloud.svg";
+          }
+        ];
+      }
+    ];
   };
 
   networking.hosts = {

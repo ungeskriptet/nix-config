@@ -71,4 +71,27 @@ in
       '';
     };
   };
+
+  services.homer.settings.services = [
+    {
+      items = [
+        {
+          name = "FRITZ!Box 6660 Cable";
+          subtitle = "Primary internet gateway";
+          url = "https://${primRouterFqdn}";
+          logo = "https://cdn.jsdelivr.net/gh/selfhst/icons@master/svg/fritz.svg";
+        }
+      ];
+    }
+    {
+      items = [
+        {
+          name = "FRITZ!Box 7590";
+          subtitle = "Secondary router";
+          url = "https://${secRouterFqdn}";
+          logo = "https://cdn.jsdelivr.net/gh/selfhst/icons@master/svg/fritz.svg";
+        }
+      ];
+    }
+  ];
 }

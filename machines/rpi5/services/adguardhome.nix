@@ -120,4 +120,17 @@ in
       };
     };
   };
+
+  services.homer.settings.services = [
+    {
+      items = [
+        {
+          name = "AdGuard Home";
+          subtitle = "Private DNS Server";
+          url = "https://${fqdn}";
+          logo = "https://cdn.jsdelivr.net/gh/selfhst/icons@master/svg/adguard-home.svg";
+        }
+      ];
+    }
+  ];
 }

@@ -45,4 +45,17 @@ in
       web-push-email-address = "webpush${domain}";
     };
   };
+
+  services.homer.settings.services = [
+    {
+      items = [
+        {
+          name = "ntfy";
+          subtitle = "Push notifications";
+          url = "https://${fqdn}";
+          logo = "https://cdn.jsdelivr.net/gh/selfhst/icons@master/svg/ntfy.svg";
+        }
+      ];
+    }
+  ];
 }

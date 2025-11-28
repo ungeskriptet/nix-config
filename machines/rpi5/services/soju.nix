@@ -90,4 +90,17 @@ in
       title "David's IRC Bouner"
     '';
   };
+
+  services.homer.settings.services = [
+    {
+      items = [
+        {
+          name = "IRC";
+          subtitle = "Gamja IRC client";
+          url = "https://${fqdn}";
+          logo = "https://${fqdn}/favicon.ico";
+        }
+      ];
+    }
+  ];
 }

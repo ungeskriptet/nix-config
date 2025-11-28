@@ -60,6 +60,19 @@ in
       tls ${config.acme.tlsCert} ${config.acme.tlsKey}
       reverse_proxy http://${fqdn}:8097
     '';
+
+    homer.settings.services = [
+      {
+        items = [
+          {
+            name = "Traccar";
+            subtitle = "Track GPS devices";
+            url = "https://${fqdn}";
+            logo = "https://cdn.jsdelivr.net/gh/selfhst/icons@master/svg/traccar.svg";
+          }
+        ];
+      }
+    ];
   };
 
   networking.hosts = {

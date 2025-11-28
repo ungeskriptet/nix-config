@@ -39,4 +39,17 @@ in
       PAPERLESS_EMAIL_USE_SSL = true;
     };
   };
+
+  services.homer.settings.services = [
+    {
+      items = [
+        {
+          name = "Paperless-ngx";
+          subtitle = "Document management system";
+          url = "https://${fqdn}";
+          logo = "https://cdn.jsdelivr.net/gh/selfhst/icons@master/svg/paperless-ngx.svg";
+        }
+      ];
+    }
+  ];
 }
