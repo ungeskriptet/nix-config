@@ -29,22 +29,6 @@ Devices: xiatian
 ## Server
 Devices: rpi5
 
-### Services:
- - AdGuard Home
- - Caddy with LEGO for TLS certificates
- - ESPHome
- - Home Assistant
- - MollySocket (For Signal push notifications on degoogled Android phones)
- - Nextcloud
- - ntfy.sh (UnifiedPush provider)
- - [samsung-update-bot](https://github.com/samsung-sm8650/update-bot)
- - soju and gamja (IRC)
- - Sshwifty
- - Stalwart (E-Mail)
- - Vaultwarden
- - Wireguard
- - [yuribot](https://github.com/ungeskriptet/yuribot)
-
 ### Installation:
 1. Generate the installer image (make sure to add your public SSH key into the flake):
     ```
