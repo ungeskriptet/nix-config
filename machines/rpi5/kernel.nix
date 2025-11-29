@@ -109,7 +109,6 @@
           "BT_HCIBTUSB_MTK"
           "BT_HCIBTUSB_POLL_SYNC"
           "BT_HCIBTUSB_RTL"
-          "BT_HCIUART"
           "BT_HCIUART_3WIRE"
           "BT_HCIUART_BCSP"
           "BT_HCIUART_H4"
