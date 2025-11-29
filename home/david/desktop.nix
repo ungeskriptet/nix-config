@@ -9,11 +9,6 @@
     ../common-allusers.nix
   ];
 
-  services.nextcloud-client = {
-    enable = true;
-    startInBackground = true;
-  };
-
   sops = {
     secrets."groovestats/apikey" = { };
     templates."GrooveStats.ini".content = ''
