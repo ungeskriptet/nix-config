@@ -55,8 +55,8 @@ in
       "isal"
       "kodi"
       "met"
+      "mqtt"
       "nfandroidtv"
-      "oralb"
       "ping"
       "radio_browser"
       "traccar"
@@ -69,23 +69,6 @@ in
       script = "!include scripts.yaml";
       shell_command = {
         poweroff_ryuzu = "${ssh} -i /var/lib/hass/ssh/id_ed25519 -o StrictHostKeyChecking=no david@ryuzu sudo poweroff";
-      };
-      rest_command = {
-        living_room_lightswitch_on = {
-          url = "http://bk7238-living-room-lightswitch/cm?cmnd=POWER1%20ON";
-          username = "admin";
-          password = "d9XM2FGB47dH9R"; # There is no TLS, so this isn't really a secret
-        };
-        living_room_lightswitch_off = {
-          url = "http://bk7238-living-room-lightswitch/cm?cmnd=POWER1%20OFF";
-          username = "admin";
-          password = "d9XM2FGB47dH9R";
-        };
-        living_room_lightswitch_toggle = {
-          url = "http://bk7238-living-room-lightswitch/cm?cmnd=POWER1%20TOGGLE";
-          username = "admin";
-          password = "d9XM2FGB47dH9R";
-        };
       };
       http = {
         server_host = [
