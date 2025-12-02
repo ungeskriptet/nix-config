@@ -10,6 +10,7 @@ let
 in
 {
   imports = [
+    ./ssh
     ./vars.nix
     ./email/common.nix
     inputs.sops-nix.homeManagerModules.sops
@@ -59,7 +60,6 @@ in
     stateVersion = "25.05";
     file = {
       ".android/adbkey.pub".source = ./dotfiles/adbkey.pub;
-      ".ssh/config".text = import ./dotfiles/ssh/config.nix { inherit lib pkgs; };
       ".ssh/id_ed25519.pub".source = ./dotfiles/ssh/id_ed25519.pub;
     }
     // lib.mergeAttrsList (
