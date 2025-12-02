@@ -32,6 +32,9 @@ in
   };
 
   home = {
+    file = {
+      ".ssh/authorized_keys".source = ./dotfiles/ssh/authorized_keys;
+    };
     homeDirectory = lib.mkForce homeDir;
     sessionVariables = {
       XDG_RUNTIME_DIR = "/tmp/run";
