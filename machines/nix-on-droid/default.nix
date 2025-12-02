@@ -14,6 +14,7 @@ in
     dig
     file
     git
+    inetutils
     jq
     lz4
     ncurses
