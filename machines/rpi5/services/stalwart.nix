@@ -198,6 +198,15 @@ in
         forward = false;
         store = "30d";
       };
+      resolver = {
+        type = "quad9";
+        concurrency = 2;
+        timeout = "5s";
+        attempts = 2;
+        preserve-intermediates = true;
+        try-tcp-on-error = true;
+        edns = true;
+      };
     };
   };
 
