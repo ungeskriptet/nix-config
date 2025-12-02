@@ -6,6 +6,7 @@
   imports = [
     ./common.nix
     ./firefox
+    ./email/desktop.nix
     ../common-allusers.nix
   ];
 
