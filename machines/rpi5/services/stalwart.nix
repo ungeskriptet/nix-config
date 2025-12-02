@@ -117,6 +117,7 @@ in
           ];
         };
         connect.greeting = "config_get('server.hostname') + ' Hi! :3'";
+        mail.is-allowed = "!key_exists('spam-block', sender_domain)";
         rcpt = {
           catch-all = true;
           rewrite = [
