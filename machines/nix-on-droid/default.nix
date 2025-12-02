@@ -4,6 +4,9 @@
   inputs,
   ...
 }:
+let
+  openssh-nix-on-droid = inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.openssh-nix-on-droid;
+in
 {
   environment.packages = with pkgs; [
     binutils
@@ -23,7 +26,7 @@
     which
     zip
 
-    inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.openssh-nix-on-droid
+    openssh-nix-on-droid
   ];
 
   environment.etcBackupExtension = ".bak";
@@ -40,7 +43,13 @@
     ];
   };
 
-  build.extraProotOptions = [ "--kill-on-exit" ];
+  build = {
+    extraProotOptions = [ "--kill-on-exit" ];
+    activationAfter.genKeys = ''
+      $DRY_RUN_CMD mkdir -p /etc/ssh
+      $DRY_RUN_CMD ${lib.getExe' openssh-nix-on-droid "ssh-keygen"} -A
+    '';
+  };
 
   time.timeZone = "Europe/Berlin";
 
