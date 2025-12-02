@@ -36,7 +36,7 @@ in
       // lib.optionalAttrs cfg.nixOnDroid.enable {
         ping = "/system/bin/ping";
         start-sshd = "${lib.getExe' cfg.nixOnDroid.opensshPkg "sshd"} -f ${pkgs.writeText "sshd_config" ''
-          HostKey ${config.home.homeDirectory}/.ssh/ssh_host_ed25519_key
+          HostKey /etc/ssh/ssh_host_ed25519_key
           Port 8022
           AllowUsers nix-on-droid
           PasswordAuthentication No
