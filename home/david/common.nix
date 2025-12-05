@@ -12,7 +12,7 @@ in
   imports = [
     ./ssh
     ./vars.nix
-    ./email/common.nix
+    ./accounts/common.nix
     inputs.sops-nix.homeManagerModules.sops
   ];
 

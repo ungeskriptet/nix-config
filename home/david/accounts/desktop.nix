@@ -14,4 +14,14 @@
     enable = true;
     profiles."Default".isDefault = true;
   };
+
+  xdg = {
+    enable = true;
+    autostart = {
+      enable = true;
+      entries = with pkgs; [
+        "${thunderbird}/share/applications/thunderbird.desktop"
+      ];
+    };
+  };
 }
