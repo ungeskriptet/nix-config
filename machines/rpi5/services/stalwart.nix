@@ -68,7 +68,7 @@ in
     settings = {
       config.local-keys = [
         "authentication.fallback-admin.*"
-        "auth.spf.verify.*"
+        "auth.*"
         "certificate.*"
         "cluster.*"
         "config.local-keys.*"
@@ -91,21 +91,30 @@ in
         "tracer.*"
         "webadmin.*"
       ];
-      auth.spf.verify = {
-        ehlo = [
-          {
-            "if" = "local_port == 25";
-            "then" = "relaxed";
-          }
-          { "else" = "disable"; }
-        ];
-        mail-from = [
+      auth = {
+        dmarc.verify = [
           {
             "if" = "local_port == 25";
             "then" = "strict";
           }
           { "else" = "disable"; }
         ];
+        spf.verify = {
+          ehlo = [
+            {
+              "if" = "local_port == 25";
+              "then" = "relaxed";
+            }
+            { "else" = "disable"; }
+          ];
+          mail-from = [
+            {
+              "if" = "local_port == 25";
+              "then" = "relaxed";
+            }
+            { "else" = "disable"; }
+          ];
+        };
       };
       session = {
         mta-sts = {
@@ -117,7 +126,6 @@ in
           ];
         };
         connect.greeting = "config_get('server.hostname') + ' Hi! :3'";
-        mail.is-allowed = "!key_exists('spam-block', sender_domain)";
         rcpt = {
           catch-all = true;
           rewrite = [
