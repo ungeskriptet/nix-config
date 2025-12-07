@@ -12,7 +12,12 @@
 
   programs.thunderbird = {
     enable = true;
-    profiles."Default".isDefault = true;
+    profiles."Default" = {
+      isDefault = true;
+      settings = {
+        "mail.display_glyph" = false;
+      };
+    };
   };
 
   xdg = {
