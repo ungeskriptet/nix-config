@@ -31,10 +31,14 @@ in
         };
       };
 
-      networking.networkmanager.enable = true;
-
-      # Required for WireGuard
-      networking.firewall.checkReversePath = false;
+      networking = {
+        networkmanager.enable = true;
+        firewall = {
+          allowedUDPPorts = [ 67 ];
+          # Required for WireGuard
+          checkReversePath = false;
+        };
+      };
     }
     (lib.mkIf cfg.david {
       # Automatically inject payload when a Nintendo Switch is connected
