@@ -17,16 +17,6 @@ in
   networking.hosts."::1" = [ fqdn ];
   networking.hosts."127.0.0.1" = [ fqdn ];
 
-  users = {
-    groups.yuribot = { };
-    users.yuribot = {
-      isSystemUser = true;
-      group = "yuribot";
-      home = "/var/lib/yuribot/";
-      createHome = true;
-    };
-  };
-
   services.caddy.virtualHosts."https://${fqdn}".extraConfig = ''
     tls ${config.acme.tlsCert} ${config.acme.tlsKey}
     reverse_proxy http://${fqdn}:8088
@@ -50,7 +40,7 @@ in
     };
     serviceConfig = {
       Type = "simple";
-      User = "yuribot";
+      DynamicUser = true;
       PrivateTmp = true;
       WorkingDirectory = "/tmp";
       EnvironmentFile = config.sops.secrets."yuribot/env".path;
