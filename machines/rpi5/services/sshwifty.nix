@@ -5,21 +5,26 @@
 let
   fqdn = "ssh.${domain}";
   domain = config.networking.domain;
+  basicauthFile = config.sops.secrets."sshwifty/basicauth".path;
 in
 {
   networking.hosts."::1" = [ fqdn ];
   networking.hosts."127.0.0.1" = [ fqdn ];
 
   sops.secrets = {
-    "sshwifty/basicauth".owner = "caddy";
+    "sshwifty/basicauth".owner = "root";
     "sshwifty/sharedkey".owner = "root";
+  };
+
+  systemd.services.caddy = {
+    serviceConfig.LoadCredential = [ "sshwifty:${basicauthFile}" ];
   };
 
   services.caddy.virtualHosts."https://${fqdn}".extraConfig = ''
     tls ${config.acme.tlsCert} ${config.acme.tlsKey}
     reverse_proxy http://${fqdn}:80
     basic_auth {
-      import ${config.sops.secrets."sshwifty/basicauth".path}
+      import {$CREDENTIALS_DIRECTORY}/sshwifty
     }
   '';
 
