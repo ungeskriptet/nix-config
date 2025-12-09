@@ -9,16 +9,6 @@ let
   domain = config.networking.domain;
 in
 {
-  users = {
-    groups.adguardhome = { };
-    users.adguardhome = {
-      isSystemUser = true;
-      group = "adguardhome";
-    };
-  };
-
-  sops.secrets."adguardhome/pass".owner = "adguardhome";
-
   networking.firewall = {
     allowedTCPPorts = [
       53
@@ -35,12 +25,6 @@ in
 
   systemd.services.adguardhome = {
     serviceConfig.SupplementaryGroups = [ "acme" ];
-    after = [ "time-sync.target" ];
-    wants = [ "time-sync.target" ];
-    preStart = lib.mkAfter ''
-      PASSWORD=$(cat ${config.sops.secrets."adguardhome/pass".path})
-      ${lib.getExe pkgs.gnused} -i "s,PLACEHOLDER,$PASSWORD," "$STATE_DIRECTORY/AdGuardHome.yaml"
-    '';
   };
 
   services.caddy.virtualHosts."https://${fqdn}".extraConfig = ''
@@ -59,7 +43,7 @@ in
       users = [
         {
           name = "david";
-          password = "PLACEHOLDER";
+          password = "$2b$05$PenHlMoSFIXGYPIRJJkNDuk1eEHmi0cI5AgBIglXYj/LmS3zykJwy";
         }
       ];
       filtering = {
