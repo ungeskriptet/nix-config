@@ -9,7 +9,7 @@ in
 
   sops.secrets = {
     "paperless/env".owner = "root";
-    "paperless/pass".owner = config.services.paperless.user;
+    "paperless/pass".owner = "root";
   };
 
   services.caddy.virtualHosts = {
