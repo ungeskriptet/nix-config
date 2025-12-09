@@ -8,21 +8,9 @@ let
   domain = config.networking.domain;
 in
 {
-  users = {
-    groups.stalwart-pw = { };
-    users.stalwart-pw = {
-      isSystemUser = true;
-      group = "stalwart-pw";
-    };
-  };
-
   sops.secrets = {
-    "stalwart/pass".owner = "stalwart-mail";
-    "stalwart/dbpass" = {
-      owner = "stalwart-pw";
-      group = "stalwart-pw";
-      mode = "0440";
-    };
+    "stalwart/pass".owner = "root";
+    "stalwart/dbpass".owner = "root";
   };
 
   networking.firewall = {
@@ -37,18 +25,17 @@ in
   networking.hosts."127.0.0.1" = [ fqdn ];
 
   systemd.services.stalwart-mail = {
-    serviceConfig.SupplementaryGroups = [
-      "acme"
-      "stalwart-pw"
-    ];
+    serviceConfig.SupplementaryGroups = [ "acme" ];
     requires = [ "postgresql.target" ];
     after = [ "postgresql.target" ];
   };
 
   systemd.services.postgresql-setup = {
-    serviceConfig.SupplementaryGroups = [ "stalwart-pw" ];
+    serviceConfig = {
+      LoadCredential = [ "dbpass:${config.sops.secrets."stalwart/dbpass".path}" ];
+    };
     script = lib.mkAfter ''
-      PASSWORD=$(cat ${config.sops.secrets."stalwart/dbpass".path})
+      PASSWORD=$(cat "$CREDENTIALS_DIRECTORY"/dbpass)
       psql -tAc "ALTER USER \"stalwart-mail\" WITH PASSWORD '$PASSWORD';"
     '';
   };
@@ -65,6 +52,10 @@ in
 
   services.stalwart-mail = {
     enable = true;
+    credentials = {
+      dbpass = config.sops.secrets."stalwart/dbpass".path;
+      pass = config.sops.secrets."stalwart/pass".path;
+    };
     settings = {
       config.local-keys = [
         "authentication.fallback-admin.*"
@@ -130,8 +121,8 @@ in
           catch-all = true;
           rewrite = [
             {
-              "if" = "is_local_domain(\"\", rcpt_domain)";
-              "then" = "moe@${domain}";
+              "if" = "is_local_domain('', rcpt_domain)";
+              "then" = "'moe@${domain}'";
             }
             { "else" = false; }
           ];
@@ -139,14 +130,14 @@ in
       };
       authentication.fallback-admin = {
         user = "admin";
-        secret = "%{file:${config.sops.secrets."stalwart/pass".path}}%";
+        secret = "%{file:%{env:CREDENTIALS_DIRECTORY}%/pass}%";
       };
       store = {
         db.type = "postgresql";
         db.host = "localhost";
         db.database = "stalwart-mail";
         db.user = "stalwart-mail";
-        db.password = "%{file:${config.sops.secrets."stalwart/dbpass".path}}%";
+        db.password = "%{file:%{env:CREDENTIALS_DIRECTORY}%/dbpass}%";
       };
       certificate.default = {
         cert = "%{file:${config.acme.tlsCert}}%";
