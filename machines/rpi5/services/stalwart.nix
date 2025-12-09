@@ -117,16 +117,7 @@ in
           ];
         };
         connect.greeting = "config_get('server.hostname') + ' Hi! :3'";
-        rcpt = {
-          catch-all = true;
-          rewrite = [
-            {
-              "if" = "is_local_domain('', rcpt_domain)";
-              "then" = "'moe@${domain}'";
-            }
-            { "else" = false; }
-          ];
-        };
+        rcpt.catch-all = true;
       };
       authentication.fallback-admin = {
         user = "admin";
