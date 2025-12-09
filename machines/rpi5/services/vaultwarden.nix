@@ -4,7 +4,7 @@ let
   domain = config.networking.domain;
 in
 {
-  sops.secrets."vaultwarden/env".owner = "vaultwarden";
+  sops.secrets."vaultwarden/env".owner = config.users.users.root.name;
 
   networking.hosts."::1" = [ fqdn ];
   networking.hosts."127.0.0.1" = [ fqdn ];
