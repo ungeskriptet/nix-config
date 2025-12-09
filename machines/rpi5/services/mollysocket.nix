@@ -16,7 +16,7 @@ in
     };
   };
 
-  sops.secrets."mollysocket/env".owner = "mollysocket";
+  sops.secrets."mollysocket/env".owner = "root";
 
   networking.hosts."::1" = [ fqdn ];
   networking.hosts."127.0.0.1" = [ fqdn ];
