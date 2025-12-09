@@ -19,20 +19,9 @@ let
     };
     meta.mainProgram = "samsung-update-bot";
   };
-  stateDir = "/var/lib/samsung-update-bot/";
 in
 {
-  sops.secrets."samsung-update-bot/token".owner = "samsung-update-bot";
-
-  users = {
-    groups.samsung-update-bot = { };
-    users.samsung-update-bot = {
-      isSystemUser = true;
-      group = "samsung-update-bot";
-      home = stateDir;
-      createHome = true;
-    };
-  };
+  sops.secrets."samsung-update-bot/token".owner = "root";
 
   systemd.services.samsung-update-bot = {
     enable = true;
@@ -40,11 +29,15 @@ in
     after = [ "network-online.target" ];
     wants = [ "network-online.target" ];
     wantedBy = [ "multi-user.target" ];
+    script = ''
+      cd "$STATE_DIRECTORY"
+      ${lib.getExe updateBot} "$CREDENTIALS_DIRECTORY"/botToken
+    '';
     serviceConfig = {
       Type = "simple";
-      User = "samsung-update-bot";
-      WorkingDirectory = stateDir;
-      ExecStart = "${lib.getExe updateBot} ${config.sops.secrets."samsung-update-bot/token".path}";
+      DynamicUser = true;
+      StateDirectory = "samsung-update-bot";
+      LoadCredential = [ "botToken:${config.sops.secrets."samsung-update-bot/token".path}" ];
       Restart = "always";
       RestartSec = 60;
     };
