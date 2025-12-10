@@ -44,20 +44,21 @@ in
     dbBackend = "postgresql";
     environmentFile = config.sops.secrets."vaultwarden/env".path;
     config = {
+      ADMIN_TOKEN = "$argon2id$v=19$m=65540,t=3,p=4$T5iNvSBw7kGwnNS7MUKnTQ67cypg0TKWtdHoggIt9RA$xxW8Ngb/wtbNs/Q49AABMlvuoQdaxkMBw8An2YSKaC0";
       DATABASE_URL = "postgresql:///vaultwarden?host=/run/postgresql";
       DOMAIN = "https://${fqdn}";
-      SIGNUPS_ALLOWED = false;
+      ENABLE_WEBSOCKET = true;
+      HTTP_REQUEST_BLOCK_NON_GLOBAL_IPS = false;
+      IP_HEADER = "X-Forwarded-For";
       ROCKET_ADDRESS = "127.0.0.1";
       ROCKET_PORT = 8082;
       ROCKET_TLS = ''{certs="${config.acme.tlsCert}",key="${config.acme.tlsKey}"}'';
-      SMTP_HOST = domain;
+      SIGNUPS_ALLOWED = false;
       SMTP_FROM = "vaultwarden@${domain}";
-      SMTP_USERNAME = "vaultwarden";
-      SMTP_SECURITY = "force_tls";
+      SMTP_HOST = domain;
       SMTP_PORT = 465;
-      ENABLE_WEBSOCKET = true;
-      IP_HEADER = "X-Forwarded-For";
-      HTTP_REQUEST_BLOCK_NON_GLOBAL_IPS = false;
+      SMTP_SECURITY = "force_tls";
+      SMTP_USERNAME = "vaultwarden";
     };
   };
 

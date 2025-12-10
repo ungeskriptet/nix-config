@@ -14,8 +14,6 @@
     inputs.lanzaboote.nixosModules.lanzaboote
   ];
 
-  sops.defaultSopsFile = "${inputs.self}/secrets/secrets-ryuzu.yaml";
-
   networking.hostName = "ryuzu";
   networking.interfaces.enp4s0.wakeOnLan.enable = true;
 
@@ -34,4 +32,6 @@
   boot.loader.systemd-boot.enable = lib.mkDefault true;
 
   security.sudo.wheelNeedsPassword = false;
+
+  users.hashedPassword = "$y$j9T$sMN/eKYxYfh97dxUFDtzf.$sD76l.o1RyplUGb./VV.m3/qgEOrHIh5MkhLoeDpXUB";
 }

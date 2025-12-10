@@ -30,19 +30,21 @@ in
     enable = true;
     environmentFile = config.sops.secrets."ntfy-sh/env".path;
     settings = {
-      base-url = "https://${fqdn}";
-      listen-unix = "/run/ntfy-sh/ntfy.sock";
-      listen-unix-mode = 432; # 0660 in octal
-      listen-http = "";
-      behind-proxy = true;
       auth-access = [ "*:up*:wo" ];
       auth-default-access = "deny-all";
-      enable-signup = false;
+      auth-users = [ "david:$2b$05$2jQBK33fXJVe0LEkjQ2uT.esP3Xm8xoTJsDXcdWxIOh/3iRRytniC:admin" ];
+      base-url = "https://${fqdn}";
+      behind-proxy = true;
       enable-login = true;
+      enable-signup = false;
       keepalive-interval = "70s";
+      listen-http = "";
+      listen-unix-mode = 432; # 0660 in octal
+      listen-unix = "/run/ntfy-sh/ntfy.sock";
       visitor-request-limit-exempt-hosts = domain;
-      web-push-file = "/var/lib/ntfy-sh/webpush.db";
       web-push-email-address = "webpush${domain}";
+      web-push-file = "/var/lib/ntfy-sh/webpush.db";
+      web-push-public-key = "BG9_p4FaZ4jpXnmPgH_CqNGxqRYAPYy6xm1hmBYk31g3MLd-nzYDNq5x8KQm8rIGKU5in1I2Z2xu_z9NMMDnffI";
     };
   };
 

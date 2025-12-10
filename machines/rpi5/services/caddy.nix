@@ -14,13 +14,8 @@ in
     allowedTCPPorts = [ 443 ];
   };
 
-  sops.secrets."caddy/basicauth".owner = "root";
-
   systemd.services.caddy = {
-    serviceConfig = {
-      LoadCredential = [ "privatePass:${config.sops.secrets."caddy/basicauth".path}" ];
-      SupplementaryGroups = [ "acme" ];
-    };
+    serviceConfig.SupplementaryGroups = [ "acme" ];
   };
 
   services.caddy = {
@@ -44,7 +39,7 @@ in
         redir /private /private/ permanent
         handle_path /private/* {
           basic_auth {
-            import {$CREDENTIALS_DIRECTORY}/privatePass
+            david $2b$05$9l2gtUS.pMa6brsBOfUl7eGOwVtifl0dbcEpg4mcr6CsG2Fk4Aqxi
           }
           root * /var/lib/caddy/private
           file_server browse

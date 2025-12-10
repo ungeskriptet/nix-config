@@ -28,6 +28,7 @@ in
       url = "https://${fqdn}";
       environmentFile = config.sops.secrets."opencloud/env".path;
       environment = {
+        IDM_ADMIN_PASSWORD = "$argon2id$v=19$m=65540,t=3,p=4$LgiBDOmi3D7ZxFghq7jfQomBGo0OtVx+h1hcNQ7guLg$Xc8q0svCbeuCd2daRQiyXbmSyaUhRmnypEZ5mHDUdmY";
         IDP_DEFAULT_SIGNIN_PAGE_TEXT = "The cloud with the strongest encryption";
         IDP_LOGIN_BACKGROUND_URL = "https://${fqdn}/idp-login-background";
         NOTIFICATIONS_SMTP_AUTHENTICATION = "auto";

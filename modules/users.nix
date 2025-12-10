@@ -17,15 +17,19 @@ in
       type = lib.types.str;
       default = "David";
     };
+    hashedPassword = lib.mkOption {
+      type = lib.types.nullOr lib.types.str;
+      default = null;
+    };
   };
 
   config = {
-    sops = {
-      secrets."users/${cfg.userName}" = {
-        neededForUsers = true;
-        owner = "root";
-      };
-    };
+    assertions = [
+      {
+        assertion = cfg.hashedPassword != null;
+        message = "Please set config.users.hashedPassword";
+      }
+    ];
 
     users = {
       mutableUsers = false;
@@ -40,7 +44,7 @@ in
         ++ lib.optionals config.programs.wireshark.enable [ "wireshark" ]
         ++ lib.optionals config.virtualisation.libvirtd.enable [ "libvirt" ]
         ++ lib.optionals config.virtualisation.podman.enable [ "podman" ];
-        hashedPasswordFile = config.sops.secrets."users/${cfg.userName}".path;
+        hashedPassword = cfg.hashedPassword;
         openssh.authorizedKeys.keys =
           config.vars.sshPubKeys
           ++ lib.optionals (config.networking.hostName == "ryuzu") [

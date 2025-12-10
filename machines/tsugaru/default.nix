@@ -80,8 +80,12 @@
     );
   };
 
-  users.userName = "kamil";
-  users.userDescription = "Kamil";
+  users = {
+    hashedPassword = "$y$j9T$zVs7BkMuIfSOpUDWx5WYS/$8Mqb4/741mi/cpECCoIN883LNL6zs6eiGt/N9o5wydA";
+    userName = "kamil";
+    userDescription = "Kamil";
+  };
+
   home-manager.users.kamil = lib.mkForce ../../home/kamil;
 
   nix-config.enablePlasma = false;

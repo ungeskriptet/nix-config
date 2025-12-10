@@ -13,8 +13,6 @@
     inputs.lanzaboote.nixosModules.lanzaboote
   ];
 
-  sops.defaultSopsFile = "${inputs.self}/secrets/secrets-xiatian.yaml";
-
   networking.hostName = "xiatian";
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -43,4 +41,6 @@
     // {
       login.fprintAuth = false;
     };
+
+  users.hashedPassword = "$y$j9T$kHWkTrrHjPj4oK2P6KeaR.$6EFjpr.XBUR9coMEYixfw5LMzzNQ2mj8jiOesYLBU9A";
 }

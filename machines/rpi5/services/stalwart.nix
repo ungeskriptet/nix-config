@@ -9,7 +9,6 @@ let
 in
 {
   sops.secrets = {
-    "stalwart/pass".owner = "root";
     "stalwart/dbpass".owner = "root";
   };
 
@@ -54,7 +53,6 @@ in
     enable = true;
     credentials = {
       dbpass = config.sops.secrets."stalwart/dbpass".path;
-      pass = config.sops.secrets."stalwart/pass".path;
     };
     settings = {
       config.local-keys = [
@@ -121,7 +119,7 @@ in
       };
       authentication.fallback-admin = {
         user = "admin";
-        secret = "%{file:%{env:CREDENTIALS_DIRECTORY}%/pass}%";
+        secret = "$2b$05$Gl18BhM0uzS4rQqE0Iuk1OJ2jYrEc33B205Ijhd0f41DrySxoe6zO";
       };
       store = {
         db.type = "postgresql";

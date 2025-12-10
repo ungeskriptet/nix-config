@@ -14,8 +14,6 @@
     inputs.lanzaboote.nixosModules.lanzaboote
   ];
 
-  sops.defaultSopsFile = "${inputs.self}/secrets/secrets-daruma.yaml";
-
   networking = {
     hostName = "daruma";
     firewall.allowedTCPPorts = [ 3389 ];
@@ -27,8 +25,12 @@
 
   i18n.defaultLocale = lib.mkForce "de_DE.UTF-8";
 
-  users.userName = "grazyna";
-  users.userDescription = "Grazyna";
+  users = {
+    hashedPassword = "$y$j9T$9EZBwL3aSCu0rlAFngWtP1$R.F4i3PyIRg0sA9PqTYkxSms6TmQ.nQ3qhoHWGn/KY2";
+    userDescription = "Grazyna";
+    userName = "grazyna";
+  };
+
   services.displayManager.autoLogin.enable = true;
   services.displayManager.autoLogin.user = config.users.userName;
 }

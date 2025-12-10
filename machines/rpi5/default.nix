@@ -19,6 +19,8 @@
 
   security.sudo.wheelNeedsPassword = false;
 
+  users.hashedPassword = "$y$j9T$j8duISvdoesAnqbKGzrDa.$pEPB4Dd3boH7.s7PRaLXPuse2K5OyrO2RHUe4vn2Qs.";
+
   nix = {
     nixPath = [ "nixpkgs=${pkgsPatched}" ];
     settings.max-jobs = 1;

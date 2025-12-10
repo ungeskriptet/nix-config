@@ -38,6 +38,7 @@ in
       port = 8085;
       webserver = true;
       allowed_endpoints = [ pushServer ];
+      allowed_uuids = [ "4c989678-dfa4-42dd-9427-cb4222ae65b1" ];
     };
   };
 }
