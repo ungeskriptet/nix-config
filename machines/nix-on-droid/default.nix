@@ -9,6 +9,7 @@ let
 in
 {
   environment.packages = with pkgs; [
+    android-tools
     binutils
     binwalk
     dig
