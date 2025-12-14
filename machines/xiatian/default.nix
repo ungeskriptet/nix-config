@@ -23,18 +23,14 @@
 
   networking.hostName = "xiatian";
 
-  systemd.services.hpkey = {
-    description = "Map HP key to Play/Pause";
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStart = [
-        "${pkgs.kbd}/bin/setkeycodes 68 164"
-      ];
-    };
+  services = {
+    fprintd.enable = true;
+    udev.extraHwdb = ''
+      evdev:input:b0011v0001p0001eAB83*
+        KEYBOARD_KEY_68=playpause
+    '';
   };
 
-  services.fprintd.enable = true;
   security.pam.services =
     lib.genAttrs [ "kde-fingerprint" "polkit-1" "sudo" ] (service: {
       rules.auth.fprintd.settings = {
