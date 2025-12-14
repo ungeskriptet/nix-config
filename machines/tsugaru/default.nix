@@ -33,16 +33,20 @@
       "udev.log_level=3"
     ];
     initrd.verbose = false;
-    loader.efi.canTouchEfiVariables = true;
-    loader.systemd-boot.enable = lib.mkDefault true;
-    loader.timeout = 0;
+    loader = {
+      efi.canTouchEfiVariables = true;
+      systemd-boot.enable = lib.mkDefault true;
+      timeout = 0;
+    };
     plymouth.enable = true;
   };
 
   services = {
     displayManager = {
-      autoLogin.enable = true;
-      autoLogin.user = config.users.userName;
+      autoLogin = {
+        enable = true;
+        user = config.users.userName;
+      };
       gdm.enable = true;
     };
     desktopManager.gnome.enable = true;
@@ -88,6 +92,8 @@
 
   home-manager.users.kamil = lib.mkForce ../../home/kamil;
 
-  nix-config.enablePlasma = false;
-  nix-config.david = false;
+  nix-config = {
+    enablePlasma = false;
+    david = false;
+  };
 }

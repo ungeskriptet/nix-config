@@ -19,9 +19,13 @@
     firewall.allowedTCPPorts = [ 3389 ];
   };
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.systemd-boot.enable = lib.mkDefault true;
+  boot = {
+    kernelPackages = pkgs.linuxPackages_latest;
+    loader = {
+      efi.canTouchEfiVariables = true;
+      systemd-boot.enable = lib.mkDefault true;
+    };
+  };
 
   i18n.defaultLocale = lib.mkForce "de_DE.UTF-8";
 
@@ -31,6 +35,8 @@
     userName = "grazyna";
   };
 
-  services.displayManager.autoLogin.enable = true;
-  services.displayManager.autoLogin.user = config.users.userName;
+  services.displayManager.autoLogin = {
+    enable = true;
+    user = config.users.userName;
+  };
 }

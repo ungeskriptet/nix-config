@@ -67,13 +67,15 @@ in
         ]
       );
 
-      environment.etc."xdg/baloofilerc".source = (pkgs.formats.ini { }).generate "baloorc" {
-        "Basic Settings" = {
-          "Indexing-Enabled" = false;
+      environment = {
+        etc."xdg/baloofilerc".source = (pkgs.formats.ini { }).generate "baloorc" {
+          "Basic Settings" = {
+            "Indexing-Enabled" = false;
+          };
         };
+        sessionVariables.SSH_ASKPASS_REQUIRE = "prefer";
       };
 
-      environment.sessionVariables.SSH_ASKPASS_REQUIRE = "prefer";
       systemd.user.services.ssh-add = {
         wantedBy = [ "default.target" ];
         requires = [ "ssh-agent.service" ];

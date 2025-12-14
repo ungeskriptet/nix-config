@@ -28,37 +28,48 @@
     users.david = lib.mkDefault ../home/david/common.nix;
   };
 
-  boot.kernel.sysctl = {
-    "kernel.dmesg_restrict" = false;
-    "kernel.sysrq" = true;
-  };
-  boot.tmp.cleanOnBoot = true;
-
-  security.rtkit.enable = true;
-  security.polkit.extraConfig = ''
-    polkit.addRule(function(action, subject) {
-      if (
-        action.id == "org.freedesktop.udisks2.encrypted-unlock-system" &&
-        subject.isInGroup("wheel")
-      ) { return polkit.Result.YES; }
-    });
-  '';
-
-  networking.domain = "david-w.eu";
-  networking.nftables.enable = true;
-  networking.firewall.filterForward = true;
-
-  services.openssh = {
-    enable = true;
-    settings.PasswordAuthentication = false;
-    settings.KbdInteractiveAuthentication = false;
+  boot = {
+    kernel.sysctl = {
+      "kernel.dmesg_restrict" = false;
+      "kernel.sysrq" = true;
+    };
+    tmp.cleanOnBoot = true;
   };
 
-  services.avahi = {
-    enable = true;
-    nssmdns4 = true;
-    nssmdns6 = true;
-    openFirewall = true;
+  security = {
+    rtkit.enable = true;
+    polkit.extraConfig = ''
+      polkit.addRule(function(action, subject) {
+        if (
+          action.id == "org.freedesktop.udisks2.encrypted-unlock-system" &&
+          subject.isInGroup("wheel")
+        ) { return polkit.Result.YES; }
+      });
+    '';
+  };
+
+  networking = {
+    domain = "david-w.eu";
+    nftables.enable = true;
+    firewall.filterForward = true;
+  };
+
+  services = {
+    openssh = {
+      enable = true;
+      settings = {
+        PasswordAuthentication = false;
+        KbdInteractiveAuthentication = false;
+      };
+    };
+
+    avahi = {
+      enable = true;
+      nssmdns4 = true;
+      nssmdns6 = true;
+      openFirewall = true;
+    };
+    xserver.xkb.layout = "de";
   };
 
   environment.sessionVariables = {
@@ -71,7 +82,6 @@
 
   time.timeZone = "Europe/Berlin";
   console.keyMap = "de";
-  services.xserver.xkb.layout = "de";
   i18n = {
     defaultLocale = lib.mkDefault "en_US.UTF-8";
     extraLocaleSettings = lib.mkDefault (
@@ -100,9 +110,11 @@
         "@wheel"
       ];
     };
-    gc.automatic = true;
-    gc.dates = "weekly";
-    gc.options = "--delete-older-than 7d";
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
+    };
   };
   nixpkgs.config.allowUnfree = true;
   system.stateVersion = "25.05";

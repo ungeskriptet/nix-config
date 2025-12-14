@@ -14,24 +14,31 @@
     inputs.lanzaboote.nixosModules.lanzaboote
   ];
 
-  networking.hostName = "ryuzu";
-  networking.interfaces.enp4s0.wakeOnLan.enable = true;
+  networking = {
+    hostName = "ryuzu";
+    interfaces.enp4s0.wakeOnLan.enable = true;
+  };
 
   programs.silverfort.enable = true;
 
-  security.polkit.extraConfig = ''
-    polkit.addRule(function(action, subject) {
-        if (action.id == "com.bitwarden.Bitwarden.unlock" && subject.isInGroup("wheel")) {
-            return polkit.Result.YES;
-        }
-    });
-  '';
+  security = {
+    polkit.extraConfig = ''
+      polkit.addRule(function(action, subject) {
+          if (action.id == "com.bitwarden.Bitwarden.unlock" && subject.isInGroup("wheel")) {
+              return polkit.Result.YES;
+          }
+      });
+    '';
+    sudo.wheelNeedsPassword = false;
+  };
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.systemd-boot.enable = lib.mkDefault true;
-
-  security.sudo.wheelNeedsPassword = false;
+  boot = {
+    kernelPackages = pkgs.linuxPackages_latest;
+    loader = {
+      efi.canTouchEfiVariables = true;
+      systemd-boot.enable = lib.mkDefault true;
+    };
+  };
 
   users.hashedPassword = "$y$j9T$sMN/eKYxYfh97dxUFDtzf.$sD76l.o1RyplUGb./VV.m3/qgEOrHIh5MkhLoeDpXUB";
 }

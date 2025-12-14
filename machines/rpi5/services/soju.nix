@@ -18,12 +18,16 @@ let
   };
 in
 {
-  networking.firewall = {
-    allowedTCPPorts = [ 6697 ];
-  };
+  networking = {
+    firewall = {
+      allowedTCPPorts = [ 6697 ];
+    };
 
-  networking.hosts."::1" = [ fqdn ];
-  networking.hosts."127.0.0.1" = [ fqdn ];
+    hosts = {
+      "::1" = [ fqdn ];
+      "127.0.0.1" = [ fqdn ];
+    };
+  };
 
   users = {
     groups.soju = { };
@@ -34,73 +38,76 @@ in
     };
   };
 
-  systemd.services.soju = {
-    requires = [ "postgresql.target" ];
-    after = [ "postgresql.target" ];
-    postStart = ''
-      while [[ ! -S /run/soju/socket ]]; do
-        sleep 1
-      done
-      chmod 660 /run/soju/socket
-    '';
-    serviceConfig.SupplementaryGroups = [ "acme" ];
-  };
-
-  systemd.services.caddy = {
-    serviceConfig.SupplementaryGroups = [ "soju" ];
-  };
-
-  services.postgresql = {
-    ensureDatabases = [ "soju" ];
-    ensureUsers = [
-      {
-        name = "soju";
-        ensureDBOwnership = true;
-      }
-    ];
-  };
-
-  services.caddy.virtualHosts = {
-    "https://${fqdn}" = {
-      extraConfig = ''
-        tls ${config.acme.tlsCert} ${config.acme.tlsKey}
-        @uploads path /uploads /uploads/*
-        reverse_proxy @uploads unix//run/soju/socket
-        reverse_proxy /socket unix//run/soju/socket
-        respond /config.json {"server":{"url":"/socket","auth":"mandatory"}} 200
-        root /favicon.ico ${gamjaIcon}
-        root ${pkgs.gamja}
-        file_server
+  systemd.services = {
+    soju = {
+      requires = [ "postgresql.target" ];
+      after = [ "postgresql.target" ];
+      postStart = ''
+        while [[ ! -S /run/soju/socket ]]; do
+          sleep 1
+        done
+        chmod 660 /run/soju/socket
       '';
+      serviceConfig.SupplementaryGroups = [ "acme" ];
+    };
+    caddy = {
+      serviceConfig.SupplementaryGroups = [ "soju" ];
     };
   };
 
-  services.soju = {
-    enable = true;
-    configFile = pkgs.writeText "soju.conf" ''
-      listen http+unix:///run/soju/socket
-      listen ircs://:6697
-      listen unix+admin:///run/soju/admin
-      hostname ${fqdn}
-      tls ${config.acme.tlsCert} ${config.acme.tlsKey}
-      db postgres "host=/run/postgresql dbname=soju"
-      message-store db
-      accept-proxy-ip localhost
-      file-upload fs /var/lib/soju/uploads
-      title "David's IRC Bouner"
-    '';
-  };
-
-  services.homer.settings.services = [
-    {
-      items = [
+  services = {
+    postgresql = {
+      ensureDatabases = [ "soju" ];
+      ensureUsers = [
         {
-          name = "IRC";
-          subtitle = "Gamja IRC client";
-          url = "https://${fqdn}";
-          logo = "https://${fqdn}/favicon.ico";
+          name = "soju";
+          ensureDBOwnership = true;
         }
       ];
-    }
-  ];
+    };
+
+    caddy.virtualHosts = {
+      "https://${fqdn}" = {
+        extraConfig = ''
+          tls ${config.acme.tlsCert} ${config.acme.tlsKey}
+          @uploads path /uploads /uploads/*
+          reverse_proxy @uploads unix//run/soju/socket
+          reverse_proxy /socket unix//run/soju/socket
+          respond /config.json {"server":{"url":"/socket","auth":"mandatory"}} 200
+          root /favicon.ico ${gamjaIcon}
+          root ${pkgs.gamja}
+          file_server
+        '';
+      };
+    };
+
+    soju = {
+      enable = true;
+      configFile = pkgs.writeText "soju.conf" ''
+        listen http+unix:///run/soju/socket
+        listen ircs://:6697
+        listen unix+admin:///run/soju/admin
+        hostname ${fqdn}
+        tls ${config.acme.tlsCert} ${config.acme.tlsKey}
+        db postgres "host=/run/postgresql dbname=soju"
+        message-store db
+        accept-proxy-ip localhost
+        file-upload fs /var/lib/soju/uploads
+        title "David's IRC Bouner"
+      '';
+    };
+
+    homer.settings.services = [
+      {
+        items = [
+          {
+            name = "IRC";
+            subtitle = "Gamja IRC client";
+            url = "https://${fqdn}";
+            logo = "https://${fqdn}/favicon.ico";
+          }
+        ];
+      }
+    ];
+  };
 }

@@ -2,7 +2,6 @@
 let
   fqdn = "dash.${domain}";
   domain = config.networking.domain;
-  cfg = config.services.homer;
 in
 {
   services = {

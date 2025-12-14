@@ -14,8 +14,10 @@ in
 {
   sops.secrets."yuribot/env".owner = "root";
 
-  networking.hosts."::1" = [ fqdn ];
-  networking.hosts."127.0.0.1" = [ fqdn ];
+  networking.hosts = {
+    "::1" = [ fqdn ];
+    "127.0.0.1" = [ fqdn ];
+  };
 
   services.caddy.virtualHosts."https://${fqdn}".extraConfig = ''
     tls ${config.acme.tlsCert} ${config.acme.tlsKey}

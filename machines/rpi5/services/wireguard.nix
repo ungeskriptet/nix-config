@@ -29,27 +29,29 @@
         owner = "systemd-network";
       });
 
-  networking.nat = {
-    enable = true;
-    externalInterface = "end0";
-    internalInterfaces = [ "wg0" ];
-  };
+  networking = {
+    nat = {
+      enable = true;
+      externalInterface = "end0";
+      internalInterfaces = [ "wg0" ];
+    };
 
-  networking.firewall = {
-    allowedUDPPorts = [
-      33434
-      53286
-      57349
-    ];
-    extraForwardRules = ''
-      iifname end0 oifname { wg1, wg2 } accept
-      iifname wg0 accept
-      iifname wg2 oifname end0 meta l4proto { tcp, udp } th dport { 80, 443 } ip daddr != 192.168.0.0/16 accept
-      iifname wg2 oifname end0 meta l4proto { tcp, udp } th dport { 80, 443 } ip6 daddr != fd00::/16 accept
-    '';
-    extraReversePathFilterRules = ''
-      iifname wg1 accept
-    '';
+    firewall = {
+      allowedUDPPorts = [
+        33434
+        53286
+        57349
+      ];
+      extraForwardRules = ''
+        iifname end0 oifname { wg1, wg2 } accept
+        iifname wg0 accept
+        iifname wg2 oifname end0 meta l4proto { tcp, udp } th dport { 80, 443 } ip daddr != 192.168.0.0/16 accept
+        iifname wg2 oifname end0 meta l4proto { tcp, udp } th dport { 80, 443 } ip6 daddr != fd00::/16 accept
+      '';
+      extraReversePathFilterRules = ''
+        iifname wg1 accept
+      '';
+    };
   };
 
   environment.systemPackages = with pkgs; [
@@ -200,47 +202,49 @@
         ];
       };
     };
-    networks.wg0 = {
-      matchConfig.Name = "wg0";
-      address = [
-        "192.168.128.1/24"
-        "fd96::1/64"
-      ];
-      networkConfig = {
-        IPMasquerade = "both";
+    networks = {
+      wg0 = {
+        matchConfig.Name = "wg0";
+        address = [
+          "192.168.128.1/24"
+          "fd96::1/64"
+        ];
+        networkConfig = {
+          IPMasquerade = "both";
+        };
       };
-    };
-    networks.wg1 = {
-      matchConfig.Name = "wg1";
-      addresses = [
-        {
-          Address = "192.168.3.1/24";
-          AddPrefixRoute = false;
-        }
-      ];
-      routingPolicyRules = [
-        {
-          To = "192.168.3.0/24";
-          Table = 96;
-        }
-        {
-          To = "192.168.96.0/24";
-          Table = 96;
-        }
-        {
-          From = "192.168.64.10";
-          Table = 96;
-        }
-      ];
-    };
-    networks.wg2 = {
-      matchConfig.Name = "wg2";
-      address = [
-        "192.168.36.1/24"
-        "fd36::1/64"
-      ];
-      networkConfig = {
-        IPMasquerade = "both";
+      wg1 = {
+        matchConfig.Name = "wg1";
+        addresses = [
+          {
+            Address = "192.168.3.1/24";
+            AddPrefixRoute = false;
+          }
+        ];
+        routingPolicyRules = [
+          {
+            To = "192.168.3.0/24";
+            Table = 96;
+          }
+          {
+            To = "192.168.96.0/24";
+            Table = 96;
+          }
+          {
+            From = "192.168.64.10";
+            Table = 96;
+          }
+        ];
+      };
+      wg2 = {
+        matchConfig.Name = "wg2";
+        address = [
+          "192.168.36.1/24"
+          "fd36::1/64"
+        ];
+        networkConfig = {
+          IPMasquerade = "both";
+        };
       };
     };
   };

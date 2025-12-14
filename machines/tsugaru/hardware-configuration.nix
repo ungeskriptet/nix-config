@@ -21,30 +21,34 @@
       "nvidia_drm"
       "nvidia_modeset"
     ];
-    initrd.availableKernelModules = [
-      "xhci_pci"
-      "ehci_pci"
-      "ahci"
-      "usb_storage"
-      "sd_mod"
-      "sr_mod"
-      "rtsx_pci_sdmmc"
-    ];
-    initrd.kernelModules = [ "i915" ];
+    initrd = {
+      availableKernelModules = [
+        "xhci_pci"
+        "ehci_pci"
+        "ahci"
+        "usb_storage"
+        "sd_mod"
+        "sr_mod"
+        "rtsx_pci_sdmmc"
+      ];
+      initrd.kernelModules = [ "i915" ];
+    };
   };
 
-  fileSystems."/" = {
-    device = "/dev/disk/by-uuid/23be29d9-b303-4d76-a4c8-3a2ac2d7bb1e";
-    fsType = "ext4";
-  };
+  fileSystems = {
+    "/" = {
+      device = "/dev/disk/by-uuid/23be29d9-b303-4d76-a4c8-3a2ac2d7bb1e";
+      fsType = "ext4";
+    };
 
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/6CA4-1CAB";
-    fsType = "vfat";
-    options = [
-      "fmask=0077"
-      "dmask=0077"
-    ];
+    "/boot" = {
+      device = "/dev/disk/by-uuid/6CA4-1CAB";
+      fsType = "vfat";
+      options = [
+        "fmask=0077"
+        "dmask=0077"
+      ];
+    };
   };
 
   zramSwap.enable = true;
@@ -66,12 +70,14 @@
     enableRedistributableFirmware = true;
     bluetooth.enable = true;
     cpu.intel.updateMicrocode = true;
-    graphics.extraPackages32 = with pkgs; [
-      (driversi686Linux.intel-vaapi-driver.override { enableHybridCodec = true; })
-    ];
-    graphics.extraPackages = with pkgs; [
-      (intel-vaapi-driver.override { enableHybridCodec = true; })
-    ];
+    graphics = {
+      extraPackages32 = with pkgs; [
+        (driversi686Linux.intel-vaapi-driver.override { enableHybridCodec = true; })
+      ];
+      extraPackages = with pkgs; [
+        (intel-vaapi-driver.override { enableHybridCodec = true; })
+      ];
+    };
     nvidia = {
       prime.offload.enable = lib.mkForce false;
       powerManagement = {

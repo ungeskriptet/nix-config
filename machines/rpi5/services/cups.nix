@@ -9,27 +9,51 @@ in
     "127.0.0.1" = [ fqdn ];
   };
 
-  services.avahi = {
-    enable = true;
-    nssmdns4 = true;
-    nssmdns6 = true;
-    openFirewall = true;
-    allowInterfaces = [ "end0" ];
-    publish = {
+  services = {
+    avahi = {
       enable = true;
-      userServices = true;
+      nssmdns4 = true;
+      nssmdns6 = true;
+      openFirewall = true;
+      allowInterfaces = [ "end0" ];
+      publish = {
+        enable = true;
+        userServices = true;
+      };
     };
-  };
 
-  services.printing = {
-    enable = true;
-    allowFrom = [ "all" ];
-    defaultShared = true;
-    drivers = with pkgs; [ hplipWithPlugin ];
-    openFirewall = true;
-    stateless = true;
-    listenAddresses = [ "*:631" ];
-    browsing = true;
+    printing = {
+      enable = true;
+      allowFrom = [ "all" ];
+      defaultShared = true;
+      drivers = with pkgs; [ hplipWithPlugin ];
+      openFirewall = true;
+      stateless = true;
+      listenAddresses = [ "*:631" ];
+      browsing = true;
+    };
+
+    caddy.virtualHosts."https://${fqdn}".extraConfig = ''
+      tls ${config.acme.tlsCert} ${config.acme.tlsKey}
+      @lan not remote_ip private_ranges
+      respond @lan "Hi! sorry not allowed :(" 403
+      reverse_proxy http://${fqdn}:631 {
+        header_up host localhost
+      }
+    '';
+
+    homer.settings.services = [
+      {
+        items = [
+          {
+            name = "CUPS";
+            subtitle = "Print server";
+            url = "https://${fqdn}";
+            logo = "https://cdn.jsdelivr.net/gh/selfhst/icons@master/svg/openprinting-cups.svg";
+          }
+        ];
+      }
+    ];
   };
 
   hardware.printers = {
@@ -44,26 +68,4 @@ in
       }
     ];
   };
-
-  services.caddy.virtualHosts."https://${fqdn}".extraConfig = ''
-    tls ${config.acme.tlsCert} ${config.acme.tlsKey}
-    @lan not remote_ip private_ranges
-    respond @lan "Hi! sorry not allowed :(" 403
-    reverse_proxy http://${fqdn}:631 {
-      header_up host localhost
-    }
-  '';
-
-  services.homer.settings.services = [
-    {
-      items = [
-        {
-          name = "CUPS";
-          subtitle = "Print server";
-          url = "https://${fqdn}";
-          logo = "https://cdn.jsdelivr.net/gh/selfhst/icons@master/svg/openprinting-cups.svg";
-        }
-      ];
-    }
-  ];
 }

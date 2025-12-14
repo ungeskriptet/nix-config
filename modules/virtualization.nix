@@ -11,12 +11,14 @@ lib.mkIf cfg.david (
     (lib.mkIf (arch == "x86_64-linux") {
       boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
       programs.virt-manager.enable = true;
-      virtualisation.libvirtd.enable = true;
-      virtualisation.spiceUSBRedirection.enable = true;
-      virtualisation.podman = {
-        enable = true;
-        dockerCompat = true;
-        autoPrune.enable = true;
+      virtualisation = {
+        libvirtd.enable = true;
+        spiceUSBRedirection.enable = true;
+        podman = {
+          enable = true;
+          dockerCompat = true;
+          autoPrune.enable = true;
+        };
       };
       security.polkit.extraConfig = ''
         polkit.addRule(function(action, subject) {

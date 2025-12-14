@@ -33,26 +33,28 @@ in
 
     users = {
       mutableUsers = false;
-      users.${cfg.userName} = {
-        isNormalUser = true;
-        description = cfg.userDescription;
-        extraGroups = [
-          "dialout"
-          "wheel"
-        ]
-        ++ lib.optionals config.networking.networkmanager.enable [ "networkmanager" ]
-        ++ lib.optionals config.programs.wireshark.enable [ "wireshark" ]
-        ++ lib.optionals config.virtualisation.libvirtd.enable [ "libvirt" ]
-        ++ lib.optionals config.virtualisation.podman.enable [ "podman" ];
-        hashedPassword = cfg.hashedPassword;
-        openssh.authorizedKeys.keys =
-          config.vars.sshPubKeys
-          ++ lib.optionals (config.networking.hostName == "ryuzu") [
-            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHCo1aBmLiSmZrjtnFVYczuv4/cNXjxF+4soUTSIeZla hass"
-          ];
-      };
-      users.root = {
-        openssh.authorizedKeys.keys = config.vars.sshPubKeys;
+      users = {
+        ${cfg.userName} = {
+          isNormalUser = true;
+          description = cfg.userDescription;
+          extraGroups = [
+            "dialout"
+            "wheel"
+          ]
+          ++ lib.optionals config.networking.networkmanager.enable [ "networkmanager" ]
+          ++ lib.optionals config.programs.wireshark.enable [ "wireshark" ]
+          ++ lib.optionals config.virtualisation.libvirtd.enable [ "libvirt" ]
+          ++ lib.optionals config.virtualisation.podman.enable [ "podman" ];
+          hashedPassword = cfg.hashedPassword;
+          openssh.authorizedKeys.keys =
+            config.vars.sshPubKeys
+            ++ lib.optionals (config.networking.hostName == "ryuzu") [
+              "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHCo1aBmLiSmZrjtnFVYczuv4/cNXjxF+4soUTSIeZla hass"
+            ];
+        };
+        root = {
+          openssh.authorizedKeys.keys = config.vars.sshPubKeys;
+        };
       };
     }
     // lib.optionalAttrs config.programs.zsh.enable { defaultUserShell = pkgs.zsh; };

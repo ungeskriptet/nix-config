@@ -1,34 +1,38 @@
 { lib, ... }:
 {
   options = {
-    networking.lanIPv4 = lib.mkOption {
-      type = lib.types.str;
-      description = "IPv4 address inside the LAN";
+    networking = {
+      lanIPv4 = lib.mkOption {
+        type = lib.types.str;
+        description = "IPv4 address inside the LAN";
+      };
+      lanIPv6 = lib.mkOption {
+        type = lib.types.str;
+        description = "IPv6 address inside the LAN";
+      };
+      lanDomain = lib.mkOption {
+        type = lib.types.str;
+        description = "LAN domain";
+        default = "fritz.box";
+      };
+      gatewayIP = lib.mkOption {
+        type = lib.types.str;
+        description = "Default gateway IP";
+        default = "192.168.64.1";
+      };
+      secGatewayIP = lib.mkOption {
+        type = lib.types.str;
+        description = "Secondary Gateway IP";
+        default = "192.168.64.15";
+      };
     };
-    networking.lanIPv6 = lib.mkOption {
-      type = lib.types.str;
-      description = "IPv6 address inside the LAN";
-    };
-    networking.lanDomain = lib.mkOption {
-      type = lib.types.str;
-      description = "LAN domain";
-      default = "fritz.box";
-    };
-    networking.gatewayIP = lib.mkOption {
-      type = lib.types.str;
-      description = "Default gateway IP";
-      default = "192.168.64.1";
-    };
-    networking.secGatewayIP = lib.mkOption {
-      type = lib.types.str;
-      description = "Secondary Gateway IP";
-      default = "192.168.64.15";
-    };
-    nix-config.enablePlasma = lib.mkEnableOption "Plasma" // {
-      default = true;
-    };
-    nix-config.david = lib.mkEnableOption "David's desktop configs" // {
-      default = true;
+    nix-config = {
+      enablePlasma = lib.mkEnableOption "Plasma" // {
+        default = true;
+      };
+      david = lib.mkEnableOption "David's desktop configs" // {
+        default = true;
+      };
     };
     vars.sshPubKeys = lib.mkOption {
       type = lib.types.listOf lib.types.str;

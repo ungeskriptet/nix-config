@@ -48,8 +48,10 @@
     };
   };
 
-  services.fstrim.enable = true;
-  services.fwupd.enable = true;
+  services = {
+    fstrim.enable = true;
+    fwupd.enable = true;
+  };
 
   nixpkgs.hostPlatform = "x86_64-linux";
 }

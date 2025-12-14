@@ -13,11 +13,15 @@
     inputs.lanzaboote.nixosModules.lanzaboote
   ];
 
-  networking.hostName = "xiatian";
+  boot = {
+    kernelPackages = pkgs.linuxPackages_latest;
+    loader = {
+      efi.canTouchEfiVariables = true;
+      systemd-boot.enable = lib.mkDefault true;
+    };
+  };
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.systemd-boot.enable = lib.mkDefault true;
+  networking.hostName = "xiatian";
 
   systemd.services.hpkey = {
     description = "Map HP key to Play/Pause";
