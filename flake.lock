@@ -202,6 +202,26 @@
         "type": "github"
       }
     },
+    "nix-shell-collection": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1764955849,
+        "narHash": "sha256-wNFbAtFIpVyfU3G66cyvckUkF0DQAhvt9LgiSw7sGA4=",
+        "ref": "refs/heads/master",
+        "rev": "8dffc455ba9d65d84776986fda39c77e8626daba",
+        "revCount": 9,
+        "type": "git",
+        "url": "https://codeberg.org/ungeskriptet/nix-shell-collection.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://codeberg.org/ungeskriptet/nix-shell-collection.git"
+      }
+    },
     "nixos-images": {
       "inputs": {
         "nixos-stable": [
@@ -403,6 +423,7 @@
         "home-manager": "home-manager",
         "lanzaboote": "lanzaboote",
         "nix-on-droid": "nix-on-droid",
+        "nix-shell-collection": "nix-shell-collection",
         "nixos-raspberrypi": "nixos-raspberrypi",
         "nixpkgs": "nixpkgs",
         "nur": "nur",

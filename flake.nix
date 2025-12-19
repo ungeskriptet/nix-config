@@ -21,6 +21,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
+    nix-shell-collection = {
+      url = "git+https://codeberg.org/ungeskriptet/nix-shell-collection.git";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixos-raspberrypi = {
       url = "github:nvmd/nixos-raspberrypi/develop";
       inputs.nixpkgs.follows = "nixpkgs";

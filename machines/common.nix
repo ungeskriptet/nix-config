@@ -115,6 +115,10 @@
       dates = "weekly";
       options = "--delete-older-than 7d";
     };
+    registry.nix-shell-collection.to = {
+      type = "path";
+      path = inputs.nix-shell-collection;
+    };
   };
   nixpkgs.config.allowUnfree = true;
   system.stateVersion = "25.05";
