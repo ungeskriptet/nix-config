@@ -108,7 +108,7 @@
               rpiModules = import ./modules/rpimodules.nix { inherit nixos-raspberrypi; };
             }
             {
-              specialArgs = { inherit inputs nixos-raspberrypi pkgsPatched; };
+              specialArgs = { inherit inputs nixos-raspberrypi; };
               system = "aarch64-linux";
               modules = [ ./machines/rpi5 ];
             };
