@@ -50,6 +50,7 @@ in
                   (domain: {
                     domain = domain;
                     answer = ip;
+                    enabled = true;
                   })
                   [
                     "*.${domain}"
