@@ -76,10 +76,6 @@ in
           poweroff_ryuzu = "${ssh} -i /var/lib/hass/ssh/id_ed25519 -o StrictHostKeyChecking=no david@ryuzu sudo poweroff";
         };
         http = {
-          server_host = [
-            "::1"
-            "127.0.0.1"
-          ];
           server_port = 8083;
           ssl_key = config.acme.tlsKey;
           ssl_certificate = config.acme.tlsCert;
