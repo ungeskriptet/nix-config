@@ -85,8 +85,9 @@ in
             "127.0.0.1"
           ];
         };
-        recorder.db_url = "postgresql://@/hass";
         wake_on_lan = { };
+        homeassistant.time_zone = null;
+        recorder.db_url = "postgresql://@/hass";
       };
     };
 
