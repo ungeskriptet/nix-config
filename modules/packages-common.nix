@@ -48,6 +48,7 @@ in
       jq
       lz4
       ncdu
+      openssl
       p7zip
       pciutils
       picocom
