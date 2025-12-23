@@ -61,6 +61,7 @@ in
       nixd
       prismlauncher
       qbittorrent
+      remmina
 
       selfPkgs.ida-pro
       selfPkgs.itgmania-zmod
