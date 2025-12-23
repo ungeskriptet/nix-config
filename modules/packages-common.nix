@@ -46,6 +46,7 @@ in
       file
       inetutils
       jq
+      killall
       lz4
       ncdu
       openssl
