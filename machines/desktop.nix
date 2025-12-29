@@ -57,15 +57,18 @@ in
         displayManager.sddm.enable = true;
       };
 
-      environment.plasma6.excludePackages = (
-        with pkgs.kdePackages;
-        [
-          baloo
-          baloo-widgets
-          elisa
-          khelpcenter
-        ]
-      );
+      environment = {
+        plasma6.excludePackages = (
+          with pkgs.kdePackages;
+          [
+            baloo
+            baloo-widgets
+            elisa
+            khelpcenter
+          ]
+        );
+        systemPackages = with pkgs; [ kdePackages.yakuake ];
+      };
 
       environment = {
         etc."xdg/baloofilerc".source = (pkgs.formats.ini { }).generate "baloorc" {
