@@ -33,6 +33,11 @@
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    plasma-manager = {
+      url = "github:nix-community/plasma-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
     pmbootstrap-git = {
       url = "git+https://gitlab.postmarketos.org/postmarketOS/pmbootstrap.git";
       flake = false;

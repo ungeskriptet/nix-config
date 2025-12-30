@@ -7,6 +7,7 @@
   imports = [
     ./common.nix
     ./firefox
+    ./plasma
     ./accounts/desktop.nix
     ../common-allusers.nix
   ];
