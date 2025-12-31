@@ -36,6 +36,7 @@ in
         yakuakerc = {
           Window = {
             Height = 100;
+            KeepOpen = true;
             ShowTitleBar = false;
             Width = 100;
           };
@@ -43,6 +44,29 @@ in
           "Notification Messages".hinding_title_bar = false;
         };
       };
+      panels = [
+        {
+          floating = false;
+          location = "top";
+          widgets = [
+            {
+              name = "org.kde.plasma.kickoff";
+              config.General.icon = "nix-snowflake";
+            }
+            "org.kde.plasma.marginsseparator"
+            "org.kde.plasma.pager"
+            "org.kde.plasma.icontasks"
+            "org.kde.plasma.marginsseparator"
+            "org.kde.plasma.systemtray"
+            {
+              digitalClock = {
+                date.format = "isoDate";
+                time.format = "24h";
+              };
+            }
+          ];
+        }
+      ];
     };
   };
 }
