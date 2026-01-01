@@ -40,6 +40,7 @@ in
             ShowTitleBar = false;
             Width = 100;
           };
+          Appearance.HideSkinBorders = true;
           Dialogs.FirstRun = false;
           "Notification Messages".hinding_title_bar = false;
         };
