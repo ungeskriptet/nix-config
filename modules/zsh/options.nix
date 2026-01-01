@@ -97,10 +97,10 @@ in
           ${lib.optionalString cfg.david.enable ''
             fdroid-install () {
               echo "< waiting for any device >"
-              ${adb} wait-for-device &&
+              ${adb} -d wait-for-device &&
               rm -f "$1.apk"
               ${curl} https://f-droid.org/repo/$1_$(${curl} -s https://f-droid.org/api/v1/packages/$1 | ${jq} .suggestedVersionCode).apk -o "$1.apk"
-              ${adb} install "$1.apk"
+              ${adb} -d install "$1.apk"
               [[ $2 = "--no-rm" ]] || rm -f "$1.apk"
             }
             heimdall-wait-for-device () {
