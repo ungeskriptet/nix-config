@@ -95,6 +95,14 @@ in
             sort $1 | uniq --count --repeated
           }
           ${lib.optionalString cfg.david.enable ''
+            magisk-install () {
+              URL=$(${curl} -sS https://api.github.com/repos/topjohnwu/magisk/releases/latest | ${jq} -r '.assets[] | select(.name | test("Magisk-v.*.apk")) | .browser_download_url')
+              ${curl} -sSLo magisk.apk "$URL"
+              if [ "$1" = "--sideload" ]; then
+                ${adb} -d sideload magisk.apk
+                rm -f magisk.apk
+              fi
+            }
             fdroid-install () {
               echo "< waiting for any device >"
               ${adb} -d wait-for-device &&
@@ -109,7 +117,9 @@ in
                 sleep 1
               done
             }
-            libneeds () {${readelf} -d $1 |grep '\(NEEDED\)' | sed -r 's/.*\[(.*)\]/\1/'}
+            libneeds () {
+              ${readelf} -d $1 |grep '\(NEEDED\)' | sed -r 's/.*\[(.*)\]/\1/'
+            }
           ''}
           gh-cherry-pick () {
             curl https://github.com/$1/commit/$2.patch | git am
@@ -125,7 +135,9 @@ in
               gitinfo="%F{yellow} ($gitinfo %B●%b)%f"
             }
           ''}
-          search () {[ -z "$2" ] && find . -iname "*$1*" | cut -c3- || find $2 -iname "*$1*"}
+          search () {
+            [ -z "$2" ] && find . -iname "*$1*" | cut -c3- || find $2 -iname "*$1*"
+          }
           stfu () {
               $@>/dev/null 2>&1 &!
           }
