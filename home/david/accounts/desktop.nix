@@ -13,7 +13,10 @@
     profiles."Default" = {
       isDefault = true;
       settings = {
+        "datareporting.healthreport.uploadEnabled" = false;
+        "mail.compose.default_to_paragraph" = false;
         "mail.display_glyph" = false;
+        "msgcompose.font_face" = "monospace";
       };
     };
   };
