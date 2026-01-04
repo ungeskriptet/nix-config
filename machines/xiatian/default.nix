@@ -1,5 +1,6 @@
 # HP EliteBook 840 G7
 {
+  config,
   inputs,
   pkgs,
   lib,
@@ -25,6 +26,10 @@
 
   services = {
     fprintd.enable = true;
+    displayManager.autoLogin = {
+      enable = true;
+      user = config.users.userName;
+    };
     udev.extraHwdb = ''
       evdev:input:b0011v0001p0001eAB83*
         KEYBOARD_KEY_68=playpause
