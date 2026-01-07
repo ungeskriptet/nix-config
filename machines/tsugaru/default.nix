@@ -50,6 +50,7 @@
       gdm.enable = true;
     };
     desktopManager.gnome.enable = true;
+    usbmuxd.enable = true;
   };
 
   environment.gnome.excludePackages = with pkgs; [
