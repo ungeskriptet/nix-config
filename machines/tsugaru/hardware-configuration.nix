@@ -31,7 +31,7 @@
         "sr_mod"
         "rtsx_pci_sdmmc"
       ];
-      initrd.kernelModules = [ "i915" ];
+      kernelModules = [ "i915" ];
     };
   };
 
