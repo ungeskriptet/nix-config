@@ -67,6 +67,5 @@ in
       selfPkgs.itgmania-zmod
       selfPkgs.odin4
       selfPkgs.outfox-alpha5
-      selfPkgs.pmbootstrap-git
     ];
 }

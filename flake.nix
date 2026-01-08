@@ -38,10 +38,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
-    pmbootstrap-git = {
-      url = "git+https://gitlab.postmarketos.org/postmarketOS/pmbootstrap.git";
-      flake = false;
-    };
     samsung-grab = {
       url = "git+https://codeberg.org/ungeskriptet/samsung-grab";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -143,9 +139,6 @@
             dumpyara = pkgs.${system}.callPackage ./packages/dumpyara.nix { };
             mdns-scan = pkgs.${system}.callPackage ./packages/mdns-scan.nix { };
             openssh-nix-on-droid = pkgs.${system}.callPackage ./packages/openssh-nix-on-droid.nix { };
-            pmbootstrap-git = pkgs.${system}.callPackage ./packages/pmbootstrap-git.nix {
-              inherit (inputs) pmbootstrap-git;
-            };
             silverfort-client = (pkgsUnfree system).callPackage ./packages/silverfort-client { };
             ttf-ms-win11 = pkgs.${system}.callPackage ./packages/ttf-ms-win11.nix { };
           }))
