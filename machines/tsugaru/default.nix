@@ -53,12 +53,15 @@
     usbmuxd.enable = true;
   };
 
-  environment.gnome.excludePackages = with pkgs; [
-    epiphany
-    geary
-    gnome-music
-    gnome-tour
-  ];
+  environment = {
+    systemPackages = with pkgs; [ prismlauncher ];
+    gnome.excludePackages = with pkgs; [
+      epiphany
+      geary
+      gnome-music
+      gnome-tour
+    ];
+  };
 
   systemd.services.gnome-remote-desktop = {
     wantedBy = [ "graphical.target" ];
