@@ -93,7 +93,7 @@ in
         message-store db
         accept-proxy-ip localhost
         file-upload fs /var/lib/soju/uploads
-        title "David's IRC Bouner"
+        title "David's IRC Bouncer"
       '';
     };
 
