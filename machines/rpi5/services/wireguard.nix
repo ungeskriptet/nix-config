@@ -19,6 +19,7 @@
         "wireguard/support/psk-5"
         "wireguard/support/psk-6"
         "wireguard/support/psk-7"
+        "wireguard/support/psk-8"
         "wireguard/netflix/privkey"
         "wireguard/netflix/psk-1"
         "wireguard/netflix/psk-2"
@@ -148,6 +149,12 @@
             PersistentKeepalive = 25;
             PresharedKeyFile = config.sops.secrets."wireguard/support/psk-7".path;
             PublicKey = "WjTGJ6HlgZNlPVIpKl/7OnaLu/+56DkKLNlvCVkn1z8=";
+          }
+          {
+            AllowedIPs = [ "192.168.3.6/32" ];
+            PersistentKeepalive = 25;
+            PresharedKeyFile = config.sops.secrets."wireguard/support/psk-8".path;
+            PublicKey = "qSpGolxn7FgZpefRyFjkZ7x8Up0IzFFbyL73GLq4BR4=";
           }
         ];
       };
