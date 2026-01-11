@@ -138,6 +138,7 @@
           (forAllSystems (system: {
             dumpyara = pkgs.${system}.callPackage ./packages/dumpyara.nix { };
             mdns-scan = pkgs.${system}.callPackage ./packages/mdns-scan.nix { };
+            nix-on-droid-setup = pkgs.${system}.callPackage ./packages/nix-on-droid-setup.nix { };
             openssh-nix-on-droid = pkgs.${system}.callPackage ./packages/openssh-nix-on-droid.nix { };
             silverfort-client = (pkgsUnfree system).callPackage ./packages/silverfort-client { };
             ttf-ms-win11 = pkgs.${system}.callPackage ./packages/ttf-ms-win11.nix { };
