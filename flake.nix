@@ -7,6 +7,7 @@
     ];
   };
   inputs = {
+    nixos-raspberrypi-kernel.url = "github:nvmd/nixos-raspberrypi/develop";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:ungeskriptet/home-manager/ssh-strictHostKeyChecking";
