@@ -86,9 +86,9 @@ in
           export WORDCHARS="''${WORDCHARS/\/}"
           export WORDCHARS="''${WORDCHARS/.}"
 
-          [ $UID = 0 ] &&
-            [ -z $SSH_AGENT_PID ] &&
-            [ $SSH_AUTH_SOCK = "/run/user/0/ssh-agent" ] &&
+          [ "$UID" = 0 ] &&
+            [ -z "$SSH_AGENT_PID" ] &&
+            [ "$SSH_AUTH_SOCK" = "/run/user/0/ssh-agent" ] &&
             eval $(ssh-agent -s)
 
           duplines () {
