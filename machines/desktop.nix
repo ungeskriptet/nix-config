@@ -45,6 +45,7 @@ in
       };
     }
     (lib.mkIf cfg.david {
+      nix-config.enableVirt = true;
       # Automatically inject payload when a Nintendo Switch is connected
       systemd.tmpfiles.rules = [ "d /var/lib/fusee-nano 0777 root root -" ];
       services.udev.extraRules = with pkgs; ''

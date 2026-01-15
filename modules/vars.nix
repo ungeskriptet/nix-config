@@ -30,6 +30,7 @@
       enablePlasma = lib.mkEnableOption "Plasma" // {
         default = true;
       };
+      enableVirt = lib.mkEnableOption "virtualization";
       david = lib.mkEnableOption "David's desktop configs" // {
         default = true;
       };

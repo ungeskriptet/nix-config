@@ -20,6 +20,8 @@
 
   users.hashedPassword = "$y$j9T$j8duISvdoesAnqbKGzrDa.$pEPB4Dd3boH7.s7PRaLXPuse2K5OyrO2RHUe4vn2Qs.";
 
+  boot.binfmt.emulatedSystems = [ "x86_64-linux" ];
+
   nix = {
     nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
     registry.nixpkgs.to = {
