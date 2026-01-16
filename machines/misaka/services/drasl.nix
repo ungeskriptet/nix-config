@@ -10,7 +10,7 @@ in
       enable = true;
       settings = {
         BaseURL = "https://${fqdn}";
-        DefaultAdmins = [ "Ungeskriptet" ];
+        DefaultAdmins = [ "ungeskriptet" ];
         Domain = fqdn;
         ForwardSkins = true;
         ListenAddress = "[::1]:8092";
