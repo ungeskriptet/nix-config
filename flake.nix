@@ -137,6 +137,7 @@
         in
         nixpkgs.lib.recursiveUpdate
           (forAllSystems (system: {
+            drasl = pkgs.${system}.callPackage ./packages/drasl.nix { };
             dumpyara = pkgs.${system}.callPackage ./packages/dumpyara.nix { };
             mdns-scan = pkgs.${system}.callPackage ./packages/mdns-scan.nix { };
             nix-on-droid-setup = pkgs.${system}.callPackage ./packages/nix-on-droid-setup.nix { };
