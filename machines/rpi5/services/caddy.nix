@@ -10,8 +10,12 @@ let
   secRouterIP = config.networking.secGatewayIP;
 in
 {
-  networking.firewall = {
-    allowedTCPPorts = [ 443 ];
+  networking = {
+    firewall.allowedTCPPorts = [ 443 ];
+    hosts = {
+      "fd64::3" = [ "drasl.${domain}" ];
+      "192.168.64.3" = [ "drasl.${domain}" ];
+    };
   };
 
   systemd.services.caddy = {
@@ -67,6 +71,10 @@ in
               tls_insecure_skip_verify
             }
           }
+        '';
+        "https://drasl.${domain}".extraConfig = ''
+          tls ${config.acme.tlsCert} ${config.acme.tlsKey}
+          reverse_proxy https://drasl.${domain}:443
         '';
       };
     };
