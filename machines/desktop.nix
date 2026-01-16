@@ -23,10 +23,6 @@ in
       services = {
         printing.enable = true;
         pulseaudio.enable = false;
-        avahi.publish = {
-          enable = true;
-          addresses = true;
-        };
         pipewire = {
           enable = true;
           alsa.enable = true;
