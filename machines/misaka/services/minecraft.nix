@@ -41,7 +41,8 @@ in
       white-list = true;
     };
     whitelist = {
-      "Ungeskriptet" = "b993ea78-8e79-4acc-acef-46569dc5f761";
+      "ungeskriptet" = "b993ea78-8e79-4acc-acef-46569dc5f761";
+      "DraslPlayer1" = "7913bcc8-d593-4275-b085-3928191feccf";
     };
   };
 }
