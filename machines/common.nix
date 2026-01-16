@@ -6,6 +6,7 @@
 }:
 {
   imports = [
+    ../modules/acme.nix
     ../modules/packages-common.nix
     ../modules/users.nix
     ../modules/vars.nix
