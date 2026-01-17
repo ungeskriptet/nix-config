@@ -14,6 +14,8 @@
       isDefault = true;
       settings = {
         "datareporting.healthreport.uploadEnabled" = false;
+        "intl.date_time.pattern_override.date_short" = "dd.MM.yyyy";
+        "intl.date_time.pattern_override.time_short" = "HH:mm";
         "mail.compose.default_to_paragraph" = false;
         "mail.display_glyph" = false;
         "msgcompose.font_face" = "monospace";
