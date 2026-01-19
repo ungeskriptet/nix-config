@@ -36,7 +36,7 @@ in
       settings = {
         auth-access = [ "*:up*:wo" ];
         auth-default-access = "deny-all";
-        auth-users = [ "david:$2b$05$2jQBK33fXJVe0LEkjQ2uT.esP3Xm8xoTJsDXcdWxIOh/3iRRytniC:admin" ];
+        auth-users = [ "david:$2a$10$coWTT.DAq.QB716gGOJMBOGradrMsCG.VDITW4m/0pXcPusoBXHlO:admin" ];
         base-url = "https://${fqdn}";
         behind-proxy = true;
         enable-login = true;
