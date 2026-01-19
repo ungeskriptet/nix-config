@@ -120,6 +120,9 @@ in
             libneeds () {
               ${readelf} -d $1 |grep '\(NEEDED\)' | sed -r 's/.*\[(.*)\]/\1/'
             }
+            python-shell () {
+              nix-shell -p "python3.withPackages (ps: with ps; [ $* ])"
+            }
           ''}
           gh-cherry-pick () {
             curl https://github.com/$1/commit/$2.patch | git am
