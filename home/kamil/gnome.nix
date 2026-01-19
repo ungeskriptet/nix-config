@@ -99,6 +99,7 @@
 
     "org/gnome/desktop" = {
       "interface/enable-hot-corners" = false;
+      "interface/show-battery-percentage" = true;
       "remote-desktop/rdp/enable" = true;
       "remote-desktop/rdp/tls-cert" = config.sops.secrets."rdp/tls-cert".path;
       "remote-desktop/rdp/tls-key" = config.sops.secrets."rdp/tls-key".path;
