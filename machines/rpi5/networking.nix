@@ -14,8 +14,8 @@
     gatewayIP = "192.168.64.1";
   };
 
-  services.resolved = {
-    extraConfig = "DNSStubListener=no";
+  services.resolved.settings.Resolve = {
+    DNSStubListener = false;
   };
 
   systemd.network = {
