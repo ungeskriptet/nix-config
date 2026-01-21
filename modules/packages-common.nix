@@ -14,6 +14,7 @@ in
   programs = {
     git.enable = true;
     htop.enable = true;
+    tcpdump.enable = true;
     neovim = {
       enable = true;
       defaultEditor = true;

@@ -43,6 +43,7 @@ in
             "wheel"
           ]
           ++ lib.optionals config.networking.networkmanager.enable [ "networkmanager" ]
+          ++ lib.optionals config.programs.tcpdump.enable [ "pcap" ]
           ++ lib.optionals config.programs.wireshark.enable [ "wireshark" ]
           ++ lib.optionals config.virtualisation.libvirtd.enable [ "libvirt" ]
           ++ lib.optionals config.virtualisation.podman.enable [ "podman" ];
