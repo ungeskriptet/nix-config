@@ -52,6 +52,7 @@ in
       ncdu
       openssl
       p7zip
+      parted
       pciutils
       picocom
       pv
