@@ -110,10 +110,7 @@
         "nix-command"
         "flakes"
       ];
-      trusted-users = [
-        "root"
-        "@wheel"
-      ];
+      trusted-users = [ "@wheel" ];
     };
     gc = {
       automatic = true;
