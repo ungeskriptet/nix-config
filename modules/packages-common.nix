@@ -12,6 +12,7 @@ let
 in
 {
   programs = {
+    bat.enable = true;
     git.enable = true;
     htop.enable = true;
     tcpdump.enable = true;
