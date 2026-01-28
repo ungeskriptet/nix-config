@@ -24,6 +24,8 @@
 
   networking.hostName = "xiatian";
 
+  environment.systemPackages = with pkgs; [ etterna ];
+
   services = {
     fprintd.enable = true;
     displayManager.autoLogin = {
