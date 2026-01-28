@@ -31,13 +31,19 @@
         owner = "systemd-network";
       });
 
-  networking = {
-    nat = {
-      enable = true;
-      externalInterface = "end0";
-      internalInterfaces = [ "wg0" ];
+  boot = {
+    kernelModules = [ "nf_nat_ftp" ];
+    kernel.sysctl = {
+      "net.ipv4.conf.all.forwarding" = true;
+      "net.ipv4.conf.default.forwarding" = true;
+      "net.ipv6.conf.all.accept_ra" = 2;
+      "net.ipv6.conf.all.forwarding" = true;
+      "net.ipv6.conf.default.accept_ra" = 2;
+      "net.ipv6.conf.default.forwarding" = true;
     };
+  };
 
+  networking = {
     firewall = {
       allowedUDPPorts = [
         33434
@@ -45,13 +51,26 @@
         57349
       ];
       extraForwardRules = ''
-        iifname end0 oifname { wg1, wg2 } accept
-        iifname wg0 accept
-        iifname wg2 oifname end0 meta l4proto { tcp, udp } th dport { 80, 443 } ip daddr != 192.168.0.0/16 accept
-        iifname wg2 oifname end0 meta l4proto { tcp, udp } th dport { 80, 443 } ip6 daddr != fd00::/16 accept
+        iifname "end0" oifname { "wg1", "wg2" } accept
+        iifname "wg0" accept
+        iifname "wg2" oifname "end0" meta l4proto { tcp, udp } th dport { 80, 443 } ip daddr != 192.168.0.0/16 accept
+        iifname "wg2" oifname "end0" meta l4proto { tcp, udp } th dport { 80, 443 } ip6 daddr != fd00::/16 accept
       '';
-      extraReversePathFilterRules = ''
-        iifname wg1 accept
+    };
+    nftables.tables.nixos-nat-custom = {
+      family = "inet";
+      content = ''
+        chain pre {
+                type nat hook prerouting priority dstnat; policy accept;
+        }
+        chain post {
+                type nat hook postrouting priority srcnat; policy accept;
+                iifname { "wg0", "wg2" } oifname "end0" masquerade
+                oifname "wg1" masquerade
+        }
+        chain out {
+                type nat hook output priority mangle; policy accept;
+        }
       '';
     };
   };
@@ -226,9 +245,6 @@
           "192.168.128.1/24"
           "fd96::1/64"
         ];
-        networkConfig = {
-          IPMasquerade = "both";
-        };
       };
       wg1 = {
         matchConfig.Name = "wg1";
@@ -259,9 +275,6 @@
           "192.168.36.1/24"
           "fd36::1/64"
         ];
-        networkConfig = {
-          IPMasquerade = "both";
-        };
       };
     };
   };
