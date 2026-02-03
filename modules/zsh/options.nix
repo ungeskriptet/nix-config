@@ -141,6 +141,18 @@ in
           search () {
             [ -z "$2" ] && find . -iname "*$1*" | cut -c3- || find $2 -iname "*$1*"
           }
+          smartunpack () {
+            COUNT=$(($(7z l -slt $1 | grep 'Path = [^/]*$' | wc -l)-1))
+            if [ "$COUNT" -gt 1 ]; then
+              OUT="$(echo $1 | sed 's/\..*$//')-$RANDOM"
+              [ -e "$OUT" ] && echo "Already exists: $OUT" && return 1
+              mkdir -p "$OUT"
+              7z x $1 -o"$OUT"
+              realpath "$OUT"
+            else
+              7z x $1
+            fi
+          }
           stfu () {
               $@>/dev/null 2>&1 &!
           }
