@@ -18,7 +18,10 @@ in
     };
     zsh = {
       enable = true;
-      setOptions = [ "PROMPT_SUBST" ];
+      setOptions = [
+        "PROMPT_SUBST"
+        "HIST_IGNORE_SPACE"
+      ];
       enableCompletion = true;
       shellAliases =
         let
