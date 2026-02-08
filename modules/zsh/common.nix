@@ -25,9 +25,10 @@ in
       enableCompletion = true;
       shellAliases =
         let
+          bat = lib.getExe pkgs.bat;
           ffmpeg = lib.getExe pkgs.ffmpeg;
-          yt-dlp = lib.getExe pkgs.yt-dlp;
           heimdall = lib.getExe pkgs.heimdall;
+          yt-dlp = lib.getExe pkgs.yt-dlp;
         in
         {
           rp = "realpath";
@@ -37,6 +38,7 @@ in
           compress-vid = "${ffmpeg} -vcodec libx264 -crf 28 output.mp4 -i";
           heimdall = "heimdall-wait-for-device && ${heimdall}";
           yt-dlp-mp4 = "${yt-dlp} -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'";
+          pat = "${bat} -pp";
         }
         // lib.optionalAttrs (!cfg.homeManager.enable) {
           switch-nixos = "sudo nixos-rebuild switch --flake path:/etc/nixos#${config.networking.hostName} -L";
