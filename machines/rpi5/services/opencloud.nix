@@ -89,4 +89,6 @@ in
     "::1" = [ fqdn ];
     "127.0.0.1" = [ fqdn ];
   };
+
+  security.acme.defaults.reloadServices = [ "opencloud.service" ];
 }

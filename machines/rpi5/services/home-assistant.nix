@@ -18,6 +18,8 @@ in
     firewall.allowedUDPPorts = [ 5353 ];
   };
 
+  security.acme.defaults.reloadServices = [ "home-assistant.service" ];
+
   systemd.services.home-assistant = {
     serviceConfig.SupplementaryGroups = [ "acme" ];
     requires = [ "postgresql.target" ];

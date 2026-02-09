@@ -24,6 +24,8 @@ in
     "127.0.0.1" = [ fqdn ];
   };
 
+  security.acme.defaults.reloadServices = [ "adguardhome.service" ];
+
   systemd.services.adguardhome = {
     serviceConfig.SupplementaryGroups = [ "acme" ];
   };

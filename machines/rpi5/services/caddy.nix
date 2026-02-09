@@ -18,6 +18,8 @@ in
     };
   };
 
+  security.acme.defaults.reloadServices = [ "caddy.service" ];
+
   systemd.services.caddy = {
     serviceConfig.SupplementaryGroups = [ "acme" ];
   };

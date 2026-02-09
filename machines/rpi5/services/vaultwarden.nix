@@ -11,6 +11,8 @@ in
     "127.0.0.1" = [ fqdn ];
   };
 
+  security.acme.defaults.reloadServices = [ "vaultwarden.service" ];
+
   systemd.services.vaultwarden = {
     serviceConfig.SupplementaryGroups = [ "acme" ];
     requires = [ "postgresql.target" ];

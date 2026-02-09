@@ -26,6 +26,8 @@ in
     "127.0.0.1" = [ fqdn ];
   };
 
+  security.acme.defaults.reloadServices = [ "stalwart.service" ];
+
   systemd.services = {
     stalwart = {
       serviceConfig.SupplementaryGroups = [ "acme" ];
