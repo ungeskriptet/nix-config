@@ -40,7 +40,7 @@ in
         PAPERLESS_TRUSTED_PROXIES = "127.0.0.0/8, ::1/128";
         PAPERLESS_ADMIN_USER = "david";
         PAPERLESS_ADMIN_MAIL = "paperless-admin@${domain}";
-        PAPERLESS_EMAIL_HOST = config.services.stalwart-mail.settings.server.hostname;
+        PAPERLESS_EMAIL_HOST = "mail.${domain}";
         PAPERLESS_EMAIL_PORT = 465;
         PAPERLESS_EMAIL_HOST_USER = "paperless@${domain}";
         PAPERLESS_EMAIL_USE_SSL = true;

@@ -27,7 +27,7 @@ in
   };
 
   systemd.services = {
-    stalwart-mail = {
+    stalwart = {
       serviceConfig.SupplementaryGroups = [ "acme" ];
       requires = [ "postgresql.target" ];
       after = [ "postgresql.target" ];
@@ -55,7 +55,7 @@ in
       ];
     };
 
-    stalwart-mail = {
+    stalwart = {
       enable = true;
       credentials = {
         dbpass = config.sops.secrets."stalwart/dbpass".path;
