@@ -44,6 +44,7 @@ in
           Dialogs.FirstRun = false;
           "Notification Messages".hinding_title_bar = false;
         };
+        ksmserverrc.General.loginMode = "emptySession";
       };
       panels = [
         {
