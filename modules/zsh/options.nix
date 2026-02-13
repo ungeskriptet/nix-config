@@ -144,7 +144,7 @@ in
           smartunpack () {
             COUNT=$(($(7z l -slt $1 | grep 'Path = [^/]*$' | wc -l)-1))
             if [ "$COUNT" -gt 1 ]; then
-              OUT="$(echo $1 | sed 's/\..*$//')-$RANDOM"
+              OUT="''${1%*[.^]*}-$RANDOM"
               [ -e "$OUT" ] && echo "Already exists: $OUT" && return 1
               mkdir -p "$OUT"
               7z x $1 -o"$OUT"
