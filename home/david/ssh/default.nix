@@ -35,7 +35,6 @@
       "postmarketos" = {
         hostname = "172.16.42.1";
         userKnownHostsFile = "/dev/null";
-        strictHostKeyChecking = "no";
       };
     };
   };
