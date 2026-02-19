@@ -147,7 +147,6 @@
           }))
           {
             x86_64-linux = {
-              ida-pro = pkgs.x86_64-linux.callPackage ./packages/ida-pro.nix { };
               itgmania-zmod = pkgs.x86_64-linux.callPackage ./packages/itgmania-zmod.nix {
                 inherit (inputs) zmod;
               };
