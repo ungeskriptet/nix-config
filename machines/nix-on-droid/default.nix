@@ -12,6 +12,7 @@ in
     android-tools
     binutils
     binwalk
+    curl
     dig
     file
     git
