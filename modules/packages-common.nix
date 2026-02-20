@@ -14,8 +14,15 @@ in
   programs = {
     bat.enable = true;
     git.enable = true;
-    htop.enable = true;
     tcpdump.enable = true;
+    htop = {
+      enable = true;
+      settings = {
+        "screen:Main" =
+          "PID USER PRIORITY NICE M_VIRT M_RESIDENT M_SHARE STATE PERCENT_CPU PERCENT_MEM ELAPSED Command";
+        "tree_view" = 1;
+      };
+    };
     neovim = {
       enable = true;
       defaultEditor = true;
