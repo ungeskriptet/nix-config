@@ -8,6 +8,7 @@
   imports = [
     ../modules/acme.nix
     ../modules/packages-common.nix
+    ../modules/popt/nixos.nix
     ../modules/users.nix
     ../modules/vars.nix
     ../modules/virtualization.nix

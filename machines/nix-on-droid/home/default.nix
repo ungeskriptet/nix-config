@@ -11,6 +11,7 @@ in
 {
   imports = [
     ../../../home/david/vars.nix
+    ../../../modules/popt/home-manager.nix
     ../../../modules/zsh/home-manager
     inputs.sops-nix.homeManagerModules.sops
   ];

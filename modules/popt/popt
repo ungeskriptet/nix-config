@@ -1,0 +1,1 @@
+rsync alias -Z -rczhL --info=progress2 --chmod=a=rwX
