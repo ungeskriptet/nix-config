@@ -1,5 +1,6 @@
 keys:
   - &bitwarden age1x67zpr06facj4aefzlx0d3nj56qpprm43jpvry8dxf9vn6u44dpqqj7k0f
+  - &rimuru age1wet24purzudvz6w3uzd2haqkpek49xlwl0u33grmnvzvpl6rv3nqgq6ctu
   - &tsugaru age16yr2tnnnw7s9qv34g9lu6gjlrcrm92c6qltfap23dnsd5msqkdwqa8fu0f
 creation_rules:
   - path_regex: secrets/secrets-(david|misaka|rpi5).yaml
@@ -11,3 +12,8 @@ creation_rules:
     - age:
       - *bitwarden
       - *tsugaru
+  - path_regex: secrets/secrets-(grazyna|rimuru).yaml
+    key_groups:
+    - age:
+      - *bitwarden
+      - *rimuru

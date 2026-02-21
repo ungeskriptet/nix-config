@@ -120,7 +120,7 @@
               modules = [ ./machines/rpi5 ];
             };
       }
-      // lib.mkNixos [ "daruma" "misaka" "ryuzu" "tsugaru" "xiatian" ] inputs;
+      // lib.mkNixos [ "daruma" "misaka" "rimuru" "ryuzu" "tsugaru" "xiatian" ] inputs;
       nixOnDroidConfigurations.nix-on-droid = nix-on-droid.lib.nixOnDroidConfiguration {
         pkgs = import nixpkgs { system = "aarch64-linux"; };
         extraSpecialArgs = { inherit inputs; };
