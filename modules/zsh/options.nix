@@ -130,6 +130,9 @@ in
           last-journalctl () {
             journalctl _SYSTEMD_INVOCATION_ID=`systemctl show -p InvocationID --value $1`
           }
+          nix-log () {
+            nix log --impure --expr "with import <nixpkgs> { }; $1"
+          }
           ${lib.optionalString cfg.gitinfo.enable ''
             precmd () {
               gitinfo=$(${git} branch --show-current 2> /dev/null)
