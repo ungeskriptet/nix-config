@@ -94,7 +94,12 @@
     userDescription = "Kamil";
   };
 
-  home-manager.users.kamil = lib.mkForce ../../home/kamil;
+  home-manager.users.kamil =
+    { ... }:
+    {
+      imports = [ ../../home/kamil.nix ];
+      gnome.monitorID = "CMO-0x00000000";
+    };
 
   nix-config = {
     enablePlasma = false;

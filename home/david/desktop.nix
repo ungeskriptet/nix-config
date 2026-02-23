@@ -9,7 +9,7 @@
     ./firefox
     ./plasma
     ./accounts/desktop.nix
-    ../common-allusers.nix
+    ../desktop.nix
   ];
 
   sops = {

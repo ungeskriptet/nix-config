@@ -9,6 +9,7 @@
   inputs = {
     nixos-raspberrypi-kernel.url = "github:nvmd/nixos-raspberrypi/develop";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    gnome.url = "github:ungeskriptet/nixpkgs/gnome-extension";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";

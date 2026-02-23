@@ -12,12 +12,11 @@ in
     ./ssh
     ./vars.nix
     ./accounts/common.nix
-    inputs.sops-nix.homeManagerModules.sops
+    ../common.nix
   ];
 
   sops = {
     defaultSopsFile = ../../secrets/secrets-david.yaml;
-    age.keyFile = "${homeDir}/.config/sops-nix/key.txt";
     secrets = {
       "adb/privkey" = {
         path = "${homeDir}/.android/adbkey";
@@ -50,13 +49,11 @@ in
         };
       };
     };
-    home-manager.enable = true;
   };
 
   home = {
     username = lib.mkDefault "david";
     homeDirectory = lib.mkDefault "/home/david";
-    stateVersion = "25.05";
     file = {
       ".android/adbkey.pub".source = ./dotfiles/adbkey.pub;
       ".ssh/id_ed25519.pub".source = ./dotfiles/ssh/id_ed25519.pub;
