@@ -31,6 +31,7 @@ in
           yt-dlp = lib.getExe pkgs.yt-dlp;
         in
         {
+          gr = "cd $(git rev-parse --show-toplevel)";
           rp = "realpath";
           wineprefix = "export WINEPREFIX=$(mktemp -d --suffix -wine)";
         }
