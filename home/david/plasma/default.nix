@@ -44,6 +44,10 @@ in
           Dialogs.FirstRun = false;
           "Notification Messages".hinding_title_bar = false;
         };
+        kcminputrc.Keyboard = {
+          RepeatDelay = 300;
+          RepeatRate = 80;
+        };
         ksmserverrc.General.loginMode = "emptySession";
       };
       panels = [
