@@ -34,6 +34,9 @@ in
   };
 
   programs = {
+    bash.shellAliases = {
+      "cdtemp" = "cd $(mktemp -d)";
+    };
     git = {
       enable = true;
       lfs.enable = true;
