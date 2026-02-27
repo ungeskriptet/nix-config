@@ -139,12 +139,16 @@ in
       "org/gnome/settings-daemon" = {
         "plugins/media-keys/control-center" = [ "<Super>i" ];
         "plugins/media-keys/custom-keybindings/custom0/binding" = "<Control><Alt>t";
-        "plugins/media-keys/custom-keybindings/custom0/command" = "kgx";
+        "plugins/media-keys/custom-keybindings/custom0/command" = "ptyxis";
         "plugins/media-keys/custom-keybindings/custom0/name" = "Terminal";
         "plugins/media-keys/custom-keybindings" = [
           "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
         ];
         "plugins/media-keys/home" = [ "<Super>e" ];
+      };
+
+      "org/gnome/Ptyxis" = {
+        "Shortcuts/reset-and-clear" = "<Shift><Control>k";
       };
     };
 

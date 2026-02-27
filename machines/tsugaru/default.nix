@@ -54,10 +54,14 @@
   };
 
   environment = {
-    systemPackages = with pkgs; [ prismlauncher ];
+    systemPackages = with pkgs; [
+      prismlauncher
+      ptyxis
+    ];
     gnome.excludePackages = with pkgs; [
       epiphany
       geary
+      gnome-console
       gnome-music
       gnome-tour
     ];

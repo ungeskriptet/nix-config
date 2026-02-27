@@ -53,9 +53,11 @@
   };
 
   environment = {
+    systemPackages = with pkgs; [ ptyxis ];
     gnome.excludePackages = with pkgs; [
       epiphany
       geary
+      gnome-console
       gnome-music
       gnome-tour
     ];
