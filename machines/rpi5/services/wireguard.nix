@@ -191,6 +191,12 @@
             PresharedKeyFile = config.sops.secrets."wireguard/support/psk-9".path;
             PublicKey = "CCjvWsHbxv6cMkhi/ejSzyOIo3sU+ZQqWcNK6dbfYDY=";
           }
+          {
+            AllowedIPs = [ "192.168.3.8/32" ];
+            PersistentKeepalive = 25;
+            PresharedKeyFile = config.sops.secrets."wireguard/support/psk-10".path;
+            PublicKey = "/uSNPuTIUkooAKYBO1pTBG4t+Zzg1Iy3iP1S/oe7Hys=";
+          }
         ];
       };
       "52-wg2" = {
