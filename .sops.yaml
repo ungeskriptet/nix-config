@@ -1,5 +1,6 @@
 keys:
   - &bitwarden age1x67zpr06facj4aefzlx0d3nj56qpprm43jpvry8dxf9vn6u44dpqqj7k0f
+  - &host_iroha age19cvea5uvze7ncxm4z2l6z3jnakdj5cuxqryydl40yuvd5w3qu5jq3ll3q0
   - &host_rimuru age1wet24purzudvz6w3uzd2haqkpek49xlwl0u33grmnvzvpl6rv3nqgq6ctu
   - &host_tsugaru age16yr2tnnnw7s9qv34g9lu6gjlrcrm92c6qltfap23dnsd5msqkdwqa8fu0f
   - &user_omao age1wz43nfrqssvgwg93ljre80p4lv6qyhsnvua8vmd0274cg0l2t4fqkextc9
@@ -18,6 +19,11 @@ creation_rules:
     - age:
       - *bitwarden
       - *host_rimuru
+  - path_regex: secrets/secrets-iroha.yaml
+    key_groups:
+    - age:
+      - *bitwarden
+      - *host_iroha
   - path_regex: secrets/secrets-omao.yaml
     key_groups:
     - age:
