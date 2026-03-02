@@ -94,31 +94,14 @@
     in
     {
       nixosConfigurations = {
-        rpi5 =
-          let
-            pkgs = import nixpkgs { system = "aarch64-linux"; };
-            pkgsPatched = pkgs.applyPatches {
-              name = "rpipkgs";
-              src = nixpkgs;
-              patches = [
-                (pkgs.fetchpatch {
-                  url = "https://github.com/NixOS/nixpkgs/pull/398456.patch";
-                  hash = "sha256-N4gry4cH0UqumhTmOH6jyHNWpvW11eRDlGsnj5uSi+0=";
-                })
-              ];
-            };
-            rpipkgs = (import "${pkgsPatched}/flake.nix").outputs { self = inputs.self; };
-          in
-          nixos-raspberrypi.lib.int.nixosSystemRPi
-            {
-              nixpkgs = rpipkgs;
-              rpiModules = import ./modules/rpimodules.nix { inherit nixos-raspberrypi; };
-            }
-            {
-              specialArgs = { inherit inputs nixos-raspberrypi; };
-              system = "aarch64-linux";
-              modules = [ ./machines/rpi5 ];
-            };
+        rpi5 = nixos-raspberrypi.lib.nixosSystem {
+          specialArgs = { inherit inputs nixos-raspberrypi; };
+          modules = [
+            ./machines/rpi5
+            inputs.nixos-raspberrypi.nixosModules.raspberry-pi-5.base
+            inputs.nixos-raspberrypi.nixosModules.raspberry-pi-5.bluetooth
+          ];
+        };
       }
       // lib.mkNixos [ "daruma" "misaka" "rimuru" "ryuzu" "tsugaru" "xiatian" ] inputs;
       nixOnDroidConfigurations.nix-on-droid = nix-on-droid.lib.nixOnDroidConfiguration {

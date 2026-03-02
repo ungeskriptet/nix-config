@@ -22,17 +22,5 @@
 
   boot.binfmt.emulatedSystems = [ "x86_64-linux" ];
 
-  nix = {
-    nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
-    registry.nixpkgs.to = {
-      type = "path";
-      path = inputs.nixpkgs;
-    };
-    settings.max-jobs = 1;
-  };
-
-  nixpkgs.flake = {
-    setFlakeRegistry = false;
-    setNixPath = false;
-  };
+  nix.settings.max-jobs = 1;
 }
