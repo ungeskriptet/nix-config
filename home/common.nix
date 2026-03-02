@@ -16,7 +16,10 @@ in
     home-manager.enable = true;
   };
 
-  sops.age.keyFile = "${homeDir}/.config/sops-nix/key.txt";
+  sops.age = {
+    keyFile = "${homeDir}/.config/sops-nix/key.txt";
+    generateKey = true;
+  };
 
   home = {
     stateVersion = "26.05";
