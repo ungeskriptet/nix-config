@@ -104,7 +104,6 @@
         };
       }
       // lib.mkNixos [
-        "daruma"
         "iroha"
         "misaka"
         "rimuru"

@@ -22,10 +22,6 @@
         user = "david";
         forwardAgent = true;
       };
-      "daruma" = {
-        hostname = "daruma";
-        user = "root";
-      };
       "git-ssh.mainlining.org" = {
         proxyCommand = "${lib.getExe pkgs.cloudflared} access ssh --hostname %h";
       };
