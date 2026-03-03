@@ -7,6 +7,14 @@
       "*" = {
         addKeysToAgent = "yes";
       };
+      "iroha" = {
+        hostname = "192.168.3.8";
+        user = "root";
+      };
+      "rimuru" = {
+        hostname = "rimuru";
+        user = "root";
+      };
       "rpi5" = {
         hostname = "fd64::2";
         user = "root";
