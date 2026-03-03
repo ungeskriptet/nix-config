@@ -3,8 +3,6 @@ let
   fqdn = "drasl.${config.networking.domain}";
 in
 {
-  imports = [ ../../../modules/drasl.nix ];
-
   services = {
     drasl = {
       enable = true;
