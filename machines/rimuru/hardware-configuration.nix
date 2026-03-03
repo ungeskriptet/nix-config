@@ -42,7 +42,11 @@
   };
 
   swapDevices = [
-    { device = "/dev/disk/by-uuid/0898dbd2-bf9c-4f81-b848-a3b547446bd2"; }
+    {
+      device = "/var/lib/swapfile";
+      size = 8 * 1024;
+      randomEncryption.enable = true;
+    }
   ];
 
   zramSwap.enable = true;
