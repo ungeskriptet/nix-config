@@ -104,9 +104,4 @@
       imports = [ ../../home/kamil.nix ];
       gnome.monitorID = "CMO-0x00000000";
     };
-
-  nix-config = {
-    enablePlasma = false;
-    david = false;
-  };
 }

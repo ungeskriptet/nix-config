@@ -88,9 +88,4 @@
       imports = [ ../../home/grazyna.nix ];
       gnome.monitorID = "CMN-0x00000000";
     };
-
-  nix-config = {
-    enablePlasma = false;
-    david = false;
-  };
 }

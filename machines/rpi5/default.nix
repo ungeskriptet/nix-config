@@ -23,4 +23,6 @@
   boot.binfmt.emulatedSystems = [ "x86_64-linux" ];
 
   nix.settings.max-jobs = 1;
+
+  nix-config.david = true;
 }

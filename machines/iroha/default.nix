@@ -94,9 +94,4 @@
       imports = [ ../../home/omao.nix ];
       gnome.monitorID = "LEO-0x00000001";
     };
-
-  nix-config = {
-    enablePlasma = false;
-    david = false;
-  };
 }

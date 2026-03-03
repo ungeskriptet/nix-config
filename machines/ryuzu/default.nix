@@ -41,4 +41,9 @@
   };
 
   users.hashedPassword = "$y$j9T$sMN/eKYxYfh97dxUFDtzf.$sD76l.o1RyplUGb./VV.m3/qgEOrHIh5MkhLoeDpXUB";
+
+  nix-config = {
+    david = true;
+    enablePlasma = true;
+  };
 }
