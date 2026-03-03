@@ -28,6 +28,7 @@ in
           "allowlockedremotedesktop@kamens.us"
           "appindicatorsupport@rgcjonas.gmail.com"
           "arcmenu@arcmenu.com"
+          "caffeine@patapon.info"
           "dash-to-panel@jderose9.github.com"
           "gtk4-ding@smedius.gitlab.com"
           "lockkeys@vaina.lt"
@@ -177,6 +178,7 @@ in
         allow-locked-remote-desktop
         appindicator
         arcmenu
+        caffeine
         dash-to-panel
         gtk4-desktop-icons-ng-ding
         lock-keys-2
