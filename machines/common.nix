@@ -7,6 +7,7 @@
 {
   imports = [
     ../modules/acme.nix
+    ../modules/git/nixos.nix
     ../modules/packages-common.nix
     ../modules/popt/nixos.nix
     ../modules/users.nix

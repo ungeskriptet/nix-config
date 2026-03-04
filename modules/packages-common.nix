@@ -13,7 +13,6 @@ in
 {
   programs = {
     bat.enable = true;
-    git.enable = true;
     tcpdump.enable = true;
     htop = {
       enable = true;
