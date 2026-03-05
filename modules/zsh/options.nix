@@ -101,6 +101,9 @@ in
               if [ "$1" = "--sideload" ]; then
                 ${adb} -d sideload magisk.apk
                 rm -f magisk.apk
+              else
+                ${adb} -d install magisk.apk
+                rm -f magisk.apk
               fi
             }
             fdroid-install () {
