@@ -48,6 +48,7 @@ in
       scrcpy
       signal-desktop
       vlc
+      wl-clipboard
       xournalpp
       yt-dlp
 
