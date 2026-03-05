@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   boot = {
     kernelParams = [ "i915.enable_guc=2" ];
@@ -44,18 +44,27 @@
     bluetooth.enable = true;
     cpu.intel.updateMicrocode = true;
     enableRedistributableFirmware = true;
-    graphics.extraPackages32 = [ pkgs.intel-media-driver-32 ];
-    graphics.extraPackages = [
-      pkgs.intel-media-driver
-      pkgs.intel-compute-runtime
-      pkgs.vpl-gpu-rt
+    graphics.extraPackages = with pkgs; [
+      intel-compute-runtime-legacy1
+      intel-media-driver
+      (intel-media-sdk.overrideAttrs (prev: {
+        doCheck = false;
+        cmakeFlags = lib.remove "-DBUILD_TESTS=ON" prev.cmakeFlags;
+      }))
     ];
     sensor.iio.enable = true;
+  };
+
+  environment.sessionVariables = {
+    LIBVA_DRIVER_NAME = "iHD";
   };
 
   services.fstrim.enable = true;
   services.fwupd.enable = true;
   services.thermald.enable = true;
 
-  nixpkgs.hostPlatform = "x86_64-linux";
+  nixpkgs = {
+    hostPlatform = "x86_64-linux";
+    config.allowInsecurePredicate = pkg: builtins.elem (lib.getName pkg) [ "intel-media-sdk" ];
+  };
 }
