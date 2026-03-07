@@ -56,7 +56,7 @@
   environment = {
     systemPackages = with pkgs; [
       aisleriot
-      gnome-mahjongg
+      kdePackages.kmahjongg
       ptyxis
       ungoogled-chromium
     ];
