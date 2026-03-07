@@ -136,22 +136,6 @@
         "type": "github"
       }
     },
-    "gnome": {
-      "locked": {
-        "lastModified": 1772570462,
-        "narHash": "sha256-lxyHlas/AaSFGYok6vFZ3OEeLQpDidIakJ2RL25/l80=",
-        "owner": "ungeskriptet",
-        "repo": "nixpkgs",
-        "rev": "ef72874423159d1a346bff33028dec66cc4fbdd5",
-        "type": "github"
-      },
-      "original": {
-        "owner": "ungeskriptet",
-        "ref": "gnome-extensions",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -537,7 +521,6 @@
     },
     "root": {
       "inputs": {
-        "gnome": "gnome",
         "home-manager": "home-manager",
         "lanzaboote": "lanzaboote",
         "nix-on-droid": "nix-on-droid",

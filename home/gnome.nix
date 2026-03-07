@@ -2,7 +2,6 @@
   lib,
   pkgs,
   config,
-  inputs,
   ...
 }:
 let
@@ -173,15 +172,14 @@ in
       };
     };
 
-    home.packages =
-      with inputs.gnome.legacyPackages.${pkgs.stdenv.hostPlatform.system}.gnomeExtensions; [
-        allow-locked-remote-desktop
-        appindicator
-        arcmenu
-        caffeine
-        dash-to-panel
-        gtk4-desktop-icons-ng-ding
-        lock-keys-2
-      ];
+    home.packages = with pkgs.gnomeExtensions; [
+      allow-locked-remote-desktop
+      appindicator
+      arcmenu
+      caffeine
+      dash-to-panel
+      gtk4-desktop-icons-ng-ding
+      lock-keys-2
+    ];
   };
 }
