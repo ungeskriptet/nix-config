@@ -30,6 +30,10 @@ in
         path = "${homeDir}/.ssh/id_ed25519";
         mode = "0400";
       };
+      "vt-cli/config" = {
+        path = "${homeDir}/.vt.toml";
+        mode = "0400";
+      };
     };
   };
 
