@@ -1,4 +1,4 @@
-{ config, ... }:
+{ pkgs, config, ... }:
 let
   cfg = config.programs.zsh-david;
 in
@@ -15,4 +15,5 @@ in
     promptInit = cfg.prompt;
     autosuggestions.enable = true;
   };
+  environment.systemPackages = with pkgs; [ fzf ];
 }

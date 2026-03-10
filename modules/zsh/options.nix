@@ -92,6 +92,9 @@ in
             [ "$SSH_AUTH_SOCK" = "/run/user/0/ssh-agent" ] &&
             eval $(ssh-agent -s)
 
+          source ${pkgs.fzf}/share/fzf/completion.zsh
+          source ${pkgs.fzf}/share/fzf/key-bindings.zsh
+
           duplines () {
             sort $1 | uniq --count --repeated
           }

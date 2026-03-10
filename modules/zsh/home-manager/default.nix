@@ -1,4 +1,9 @@
-{ lib, config, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 let
   cfg = config.programs.zsh-david;
 in
@@ -23,4 +28,8 @@ in
     };
     autosuggestion.enable = true;
   };
+
+  home.packages = with pkgs; [
+    fzf
+  ];
 }
