@@ -21,7 +21,6 @@
         forwardAgent = true;
       };
       "ryuzu" = {
-        hostname = "fd64::8";
         user = "david";
         forwardAgent = true;
       };
