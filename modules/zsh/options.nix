@@ -30,10 +30,10 @@ in
       description = "Zsh prompt";
       default = ''
         [ $UID = 0 ] && COLOR="{red}" || COLOR="{${if cfg.nixOnDroid.enable then "yellow" else "magenta"}}"
-        [ -n "$SSH_TTY" ] && SSH="%F{cyan}[SSH]%f" || SSH=""
+        [ -n "$SSH_TTY" ] && SSH="%F{cyan} [SSH]%f" || SSH=""
         PROMPT="╭─%F''${COLOR}${
           if cfg.nixOnDroid.enable then "nix-on-droid" else "%n@%m"
-        }%f %F{blue}%~%f ''${SSH}${lib.optionalString cfg.gitinfo.enable "\\$gitinfo"}
+        }%f %F{blue}%~%f''${SSH}${lib.optionalString cfg.gitinfo.enable "\\$gitinfo"}
         ╰─ "
       '';
     };
