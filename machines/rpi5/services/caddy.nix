@@ -78,6 +78,10 @@ in
           tls ${config.acme.tlsCert} ${config.acme.tlsKey}
           reverse_proxy https://drasl.${domain}:443
         '';
+        "https://omao.${domain}".extraConfig = ''
+          tls ${config.acme.tlsCert} ${config.acme.tlsKey}
+          reverse_proxy https://51kmze6tyra6b5gb.myfritz.net:40555
+        '';
       };
     };
 
