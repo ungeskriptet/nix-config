@@ -40,7 +40,6 @@ in
         description = "Periodic FRITZ!Box cleanup";
         wantedBy = [ "timers.target" ];
         timerConfig = {
-          OnActiveSec = 0;
           OnCalendar = cfg.timer;
           Persistent = true;
         };
