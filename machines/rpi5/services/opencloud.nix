@@ -68,7 +68,9 @@ in
         root /idp-login-background ${background}
         file_server
       }
-      reverse_proxy https://${fqdn}:8096
+      reverse_proxy https://${fqdn}:8096 {
+        header_up Host {host}
+      }
     '';
 
     homer.settings.services = [
