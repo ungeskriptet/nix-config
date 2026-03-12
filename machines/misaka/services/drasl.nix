@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, ... }:
 let
   fqdn = "drasl.${config.networking.domain}";
 in

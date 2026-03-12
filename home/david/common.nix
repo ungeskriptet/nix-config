@@ -1,7 +1,6 @@
 {
   lib,
   config,
-  inputs,
   ...
 }:
 let
@@ -66,7 +65,7 @@ in
       ".ssh/id_ed25519.pub".source = ./dotfiles/ssh/id_ed25519.pub;
     }
     // lib.mergeAttrsList (
-      builtins.map (file: { ".local/share/patatt/public/${file}".source = ./dotfiles/patattkey.pub; }) [
+      map (file: { ".local/share/patatt/public/${file}".source = ./dotfiles/patattkey.pub; }) [
         "ed25519/mainlining.org/david.wronek/20250914"
         "ed25519/mainlining.org/david.wronek/default"
         "20250914.pub"

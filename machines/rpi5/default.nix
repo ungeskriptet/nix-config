@@ -1,7 +1,6 @@
 # Raspberry Pi 5
 {
   inputs,
-  pkgsPatched,
   ...
 }:
 {

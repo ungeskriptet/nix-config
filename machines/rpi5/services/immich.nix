@@ -5,7 +5,7 @@
 let
   fqdn = "photos.${domain}";
   domain = config.networking.domain;
-  port = builtins.toString config.services.immich.port;
+  port = toString config.services.immich.port;
 in
 {
   sops = {

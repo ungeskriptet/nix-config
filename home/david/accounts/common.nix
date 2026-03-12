@@ -12,7 +12,7 @@ let
 in
 {
   sops.secrets = lib.mergeAttrsList (
-    builtins.map (email: { "email/${email}".mode = "0400"; }) [
+    map (email: { "email/${email}".mode = "0400"; }) [
       myEmail
       mainlining
     ]

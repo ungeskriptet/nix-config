@@ -77,12 +77,13 @@
       treefmtEval = forAllSystems (
         system:
         inputs.treefmt-nix.lib.evalModule nixpkgs.legacyPackages.${system} (
-          { pkgs, ... }:
+          { ... }:
           {
             projectRootFile = "flake.nix";
             programs = {
               nixfmt.enable = true;
               keep-sorted.enable = true;
+              nixf-diagnose.enable = true;
             };
             settings = {
               verbose = 1;
