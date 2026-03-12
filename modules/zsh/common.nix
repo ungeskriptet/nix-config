@@ -38,6 +38,8 @@ in
         // lib.optionalAttrs cfg.david.enable {
           compress-vid = "${ffmpeg} -vcodec libx264 -crf 28 output.mp4 -i";
           heimdall = "heimdall-wait-for-device && ${heimdall}";
+          rpi5 = "ssh root@rpi5";
+          ryuzu = "ssh david@ryuzu";
           yt-dlp-mp4 = "${yt-dlp} -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'";
           c = "${bat} -pp";
         }
