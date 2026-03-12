@@ -28,7 +28,7 @@
     backupFileExtension = "hmbak";
   }
   // lib.optionalAttrs (config.users.userName == "david") {
-    users.david = lib.mkDefault ../home/david/common.nix;
+    users.david.imports = [ ../home/david/common.nix ];
   };
 
   boot = {

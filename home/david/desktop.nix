@@ -5,7 +5,6 @@
 }:
 {
   imports = [
-    ./common.nix
     ./firefox
     ./plasma
     ./accounts/desktop.nix
@@ -25,19 +24,9 @@
     enable = true;
     autostart = {
       enable = true;
-      entries =
-        with pkgs;
-        let
-          opencloud = runCommand "opencloud.desktop" { } ''
-            substitute \
-              ${opencloud-desktop}/share/applications/opencloud.desktop $out \
-              --replace-fail " --showsettings" ""
-          '';
-        in
-        [
-          "${signal-desktop}/share/applications/signal.desktop"
-          opencloud
-        ];
+      entries = [
+        "${pkgs.signal-desktop}/share/applications/signal.desktop"
+      ];
     };
   };
 

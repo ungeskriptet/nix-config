@@ -55,4 +55,6 @@
     david = true;
     enablePlasma = true;
   };
+
+  home-manager.users.david.imports = [ ./home.nix ];
 }
