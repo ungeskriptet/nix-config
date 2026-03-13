@@ -79,6 +79,13 @@
     xserver.xkb.layout = "de";
   };
 
+  systemd.oomd = {
+    enable = true;
+    enableRootSlice = true;
+    enableUserSlices = true;
+    settings.OOM.DefaultMemoryPressureDurationSec = "20s";
+  };
+
   environment.sessionVariables = {
     XDG_CACHE_HOME = "$HOME/.cache";
     XDG_CONFIG_HOME = "$HOME/.config";
