@@ -13,6 +13,7 @@ in
 {
   programs = {
     bat.enable = true;
+    nix-index-database.comma.enable = true;
     tcpdump.enable = true;
     htop = {
       enable = true;
