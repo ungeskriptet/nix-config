@@ -58,6 +58,7 @@ in
       edl
       extract-dtb
       heimdall
+      llvmPackages.clang-tools
       meld
       nixd
       prismlauncher
