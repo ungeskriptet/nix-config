@@ -45,5 +45,6 @@
   nix-config = {
     david = true;
     enablePlasma = true;
+    vr = true;
   };
 }
