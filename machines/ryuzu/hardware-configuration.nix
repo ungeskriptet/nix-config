@@ -12,6 +12,9 @@
       "usb_storage"
       "sd_mod"
     ];
+    kernel.sysctl = {
+      "vm.swappiness" = 10;
+    };
   };
 
   fileSystems = {
@@ -38,12 +41,16 @@
     };
   };
 
-  zramSwap.enable = true;
+  zramSwap = {
+    enable = true;
+    memoryPercent = 75;
+  };
 
   swapDevices = [
     {
       device = "/var/lib/swapfile";
       size = 64 * 1024;
+      options = [ "discard" ];
       randomEncryption.enable = true;
     }
   ];
