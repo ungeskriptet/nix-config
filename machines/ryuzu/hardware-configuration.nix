@@ -27,6 +27,15 @@
         "dmask=0077"
       ];
     };
+    "/mnt/data-ssd" = {
+      device = "/dev/disk/by-id/nvme-KXG60ZNV1T02_KIOXIA_Z0BA302UKEV2_1-part1";
+      fsType = "ext4";
+      neededForBoot = true;
+    };
+    "/nix" = {
+      device = "/mnt/data-ssd/nix";
+      options = [ "bind" ];
+    };
   };
 
   zramSwap.enable = true;
