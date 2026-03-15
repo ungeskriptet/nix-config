@@ -16,7 +16,7 @@
 
   networking = {
     hostName = "ryuzu";
-    interfaces.enp4s0.wakeOnLan.enable = true;
+    interfaces.enp5s0.wakeOnLan.enable = true;
   };
 
   programs.silverfort.enable = true;
