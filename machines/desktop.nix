@@ -108,5 +108,12 @@ in
         serviceConfig.Restart = "on-failure";
       };
     })
+    (lib.mkIf (!cfg.david) {
+      nix.gc = {
+        automatic = true;
+        dates = "weekly";
+        options = "-d";
+      };
+    })
   ];
 }

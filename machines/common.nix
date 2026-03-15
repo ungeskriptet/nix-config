@@ -122,11 +122,6 @@
       ];
       trusted-users = [ "@wheel" ];
     };
-    gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "-d";
-    };
     registry.nix-shell-collection.to = {
       type = "path";
       path = inputs.nix-shell-collection;
