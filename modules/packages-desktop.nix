@@ -43,7 +43,6 @@ in
       hunspellDicts.pl_PL
       hyphenDicts.de_DE
       hyphenDicts.en_US
-      kdePackages.sddm-kcm
       libreoffice-qt6-fresh
       scrcpy
       signal-desktop
