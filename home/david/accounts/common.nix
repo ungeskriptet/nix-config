@@ -1,6 +1,5 @@
 {
   lib,
-  pkgs,
   config,
   ...
 }:
@@ -46,13 +45,11 @@ in
         accounts = {
           myEmail = {
             primary = true;
-            aerc.enable = true;
           }
           // genEmailConfig myEmailHost myEmail config.sops.secrets."email/${myEmail}".path;
-          mainlining = {
-            aerc.enable = true;
-          }
-          // genEmailConfig mainliningHost mainlining config.sops.secrets."email/${mainlining}".path;
+          mainlining =
+            genEmailConfig mainliningHost mainlining
+              config.sops.secrets."email/${mainlining}".path;
         };
       };
 
@@ -81,20 +78,6 @@ in
       thunderbird = {
         enable = true;
         profiles = [ "Default" ];
-      };
-    };
-  };
-
-  programs = {
-    aerc = {
-      enable = true;
-      extraConfig = {
-        general.unsafe-accounts-conf = true;
-        filters = {
-          "text/plain" = "${pkgs.aerc}/libexec/aerc/filters/colorize";
-          "text/html" =
-            "${pkgs.aerc}/libexec/aerc/filters/html -o display_link_number=true | ${pkgs.aerc}/libexec/aerc/filters/colorize";
-        };
       };
     };
   };
