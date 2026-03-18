@@ -65,6 +65,10 @@
     };
   };
 
+  systemd.sleep.settings.Sleep = {
+    MemorySleepMode = "s2idle";
+  };
+
   services = {
     fstrim.enable = true;
     fwupd.enable = true;
