@@ -36,12 +36,13 @@ in
           wineprefix = "export WINEPREFIX=$(mktemp -d --suffix -wine)";
         }
         // lib.optionalAttrs cfg.david.enable {
+          c = "${bat} -pp";
           compress-vid = "${ffmpeg} -vcodec libx264 -crf 28 output.mp4 -i";
           heimdall = "heimdall-wait-for-device && ${heimdall}";
           rpi5 = "ssh root@rpi5";
           ryuzu = "ssh david@ryuzu";
+          tftp-server = "sudo mkdir -p -m a=rwx tftp; sudo in.tftpd --foreground --listen --address :69 --secure --create ./tftp";
           yt-dlp-mp4 = "${yt-dlp} -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'";
-          c = "${bat} -pp";
         }
         // lib.optionalAttrs (!cfg.homeManager.enable) {
           switch-nixos = "sudo nixos-rebuild switch --flake path:/etc/nixos#${config.networking.hostName} -L";
