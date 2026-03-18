@@ -56,10 +56,6 @@ in
       enable = true;
       port = 8093;
       host = "::1";
-      database = {
-        enableVectorChord = true;
-        enableVectors = false;
-      };
       environment = {
         "IMMICH_CONFIG_FILE" = config.sops.templates."immich.json".path;
       };
