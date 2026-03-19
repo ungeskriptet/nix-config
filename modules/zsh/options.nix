@@ -99,17 +99,6 @@ in
             sort $1 | uniq --count --repeated
           }
           ${lib.optionalString cfg.david.enable ''
-            magisk-install () {
-              URL=$(${curl} -sS https://api.github.com/repos/topjohnwu/magisk/releases/latest | ${jq} -r '.assets[] | select(.name | test("Magisk-v.*.apk")) | .browser_download_url')
-              ${curl} -sSLo magisk.apk "$URL"
-              if [ "$1" = "--sideload" ]; then
-                ${adb} -d sideload magisk.apk
-                rm -f magisk.apk
-              else
-                ${adb} -d install magisk.apk
-                rm -f magisk.apk
-              fi
-            }
             fdroid-install () {
               echo "< waiting for any device >"
               ${adb} -d wait-for-device &&

@@ -134,6 +134,7 @@
         nixpkgs.lib.recursiveUpdate
           (forAllSystems (system: {
             dumpyara = pkgs.${system}.callPackage ./packages/dumpyara.nix { };
+            magisk-install = pkgs.${system}.callPackage ./packages/magisk-install.nix { };
             mdns-scan = pkgs.${system}.callPackage ./packages/mdns-scan.nix { };
             nix-on-droid-setup = pkgs.${system}.callPackage ./packages/nix-on-droid-setup.nix { };
             openssh-nix-on-droid = pkgs.${system}.callPackage ./packages/openssh-nix-on-droid.nix { };
