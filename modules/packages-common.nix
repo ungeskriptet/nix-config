@@ -29,6 +29,10 @@ in
       viAlias = true;
       vimAlias = true;
     };
+    nix-index = {
+      enableBashIntegration = false;
+      enableZshIntegration = false;
+    };
     ssh = lib.mkIf (config.services.gnome.gcr-ssh-agent.enable == false) {
       startAgent = true;
       extraConfig = ''
