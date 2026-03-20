@@ -120,7 +120,7 @@
             ]; # e3q
             PersistentKeepalive = 25;
             PresharedKeyFile = config.sops.secrets."wireguard/rpi5/psk-3".path;
-            PublicKey = "ImQpwLq5lv+ts5zKA82QycNyx2TIu6bLgSYLPMy5Y3c=";
+            PublicKey = "vBB8CaZPyDykroXWjAubqPolWVZPxcGBuZdxaiBKWSc=";
           }
         ];
       };
