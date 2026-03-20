@@ -1,4 +1,9 @@
-{ lib, writeShellScriptBin, fetchurl, android-tools }:
+{
+  lib,
+  writeShellScriptBin,
+  fetchurl,
+  android-tools,
+}:
 let
   version = "30.7";
   magisk = fetchurl {
