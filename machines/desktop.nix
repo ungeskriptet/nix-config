@@ -11,7 +11,6 @@ in
   imports = [
     ./common.nix
     ../modules/packages-desktop.nix
-    ../modules/silverfort.nix
     ../modules/vr.nix
   ];
 

@@ -19,8 +19,6 @@
     interfaces.enp5s0.wakeOnLan.enable = true;
   };
 
-  programs.silverfort.enable = true;
-
   security = {
     polkit.extraConfig = ''
       polkit.addRule(function(action, subject) {
