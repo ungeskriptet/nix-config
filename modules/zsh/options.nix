@@ -158,9 +158,9 @@ in
           ucd () {for i in $(seq 1 $1); do cd ..; done}
           wherebin () {readlink $(which $1)}
           ${lib.optionalString config.programs.zoxide.enableZshIntegration ''
-            zoxidezle () { zle -I; zi }
-            zle -N zoxidezle zoxidezle
-            bindkey "^G" zoxidezle
+            zoxide-widget () { zi; zle reset-prompt }
+            zle -N zoxide-widget
+            bindkey "^G" zoxide-widget
           ''}
         '';
     };
