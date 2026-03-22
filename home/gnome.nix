@@ -29,6 +29,7 @@ in
           "arcmenu@arcmenu.com"
           "caffeine@patapon.info"
           "dash-to-panel@jderose9.github.com"
+          "drive-menu@gnome-shell-extensions.gcampax.github.com"
           "gtk4-ding@smedius.gitlab.com"
           "lockkeys@vaina.lt"
         ];
@@ -180,6 +181,7 @@ in
       dash-to-panel
       gtk4-desktop-icons-ng-ding
       lock-keys-2
+      removable-drive-menu
     ];
   };
 }
