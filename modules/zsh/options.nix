@@ -92,6 +92,11 @@ in
             [ "$SSH_AUTH_SOCK" = "/run/user/0/ssh-agent" ] &&
             eval $(ssh-agent -s)
 
+          kill-ssh-add () { ${lib.getExe pkgs.killall} ssh-add &> /dev/null }
+          trap kill-ssh-add INT
+          ssh-add -l &> /dev/null || ssh-add
+          trap - INT
+
           source ${pkgs.fzf}/share/fzf/completion.zsh
           source ${pkgs.fzf}/share/fzf/key-bindings.zsh
 
