@@ -44,10 +44,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
-    samsung-grab = {
-      url = "git+https://codeberg.org/ungeskriptet/samsung-grab";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -129,7 +125,6 @@
           (forAllSystems (system: {
             dumpyara = pkgs.${system}.callPackage ./packages/dumpyara.nix { };
             magisk-install = pkgs.${system}.callPackage ./packages/magisk-install.nix { };
-            mdns-scan = pkgs.${system}.callPackage ./packages/mdns-scan.nix { };
             nix-on-droid-setup = pkgs.${system}.callPackage ./packages/nix-on-droid-setup.nix { };
             openssh-nix-on-droid = pkgs.${system}.callPackage ./packages/openssh-nix-on-droid.nix { };
             ttf-ms-win11 = pkgs.${system}.callPackage ./packages/ttf-ms-win11.nix { };

@@ -2,13 +2,10 @@
   lib,
   pkgs,
   config,
-  inputs,
   ...
 }:
 let
   cfg = config.nix-config;
-  samsung-grab = inputs.samsung-grab.packages.${pkgs.stdenv.hostPlatform.system}.samsung-grab;
-  selfPkgs = inputs.self.packages.${pkgs.stdenv.hostPlatform.system};
 in
 {
   programs = {
@@ -85,8 +82,5 @@ in
       internetarchive
       samfirm-js
       sops
-
-      samsung-grab
-      selfPkgs.mdns-scan
     ];
 }

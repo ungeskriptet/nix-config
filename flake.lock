@@ -568,9 +568,8 @@
         "nixpkgs-locked": "nixpkgs-locked",
         "nur": "nur",
         "plasma-manager": "plasma-manager",
-        "samsung-grab": "samsung-grab",
         "sops-nix": "sops-nix",
-        "treefmt-nix": "treefmt-nix_2",
+        "treefmt-nix": "treefmt-nix",
         "yuribot": "yuribot",
         "zmod": "zmod"
       }
@@ -594,27 +593,6 @@
         "owner": "oxalica",
         "repo": "rust-overlay",
         "type": "github"
-      }
-    },
-    "samsung-grab": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "treefmt-nix": "treefmt-nix"
-      },
-      "locked": {
-        "lastModified": 1760422674,
-        "narHash": "sha256-nLIoHVlaJEqP+4iNmt4OKAQO5G9ZKGdl9J6yJl3bh1Q=",
-        "ref": "refs/heads/master",
-        "rev": "c706b2163965e170347afa613e33dc705d373219",
-        "revCount": 12,
-        "type": "git",
-        "url": "https://codeberg.org/ungeskriptet/samsung-grab"
-      },
-      "original": {
-        "type": "git",
-        "url": "https://codeberg.org/ungeskriptet/samsung-grab"
       }
     },
     "scss-reset": {
@@ -654,27 +632,6 @@
       }
     },
     "treefmt-nix": {
-      "inputs": {
-        "nixpkgs": [
-          "samsung-grab",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1760120816,
-        "narHash": "sha256-gq9rdocpmRZCwLS5vsHozwB6b5nrOBDNc2kkEaTXHfg=",
-        "owner": "numtide",
-        "repo": "treefmt-nix",
-        "rev": "761ae7aff00907b607125b2f57338b74177697ed",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "treefmt-nix",
-        "type": "github"
-      }
-    },
-    "treefmt-nix_2": {
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
