@@ -13,7 +13,6 @@ in
   services.udev.packages = lib.optionals cfg.david (
     with pkgs;
     [
-      edl
       heimdall.udev
     ]
   );
@@ -54,7 +53,6 @@ in
       selfPkgs.ttf-ms-win11
     ]
     ++ lib.optionals cfg.david [
-      edl
       extract-dtb
       heimdall
       llvmPackages.clang-tools
