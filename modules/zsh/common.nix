@@ -45,7 +45,14 @@ in
           yt-dlp-mp4 = "${yt-dlp} -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'";
         }
         // lib.optionalAttrs (!cfg.homeManager.enable) {
-          switch-nixos = "sudo nixos-rebuild switch --flake path:/etc/nixos#${config.networking.hostName} -L";
+          switch-nixos = lib.concatStringsSep " " [
+            "sudo NIX_SSHOPTS=\""
+            "-oIdentityAgent=$SSH_AUTH_SOCK"
+            "-oStrictHostKeyChecking=no"
+            "-oUserKnownHostsFile=/dev/null\""
+            "nixos-rebuild switch -L"
+            "--flake path:/etc/nixos#${config.networking.hostName}"
+          ];
         }
         // lib.optionalAttrs cfg.nixOnDroid.enable {
           ping = "/system/bin/ping";
