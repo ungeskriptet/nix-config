@@ -53,6 +53,12 @@ in
             "nixos-rebuild switch -L"
             "--flake path:/etc/nixos#${config.networking.hostName}"
           ];
+          nixpkgs-info = lib.concatStringsSep " " [
+            "nix flake metadata path:/etc/nixos --json |"
+            "jq '.locks.nodes.root.inputs.nixpkgs as $nixpkgs |"
+            ".locks.nodes | to_entries[] |"
+            "select(.key == $nixpkgs)'"
+          ];
         }
         // lib.optionalAttrs cfg.nixOnDroid.enable {
           ping = "/system/bin/ping";
