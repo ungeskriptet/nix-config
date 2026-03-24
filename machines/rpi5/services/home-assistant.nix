@@ -48,6 +48,13 @@ in
 
     home-assistant = {
       enable = true;
+      package = pkgs.home-assistant.override {
+        packageOverrides = _: super: {
+          radios = super.radios.overridePythonAttrs {
+            pythonRelaxDeps = [ "pycountry" ];
+          };
+        };
+      };
       extraComponents = [
         "analytics"
         "androidtv"
