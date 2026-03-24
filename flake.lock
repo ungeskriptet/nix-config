@@ -143,11 +143,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1773810247,
-        "narHash": "sha256-6Vz1Thy/1s7z+Rq5OfkWOBAdV4eD+OrvDs10yH6xJzQ=",
+        "lastModified": 1774293042,
+        "narHash": "sha256-OEBV+Y5I4Ldu98k0KvGXRfJYh+jjE8ocCSL/dxTGs1s=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "d47357a4c806d18a3e853ad2699eaec3c01622e7",
+        "rev": "bc357c75e3142a31b849ba49c5299fb52c61cf59",
         "type": "github"
       },
       "original": {
@@ -212,11 +212,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1773552174,
-        "narHash": "sha256-mHSRNrT1rjeYBgkAlj07dW3+1nFEgAd8Gu6lgyfT9DU=",
+        "lastModified": 1774156144,
+        "narHash": "sha256-gdYe9wTPl4ignDyXUl1LlICWj41+S0GB5lG1fKP17+A=",
         "owner": "nix-community",
         "repo": "nix-index-database",
-        "rev": "8faeb68130df077450451b6734a221ba0d6cde42",
+        "rev": "55b588747fa3d7fc351a11831c4b874dab992862",
         "type": "github"
       },
       "original": {
@@ -418,29 +418,29 @@
         "type": "github"
       }
     },
-    "nixpkgs-stable": {
+    "nixpkgs-locked": {
       "locked": {
-        "lastModified": 1773814637,
-        "narHash": "sha256-GNU+ooRmrHLfjlMsKdn0prEKVa0faVanm0jrgu1J/gY=",
+        "lastModified": 1774106199,
+        "narHash": "sha256-US5Tda2sKmjrg2lNHQL3jRQ6p96cgfWh3J1QBliQ8Ws=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "fea3b367d61c1a6592bc47c72f40a9f3e6a53e96",
+        "rev": "6c9a78c09ff4d6c21d0319114873508a6ec01655",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
-        "ref": "nixos-25.11",
         "repo": "nixpkgs",
+        "rev": "6c9a78c09ff4d6c21d0319114873508a6ec01655",
         "type": "github"
       }
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1773734432,
-        "narHash": "sha256-IF5ppUWh6gHGHYDbtVUyhwy/i7D261P7fWD1bPefOsw=",
+        "lastModified": 1774106199,
+        "narHash": "sha256-US5Tda2sKmjrg2lNHQL3jRQ6p96cgfWh3J1QBliQ8Ws=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "cda48547b432e8d3b18b4180ba07473762ec8558",
+        "rev": "6c9a78c09ff4d6c21d0319114873508a6ec01655",
         "type": "github"
       },
       "original": {
@@ -496,11 +496,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1773865200,
-        "narHash": "sha256-8czib6KKefjVOV1O9g1Hl9jtckD4nPk3+fmwHOvAcBs=",
+        "lastModified": 1774336263,
+        "narHash": "sha256-ufuZKodCTASxeFnNiW3E3ngAWHqGe1D89CYcKEujqRE=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "473a24c5bd14cc4e25c4eb0a545c0f183369826e",
+        "rev": "2626cc134420aa71f752ab811957dd1b52793573",
         "type": "github"
       },
       "original": {
@@ -565,7 +565,7 @@
         "nixos-raspberrypi": "nixos-raspberrypi",
         "nixos-raspberrypi-kernel": "nixos-raspberrypi-kernel",
         "nixpkgs": "nixpkgs_2",
-        "nixpkgs-stable": "nixpkgs-stable",
+        "nixpkgs-locked": "nixpkgs-locked",
         "nur": "nur",
         "plasma-manager": "plasma-manager",
         "samsung-grab": "samsung-grab",
@@ -640,11 +640,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1773698643,
-        "narHash": "sha256-VCiDjE8kNs8uCAK73Ezk1r3fFuc4JepvW07YFqaN968=",
+        "lastModified": 1774303811,
+        "narHash": "sha256-fhG4JAcLgjKwt+XHbjs8brpWnyKUfU4LikLm3s0Q/ic=",
         "owner": "Mic92",
         "repo": "sops-nix",
-        "rev": "8237de83e8200d16fe0c4467b02a1c608ff28044",
+        "rev": "614e256310e0a4f8a9ccae3fa80c11844fba7042",
         "type": "github"
       },
       "original": {
@@ -717,11 +717,11 @@
     "zmod": {
       "flake": false,
       "locked": {
-        "lastModified": 1758999616,
-        "narHash": "sha256-8ukHjPUPXo53FWVFm+iyRq2mKlqZ4O+5VlV4ba+mFSM=",
+        "lastModified": 1774331797,
+        "narHash": "sha256-AhzC4wf+dfxediW72xuiUE+nPFYnCC5ZK7dPtOEwutE=",
         "owner": "zarzob",
         "repo": "Simply-Love-SM5",
-        "rev": "87b8e5db3452d54121d81554d720e498d20a18fc",
+        "rev": "9c2993af5a75faf4cf03d617cf08b73e1071e748",
         "type": "github"
       },
       "original": {
