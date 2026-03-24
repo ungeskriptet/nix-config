@@ -54,7 +54,7 @@ in
             "--flake path:/etc/nixos#${config.networking.hostName}"
           ];
           nixpkgs-info = lib.concatStringsSep " " [
-            "nix flake metadata path:/etc/nixos --json |"
+            "nix flake metadata nix-config --json |"
             "jq '.locks.nodes.root.inputs.nixpkgs as $nixpkgs |"
             ".locks.nodes | to_entries[] |"
             "select(.key == $nixpkgs)'"
