@@ -122,9 +122,15 @@
       ];
       trusted-users = [ "@wheel" ];
     };
-    registry.nix-shell-collection.to = {
-      type = "path";
-      path = inputs.nix-shell-collection;
+    registry = {
+      nix-config.to = {
+        type = "path";
+        path = inputs.self;
+      };
+      nix-shell-collection.to = {
+        type = "path";
+        path = inputs.nix-shell-collection;
+      };
     };
   };
   nixpkgs.config.allowUnfree = true;
