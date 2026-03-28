@@ -81,6 +81,8 @@ in
           bindkey "^[[F" end-of-line
           bindkey "^[[1;5C" forward-word
           bindkey "^[[A" up-line-or-beginning-search
+          bindkey "^[[1;5A" vi-forward-blank-word
+          bindkey "^[[1;5B" vi-backward-blank-word
 
           mkdir -p $HOME/.cache/zsh
 
