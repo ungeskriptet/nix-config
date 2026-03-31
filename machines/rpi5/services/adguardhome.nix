@@ -6,6 +6,33 @@
 let
   fqdn = "adguard.${domain}";
   domain = config.networking.domain;
+  mkDnsRewrites =
+    entry:
+    lib.mkMerge (
+      map (
+        {
+          domains,
+          a ? "",
+          aaaa ? "",
+        }:
+        lib.mkMerge (
+          map
+            (
+              answer:
+              lib.mkIf (answer != "") (
+                map (domain: {
+                  inherit answer domain;
+                  enabled = true;
+                }) domains
+              )
+            )
+            [
+              a
+              aaaa
+            ]
+        )
+      ) entry
+    );
 in
 {
   networking.firewall = {
@@ -44,28 +71,28 @@ in
           }
         ];
         filtering = {
-          rewrites = lib.concatLists (
-            lib.map
-              (
-                ip:
-                lib.map
-                  (domain: {
-                    domain = domain;
-                    answer = ip;
-                    enabled = true;
-                  })
-                  [
-                    "*.${domain}"
-                    domain
-                    config.networking.hostName
-                    config.networking.fqdn
-                  ]
-              )
-              [
-                config.networking.lanIPv4
-                config.networking.lanIPv6
-              ]
-          );
+          rewrites = mkDnsRewrites [
+            {
+              domains = [
+                "*.${domain}"
+                domain
+                config.networking.hostName
+                config.networking.fqdn
+              ];
+              a = config.networking.lanIPv4;
+              aaaa = config.networking.lanIPv6;
+            }
+            {
+              domains = [ "misaka.${domain}" ];
+              a = "192.168.64.3";
+              aaaa = "fd64::3";
+            }
+            {
+              domains = [ "satone.${domain}" ];
+              a = "193.122.3.88";
+              aaaa = "2603:c020:8008:4864:0:6247:e5e6:8a6a";
+            }
+          ];
         };
         dns = {
           upstream_dns = [
