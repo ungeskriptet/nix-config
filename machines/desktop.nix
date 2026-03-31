@@ -39,27 +39,6 @@ in
           checkReversePath = false;
         };
       };
-
-      nixpkgs.overlays = [
-        (self: super: {
-          xdg-user-dirs = super.xdg-user-dirs.overrideAttrs {
-            outputs = [
-              "out"
-              "lib"
-              "man"
-            ];
-          };
-          xdg-user-dirs-gtk = super.xdg-user-dirs-gtk.overrideAttrs {
-            postPatch = ''
-              substituteInPlace update.c --replace-fail \
-                'bindtextdomain ("xdg-user-dirs", GLIBLOCALEDIR);' \
-                'bindtextdomain ("xdg-user-dirs", "${lib.getLib self.xdg-user-dirs}/share/locale");'
-
-              patchShebangs meson_custom_install_desktop_file.sh
-            '';
-          };
-        })
-      ];
     }
     (lib.mkIf cfg.david {
       nix-config.enableVirt = true;
