@@ -106,6 +106,11 @@ in
             sort $1 | uniq --count --repeated
           }
           ${lib.optionalString cfg.david.enable ''
+            adb-sideload () {
+              echo "< waiting for any device >"
+              adb wait-for-sideload
+              adb sideload "$@"
+            };
             fdroid-install () {
               echo "< waiting for any device >"
               ${adb} -d wait-for-device &&
