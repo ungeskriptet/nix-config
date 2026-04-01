@@ -1,8 +1,12 @@
 {
+  lib,
   config,
   pkgs,
   ...
 }:
+let
+  cfg = config.hm-config;
+in
 {
   imports = [
     ./firefox
@@ -11,7 +15,7 @@
     ../desktop.nix
   ];
 
-  sops = {
+  sops = lib.mkIf cfg.trusted {
     secrets."groovestats/apikey" = { };
     templates."GrooveStats.ini".content = ''
       [GrooveStats]
@@ -32,7 +36,7 @@
 
   home = {
     file = {
-      ".itgmania/Save/LocalProfiles/00000000/GrooveStats.ini" = {
+      ".itgmania/Save/LocalProfiles/00000000/GrooveStats.ini" = lib.mkIf cfg.trusted {
         source = config.lib.file.mkOutOfStoreSymlink config.sops.templates."GrooveStats.ini".path;
         force = true;
       };

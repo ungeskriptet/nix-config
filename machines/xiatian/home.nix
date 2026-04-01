@@ -1,5 +1,7 @@
 { pkgs, ... }:
 {
+  hm-config.trusted = true;
+
   xdg.autostart = {
     enable = true;
     entries =

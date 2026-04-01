@@ -45,4 +45,6 @@
     enablePlasma = true;
     vr = true;
   };
+
+  home-manager.users.david.config.hm-config.trusted = true;
 }

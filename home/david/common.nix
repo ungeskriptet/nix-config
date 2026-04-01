@@ -5,6 +5,7 @@
 }:
 let
   homeDir = config.home.homeDirectory;
+  cfg = config.hm-config;
 in
 {
   imports = [
@@ -14,7 +15,7 @@ in
     ../common.nix
   ];
 
-  sops = {
+  sops = lib.mkIf cfg.trusted {
     defaultSopsFile = ../../secrets/secrets-david.yaml;
     secrets = {
       "adb/privkey" = {

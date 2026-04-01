@@ -43,6 +43,7 @@ in
     config = lib.mkMerge [
       (import ./home)
       (import ../../home/david/common.nix)
+      { hm-config.trusted = true; }
     ];
   };
 

@@ -10,6 +10,7 @@
       david = lib.mkEnableOption "David's configs" // {
         default = true;
       };
+      trusted = lib.mkEnableOption "copying trusted files";
     };
   };
 }

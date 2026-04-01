@@ -24,4 +24,6 @@
   nix.settings.max-jobs = 1;
 
   nix-config.david = true;
+
+  home-manager.users.david.config.hm-config.trusted = true;
 }

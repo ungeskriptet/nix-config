@@ -1,9 +1,14 @@
 {
+  lib,
+  config,
   pkgs,
   ...
 }:
+let
+  cfg = config.hm-config;
+in
 {
-  accounts.email.accounts = {
+  accounts.email.accounts = lib.mkIf cfg.trusted {
     myEmail.thunderbird.enable = true;
     mainlining.thunderbird.enable = true;
   };
