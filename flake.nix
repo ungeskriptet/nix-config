@@ -10,6 +10,10 @@
     nixos-raspberrypi-kernel.url = "github:nvmd/nixos-raspberrypi/develop";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-locked.url = "github:NixOS/nixpkgs/6c9a78c09ff4d6c21d0319114873508a6ec01655";
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -111,6 +115,10 @@
         { host = "ryuzu"; }
         { host = "tsugaru"; }
         { host = "xiatian"; }
+        {
+          host = "satone";
+          system = "aarch64-linux";
+        }
       ] inputs;
       nixOnDroidConfigurations.nix-on-droid = nix-on-droid.lib.nixOnDroidConfiguration {
         pkgs = import nixpkgs { system = "aarch64-linux"; };
