@@ -2,10 +2,12 @@
   lib,
   pkgs,
   config,
+  inputs,
   ...
 }:
 let
   cfg = config.nix-config;
+  selfPkgs = inputs.self.packages.${pkgs.stdenv.hostPlatform.system};
 in
 {
   programs = {
@@ -74,6 +76,8 @@ in
       unzip
       usbutils
       zip
+
+      selfPkgs.switch-nixos
     ]
     ++ lib.optionals cfg.david [
       b4
