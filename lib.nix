@@ -3,14 +3,20 @@
   mkNixos =
     hosts: inputs:
     nixpkgs.lib.mergeAttrsList (
-      map (host: {
-        ${host} = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs; };
-          system = "x86_64-linux";
-          modules = [
-            ./machines/${host}
-          ];
-        };
-      }) hosts
+      map (
+        {
+          host,
+          system ? "x86_64-linux",
+        }:
+        {
+          ${host} = nixpkgs.lib.nixosSystem {
+            inherit system;
+            specialArgs = { inherit inputs; };
+            modules = [
+              ./machines/${host}
+            ];
+          };
+        }
+      ) hosts
     );
 }

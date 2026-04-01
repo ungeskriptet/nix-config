@@ -105,12 +105,12 @@
         };
       }
       // lib.mkNixos [
-        "iroha"
-        "misaka"
-        "rimuru"
-        "ryuzu"
-        "tsugaru"
-        "xiatian"
+        { host = "iroha"; }
+        { host = "misaka"; }
+        { host = "rimuru"; }
+        { host = "ryuzu"; }
+        { host = "tsugaru"; }
+        { host = "xiatian"; }
       ] inputs;
       nixOnDroidConfigurations.nix-on-droid = nix-on-droid.lib.nixOnDroidConfiguration {
         pkgs = import nixpkgs { system = "aarch64-linux"; };
