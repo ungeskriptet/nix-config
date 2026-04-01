@@ -53,19 +53,6 @@
     usbmuxd.enable = true;
   };
 
-  hardware.printers = {
-    ensureDefaultPrinter = "HP_LaserJet_P1005";
-    ensurePrinters = [
-      {
-        name = "HP_LaserJet_P1005";
-        location = "Wohnzimmer";
-        deviceUri = "dnssd://HP%20Drucker%20Wohnzimmer%20%40%20rpi5._ipp._tcp.local/cups?uuid=8a0d0afa-0f33-311b-6967-ba0bf52b6741";
-        model = "everywhere";
-        description = "HP LaserJet P1005";
-      }
-    ];
-  };
-
   environment = {
     systemPackages = with pkgs; [ ptyxis ];
     gnome.excludePackages = with pkgs; [
