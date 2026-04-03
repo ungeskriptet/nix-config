@@ -35,6 +35,7 @@ writeShellScriptBin "switch-nixos" ''
     "-oUserKnownHostsFile=/dev/null"
   )
 
-  NIX_SSHOPTS="''${NIXOS_SSHOPTS[*]}" nixos-rebuild \
+  sudo \
+    NIX_SSHOPTS="''${NIXOS_SSHOPTS[*]}" nixos-rebuild \
     switch -L --flake $flake $target
 ''
