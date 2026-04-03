@@ -136,6 +136,7 @@
             magisk-install = pkgs.${system}.callPackage ./packages/magisk-install.nix { };
             nix-on-droid-setup = pkgs.${system}.callPackage ./packages/nix-on-droid-setup.nix { };
             openssh-nix-on-droid = pkgs.${system}.callPackage ./packages/openssh-nix-on-droid.nix { };
+            rg-uuid = pkgs.${system}.callPackage ./packages/rg-uuid { };
             switch-nixos = pkgs.${system}.callPackage ./packages/switch-nixos.nix { };
             ttf-ms-win11 = pkgs.${system}.callPackage ./packages/ttf-ms-win11.nix { };
           }))

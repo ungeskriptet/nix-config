@@ -77,6 +77,7 @@ in
       usbutils
       zip
 
+      selfPkgs.rg-uuid
       selfPkgs.switch-nixos
     ]
     ++ lib.optionals cfg.david [
