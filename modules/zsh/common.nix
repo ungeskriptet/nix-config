@@ -36,7 +36,7 @@ in
           wineprefix = "export WINEPREFIX=$(mktemp -d --suffix -wine)";
         }
         // lib.optionalAttrs cfg.david.enable {
-          c = "${bat} -pp";
+          c = "${bat} -ppA";
           compress-vid = "${ffmpeg} -vcodec libx264 -crf 28 output.mp4 -i";
           heimdall = "heimdall-wait-for-device && ${heimdall}";
           rpi5 = "ssh root@rpi5";
