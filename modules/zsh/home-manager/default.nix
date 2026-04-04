@@ -14,7 +14,7 @@ in
   programs.zsh = {
     initContent = cfg.zshrc;
     profileExtra = lib.mkIf cfg.nixOnDroid.enable ''
-      eval $(ssh-agent -s)
+      eval $(ssh-agent -s) > /dev/null
       ${lib.last config.systemd.user.services.sops-nix.Service.ExecStart}
     '';
     history = {

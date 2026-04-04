@@ -89,14 +89,13 @@ in
           export WORDCHARS="''${WORDCHARS/\/}"
           export WORDCHARS="''${WORDCHARS/.}"
 
-          [ "$UID" = 0 ] &&
-            [ -z "$SSH_AGENT_PID" ] &&
-            [ "$SSH_AUTH_SOCK" = "/run/user/0/ssh-agent" ] &&
-            eval $(ssh-agent -s)
+          if [ "$UID" -eq 0 ] && [ -z "$SSH_AUTH_SOCK" ]; then
+            eval $(ssh-agent -s) > /dev/null
+          fi
 
           kill-ssh-add () { ${lib.getExe pkgs.killall} ssh-add &> /dev/null }
           trap kill-ssh-add INT
-          ssh-add -l &> /dev/null || ssh-add
+          ssh-add -l &> /dev/null || ssh-add > /dev/null
           trap - INT
 
           source ${pkgs.fzf}/share/fzf/completion.zsh
