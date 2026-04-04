@@ -134,6 +134,15 @@ in
           gh-cherry-pick () {
             curl https://github.com/$1/commit/$2.patch | git am
           }
+          git-remote () {
+            if [ -z "$1" ]; then
+              REMOTE="ungeskriptet/$(basename "$PWD")"
+            else
+              REMOTE="$1"
+            fi
+            git remote add gh "gh:$REMOTE"
+            git remote add cb "cb:$REMOTE"
+          }
           last-journalctl () {
             journalctl _SYSTEMD_INVOCATION_ID=`systemctl show -p InvocationID --value $1`
           }
