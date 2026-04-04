@@ -73,7 +73,6 @@ in
             "Indexing-Enabled" = false;
           };
         };
-        sessionVariables.SSH_ASKPASS_REQUIRE = "prefer";
       };
 
       systemd.user.services.ssh-add = {
