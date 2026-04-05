@@ -55,10 +55,16 @@ in
       ];
     };
 
-    caddy.virtualHosts."https://${fqdn}".extraConfig = ''
-      tls ${config.acme.tlsCert} ${config.acme.tlsKey}
-      reverse_proxy http://${fqdn}:8097
-    '';
+    caddy.virtualHosts = {
+      "https://${fqdn}".extraConfig = ''
+        tls ${config.acme.tlsCert} ${config.acme.tlsKey}
+        reverse_proxy http://${fqdn}:8097
+      '';
+      "https://osmand.${domain}".extraConfig = ''
+        tls ${config.acme.tlsCert} ${config.acme.tlsKey}
+        reverse_proxy http://${fqdn}:5055
+      '';
+    };
 
     homer.settings.services = [
       {
