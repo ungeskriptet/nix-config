@@ -98,6 +98,14 @@ in
           ssh-add -l &> /dev/null || ssh-add > /dev/null
           trap - INT
 
+          export NIX_SSHOPTS="${
+            lib.concatStringsSep " " [
+              "-oIdentityAgent=$SSH_AUTH_SOCK"
+              "-oStrictHostKeyChecking=no"
+              "-oUserKnownHostsFile=/dev/null"
+            ]
+          }"
+
           source ${pkgs.fzf}/share/fzf/completion.zsh
           source ${pkgs.fzf}/share/fzf/key-bindings.zsh
 
