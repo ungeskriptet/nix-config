@@ -51,7 +51,7 @@
       });
     '';
     sudo.extraConfig = ''
-      Defaults env_keep+=SSH_AUTH_SOCK
+      Defaults env_keep+="NIX_SSHOPTS SSH_AUTH_SOCK"
     '';
   };
 
