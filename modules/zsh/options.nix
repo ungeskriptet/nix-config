@@ -89,7 +89,7 @@ in
           export WORDCHARS="''${WORDCHARS/\/}"
           export WORDCHARS="''${WORDCHARS/.}"
 
-          if [ "$UID" -eq 0 ] && [ -z "$SSH_AUTH_SOCK" ]; then
+          if [ "$UID" -eq 0 -a -z "$SSH_AGENT_PID" -a "$SSH_AUTH_SOCK" = "/run/user/0/ssh-agent" ]; then
             eval $(ssh-agent -s) > /dev/null
           fi
 
