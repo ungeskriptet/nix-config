@@ -59,6 +59,7 @@ in
 
     stalwart = {
       enable = true;
+      stateVersion = "26.05";
       credentials = {
         dbpass = config.sops.secrets."stalwart/dbpass".path;
       };
