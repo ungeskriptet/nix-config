@@ -37,6 +37,7 @@
     };
     "/nix" = {
       device = "/mnt/data-ssd/nix";
+      fsType = "none";
       options = [ "bind" ];
     };
   };
