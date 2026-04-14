@@ -66,18 +66,5 @@ in
         SMTP_USERNAME = "vaultwarden";
       };
     };
-
-    homer.settings.services = [
-      {
-        items = [
-          {
-            name = "Vaultwarden";
-            subtitle = "Password manager";
-            url = "https://${fqdn}";
-            logo = "https://cdn.jsdelivr.net/gh/selfhst/icons@master/svg/vaultwarden-light.svg";
-          }
-        ];
-      }
-    ];
   };
 }

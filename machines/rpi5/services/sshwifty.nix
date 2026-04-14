@@ -65,18 +65,5 @@ in
         ];
       };
     };
-
-    homer.settings.services = [
-      {
-        items = [
-          {
-            name = "Sshwifty";
-            subtitle = "Web-based SSH client";
-            url = "https://${fqdn}";
-            logo = "https://cdn.jsdelivr.net/gh/selfhst/icons@master/svg/sshwifty.svg";
-          }
-        ];
-      }
-    ];
   };
 }

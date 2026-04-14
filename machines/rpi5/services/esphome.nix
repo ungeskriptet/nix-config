@@ -41,18 +41,5 @@ in
       enable = true;
       enableUnixSocket = true;
     };
-
-    homer.settings.services = [
-      {
-        items = [
-          {
-            name = "ESPHome";
-            subtitle = "Manage ESPHome devices";
-            url = "https://${fqdn}";
-            logo = "https://cdn.jsdelivr.net/gh/selfhst/icons@master/svg/esphome.svg";
-          }
-        ];
-      }
-    ];
   };
 }

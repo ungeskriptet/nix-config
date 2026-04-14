@@ -226,18 +226,5 @@ in
         '';
       };
     };
-
-    homer.settings.services = [
-      {
-        items = [
-          {
-            name = "Stalwart";
-            subtitle = "Manage email server";
-            url = "https://${fqdn}";
-            logo = "https://cdn.jsdelivr.net/gh/selfhst/icons@master/svg/stalwart.svg";
-          }
-        ];
-      }
-    ];
   };
 }

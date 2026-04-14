@@ -136,18 +136,5 @@ in
       respond @lan "Hi! sorry not allowed :(" 403
       reverse_proxy https://${fqdn}:8084
     '';
-
-    homer.settings.services = [
-      {
-        items = [
-          {
-            name = "AdGuard Home";
-            subtitle = "Private DNS Server";
-            url = "https://${fqdn}";
-            logo = "https://cdn.jsdelivr.net/gh/selfhst/icons@master/svg/adguard-home.svg";
-          }
-        ];
-      }
-    ];
   };
 }

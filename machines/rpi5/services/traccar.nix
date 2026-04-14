@@ -65,19 +65,6 @@ in
         reverse_proxy http://${fqdn}:5055
       '';
     };
-
-    homer.settings.services = [
-      {
-        items = [
-          {
-            name = "Traccar";
-            subtitle = "Track GPS devices";
-            url = "https://${fqdn}";
-            logo = "https://cdn.jsdelivr.net/gh/selfhst/icons@master/svg/traccar.svg";
-          }
-        ];
-      }
-    ];
   };
 
   networking.hosts = {

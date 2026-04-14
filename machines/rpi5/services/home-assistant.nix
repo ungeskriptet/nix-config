@@ -99,18 +99,5 @@ in
         recorder.db_url = "postgresql://@/hass";
       };
     };
-
-    homer.settings.services = [
-      {
-        items = [
-          {
-            name = "Home Assistant";
-            subtitle = "Smart Home";
-            url = "https://${fqdn}";
-            logo = "https://cdn.jsdelivr.net/gh/selfhst/icons@master/svg/home-assistant.svg";
-          }
-        ];
-      }
-    ];
   };
 }

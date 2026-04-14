@@ -96,18 +96,5 @@ in
         title "David's IRC Bouncer"
       '';
     };
-
-    homer.settings.services = [
-      {
-        items = [
-          {
-            name = "IRC";
-            subtitle = "Gamja IRC client";
-            url = "https://${fqdn}";
-            logo = "https://${fqdn}/favicon.ico";
-          }
-        ];
-      }
-    ];
   };
 }

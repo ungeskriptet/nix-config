@@ -41,19 +41,6 @@ in
         header_up host localhost
       }
     '';
-
-    homer.settings.services = [
-      {
-        items = [
-          {
-            name = "CUPS";
-            subtitle = "Print server";
-            url = "https://${fqdn}";
-            logo = "https://cdn.jsdelivr.net/gh/selfhst/icons@master/svg/openprinting-cups.svg";
-          }
-        ];
-      }
-    ];
   };
 
   hardware.printers = {

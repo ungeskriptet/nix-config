@@ -65,18 +65,5 @@ in
         }
       ];
     };
-
-    homer.settings.services = [
-      {
-        items = [
-          {
-            name = "Webmail";
-            subtitle = "Roundcube email client";
-            url = "https://${fqdn}";
-            logo = "https://cdn.jsdelivr.net/gh/selfhst/icons@master/svg/roundcube.svg";
-          }
-        ];
-      }
-    ];
   };
 }

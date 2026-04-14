@@ -51,18 +51,5 @@ in
         web-push-public-key = "BG9_p4FaZ4jpXnmPgH_CqNGxqRYAPYy6xm1hmBYk31g3MLd-nzYDNq5x8KQm8rIGKU5in1I2Z2xu_z9NMMDnffI";
       };
     };
-
-    homer.settings.services = [
-      {
-        items = [
-          {
-            name = "ntfy";
-            subtitle = "Push notifications";
-            url = "https://${fqdn}";
-            logo = "https://cdn.jsdelivr.net/gh/selfhst/icons@master/svg/ntfy.svg";
-          }
-        ];
-      }
-    ];
   };
 }
