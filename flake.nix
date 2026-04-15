@@ -92,7 +92,10 @@
               nixfmt.enable = true;
               black.enable = true;
               keep-sorted.enable = true;
-              nixf-diagnose.enable = true;
+              nixf-diagnose = {
+                enable = true;
+                autoFix = false;
+              };
             };
             settings = {
               verbose = 1;
