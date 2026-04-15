@@ -21,21 +21,24 @@ in
       description = "Default TLS certificate";
       default = "${config.security.acme.certs."${domain}".directory}/fullchain.pem";
     };
+    tsigKey = lib.mkOption {
+      type = lib.types.path;
+      description = "Path to a file containing the TSIG key";
+    };
   };
   config = lib.mkIf cfg.enable {
-    sops.secrets."pdns/apikey".owner = "acme";
-
     security.acme = {
       acceptTerms = true;
       defaults.email = "acme@${domain}";
       defaults.dnsResolver = "9.9.9.9:53";
       certs.${domain} = {
         extraDomainNames = [ "*.${domain}" ];
-        dnsProvider = "pdns";
+        dnsProvider = "rfc2136";
+        credentialFiles = {
+          RFC2136_TSIG_FILE = cfg.tsigKey;
+        };
         environmentFile = "${pkgs.writeText "env" ''
-          PDNS_SERVER_NAME=ns1.famfo.xyz
-          PDNS_API_URL=https://beta.servfail.network/
-          PDNS_API_KEY_FILE=${config.sops.secrets."pdns/apikey".path}
+          RFC2136_NAMESERVER=ns1.david-w.eu.
         ''}";
       };
     };
