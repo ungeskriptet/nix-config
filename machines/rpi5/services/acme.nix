@@ -10,8 +10,8 @@ in
 
   acme = {
     enable = true;
-    tsigKey = config.sops.secrets."bind/tsig/rpi5".path;
+    tsigKey = config.sops.secrets."acme/tsig-key".path;
   };
 
-  sops.secrets."bind/tsig/rpi5".owner = "root";
+  sops.secrets."acme/tsig-key".owner = "root";
 }

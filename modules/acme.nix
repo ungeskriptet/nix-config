@@ -35,10 +35,12 @@ in
         extraDomainNames = [ "*.${domain}" ];
         dnsProvider = "rfc2136";
         credentialFiles = {
-          RFC2136_TSIG_FILE = cfg.tsigKey;
+          RFC2136_TSIG_SECRET_FILE = cfg.tsigKey;
         };
         environmentFile = "${pkgs.writeText "env" ''
           RFC2136_NAMESERVER=ns1.david-w.eu.
+          RFC2136_TSIG_ALGORITHM=hmac-sha256.
+          RFC2136_TSIG_KEY=rpi5
         ''}";
       };
     };
