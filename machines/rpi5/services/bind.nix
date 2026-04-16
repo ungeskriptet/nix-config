@@ -25,6 +25,7 @@ in
       ];
       extraConfig = ''
         include "/run/credentials/bind.service/tsig-rpi5";
+        include "/run/credentials/bind.service/tsig-xiatian";
       '';
       zones.${domain} = {
         master = true;
@@ -35,7 +36,10 @@ in
           }
         );
         extraConfig = ''
-          allow-update { key rpi5; };
+          update-policy {
+            grant rpi5 zonesub any;
+            grant xiatian name xiatian.${domain}. any;
+          };
           journal "/var/lib/${journalPath}/${domain}.jnl";
         '';
       };
@@ -55,8 +59,13 @@ in
 
   systemd.services.bind.serviceConfig = {
     StateDirectory = journalPath;
-    LoadCredential = [ "tsig-rpi5:${config.sops.secrets."bind/tsig/rpi5".path}" ];
+    LoadCredential = [
+      "tsig-rpi5:${config.sops.secrets."bind/tsig/rpi5".path}"
+      "tsig-xiatian:${config.sops.secrets."bind/tsig/xiatian".path}"
+    ];
   };
 
-  sops.secrets."bind/tsig/rpi5".owner = "root";
+  sops.secrets = lib.genAttrs [ "bind/tsig/rpi5" "bind/tsig/xiatian" ] (secret: {
+    owner = "root";
+  });
 }
