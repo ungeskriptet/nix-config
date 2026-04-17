@@ -14,6 +14,8 @@
     inputs.lanzaboote.nixosModules.lanzaboote
   ];
 
+  sops.defaultSopsFile = ../../secrets/secrets-ryuzu.yaml;
+
   networking = {
     hostName = "ryuzu";
     interfaces.enp5s0.wakeOnLan.enable = true;
