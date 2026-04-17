@@ -30,6 +30,14 @@ in
             action = "update";
           }
           {
+            id = "ryuzu_acl";
+            key = "ryuzu";
+            action = "update";
+            update-owner = "name";
+            update-owner-match = "equal";
+            update-owner-name = [ "ryuzu" ];
+          }
+          {
             id = "xiatian_acl";
             key = "xiatian";
             action = "update";
