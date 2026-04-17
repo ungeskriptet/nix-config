@@ -10,6 +10,7 @@ in
 {
   imports = [
     ./options.nix
+    ./zshrc.nix
   ];
   programs = {
     zoxide = {
