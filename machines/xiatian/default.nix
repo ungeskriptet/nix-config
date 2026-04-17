@@ -14,6 +14,8 @@
     inputs.lanzaboote.nixosModules.lanzaboote
   ];
 
+  sops.defaultSopsFile = ../../secrets/secrets-xiatian.yaml;
+
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;
     loader = {

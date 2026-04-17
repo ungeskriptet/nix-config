@@ -6,7 +6,7 @@ keys:
   - &user_grazyna age1v4aj5laf9p5ld52746t6le6lfmk6xv7ymn6ystz4sdzqz06t79tsq2jns5
   - &user_omao age1wz43nfrqssvgwg93ljre80p4lv6qyhsnvua8vmd0274cg0l2t4fqkextc9
 creation_rules:
-  - path_regex: secrets/secrets-(david|misaka|rpi5).yaml
+  - path_regex: secrets/secrets-(david|misaka|rpi5|xiatian).yaml
     key_groups:
     - age:
       - *bitwarden
