@@ -10,6 +10,7 @@ in
 {
   imports = [
     ./common.nix
+    ../modules/nm-nsupdate.nix
     ../modules/packages-desktop.nix
     ../modules/vr.nix
   ];
@@ -20,9 +21,17 @@ in
         users.david.imports = [ ../home/david/desktop.nix ];
       };
 
+      sops.secrets."dns/tsig".owner = "root";
+
       services = {
         printing.enable = true;
         pulseaudio.enable = false;
+        nm-nsupdate = {
+          enable = true;
+          fqdn = config.networking.fqdn;
+          nameServer = "ns1.${config.networking.domain}";
+          tsigKeyFile = config.sops.secrets."dns/tsig".path;
+        };
         pipewire = {
           enable = true;
           alsa.enable = true;
