@@ -14,12 +14,10 @@ in
     tlsKey = lib.mkOption {
       type = lib.types.str;
       description = "Default TLS key";
-      default = "${config.security.acme.certs."${domain}".directory}/key.pem";
     };
     tlsCert = lib.mkOption {
       type = lib.types.str;
       description = "Default TLS certificate";
-      default = "${config.security.acme.certs."${domain}".directory}/fullchain.pem";
     };
     tsigKey = lib.mkOption {
       type = lib.types.path;
@@ -27,6 +25,10 @@ in
     };
   };
   config = lib.mkIf cfg.enable {
+    acme = {
+      tlsCert = "${config.security.acme.certs."${domain}".directory}/fullchain.pem";
+      tlsKey = "${config.security.acme.certs."${domain}".directory}/key.pem";
+    };
     security.acme = {
       acceptTerms = true;
       defaults.email = "acme@${domain}";
