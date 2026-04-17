@@ -138,5 +138,6 @@
     };
   };
   nixpkgs.config.allowUnfree = true;
+  documentation.nixos.includeAllModules = true;
   system.stateVersion = "25.05";
 }
