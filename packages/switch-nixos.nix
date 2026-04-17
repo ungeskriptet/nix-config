@@ -6,19 +6,16 @@ writeShellScriptBin "switch-nixos" ''
 
   Options:
   -f | --flake    Flake URL (Default: path:/etc/nixos#$(hostname))
-  -t | --target   Deploy to remote host through SSH
   -h | --help     Show help and exit
   EOF
   }
 
   # Defaults
-  target=""
   flake="path:/etc/nixos#$(hostname)"
 
   while [ $# -gt 0 ]; do
     case "$1" in
       --flake|-f) flake="$2"; shift 2 ;;
-      --target|-t) target="--target-host $2"; shift 2 ;;
       --help|-h) help; exit ;;
       *) break ;;
     esac
@@ -37,5 +34,5 @@ writeShellScriptBin "switch-nixos" ''
 
   sudo \
     NIX_SSHOPTS="''${NIXOS_SSHOPTS[*]}" nixos-rebuild \
-    switch -L --flake $flake $target
+    switch -L --accept-flake-config --flake $flake $*
 ''
