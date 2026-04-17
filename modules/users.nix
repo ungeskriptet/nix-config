@@ -12,14 +12,17 @@ in
     userName = lib.mkOption {
       type = lib.types.str;
       default = "david";
+      description = "Username for the default user.";
     };
     userDescription = lib.mkOption {
       type = lib.types.str;
       default = "David";
+      description = "GECOS description for the default user.";
     };
     hashedPassword = lib.mkOption {
       type = lib.types.nullOr lib.types.str;
       default = null;
+      description = "Hashed password for the default user.";
     };
   };
 
