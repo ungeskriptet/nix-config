@@ -33,6 +33,6 @@ writeShellScriptBin "switch-nixos" ''
   )
 
   sudo \
-    NIX_SSHOPTS="''${NIXOS_SSHOPTS[*]}" nixos-rebuild \
+    NIX_SSHOPTS="''${NIX_SSHOPTS[*]}" nixos-rebuild \
     switch -L --accept-flake-config --flake $flake $*
 ''
