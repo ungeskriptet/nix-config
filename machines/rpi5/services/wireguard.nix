@@ -8,6 +8,18 @@ let
   myVpn = config.networking.myVpn;
   supportVpn = config.networking.supportVpn;
   netflixVpn = config.networking.netflixVpn;
+  mkVpnOption = addr: cidr: {
+    address = lib.mkOption {
+      type = lib.types.str;
+      default = addr;
+      description = "Interface address.";
+    };
+    cidr = lib.mkOption {
+      type = lib.types.str;
+      default = cidr;
+      description = "Subnet mask in CIDR form.";
+    };
+  };
 in
 {
   options.networking = {
@@ -15,66 +27,21 @@ in
       enable = lib.mkEnableOption "personal VPN" // {
         default = true;
       };
-      ipv4 = {
-        address = lib.mkOption {
-          type = lib.types.str;
-          default = "192.168.128.1";
-        };
-        cidr = lib.mkOption {
-          type = lib.types.str;
-          default = "24";
-        };
-      };
-      ipv6 = {
-        address = lib.mkOption {
-          type = lib.types.str;
-          default = "fd96::1";
-        };
-        cidr = lib.mkOption {
-          type = lib.types.str;
-          default = "64";
-        };
-      };
+      ipv4 = mkVpnOption "192.168.128.1" "24";
+      ipv6 = mkVpnOption "fd96::1" "64";
     };
     supportVpn = {
       enable = lib.mkEnableOption "support VPN" // {
         default = true;
       };
-      ipv4 = {
-        address = lib.mkOption {
-          type = lib.types.str;
-          default = "192.168.3.1";
-        };
-        cidr = lib.mkOption {
-          type = lib.types.str;
-          default = "24";
-        };
-      };
+      ipv4 = mkVpnOption "192.168.3.1" "24";
     };
     netflixVpn = {
       enable = lib.mkEnableOption "Netflix VPN" // {
         default = true;
       };
-      ipv4 = {
-        address = lib.mkOption {
-          type = lib.types.str;
-          default = "192.168.36.1";
-        };
-        cidr = lib.mkOption {
-          type = lib.types.str;
-          default = "24";
-        };
-      };
-      ipv6 = {
-        address = lib.mkOption {
-          type = lib.types.str;
-          default = "fd36::1";
-        };
-        cidr = lib.mkOption {
-          type = lib.types.str;
-          default = "64";
-        };
-      };
+      ipv4 = mkVpnOption "192.168.36.1" "24";
+      ipv6 = mkVpnOption "fd36::1" "64";
     };
   };
   config = {
