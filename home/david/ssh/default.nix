@@ -1,6 +1,11 @@
-{ lib, pkgs, ... }:
 {
-  programs.ssh = {
+  lib,
+  pkgs,
+  config,
+  ...
+}:
+{
+  programs.ssh = lib.mkIf config.hm-config.dotfiles {
     enable = true;
     enableDefaultConfig = false;
     matchBlocks = {

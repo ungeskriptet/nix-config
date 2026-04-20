@@ -61,16 +61,18 @@ in
   home = {
     username = lib.mkDefault "david";
     homeDirectory = lib.mkDefault "/home/david";
-    file = {
-      ".android/adbkey.pub".source = ./dotfiles/adbkey.pub;
-      ".ssh/id_ed25519.pub".source = ./dotfiles/ssh/id_ed25519.pub;
-    }
-    // lib.mergeAttrsList (
-      map (file: { ".local/share/patatt/public/${file}".source = ./dotfiles/patattkey.pub; }) [
-        "ed25519/mainlining.org/david.wronek/20250914"
-        "ed25519/mainlining.org/david.wronek/default"
-        "20250914.pub"
-      ]
+    file = lib.mkIf cfg.dotfiles (
+      {
+        ".android/adbkey.pub".source = ./dotfiles/adbkey.pub;
+        ".ssh/id_ed25519.pub".source = ./dotfiles/ssh/id_ed25519.pub;
+      }
+      // lib.mergeAttrsList (
+        map (file: { ".local/share/patatt/public/${file}".source = ./dotfiles/patattkey.pub; }) [
+          "ed25519/mainlining.org/david.wronek/20250914"
+          "ed25519/mainlining.org/david.wronek/default"
+          "20250914.pub"
+        ]
+      )
     );
   };
 }
