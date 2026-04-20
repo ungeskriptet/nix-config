@@ -54,8 +54,6 @@ in
         '';
         "https://${primRouterFqdn}".extraConfig = ''
           tls ${config.acme.tlsCert} ${config.acme.tlsKey}
-          @lan not remote_ip private_ranges
-          respond @lan "Hi! sorry not allowed :(" 403
           reverse_proxy https://${primRouterIP}:443 {
             transport http {
               tls
