@@ -19,7 +19,7 @@ in
   services = {
     caddy.virtualHosts."https://${fqdn}".extraConfig = ''
       tls ${config.acme.tlsCert} ${config.acme.tlsKey}
-      reverse_proxy http://${fqdn}:80
+      reverse_proxy http://${fqdn}:8099
       basic_auth {
         david $2b$05$/lL3Z49W7HZYObGWxkdVkuyyYBvMacdd/FtMr4lAHtSWIkAumPgie
       }
@@ -33,7 +33,7 @@ in
         Servers = [
           {
             ListenInterface = "::1";
-            ListenPort = 80;
+            ListenPort = 8099;
           }
         ];
         OnlyAllowPresetRemotes = true;
