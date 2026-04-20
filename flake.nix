@@ -81,7 +81,7 @@
       ...
     }@inputs:
     let
-      lib = import ./lib.nix { inherit nixpkgs; };
+      lib = import ./lib.nix { inherit inputs; };
       forAllSystems = nixpkgs.lib.genAttrs [
         "x86_64-linux"
         "aarch64-linux"
@@ -136,6 +136,9 @@
         pkgs = import nixpkgs { system = "aarch64-linux"; };
         extraSpecialArgs = { inherit inputs; };
         modules = [ ./machines/nix-on-droid ];
+      };
+      homeConfigurations = lib.mkHomeConfigurations "david" {
+        modules = [ ./home/david/standalone.nix ];
       };
       packages =
         let
