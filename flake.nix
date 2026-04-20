@@ -44,7 +44,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-raspberrypi = {
-      url = "github:nvmd/nixos-raspberrypi/develop";
+      url = "github:ungeskriptet/nixos-raspberrypi/treefmt";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nur = {
