@@ -42,10 +42,12 @@ in
     adGuardIpv4 = lib.mkOption {
       type = lib.types.str;
       default = "192.168.64.4";
+      description = "IPv4 listen address for AdGuard Home.";
     };
     adGuardIpv6 = lib.mkOption {
       type = lib.types.str;
       default = "fd64::4";
+      description = "IPv6 listen address for AdGuard Home.";
     };
   };
   config = {
