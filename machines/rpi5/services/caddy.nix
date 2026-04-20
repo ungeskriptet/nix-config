@@ -11,7 +11,13 @@ let
 in
 {
   networking = {
-    firewall.allowedTCPPorts = [ 443 ];
+    firewall = {
+      allowedTCPPorts = [
+        80
+        443
+      ];
+      allowedUDPPorts = [ 443 ];
+    };
     hosts = {
       "fd64::3" = [ "drasl.${domain}" ];
       "192.168.64.3" = [ "drasl.${domain}" ];
@@ -28,7 +34,7 @@ in
     caddy = {
       enable = true;
       globalConfig = ''
-        auto_https off
+        auto_https disable_certs
       '';
       virtualHosts = {
         "https://*.${domain}".extraConfig = ''
