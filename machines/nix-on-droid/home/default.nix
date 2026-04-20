@@ -1,7 +1,6 @@
 {
   lib,
   pkgs,
-  config,
   inputs,
   ...
 }:
@@ -10,27 +9,19 @@ let
 in
 {
   imports = [
-    ../../../home/david/vars.nix
-    ../../../modules/git/home-manager.nix
-    ../../../modules/popt/home-manager.nix
-    ../../../modules/zsh/home-manager
-    inputs.sops-nix.homeManagerModules.sops
+    ../../../home/david/standalone.nix
   ];
 
   programs = {
-    neovim = {
+    zsh-david.nixOnDroid = {
       enable = true;
-      viAlias = true;
-      vimAlias = true;
+      opensshPkg = inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.openssh-nix-on-droid;
     };
-    zsh-david = {
-      nixOnDroid = {
-        enable = true;
-        opensshPkg = inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.openssh-nix-on-droid;
-      };
-      david.enable = config.hm-config.david;
-      homeManager.enable = true;
-    };
+  };
+
+  hm-config = {
+    dotfiles = true;
+    trusted = true;
   };
 
   home = {

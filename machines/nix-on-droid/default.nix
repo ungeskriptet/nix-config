@@ -40,11 +40,7 @@ in
     useGlobalPkgs = true;
     useUserPackages = true;
     extraSpecialArgs = { inherit inputs; };
-    config = lib.mkMerge [
-      (import ./home)
-      (import ../../home/david/common.nix)
-      { hm-config.trusted = true; }
-    ];
+    config = ./home;
   };
 
   build = {
