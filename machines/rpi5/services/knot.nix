@@ -63,6 +63,7 @@ in
             );
             acl = [
               "rpi5_acl"
+              "ryuzu_acl"
               "xiatian_acl"
             ];
             dnssec-signing = "on";
