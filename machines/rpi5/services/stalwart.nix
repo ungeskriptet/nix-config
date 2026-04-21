@@ -6,6 +6,22 @@
 let
   fqdn = "mail.${domain}";
   domain = config.networking.domain;
+  sieveList = list: "[\"" + lib.concatStringsSep "\", \"" list + "\"]";
+  mkWildcard =
+    domains:
+    lib.concatLists (
+      map (domain: [
+        "*.${domain}"
+        domain
+      ]) domains
+    );
+  # They block me, so I block them too!
+  # (But seriously, they should block based on
+  # reputation and not based on prejudices...)
+  blockedServers = sieveList (mkWildcard [
+    "gmx.de"
+    "gmx.net"
+  ]);
 in
 {
   sops.secrets = {
@@ -79,6 +95,7 @@ in
           "!server.allowed-ip.*"
           "!server.blocked-ip.*"
           "session.*"
+          "sieve.*"
           "spam-filter.resource"
           "storage.blob"
           "storage.data"
@@ -125,6 +142,28 @@ in
           };
           connect.greeting = "config_get('server.hostname') + ' Hi! :3'";
           rcpt.catch-all = true;
+          data.script = "'reverse-reject'";
+        };
+        sieve.trusted.scripts.reverse-reject = {
+          name = "Reverse-reject";
+          contents = ''
+            require ["envelope", "variables", "reject"];
+            if anyof(
+              envelope :matches :domain "from" ${blockedServers},
+              address :matches :domain "from" ${blockedServers},
+              string :matches "''${env.helo_domain}" ${blockedServers}
+            ) {
+              ${lib.concatStringsSep " " [
+                "reject \"551 5.1.1"
+                "Sorry, :( deine E-Mail wurde abgeleht da '\${env.helo_domain}' meinen"
+                "Mailserver blockiert. Das heißt, dass ich auf deine Nachricht nicht"
+                "antworten kann. Bitte kontaktiere mich von einem anderem E-Mail Provider."
+                "Sorry, :( your E-Mail has been rejected because '\${env.helo_domain}'"
+                "blocks my mailserver. This means I won't be able to reply to your"
+                "message. Please contact me from a different E-Mail provider.\";"
+              ]}
+            }
+          '';
         };
         authentication.fallback-admin = {
           user = "admin";
