@@ -74,6 +74,11 @@ in
     }
     {
       issuerCritical = false;
+      tag = "issuewild";
+      value = "letsencrypt.org";
+    }
+    {
+      issuerCritical = false;
       tag = "iodef";
       value = "mailto:certificate@david-w.eu";
     }
