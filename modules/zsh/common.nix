@@ -33,6 +33,7 @@ in
         in
         {
           gr = "cd $(git rev-parse --show-toplevel)";
+          ls = "ls --color=auto";
           rp = "realpath";
           wineprefix = "export WINEPREFIX=$(mktemp -d --suffix -wine)";
         }
