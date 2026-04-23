@@ -50,7 +50,9 @@ in
                 esac
                 addrs=$(ip --json a | ${jq} -r \
                   'map(
-                     .addr_info | map(
+                     select(
+                       .operstate == "UP"
+                     ) | .addr_info | map(
                        select(
                          .scope == "global"
                        ) | select(
