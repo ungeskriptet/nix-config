@@ -11,6 +11,10 @@ in
 {
   options.acme = {
     enable = lib.mkEnableOption "Let's Encrypt";
+    nameServer = lib.mkOption {
+      type = lib.types.str;
+      description = "The nameserver to use for the DNS-01 challenge.";
+    };
     tlsKey = lib.mkOption {
       type = lib.types.str;
       description = "Default TLS key";
@@ -19,9 +23,18 @@ in
       type = lib.types.str;
       description = "Default TLS certificate";
     };
+    tsigAlgorithm = lib.mkOption {
+      type = lib.types.str;
+      description = "TSIG key algorithm.";
+      default = "hmac-sha256.";
+    };
     tsigKey = lib.mkOption {
       type = lib.types.path;
       description = "Path to a file containing the TSIG key";
+    };
+    tsigKeyName = lib.mkOption {
+      type = lib.types.str;
+      description = "TSIG key name.";
     };
   };
   config = lib.mkIf cfg.enable {
@@ -40,9 +53,9 @@ in
           RFC2136_TSIG_SECRET_FILE = cfg.tsigKey;
         };
         environmentFile = "${pkgs.writeText "env" ''
-          RFC2136_NAMESERVER=ns1.david-w.eu.
-          RFC2136_TSIG_ALGORITHM=hmac-sha256.
-          RFC2136_TSIG_KEY=rpi5
+          RFC2136_NAMESERVER=${cfg.nameServer}
+          RFC2136_TSIG_ALGORITHM=${cfg.tsigAlgorithm}
+          RFC2136_TSIG_KEY=${cfg.tsigKeyName}
         ''}";
       };
     };
