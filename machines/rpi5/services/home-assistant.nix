@@ -83,7 +83,13 @@ in
         automation = "!include automations.yaml";
         script = "!include scripts.yaml";
         shell_command = {
-          poweroff_ryuzu = "${ssh} -i /var/lib/hass/ssh/id_ed25519 -o StrictHostKeyChecking=no david@ryuzu sudo poweroff";
+          poweroff_ryuzu = lib.concatStringsSep " " [
+            "${ssh}"
+            "-i/var/lib/hass/ssh/id_ed25519"
+            "-oStrictHostKeyChecking=no"
+            "root@ryuzu.${domain}"
+            "poweroff"
+          ];
         };
         http = {
           server_port = 8083;
