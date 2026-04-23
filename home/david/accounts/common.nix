@@ -4,8 +4,9 @@
   ...
 }:
 let
-  myEmail = "moe@david-w.eu";
-  myEmailHost = "mail.david-w.eu";
+  domain = config.vars.domain;
+  myEmail = "moe@${domain}";
+  myEmailHost = "mail.${domain}";
   mainlining = "david.wronek@mainlining.org";
   mainliningHost = "mail.mainlining.org";
   cfg = config.hm-config;
