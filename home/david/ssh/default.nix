@@ -4,6 +4,9 @@
   config,
   ...
 }:
+let
+  domain = config.vars.domain;
+in
 {
   programs.ssh = lib.mkIf config.hm-config.dotfiles {
     enable = true;
@@ -13,24 +16,25 @@
         addKeysToAgent = "yes";
       };
       "iroha" = {
-        hostname = "192.168.3.8";
+        hostname = "iroha.${domain}";
         user = "root";
       };
       "rimuru" = {
-        hostname = "rimuru";
+        hostname = "rimuru.${domain}";
         user = "root";
       };
       "rpi5" = {
-        hostname = "fd64::2";
+        hostname = "rpi5.${domain}";
         user = "root";
         forwardAgent = true;
       };
       "ryuzu" = {
+        hostname = "ryuzu.${domain}";
         user = "david";
         forwardAgent = true;
       };
       "xiatian" = {
-        hostname = "xiatian";
+        hostname = "xiatian.${domain}";
         user = "david";
         forwardAgent = true;
       };
