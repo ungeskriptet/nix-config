@@ -8,6 +8,7 @@ let
   domain = config.networking.domain;
   globalIpv4 = config.networking.globalIpv4;
   globalIpv6 = config.networking.globalIpv6;
+  lanIpv4 = config.networking.lanIPv4;
   A = [
     (a globalIpv4)
   ];
@@ -143,6 +144,11 @@ in
       TXT = [
         "v=spf1 a ra=postmaster -all"
       ];
+    };
+
+    rpi5 = {
+      inherit AAAA;
+      A = [ (a lanIpv4) ];
     };
 
     satone = {
