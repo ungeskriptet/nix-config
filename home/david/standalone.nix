@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ lib, ... }:
 {
   imports = [
     ../../modules/git/home-manager.nix
@@ -14,7 +14,7 @@
       vimAlias = true;
     };
     zsh-david = {
-      david.enable = config.hm-config.david;
+      david.enable = true;
       homeManager.enable = true;
     };
   };
