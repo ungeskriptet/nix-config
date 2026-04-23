@@ -20,7 +20,6 @@
   };
 
   hm-config = {
-    david = lib.mkDefault true;
     trusted = lib.mkDefault false;
     dotfiles = lib.mkDefault false;
   };
