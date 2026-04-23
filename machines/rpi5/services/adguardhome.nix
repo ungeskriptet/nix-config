@@ -90,11 +90,10 @@ in
             rewrites = mkDnsRewrites [
               {
                 domains = [
-                  "*.${domain}"
-                  domain
                   config.networking.hostName
                   config.networking.fqdn
-                ];
+                ]
+                ++ config.networking.hosts."::1";
                 a = config.networking.lanIPv4;
                 aaaa = config.networking.lanIPv6;
               }
