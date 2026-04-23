@@ -56,7 +56,7 @@
   };
 
   networking = {
-    domain = "david-w.eu";
+    domain = config.vars.domain;
     nftables.enable = true;
     firewall.filterForward = true;
   };
