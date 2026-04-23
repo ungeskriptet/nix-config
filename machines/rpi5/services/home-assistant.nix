@@ -62,6 +62,7 @@ in
         "bthome"
         "cast"
         "default_config"
+        "enigma2"
         "esphome"
         "fritz"
         "fritzbox"
