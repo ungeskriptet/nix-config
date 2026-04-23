@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  config,
   inputs,
   ...
 }:
@@ -26,7 +27,7 @@ in
 
   home = {
     file = {
-      ".ssh/authorized_keys".source = ./dotfiles/ssh/authorized_keys;
+      ".ssh/authorized_keys".text = lib.concatStringsSep "\n" config.vars.sshPubKeys;
     };
     homeDirectory = lib.mkForce homeDir;
     sessionVariables = {
