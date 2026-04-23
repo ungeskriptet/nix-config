@@ -28,7 +28,6 @@
     };
     nix-config = {
       enablePlasma = lib.mkEnableOption "Plasma";
-      enableVirt = lib.mkEnableOption "virtualization";
       david = lib.mkEnableOption "David's desktop configs";
     };
     vars.sshPubKeys = lib.mkOption {

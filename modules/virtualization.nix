@@ -4,6 +4,7 @@ let
   cfg = config.nix-config;
 in
 {
+  options.nix-config.enableVirt = lib.mkEnableOption "virtualisation";
   config = lib.mkIf (cfg.enableVirt && arch == "x86_64-linux") {
     boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
     programs.virt-manager.enable = true;
