@@ -81,7 +81,7 @@ in
     {
       issuerCritical = false;
       tag = "iodef";
-      value = "mailto:certificate@david-w.eu";
+      value = "mailto:certificate@${domain}";
     }
   ];
 
