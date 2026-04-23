@@ -51,11 +51,7 @@ in
           ++ lib.optionals config.virtualisation.libvirtd.enable [ "libvirt" ]
           ++ lib.optionals config.virtualisation.podman.enable [ "podman" ];
           hashedPassword = cfg.hashedPassword;
-          openssh.authorizedKeys.keys =
-            config.vars.sshPubKeys
-            ++ lib.optionals (config.networking.hostName == "ryuzu") [
-              "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHCo1aBmLiSmZrjtnFVYczuv4/cNXjxF+4soUTSIeZla hass"
-            ];
+          openssh.authorizedKeys.keys = config.vars.sshPubKeys;
         };
         root = {
           openssh.authorizedKeys.keys = config.vars.sshPubKeys;
