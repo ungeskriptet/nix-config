@@ -8,7 +8,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./home-assistant-ssh.nix
+    ./home-assistant/ssh.nix
     ../desktop.nix
     ../../modules/minecraft-server.nix
     ../../modules/secureboot.nix
