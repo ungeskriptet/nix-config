@@ -4,7 +4,10 @@
   git,
   openssh,
   ssh-to-age,
-}:
+}@args:
+let
+  domain = (import ../modules/common-vars.nix args).options.vars.domain.default;
+in
 writeShellScriptBin "nix-on-droid-setup" ''
   set -euo pipefail
 
@@ -44,7 +47,7 @@ writeShellScriptBin "nix-on-droid-setup" ''
       read REMOTE_BUILDER
       break
     elif [ "$RPI5_BUILD" = "y" ]; then
-      REMOTE_BUILDER="root@fd64::2"
+      REMOTE_BUILDER="root@rpi5.${domain}"
       break
     fi
   done
