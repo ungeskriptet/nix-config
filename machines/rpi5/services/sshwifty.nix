@@ -41,7 +41,7 @@ in
           {
             Title = "rpi5";
             Type = "SSH";
-            Host = "rpi5:22";
+            Host = "rpi5.${domain}:22";
             TabColor = "110000";
             Meta = {
               User = "root";
@@ -53,7 +53,7 @@ in
           {
             Title = "ryuzu";
             Type = "SSH";
-            Host = "ryuzu:22";
+            Host = "ryuzu.${domain}:22";
             TabColor = "000011";
             Meta = {
               User = "david";
