@@ -31,8 +31,4 @@
       policies = import ./policies.nix;
     };
   };
-
-  home.file = {
-    ".mozilla/firefox/nix/search.json.mozlz4".force = lib.mkForce true;
-  };
 }

@@ -1,6 +1,7 @@
 { lib, pkgs }:
 {
   default = "ddg";
+  force = true;
   engines = lib.mergeAttrsList (
     lib.map (file: import (./. + "/${file}") { inherit pkgs; }) (
       lib.attrNames (
