@@ -8,6 +8,7 @@
     kernel.sysctl = {
       "kernel.panic" = 60;
       "kernel.hung_task_panic" = true;
+      "vm.mmap_rnd_bits" = 30;
     };
   };
 
