@@ -1,7 +1,5 @@
 { ... }:
 {
-  acme.enable = true;
-
   networking.firewall = {
     allowedTCPPorts = [ 443 ];
   };
