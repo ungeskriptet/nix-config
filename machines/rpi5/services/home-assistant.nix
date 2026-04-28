@@ -8,6 +8,15 @@ let
   fqdn = "home.${domain}";
   domain = config.networking.domain;
   ssh = lib.getExe pkgs.openssh;
+  ryuzuCmd =
+    cmd:
+    lib.concatStringsSep " " [
+      ssh
+      "-i/var/lib/hass/ssh/id_ed25519"
+      "-oStrictHostKeyChecking=no"
+      "root@ryuzu.${domain}"
+      cmd
+    ];
 in
 {
   networking = {
@@ -83,13 +92,8 @@ in
         automation = "!include automations.yaml";
         script = "!include scripts.yaml";
         shell_command = {
-          poweroff_ryuzu = lib.concatStringsSep " " [
-            "${ssh}"
-            "-i/var/lib/hass/ssh/id_ed25519"
-            "-oStrictHostKeyChecking=no"
-            "root@ryuzu.${domain}"
-            "poweroff"
-          ];
+          poweroff_ryuzu = ryuzuCmd "poweroff";
+          start_itgmania = ryuzuCmd "itgmania";
         };
         http = {
           server_port = 8083;
