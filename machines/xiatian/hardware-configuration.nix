@@ -12,7 +12,6 @@
     ];
     initrd.luks.devices."NIXOS_ROOTFS" = {
       device = "/dev/disk/by-partlabel/root";
-      preOpenCommands = "(sleep 300; poweroff -f) &";
     };
   };
 
