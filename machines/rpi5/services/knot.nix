@@ -25,6 +25,14 @@ in
         ];
         acl = [
           {
+            id = "iroha_acl";
+            key = "iroha";
+            action = "update";
+            update-owner = "name";
+            update-owner-match = "equal";
+            update-owner-name = [ "iroha" ];
+          }
+          {
             id = "rimuru_acl";
             key = "rimuru";
             action = "update";
@@ -70,6 +78,7 @@ in
               }
             );
             acl = [
+              "iroha_acl"
               "rimuru_acl"
               "rpi5_acl"
               "ryuzu_acl"
