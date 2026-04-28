@@ -25,6 +25,14 @@ in
         ];
         acl = [
           {
+            id = "rimuru_acl";
+            key = "rimuru";
+            action = "update";
+            update-owner = "name";
+            update-owner-match = "equal";
+            update-owner-name = [ "rimuru" ];
+          }
+          {
             id = "rpi5_acl";
             key = "rpi5";
             action = "update";
@@ -62,6 +70,7 @@ in
               }
             );
             acl = [
+              "rimuru_acl"
               "rpi5_acl"
               "ryuzu_acl"
               "xiatian_acl"
