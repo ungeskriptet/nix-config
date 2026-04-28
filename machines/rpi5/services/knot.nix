@@ -33,6 +33,11 @@ in
             update-owner-name = [ "iroha" ];
           }
           {
+            id = "misaka_acl";
+            key = "misaka";
+            action = "update";
+          }
+          {
             id = "rimuru_acl";
             key = "rimuru";
             action = "update";
@@ -87,6 +92,7 @@ in
             );
             acl = [
               "iroha_acl"
+              "misaka_acl"
               "rimuru_acl"
               "rpi5_acl"
               "ryuzu_acl"
