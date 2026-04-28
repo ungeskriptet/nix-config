@@ -22,6 +22,10 @@ let
     "gmx.de"
     "gmx.net"
   ]);
+  blockedAliases = sieveList [
+    "info"
+    "sales"
+  ];
 in
 {
   sops.secrets = {
@@ -141,7 +145,10 @@ in
             ];
           };
           connect.greeting = "config_get('server.hostname') + ' Hi! :3'";
-          rcpt.catch-all = true;
+          rcpt = {
+            catch-all = true;
+            script = "'block-aliases'";
+          };
           data.script = "'reverse-reject'";
         };
         sieve.trusted.scripts.reverse-reject = {
@@ -161,6 +168,23 @@ in
                 "Sorry, :( your E-Mail has been rejected because '\${env.helo_domain}'"
                 "blocks my mailserver. This means I won't be able to reply to your"
                 "message. Please contact me from a different E-Mail provider.\";"
+              ]}
+            }
+          '';
+        };
+        sieve.trusted.scripts.block-aliases = {
+          name = "Block aliases";
+          contents = ''
+            require ["envelope"];
+            if envelope :is :localpart "to" ${blockedAliases} {
+              ${lib.concatStringsSep " " [
+                "reject \"550"
+                "Hi! Deine E-Mail wurde blockiert, aber keine sorge, wenn du mich"
+                "erreichen möchtest, nutze bitte einen anderen zufälligen Alias"
+                "(Den Teil der E-Mail adresse vor dem '@')."
+                "Hi! Your message was blocked, but fear not, if you want to reach"
+                "me, use a different random alias (The part of the E-Mail address"
+                "before the '@').\";"
               ]}
             }
           '';
