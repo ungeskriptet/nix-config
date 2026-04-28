@@ -32,6 +32,11 @@
     nix-config = {
       enablePlasma = lib.mkEnableOption "Plasma";
       david = lib.mkEnableOption "David's desktop configs";
+      deviceType = lib.mkOption {
+        type = lib.types.nullOr (lib.types.enum [ "desktop" ]);
+        description = "The device type.";
+        default = null;
+      };
     };
   };
 }

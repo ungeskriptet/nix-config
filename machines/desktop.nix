@@ -49,6 +49,8 @@ in
           checkReversePath = false;
         };
       };
+
+      nix-config.deviceType = "desktop";
     }
     (lib.mkIf cfg.david {
       nix-config.enableVirt = true;
