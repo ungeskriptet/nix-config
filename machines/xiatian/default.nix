@@ -16,14 +16,6 @@
 
   sops.defaultSopsFile = ../../secrets/secrets-xiatian.yaml;
 
-  boot = {
-    kernelPackages = pkgs.linuxPackages_latest;
-    loader = {
-      efi.canTouchEfiVariables = true;
-      systemd-boot.enable = lib.mkDefault true;
-    };
-  };
-
   networking.hostName = "xiatian";
 
   environment.systemPackages = with pkgs; [ etterna ];
@@ -56,6 +48,10 @@
   nix-config = {
     david = true;
     enablePlasma = true;
+    hardware = {
+      enable = true;
+      platform = "intel";
+    };
   };
 
   home-manager.users.david.imports = [ ./home.nix ];

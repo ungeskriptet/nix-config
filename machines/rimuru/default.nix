@@ -1,6 +1,5 @@
 {
   inputs,
-  pkgs,
   lib,
   ...
 }:
@@ -24,15 +23,13 @@
     interfaces.enp2s0f1.wakeOnLan.enable = true;
   };
 
-  boot = {
-    kernelPackages = pkgs.linuxPackages_latest;
-    loader = {
-      efi.canTouchEfiVariables = true;
-      systemd-boot.enable = lib.mkDefault true;
+  nix-config = {
+    gnome.enable = true;
+    hardware = {
+      enable = true;
+      platform = "intel";
     };
   };
-
-  nix-config.gnome.enable = true;
 
   i18n = {
     defaultLocale = lib.mkForce "de_DE.UTF-8";

@@ -1,24 +1,5 @@
-{ pkgs, lib, ... }:
-
+{ ... }:
 {
-  boot = {
-    kernelModules = [ "kvm-intel" ];
-    kernelPackages = pkgs.linuxPackages_latest;
-    loader = {
-      efi.canTouchEfiVariables = true;
-      systemd-boot.enable = lib.mkDefault true;
-    };
-    initrd.availableKernelModules = [
-      "xhci_pci"
-      "ahci"
-      "nvme"
-      "usbhid"
-      "usb_storage"
-      "sd_mod"
-      "rtsx_pci_sdmmc"
-    ];
-  };
-
   fileSystems = {
     "/" = {
       device = "/dev/disk/by-uuid/baa48611-e2d9-4925-84fb-d6e5aedf281c";
@@ -40,10 +21,7 @@
     };
   };
 
-  zramSwap = {
-    enable = true;
-    memoryPercent = 50;
-  };
+  zramSwap.memoryPercent = 50;
 
   swapDevices = [
     {
@@ -52,16 +30,4 @@
       randomEncryption.enable = true;
     }
   ];
-
-  services = {
-    fstrim.enable = true;
-    fwupd.enable = true;
-  };
-
-  hardware = {
-    cpu.intel.updateMicrocode = true;
-    enableRedistributableFirmware = true;
-  };
-
-  nixpkgs.hostPlatform = "x86_64-linux";
 }

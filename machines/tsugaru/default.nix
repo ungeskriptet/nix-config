@@ -24,21 +24,19 @@
     firewall.allowedTCPPorts = [ 3389 ];
   };
 
-  boot = {
-    kernelPackages = pkgs.linuxPackages_latest;
-    loader = {
-      efi.canTouchEfiVariables = true;
-      systemd-boot.enable = lib.mkDefault true;
-    };
-  };
-
   environment = {
     systemPackages = with pkgs; [
       prismlauncher
     ];
   };
 
-  nix-config.gnome.enable = true;
+  nix-config = {
+    gnome.enable = true;
+    hardware = {
+      enable = true;
+      platform = "intel";
+    };
+  };
 
   i18n = {
     defaultLocale = lib.mkForce "pl_PL.UTF-8";

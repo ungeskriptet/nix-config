@@ -24,14 +24,6 @@
     interfaces.enp3s0.wakeOnLan.enable = true;
   };
 
-  boot = {
-    kernelPackages = pkgs.linuxPackages_latest;
-    loader = {
-      efi.canTouchEfiVariables = true;
-      systemd-boot.enable = lib.mkDefault true;
-    };
-  };
-
   environment = {
     systemPackages = with pkgs; [
       aisleriot
@@ -40,7 +32,13 @@
     ];
   };
 
-  nix-config.gnome.enable = true;
+  nix-config = {
+    gnome.enable = true;
+    hardware = {
+      enable = true;
+      platform = "intel";
+    };
+  };
 
   i18n = {
     defaultLocale = lib.mkForce "de_DE.UTF-8";

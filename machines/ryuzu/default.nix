@@ -1,8 +1,6 @@
 # ASRock B550M Pro4 AMD Desktop
 {
   inputs,
-  pkgs,
-  lib,
   ...
 }:
 {
@@ -34,20 +32,16 @@
     sudo.wheelNeedsPassword = false;
   };
 
-  boot = {
-    kernelPackages = pkgs.linuxPackages_latest;
-    loader = {
-      efi.canTouchEfiVariables = true;
-      systemd-boot.enable = lib.mkDefault true;
-    };
-  };
-
   users.hashedPassword = "$y$j9T$sMN/eKYxYfh97dxUFDtzf.$sD76l.o1RyplUGb./VV.m3/qgEOrHIh5MkhLoeDpXUB";
 
   nix-config = {
     david = true;
     enablePlasma = true;
     vr = true;
+    hardware = {
+      enable = true;
+      platform = "amd";
+    };
   };
 
   home-manager.users.david.config.hm-config.trusted = true;

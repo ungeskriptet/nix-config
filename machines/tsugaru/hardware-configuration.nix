@@ -1,17 +1,10 @@
 {
   lib,
-  pkgs,
-  modulesPath,
   ...
 }:
 
 {
-  imports = [
-    (modulesPath + "/installer/scan/not-detected.nix")
-  ];
-
   boot = {
-    kernelModules = [ "kvm-intel" ];
     extraModprobeConfig = ''
       options nouveau modeset=0
     '';
@@ -21,18 +14,6 @@
       "nvidia_drm"
       "nvidia_modeset"
     ];
-    initrd = {
-      availableKernelModules = [
-        "xhci_pci"
-        "ehci_pci"
-        "ahci"
-        "usb_storage"
-        "sd_mod"
-        "sr_mod"
-        "rtsx_pci_sdmmc"
-      ];
-      kernelModules = [ "i915" ];
-    };
   };
 
   fileSystems = {
@@ -51,8 +32,6 @@
     };
   };
 
-  zramSwap.enable = true;
-
   # Bug: Fix audio after sleep
   systemd.services.reloadaudio = {
     description = "Reload audio after sleep";
@@ -66,18 +45,6 @@
   };
 
   hardware = {
-    enableAllFirmware = true;
-    enableRedistributableFirmware = true;
-    bluetooth.enable = true;
-    cpu.intel.updateMicrocode = true;
-    graphics = {
-      extraPackages32 = with pkgs; [
-        (driversi686Linux.intel-vaapi-driver.override { enableHybridCodec = true; })
-      ];
-      extraPackages = with pkgs; [
-        (intel-vaapi-driver.override { enableHybridCodec = true; })
-      ];
-    };
     nvidia = {
       prime.offload.enable = lib.mkForce false;
       powerManagement = {
@@ -91,10 +58,5 @@
     udev.extraRules = ''
       ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x03[0-9]*", ATTR{power/control}="auto", ATTR{remove}="1"
     '';
-    fstrim.enable = true;
-    fwupd.enable = true;
-    thermald.enable = true;
   };
-
-  nixpkgs.hostPlatform = "x86_64-linux";
 }

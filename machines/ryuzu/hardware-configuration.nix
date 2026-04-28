@@ -1,17 +1,7 @@
 { ... }:
 {
   boot = {
-    kernelModules = [ "kvm-amd" ];
-    kernelParams = [ "amd_pstate=active" ];
     loader.systemd-boot.consoleMode = "max";
-    initrd.availableKernelModules = [
-      "nvme"
-      "xhci_pci"
-      "ahci"
-      "usbhid"
-      "usb_storage"
-      "sd_mod"
-    ];
     kernel.sysctl = {
       "vm.swappiness" = 10;
     };
@@ -42,10 +32,7 @@
     };
   };
 
-  zramSwap = {
-    enable = true;
-    memoryPercent = 85;
-  };
+  zramSwap.memoryPercent = 85;
 
   swapDevices = [
     {
@@ -55,21 +42,4 @@
       randomEncryption.enable = true;
     }
   ];
-
-  hardware = {
-    bluetooth.enable = true;
-    cpu.amd.updateMicrocode = true;
-    enableRedistributableFirmware = true;
-    graphics = {
-      enable = true;
-      enable32Bit = true;
-    };
-  };
-
-  services = {
-    fstrim.enable = true;
-    fwupd.enable = true;
-  };
-
-  nixpkgs.hostPlatform = "x86_64-linux";
 }
