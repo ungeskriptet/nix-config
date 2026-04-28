@@ -54,6 +54,14 @@ in
             update-owner-name = [ "ryuzu" ];
           }
           {
+            id = "tsugaru_acl";
+            key = "tsugaru";
+            action = "update";
+            update-owner = "name";
+            update-owner-match = "equal";
+            update-owner-name = [ "tsugaru" ];
+          }
+          {
             id = "xiatian_acl";
             key = "xiatian";
             action = "update";
@@ -82,6 +90,7 @@ in
               "rimuru_acl"
               "rpi5_acl"
               "ryuzu_acl"
+              "tsugaru_acl"
               "xiatian_acl"
             ];
             dnssec-signing = "on";
