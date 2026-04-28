@@ -1,14 +1,21 @@
 {
   lib,
   pkgs,
+  config,
   ...
 }:
 let
+  systemdCmd = cmd: lib.getExe' pkgs.systemd cmd;
   homeAssistantKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHCo1aBmLiSmZrjtnFVYczuv4/cNXjxF+4soUTSIeZla hass";
   sshWrapper = pkgs.writeShellScript "home-assistant-ssh" ''
     case "$SSH_ORIGINAL_COMMAND" in
       "poweroff")
-        exec ${lib.getExe' pkgs.systemd "poweroff"}
+        exec ${systemdCmd "poweroff"}
+        ;;
+      "itgmania")
+        exec ${systemdCmd "systemctl"} \
+          --machine=${config.users.userName}@ \
+          --user start ${config.systemd.user.services.itgmania.name}
         ;;
       *)
         echo "Access denied for unknown command" 1>&2
@@ -21,5 +28,12 @@ in
     openssh.authorizedKeys.keys = [
       ''restrict,command="${sshWrapper}" ${homeAssistantKey}''
     ];
+  };
+
+  systemd.user.services.itgmania = {
+    description = "Launch ITGmania";
+    script = lib.getExe pkgs.itgmania;
+    after = [ "graphical-session.target" ];
+    wants = [ "graphical-session.target" ];
   };
 }
