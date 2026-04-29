@@ -1,5 +1,5 @@
 # ASRock B550M Pro4 AMD Desktop
-{ ... }:
+{ pkgs, ... }:
 {
   imports = [
     ./hardware-configuration.nix
@@ -32,6 +32,12 @@
   programs.itgmania = {
     enable = true;
     audioDevice = "alsa_output.pci-0000_0b_00.4.analog-stereo";
+    extraPackages = (
+      with pkgs.itgmaniaPackages;
+      [
+        zmod-simply-love
+      ]
+    );
   };
 
   nix-config = {
