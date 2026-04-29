@@ -11,6 +11,7 @@ in
   imports = [
     ./common.nix
     ../modules/gnome.nix
+    ../modules/itgmania.nix
     ../modules/nm-nsupdate.nix
     ../modules/packages-desktop.nix
     ../modules/vr.nix

@@ -29,6 +29,11 @@
 
   users.hashedPassword = "$y$j9T$sMN/eKYxYfh97dxUFDtzf.$sD76l.o1RyplUGb./VV.m3/qgEOrHIh5MkhLoeDpXUB";
 
+  programs.itgmania = {
+    enable = true;
+    audioDevice = "alsa_output.pci-0000_0b_00.4.analog-stereo";
+  };
+
   nix-config = {
     david = true;
     enablePlasma = true;
