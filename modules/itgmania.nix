@@ -13,6 +13,7 @@ let
       Options.DisableScreenSaver = 0;
     }
   );
+  itgmaniaPkg = pkgs.itgmania.override { extraPackages = cfg.extraPackages; };
 in
 {
   options.programs.itgmania = {
@@ -32,8 +33,17 @@ in
       '';
       default = { };
     };
+    extraPackages = lib.mkOption {
+      type = lib.types.listOf lib.types.package;
+      description = ''
+        Extra songpacks, themes or other
+        packages to install.
+      '';
+      default = [ ];
+    };
   };
   config = lib.mkIf cfg.enable {
+    environment.systemPackages = [ itgmaniaPkg ];
     systemd.user.services.itgmania = {
       description = "Launch ITGmania";
       script = ''
@@ -71,7 +81,7 @@ in
         (
           [
             crudini
-            itgmania
+            itgmaniaPkg
             systemd
           ]
           ++ lib.optionals (cfg.audioDevice != "") [
