@@ -54,7 +54,7 @@ in
           ) | .value.name'
         )
         wpctl set-default $(get_output_id "${speakers}")
-        itgmania
+        systemd-inhibit --what=idle:sleep itgmania
         wpctl set-default $(get_output_id "$PREVIOUS_OUTPUT")
       '';
     after = [ "graphical-session.target" ];
@@ -63,6 +63,7 @@ in
       itgmania
       jq
       pipewire
+      systemd
       wireplumber
     ];
   };
