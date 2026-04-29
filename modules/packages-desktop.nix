@@ -62,7 +62,6 @@ in
       qbittorrent
       remmina
 
-      selfPkgs.itgmania-zmod
       selfPkgs.magisk-install
       selfPkgs.odin4
       selfPkgs.outfox-alpha5

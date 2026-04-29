@@ -629,8 +629,7 @@
         "plasma-manager": "plasma-manager",
         "sops-nix": "sops-nix",
         "treefmt-nix": "treefmt-nix_2",
-        "yuribot": "yuribot",
-        "zmod": "zmod"
+        "yuribot": "yuribot"
       }
     },
     "rust-overlay": {
@@ -749,23 +748,6 @@
       "original": {
         "type": "git",
         "url": "https://codeberg.org/ungeskriptet/yuribot"
-      }
-    },
-    "zmod": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1775531242,
-        "narHash": "sha256-DXQrutqlCUG7GypMq19gef4eR/qpAKL89nD/w9aTw8I=",
-        "owner": "zarzob",
-        "repo": "Simply-Love-SM5",
-        "rev": "2ca1809ff8ff34034c1cf9c471f93d58d850fed0",
-        "type": "github"
-      },
-      "original": {
-        "owner": "zarzob",
-        "ref": "itgmania-release",
-        "repo": "Simply-Love-SM5",
-        "type": "github"
       }
     }
   },

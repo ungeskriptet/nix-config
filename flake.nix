@@ -70,10 +70,6 @@
       url = "git+https://codeberg.org/ungeskriptet/yuribot";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    zmod = {
-      url = "github:zarzob/Simply-Love-SM5/itgmania-release";
-      flake = false;
-    };
   };
   outputs =
     {
@@ -157,9 +153,6 @@
           }))
           {
             x86_64-linux = {
-              itgmania-zmod = pkgs.x86_64-linux.callPackage ./packages/itgmania-zmod.nix {
-                inherit (inputs) zmod;
-              };
               odin4 = pkgs.x86_64-linux.callPackage ./packages/odin4.nix { };
               outfox-alpha5 = pkgs.x86_64-linux.callPackage ./packages/outfox-alpha5.nix { };
             };
