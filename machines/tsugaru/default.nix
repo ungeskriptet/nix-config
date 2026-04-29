@@ -10,8 +10,6 @@
     ./hardware-configuration.nix
     ./wireguard.nix
     ../desktop.nix
-    ../../modules/secureboot.nix
-    inputs.lanzaboote.nixosModules.lanzaboote
   ];
 
   sops = {
@@ -32,6 +30,7 @@
 
   nix-config = {
     gnome.enable = true;
+    secureboot.enable = true;
     hardware = {
       enable = true;
       platform = "intel";

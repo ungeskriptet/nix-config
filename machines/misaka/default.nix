@@ -1,15 +1,10 @@
-{
-  inputs,
-  ...
-}:
+{ inputs, ... }:
 {
   imports = [
     ./hardware-configuration.nix
     ./networking.nix
     ./services
     ../common.nix
-    ../../modules/secureboot.nix
-    inputs.lanzaboote.nixosModules.lanzaboote
   ];
 
   sops.defaultSopsFile = "${inputs.self}/secrets/secrets-misaka.yaml";
@@ -20,6 +15,7 @@
 
   nix-config = {
     david = true;
+    secureboot.enable = true;
     hardware = {
       enable = true;
       platform = "intel";

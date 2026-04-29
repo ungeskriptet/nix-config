@@ -1,8 +1,5 @@
 # ASRock B550M Pro4 AMD Desktop
-{
-  inputs,
-  ...
-}:
+{ ... }:
 {
   imports = [
     ./hardware-configuration.nix
@@ -10,8 +7,6 @@
     ./home-assistant/ssh.nix
     ../desktop.nix
     ../../modules/minecraft-server.nix
-    ../../modules/secureboot.nix
-    inputs.lanzaboote.nixosModules.lanzaboote
   ];
 
   sops.defaultSopsFile = ../../secrets/secrets-ryuzu.yaml;
@@ -38,6 +33,7 @@
     david = true;
     enablePlasma = true;
     vr = true;
+    secureboot.enable = true;
     hardware = {
       enable = true;
       platform = "amd";

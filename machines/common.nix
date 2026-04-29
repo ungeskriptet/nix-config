@@ -11,6 +11,7 @@
     ../modules/hardware.nix
     ../modules/packages-common.nix
     ../modules/popt/nixos.nix
+    ../modules/secureboot.nix
     ../modules/users.nix
     ../modules/vars.nix
     ../modules/virtualization.nix

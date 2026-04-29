@@ -1,7 +1,6 @@
 # HP EliteBook 840 G7
 {
   config,
-  inputs,
   pkgs,
   lib,
   ...
@@ -10,8 +9,6 @@
   imports = [
     ./hardware-configuration.nix
     ../desktop.nix
-    ../../modules/secureboot.nix
-    inputs.lanzaboote.nixosModules.lanzaboote
   ];
 
   sops.defaultSopsFile = ../../secrets/secrets-xiatian.yaml;
@@ -48,6 +45,7 @@
   nix-config = {
     david = true;
     enablePlasma = true;
+    secureboot.enable = true;
     hardware = {
       enable = true;
       platform = "intel";
