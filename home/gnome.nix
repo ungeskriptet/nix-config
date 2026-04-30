@@ -164,10 +164,15 @@ in
         };
         Service = {
           Type = "oneshot";
-          ExecStart = pkgs.writeShellScript "grdctl-set-pass" ''
-            GRD_PASS=$(cat ${config.sops.secrets."rdp/password".path})
-            ${lib.getExe pkgs.gnome-remote-desktop} rdp set-credentials ${config.home.username} $GRD_PASS
-          '';
+          ExecStart =
+            let
+              grdctl = lib.getExe pkgs.gnome-remote-desktop;
+            in
+            pkgs.writeShellScript "grdctl-set-pass" ''
+              GRD_PASS=$(cat ${config.sops.secrets."rdp/password".path})
+              ${grdctl} rdp set-credentials ${config.home.username} $GRD_PASS
+              ${grdctl} rdp enable
+            '';
         };
         Install.WantedBy = [ "default.target" ];
       };
