@@ -41,6 +41,7 @@ in
     environment = {
       systemPackages = with pkgs; [ ptyxis ];
       gnome.excludePackages = with pkgs; [
+        decibels
         epiphany
         geary
         gnome-console
