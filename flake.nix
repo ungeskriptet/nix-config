@@ -119,6 +119,7 @@
         };
       }
       // lib.mkNixos [
+        { host = "celica"; }
         { host = "iroha"; }
         { host = "misaka"; }
         { host = "rimuru"; }
