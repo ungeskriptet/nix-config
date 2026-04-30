@@ -25,6 +25,14 @@ in
         ];
         acl = [
           {
+            id = "celica_acl";
+            key = "celica";
+            action = "update";
+            update-owner = "name";
+            update-owner-match = "equal";
+            update-owner-name = [ "celica" ];
+          }
+          {
             id = "iroha_acl";
             key = "iroha";
             action = "update";
@@ -91,6 +99,7 @@ in
               }
             );
             acl = [
+              "celica_acl"
               "iroha_acl"
               "misaka_acl"
               "rimuru_acl"
