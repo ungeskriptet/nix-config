@@ -39,6 +39,11 @@
     };
   };
 
+  services = {
+    flatpak.enable = true;
+    gnome.gnome-software.enable = true;
+  };
+
   i18n = {
     defaultLocale = lib.mkForce "de_DE.UTF-8";
     extraLocaleSettings = lib.mkForce { };
