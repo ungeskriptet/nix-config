@@ -49,20 +49,15 @@ in
       };
     };
 
-    caddy.virtualHosts."https://${fqdn}".extraConfig = ''
-      tls ${config.acme.tlsCert} ${config.acme.tlsKey}
-      reverse_proxy https://${fqdn}:8098 {
-        header_up Host {host}
-      }
-    '';
+    caddy.hosts.${fqdn} = {
+      reverseProxies."https://${fqdn}:8098" = {
+        hostHeader = "{host}";
+      };
+    };
   };
 
   networking = {
     firewall.allowedUDPPorts = [ 3478 ];
-    hosts = {
-      "::1" = [ fqdn ];
-      "127.0.0.1" = [ fqdn ];
-    };
   };
 
   sops.secrets."headscale/oidc_secret".owner = "root";

@@ -4,11 +4,6 @@ let
   domain = config.networking.domain;
 in
 {
-  networking.hosts = {
-    "::1" = [ fqdn ];
-    "127.0.0.1" = [ fqdn ];
-  };
-
   sops.secrets."ntfy-sh/env".owner = "root";
 
   systemd.services = {
@@ -21,13 +16,8 @@ in
   };
 
   services = {
-    caddy.virtualHosts = {
-      "https://${fqdn}" = {
-        extraConfig = ''
-          tls ${config.acme.tlsCert} ${config.acme.tlsKey}
-          reverse_proxy unix/${config.services.ntfy-sh.settings.listen-unix}
-        '';
-      };
+    caddy.hosts.${fqdn} = {
+      reverseProxies."unix/${config.services.ntfy-sh.settings.listen-unix}" = { };
     };
 
     ntfy-sh = {

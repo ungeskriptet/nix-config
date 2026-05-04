@@ -22,11 +22,6 @@ in
     firewall = {
       allowedTCPPorts = [ 6697 ];
     };
-
-    hosts = {
-      "::1" = [ fqdn ];
-      "127.0.0.1" = [ fqdn ];
-    };
   };
 
   users = {
@@ -66,19 +61,20 @@ in
       ];
     };
 
-    caddy.virtualHosts = {
-      "https://${fqdn}" = {
-        extraConfig = ''
-          tls ${config.acme.tlsCert} ${config.acme.tlsKey}
-          @uploads path /uploads /uploads/*
-          reverse_proxy @uploads unix//run/soju/socket
-          reverse_proxy /socket unix//run/soju/socket
-          respond /config.json {"server":{"url":"/socket","auth":"mandatory"}} 200
-          root /favicon.ico ${gamjaIcon}
-          root ${pkgs.gamja}
-          file_server
-        '';
+    caddy.hosts.${fqdn} = {
+      reverseProxies."unix//run/soju/socket".paths = [
+        "/socket"
+        "/uploads"
+        "/uploads/*"
+      ];
+      rootDirs = {
+        "favicon".dir = toString gamjaIcon;
+        "root".dir = toString pkgs.gamja;
       };
+      fileServer = [ { } ];
+      extraConfig = ''
+        respond /config.json {"server":{"url":"/socket","auth":"mandatory"}} 200
+      '';
     };
 
     soju = {

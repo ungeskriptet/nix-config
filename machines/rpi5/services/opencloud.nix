@@ -62,21 +62,17 @@ in
       enableOcr = true;
     };
 
-    caddy.virtualHosts."https://${fqdn}".extraConfig = ''
-      tls ${config.acme.tlsCert} ${config.acme.tlsKey}
-      handle /idp-login-background {
-        root /idp-login-background ${background}
-        file_server
-      }
-      reverse_proxy https://${fqdn}:8096 {
-        header_up Host {host}
-      }
-    '';
-  };
-
-  networking.hosts = {
-    "::1" = [ fqdn ];
-    "127.0.0.1" = [ fqdn ];
+    caddy.hosts.${fqdn} = {
+      reverseProxies."https://${fqdn}:8096" = {
+        hostHeader = "{host}";
+      };
+      extraConfig = ''
+        handle /idp-login-background {
+          root /idp-login-background ${background}
+          file_server
+        }
+      '';
+    };
   };
 
   security.acme.defaults.reloadServices = [ "opencloud.service" ];

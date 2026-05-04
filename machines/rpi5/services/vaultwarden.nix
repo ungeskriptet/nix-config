@@ -6,11 +6,6 @@ in
 {
   sops.secrets."vaultwarden/env".owner = config.users.users.root.name;
 
-  networking.hosts = {
-    "::1" = [ fqdn ];
-    "127.0.0.1" = [ fqdn ];
-  };
-
   security.acme.defaults.reloadServices = [ "vaultwarden.service" ];
 
   systemd.services.vaultwarden = {
@@ -20,17 +15,11 @@ in
   };
 
   services = {
-    caddy.virtualHosts = {
-      "https://${fqdn}" = {
-        extraConfig = ''
-          tls ${config.acme.tlsCert} ${config.acme.tlsKey}
-          @lan {
-            path /admin*
-            not remote_ip private_ranges
-          }
-          respond @lan "Hi! sorry not allowed :(" 403
-          reverse_proxy https://${fqdn}:8082
-        '';
+    caddy.hosts.${fqdn} = {
+      reverseProxies."https://${fqdn}:8082" = { };
+      lanOnly = {
+        enable = true;
+        paths = [ "/admin*" ];
       };
     };
 

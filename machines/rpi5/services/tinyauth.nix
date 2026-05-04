@@ -42,11 +42,8 @@ in
       };
     };
 
-    caddy.virtualHosts."https://${fqdn}" = {
-      extraConfig = ''
-        tls ${config.acme.tlsCert} ${config.acme.tlsKey}
-        reverse_proxy unix//run/tinyauth/tinyauth.sock
-      '';
+    caddy.hosts."${fqdn}" = {
+      reverseProxies."unix//run/tinyauth/tinyauth.sock" = { };
     };
   };
 
@@ -55,10 +52,5 @@ in
       wants = [ config.systemd.services.tinyauth.name ];
       serviceConfig.SupplementaryGroups = [ "tinyauth" ];
     };
-  };
-
-  networking.hosts = {
-    "::1" = [ fqdn ];
-    "127.0.0.1" = [ fqdn ];
   };
 }

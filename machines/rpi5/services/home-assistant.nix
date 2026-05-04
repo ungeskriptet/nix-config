@@ -20,10 +20,6 @@ let
 in
 {
   networking = {
-    hosts = {
-      "::1" = [ fqdn ];
-      "127.0.0.1" = [ fqdn ];
-    };
     firewall.allowedUDPPorts = [ 5353 ];
   };
 
@@ -36,13 +32,8 @@ in
   };
 
   services = {
-    caddy.virtualHosts = {
-      "https://${fqdn}" = {
-        extraConfig = ''
-          tls ${config.acme.tlsCert} ${config.acme.tlsKey}
-          reverse_proxy https://${fqdn}:8083
-        '';
-      };
+    caddy.hosts.${fqdn} = {
+      reverseProxies."https://${fqdn}:8083" = { };
     };
 
     postgresql = {

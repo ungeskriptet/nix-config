@@ -8,20 +8,14 @@ let
   domain = config.networking.domain;
 in
 {
-  networking.hosts = {
-    "::1" = [ fqdn ];
-    "127.0.0.1" = [ fqdn ];
-  };
-
   systemd.tmpfiles.rules = [
     "d /var/lib/roundcube/enigma 0750 roundcube roundcube -"
   ];
 
   services = {
-    caddy.virtualHosts."https://${fqdn}".extraConfig = ''
-      tls ${config.acme.tlsCert} ${config.acme.tlsKey}
-      reverse_proxy http://${fqdn}:8091
-    '';
+    caddy.hosts.${fqdn} = {
+      reverseProxies."http://${fqdn}:8091" = { };
+    };
 
     roundcube = {
       enable = true;

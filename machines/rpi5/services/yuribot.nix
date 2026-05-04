@@ -14,15 +14,9 @@ in
 {
   sops.secrets."yuribot/env".owner = "root";
 
-  networking.hosts = {
-    "::1" = [ fqdn ];
-    "127.0.0.1" = [ fqdn ];
+  services.caddy.hosts.${fqdn} = {
+    reverseProxies."http://${fqdn}:8088" = { };
   };
-
-  services.caddy.virtualHosts."https://${fqdn}".extraConfig = ''
-    tls ${config.acme.tlsCert} ${config.acme.tlsKey}
-    reverse_proxy http://${fqdn}:8088
-  '';
 
   systemd.services.yuribot = {
     enable = true;

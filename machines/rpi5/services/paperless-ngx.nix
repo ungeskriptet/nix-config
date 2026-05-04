@@ -9,20 +9,14 @@ let
   fqdn = "paperless.${domain}";
 in
 {
-  networking.hosts."::1" = [ fqdn ];
-  networking.hosts."127.0.0.1" = [ fqdn ];
-
   sops.secrets = {
     "paperless/env".owner = "root";
     "paperless/pass".owner = "root";
   };
 
   services = {
-    caddy.virtualHosts = {
-      "https://${fqdn}".extraConfig = ''
-        tls ${config.acme.tlsCert} ${config.acme.tlsKey}
-        reverse_proxy http://${fqdn}:8095
-      '';
+    caddy.hosts.${fqdn} = {
+      reverseProxies."http://${fqdn}:8095" = { };
     };
 
     paperless = {

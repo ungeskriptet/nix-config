@@ -7,23 +7,18 @@ let
   domain = config.networking.domain;
 in
 {
-  networking.hosts = {
-    "::1" = [ fqdn ];
-    "127.0.0.1" = [ fqdn ];
-  };
-
   sops.secrets = {
     "sshwifty/sharedkey".owner = "root";
   };
 
   services = {
-    caddy.virtualHosts."https://${fqdn}".extraConfig = ''
-      tls ${config.acme.tlsCert} ${config.acme.tlsKey}
-      reverse_proxy http://${fqdn}:8099
-      basic_auth {
-        david $2b$05$/lL3Z49W7HZYObGWxkdVkuyyYBvMacdd/FtMr4lAHtSWIkAumPgie
-      }
-    '';
+    caddy.hosts.${fqdn} = {
+      reverseProxies."http://${fqdn}:8099" = { };
+      basicAuth = {
+        user = "david";
+        hash = "$2b$05$/lL3Z49W7HZYObGWxkdVkuyyYBvMacdd/FtMr4lAHtSWIkAumPgie";
+      };
+    };
 
     sshwifty = {
       enable = true;

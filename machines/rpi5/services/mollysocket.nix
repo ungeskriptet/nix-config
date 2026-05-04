@@ -10,19 +10,9 @@ in
 {
   sops.secrets."mollysocket/env".owner = "root";
 
-  networking.hosts = {
-    "::1" = [ fqdn ];
-    "127.0.0.1" = [ fqdn ];
-  };
-
   services = {
-    caddy.virtualHosts = {
-      "https://${fqdn}" = {
-        extraConfig = ''
-          tls ${config.acme.tlsCert} ${config.acme.tlsKey}
-          reverse_proxy http://${fqdn}:8085
-        '';
-      };
+    caddy.hosts.${fqdn} = {
+      reverseProxies."http://${fqdn}:8085" = { };
     };
 
     mollysocket = {

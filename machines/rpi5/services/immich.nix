@@ -39,17 +39,9 @@ in
     secrets."immich/smtppass" = { };
   };
 
-  networking.hosts = {
-    "::1" = [ fqdn ];
-    "127.0.0.1" = [ fqdn ];
-  };
-
   services = {
-    caddy.virtualHosts = {
-      "https://${fqdn}".extraConfig = ''
-        tls ${config.acme.tlsCert} ${config.acme.tlsKey}
-        reverse_proxy http://${fqdn}:${port}
-      '';
+    caddy.hosts.${fqdn} = {
+      reverseProxies."http://${fqdn}:${port}" = { };
     };
 
     immich = {

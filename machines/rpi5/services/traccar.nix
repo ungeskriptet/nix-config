@@ -55,20 +55,13 @@ in
       ];
     };
 
-    caddy.virtualHosts = {
-      "https://${fqdn}".extraConfig = ''
-        tls ${config.acme.tlsCert} ${config.acme.tlsKey}
-        reverse_proxy http://${fqdn}:8097
-      '';
-      "https://osmand.${domain}".extraConfig = ''
-        tls ${config.acme.tlsCert} ${config.acme.tlsKey}
-        reverse_proxy http://${fqdn}:5055
-      '';
+    caddy.hosts = {
+      ${fqdn} = {
+        reverseProxies."http://${fqdn}:8097" = { };
+      };
+      "osmand.${domain}" = {
+        reverseProxies."http://${fqdn}:5055" = { };
+      };
     };
-  };
-
-  networking.hosts = {
-    "::1" = [ fqdn ];
-    "127.0.0.1" = [ fqdn ];
   };
 }

@@ -62,11 +62,6 @@ in
       ];
     };
 
-    networking.hosts = {
-      "::1" = [ fqdn ];
-      "127.0.0.1" = [ fqdn ];
-    };
-
     security.acme.defaults.reloadServices = [ "adguardhome.service" ];
 
     systemd.services.adguardhome = {
@@ -152,12 +147,10 @@ in
         };
       };
 
-      caddy.virtualHosts."https://${fqdn}".extraConfig = ''
-        tls ${config.acme.tlsCert} ${config.acme.tlsKey}
-        @lan not remote_ip private_ranges
-        respond @lan "Hi! sorry not allowed :(" 403
-        reverse_proxy https://${fqdn}:8084
-      '';
+      caddy.hosts.${fqdn} = {
+        reverseProxies."https://${fqdn}:8084" = { };
+        lanOnly.enable = true;
+      };
     };
   };
 }

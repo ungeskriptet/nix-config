@@ -41,11 +41,6 @@ in
     ];
   };
 
-  networking.hosts = {
-    "::1" = [ fqdn ];
-    "127.0.0.1" = [ fqdn ];
-  };
-
   security.acme.defaults.reloadServices = [ "stalwart.service" ];
 
   systemd.services = {
@@ -271,22 +266,24 @@ in
       };
     };
 
-    caddy.virtualHosts = {
-      "https://${fqdn}, https://autodiscover.${domain}, https://autoconfig.${domain}, https://mta-sts.${domain}" =
-        {
-          extraConfig = ''
-            tls ${config.acme.tlsCert} ${config.acme.tlsKey}
-            reverse_proxy https://${fqdn}:8087
-          '';
-        };
-      "https://${domain}" = {
-        extraConfig = ''
-          reverse_proxy /dav/* https://${fqdn}:8087
-          reverse_proxy /jmap/* https://${fqdn}:8087
-          reverse_proxy /.well-known/caldav https://${fqdn}:8087
-          reverse_proxy /.well-known/carddav https://${fqdn}:8087
-          reverse_proxy /.well-known/jmap https://${fqdn}:8087
-        '';
+    caddy.hosts = {
+      stalwart = {
+        fqdns = [
+          fqdn
+          "autoconfig.${domain}"
+          "autodiscover.${domain}"
+          "mta-sts.${domain}"
+        ];
+        reverseProxies."https://${fqdn}:8087" = { };
+      };
+      ${domain} = {
+        reverseProxies."https://${fqdn}:8087".paths = [
+          "/dav/*"
+          "/jmap/*"
+          "/.well-known/caldav"
+          "/.well-known/carddav"
+          "/.well-known/jmap"
+        ];
       };
     };
   };

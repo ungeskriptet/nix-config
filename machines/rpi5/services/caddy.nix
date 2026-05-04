@@ -4,10 +4,6 @@
 }:
 let
   domain = config.networking.domain;
-  primRouterFqdn = "fritz.${domain}";
-  primRouterIP = config.networking.gatewayIP;
-  secRouterFqdn = "7590.${domain}";
-  secRouterIP = config.networking.secGatewayIP;
 in
 {
   networking = {
@@ -17,12 +13,6 @@ in
         443
       ];
       allowedUDPPorts = [ 443 ];
-    };
-    hosts = {
-      "fd64::3" = [ "drasl.${domain}" ];
-      "192.168.64.3" = [ "drasl.${domain}" ];
-      "::1" = [ "options.${domain}" ];
-      "127.0.0.1" = [ "options.${domain}" ];
     };
   };
 
@@ -38,20 +28,51 @@ in
       globalConfig = ''
         auto_https disable_certs
       '';
+      hosts = {
+        "*.${domain}" = {
+          extraConfig = ''
+            redir * https://${domain}/ temporary
+          '';
+        };
+        "7590.${domain}" = {
+          lanOnly.enable = true;
+          reverseProxies."https://192.168.64.15" = {
+            insecureTLS = true;
+          };
+        };
+        "drasl.${domain}" = {
+          reverseProxies."https://[fd64::3]" = { };
+        };
+        "fritz.${domain}" = {
+          reverseProxies."https://[fd64::52e6:36ff:fe06:6e73]" = {
+            insecureTLS = true;
+          };
+        };
+        "omao.${domain}" = {
+          reverseProxies."https://51kmze6tyra6b5gb.myfritz.net:40555" = { };
+        };
+        "options.${domain}" = {
+          rootDirs.manual.dir = "${config.system.build.manual.manualHTML}/share/doc/nixos";
+          fileServer = [ { } ];
+          index = "/options.html";
+        };
+        ${domain} = {
+          rootDirs."/var/lib/caddy/www" = { };
+          fileServer = [
+            { }
+            {
+              browse = true;
+              paths = [ "/files/*" ];
+            }
+          ];
+          extraConfig = ''
+            redir /files /files/ permanent
+            redir /private /private/ permanent
+          '';
+        };
+      };
       virtualHosts = {
-        "https://*.${domain}".extraConfig = ''
-          tls ${config.acme.tlsCert} ${config.acme.tlsKey}
-          redir * https://${domain}/ permanent
-        '';
         "https://${domain}".extraConfig = ''
-          tls ${config.acme.tlsCert} ${config.acme.tlsKey}
-          root * /var/lib/caddy/www/
-          file_server
-
-          redir /files /files/ permanent
-          file_server /files/* browse
-
-          redir /private /private/ permanent
           handle_path /private/* {
             basic_auth {
               david $2b$05$9l2gtUS.pMa6brsBOfUl7eGOwVtifl0dbcEpg4mcr6CsG2Fk4Aqxi
@@ -59,40 +80,6 @@ in
             root * /var/lib/caddy/private
             file_server browse
           }
-        '';
-        "https://${primRouterFqdn}".extraConfig = ''
-          tls ${config.acme.tlsCert} ${config.acme.tlsKey}
-          reverse_proxy https://${primRouterIP}:443 {
-            transport http {
-              tls
-              tls_insecure_skip_verify
-            }
-          }
-        '';
-        "https://${secRouterFqdn}".extraConfig = ''
-          tls ${config.acme.tlsCert} ${config.acme.tlsKey}
-          @lan not remote_ip private_ranges
-          respond @lan "Hi! sorry not allowed :(" 403
-          reverse_proxy https://${secRouterIP}:443 {
-            transport http {
-              tls
-              tls_insecure_skip_verify
-            }
-          }
-        '';
-        "https://drasl.${domain}".extraConfig = ''
-          tls ${config.acme.tlsCert} ${config.acme.tlsKey}
-          reverse_proxy https://drasl.${domain}:443
-        '';
-        "https://omao.${domain}".extraConfig = ''
-          tls ${config.acme.tlsCert} ${config.acme.tlsKey}
-          reverse_proxy https://51kmze6tyra6b5gb.myfritz.net:40555
-        '';
-        "https://options.${domain}".extraConfig = ''
-          tls ${config.acme.tlsCert} ${config.acme.tlsKey}
-          root ${config.system.build.manual.manualHTML}/share/doc/nixos
-          try_files /options.html
-          file_server
         '';
       };
     };

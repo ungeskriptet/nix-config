@@ -9,11 +9,6 @@ in
 {
   sops.secrets."esphome/env".owner = "root";
 
-  networking.hosts = {
-    "::1" = [ fqdn ];
-    "127.0.0.1" = [ fqdn ];
-  };
-
   systemd.services = {
     esphome = {
       serviceConfig.EnvironmentFile = config.sops.secrets."esphome/env".path;
@@ -26,15 +21,9 @@ in
   };
 
   services = {
-    caddy.virtualHosts = {
-      "https://${fqdn}" = {
-        extraConfig = ''
-          tls ${config.acme.tlsCert} ${config.acme.tlsKey}
-          @lan not remote_ip private_ranges
-          respond @lan "Hi! sorry not allowed :(" 403
-          reverse_proxy unix//run/esphome/esphome.sock
-        '';
-      };
+    caddy.hosts.${fqdn} = {
+      reverseProxies."unix//run/esphome/esphome.sock" = { };
+      lanOnly.enable = true;
     };
 
     esphome = {

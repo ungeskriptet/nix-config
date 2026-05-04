@@ -4,11 +4,6 @@ let
   domain = config.networking.domain;
 in
 {
-  networking.hosts = {
-    "::1" = [ fqdn ];
-    "127.0.0.1" = [ fqdn ];
-  };
-
   services = {
     avahi = {
       enable = true;
@@ -33,14 +28,12 @@ in
       browsing = true;
     };
 
-    caddy.virtualHosts."https://${fqdn}".extraConfig = ''
-      tls ${config.acme.tlsCert} ${config.acme.tlsKey}
-      @lan not remote_ip private_ranges
-      respond @lan "Hi! sorry not allowed :(" 403
-      reverse_proxy http://${fqdn}:631 {
-        header_up host localhost
-      }
-    '';
+    caddy.hosts.${fqdn} = {
+      reverseProxies."http://${fqdn}:631" = {
+        hostHeader = "localhost";
+      };
+      lanOnly.enable = true;
+    };
   };
 
   hardware.printers = {
