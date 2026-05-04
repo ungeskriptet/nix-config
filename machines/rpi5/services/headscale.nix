@@ -40,6 +40,12 @@ in
             "2620:fe::10"
           ];
         };
+        oidc = {
+          issuer = "https://auth.${domain}";
+          client_id = "6ae8c236-d562-4f2e-8ce7-164bbf608d71";
+          client_secret_path = "\${CREDENTIALS_DIRECTORY}/oidc_secret";
+          pkce.enabled = true;
+        };
       };
     };
 
@@ -59,8 +65,15 @@ in
     };
   };
 
+  sops.secrets."headscale/oidc_secret".owner = "root";
+
   systemd.services.headscale = {
-    serviceConfig.SupplementaryGroups = [ "acme" ];
+    after = [ "tinyauth.service" ];
+    wants = [ "tinyauth.service" ];
+    serviceConfig = {
+      SupplementaryGroups = [ "acme" ];
+      LoadCredential = [ "oidc_secret:${config.sops.secrets."headscale/oidc_secret".path}" ];
+    };
   };
 
   security.acme.defaults.reloadServices = [ "headscale.service" ];

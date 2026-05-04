@@ -9,6 +9,7 @@ in
 
   sops = {
     secrets = {
+      "tinyauth/oidc/headscale" = { };
       "tinyauth/totp" = { };
     };
     templates."tinyauth/env" = {
@@ -21,6 +22,7 @@ in
             config.sops.placeholder."tinyauth/totp"
           ]
         }
+        TINYAUTH_OIDC_CLIENTS_HEADSCALE_CLIENTSECRET=${config.sops.placeholder."tinyauth/oidc/headscale"}
       '';
     };
   };
@@ -34,6 +36,9 @@ in
         APPURL = "https://${fqdn}";
         AUTH_SECURECOOKIE = true;
         UI_TITLE = "BakaAuth";
+        OIDC_CLIENTS_HEADSCALE_CLIENTID = "6ae8c236-d562-4f2e-8ce7-164bbf608d71";
+        OIDC_CLIENTS_HEADSCALE_NAME = "Headscale";
+        OIDC_CLIENTS_HEADSCALE_TRUSTEDREDIRECTURIS = "https://vpn.${domain}/oidc/callback";
       };
     };
 
