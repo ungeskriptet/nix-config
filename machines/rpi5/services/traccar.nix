@@ -1,6 +1,7 @@
 {
-  lib,
+  pkgs,
   config,
+  inputs,
   ...
 }:
 let
@@ -8,33 +9,28 @@ let
   domain = config.networking.domain;
 in
 {
-  sops.secrets."traccar/env".owner = config.users.users.root.name;
+  disabledModules = [ "services/monitoring/traccar.nix" ];
+  imports = [ ../../../modules/traccar.nix ];
 
   systemd.services = {
     traccar = {
       after = [ "postgresql.target" ];
       requires = [ "postgresql.target" ];
     };
-    postgresql-setup = {
-      serviceConfig.LoadCredential = [ "traccarenv:${config.sops.secrets."traccar/env".path}" ];
-      script = lib.mkAfter ''
-        source "$CREDENTIALS_DIRECTORY/traccarenv"
-        psql -tAc "ALTER USER \"traccar\" WITH PASSWORD '$TRACCAR_DB_PASSWORD';"
-      '';
-    };
   };
 
   services = {
     traccar = {
       enable = true;
-      environmentFile = config.sops.secrets."traccar/env".path;
+      package = inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.traccar;
+      environment = {
+        CONFIG_USE_ENVIRONMENT_VARIABLES = "true";
+        DATABASE_URL = "jdbc:postgresql://localhost/traccar?socketFactory=org.newsclub.net.unix.AFUNIXSocketFactory$FactoryArg&socketFactoryArg=/run/postgresql/.s.PGSQL.5432";
+      };
       settings = {
         database = {
           driver = "org.postgresql.Driver";
-          # Switch to Unix socket once traccar has been updated
-          url = "jdbc:postgresql://localhost:5432/traccar";
           user = "traccar";
-          password = "$TRACCAR_DB_PASSWORD";
         };
         web = {
           address = "[::1]";
