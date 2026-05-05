@@ -102,7 +102,7 @@ let
           description = "Attribute set of root directories.";
           default = { };
         };
-        fileServer = lib.mkOption {
+        fileServers = lib.mkOption {
           type = lib.types.listOf fileServerOptions;
           description = "List of file servers.";
           default = [ ];
@@ -229,7 +229,7 @@ in
               map (
                 x:
                 let
-                  index = toString (lib.lists.findFirstIndex (y: x == y) null host.fileServer);
+                  index = toString (lib.lists.findFirstIndex (y: x == y) null host.fileServers);
                 in
                 ''
                   ${mkMatcher {
@@ -238,7 +238,7 @@ in
                   }}
                   file_server @file_server_paths_${index} ${lib.optionalString x.browse "browse"}
                 ''
-              ) host.fileServer
+              ) host.fileServers
             )}
             ${lib.optionalString (host.index != "") ''
               try_files ${host.index}

@@ -53,12 +53,12 @@ in
         };
         "options.${domain}" = {
           rootDirs.manual.dir = "${config.system.build.manual.manualHTML}/share/doc/nixos";
-          fileServer = [ { } ];
+          fileServers = [ { } ];
           index = "/options.html";
         };
         ${domain} = {
           rootDirs."/var/lib/caddy/www" = { };
-          fileServer = [
+          fileServers = [
             { }
             {
               browse = true;

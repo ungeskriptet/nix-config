@@ -71,7 +71,7 @@ in
         "favicon".dir = toString gamjaIcon;
         "root".dir = toString pkgs.gamja;
       };
-      fileServer = [ { } ];
+      fileServers = [ { } ];
       extraConfig = ''
         respond /config.json {"server":{"url":"/socket","auth":"mandatory"}} 200
       '';
