@@ -1,10 +1,11 @@
 # ASRock B550M Pro4 AMD Desktop
-{ pkgs, ... }:
+{ ... }:
 {
   imports = [
     ./hardware-configuration.nix
     ./home-assistant/powerdown.nix
     ./home-assistant/ssh.nix
+    ./itgmania.nix
     ../desktop.nix
     ../../modules/minecraft-server.nix
   ];
@@ -28,17 +29,6 @@
   };
 
   users.hashedPassword = "$y$j9T$sMN/eKYxYfh97dxUFDtzf.$sD76l.o1RyplUGb./VV.m3/qgEOrHIh5MkhLoeDpXUB";
-
-  programs.itgmania = {
-    enable = true;
-    audioDevice = "alsa_output.pci-0000_0b_00.4.analog-stereo";
-    extraPackages = (
-      with pkgs.itgmaniaPackages;
-      [
-        zmod-simply-love
-      ]
-    );
-  };
 
   nix-config = {
     david = true;
