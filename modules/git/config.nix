@@ -1,4 +1,8 @@
 {
+  alias = {
+    "ae" = "commit --amend -s";
+    "ane" = "commit --amend --no-edit -s";
+  };
   init = {
     defaultBranch = "master";
   };
