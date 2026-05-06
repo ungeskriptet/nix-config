@@ -41,12 +41,8 @@ in
       };
     };
     caddy = {
-      enable = true;
-      virtualHosts = {
-        "https://${fqdn}".extraConfig = ''
-          tls ${config.acme.tlsCert} ${config.acme.tlsKey}
-          reverse_proxy http://[::1]:8092
-        '';
+      hosts.${fqdn} = {
+        reverseProxies."http://[::1]:8092" = { };
       };
     };
   };
