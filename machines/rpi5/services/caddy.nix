@@ -22,7 +22,10 @@ in
           };
         };
         "drasl.${domain}" = {
-          reverseProxies."https://[fd64::3]" = { };
+          reverseProxies."https://[fd64::3]" = {
+            hostHeader = "drasl.${domain}";
+            serverName = "drasl.${domain}";
+          };
         };
         "fritz.${domain}" = {
           reverseProxies."https://[fd64::52e6:36ff:fe06:6e73]" = {
