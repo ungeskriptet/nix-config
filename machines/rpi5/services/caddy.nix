@@ -6,28 +6,9 @@ let
   domain = config.networking.domain;
 in
 {
-  networking = {
-    firewall = {
-      allowedTCPPorts = [
-        80
-        443
-      ];
-      allowedUDPPorts = [ 443 ];
-    };
-  };
-
-  security.acme.defaults.reloadServices = [ "caddy.service" ];
-
-  systemd.services.caddy = {
-    serviceConfig.SupplementaryGroups = [ "acme" ];
-  };
-
   services = {
     caddy = {
       enable = true;
-      globalConfig = ''
-        auto_https disable_certs
-      '';
       hosts = {
         "*.${domain}" = {
           extraConfig = ''

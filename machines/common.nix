@@ -7,6 +7,7 @@
 {
   imports = [
     ../modules/acme.nix
+    ../modules/caddy-common.nix
     ../modules/caddy-hosts.nix
     ../modules/git/nixos.nix
     ../modules/hardware.nix
