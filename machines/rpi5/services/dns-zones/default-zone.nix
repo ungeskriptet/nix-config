@@ -129,31 +129,32 @@ in
   ];
 
   subdomains = {
+    # keep-sorted start block=yes
     "*" = { inherit A AAAA; };
-
     _discord = {
       TXT = [ "dh=af7fa0fe13e9372fbb35fe58ac41091232b2e929" ];
     };
-
     _mta-sts = {
       TXT = [ "v=STSv1; id=2711684835720415692" ];
     };
-
     mail = {
       inherit A AAAA;
       TXT = [
         "v=spf1 a ra=postmaster -all"
       ];
     };
-
+    misaka = {
+      A = [ (a "192.168.64.3") ];
+      AAAA = [ (a "fd64::3") ];
+    };
     rpi5 = {
       inherit AAAA;
       A = [ (a lanIpv4) ];
     };
-
     satone = {
       A = [ (a "193.122.3.88") ];
       AAAA = [ (a "2603:c020:8008:4864:0:6247:e5e6:8a6a") ];
     };
+    # keep-sorted end
   };
 }
