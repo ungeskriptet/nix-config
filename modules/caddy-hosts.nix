@@ -46,6 +46,13 @@ let
           '';
           default = "";
         };
+        serverName = lib.mkOption {
+          type = lib.types.str;
+          description = ''
+            The server name to use for TLS validation.
+          '';
+          default = "";
+        };
       };
     }
   );
@@ -187,12 +194,14 @@ in
                     ${lib.optionalString (v.hostHeader != "") ''
                       header_up Host ${v.hostHeader}
                     ''}
-                    ${lib.optionalString v.insecureTLS ''
-                      transport http {
-                        tls
+                    transport http {
+                      ${lib.optionalString v.insecureTLS ''
                         tls_insecure_skip_verify
-                      }
-                    ''}
+                      ''}
+                      ${lib.optionalString (v.serverName != "") ''
+                        tls_server_name ${v.serverName}
+                      ''}
+                    }
                   }
                 ''
               ) host.reverseProxies
