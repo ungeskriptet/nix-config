@@ -57,9 +57,12 @@ in
       nix-config.enableVirt = true;
       # Automatically inject payload when a Nintendo Switch is connected
       systemd.tmpfiles.rules = [ "d /var/lib/fusee-nano 0777 root root -" ];
-      services.udev.extraRules = with pkgs; ''
-        ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="0955", ATTR{idProduct}=="7321", RUN+="${lib.getExe fusee-nano} /var/lib/fusee-nano/payload.bin"
-      '';
+      services = {
+        tailscale.enable = true;
+        udev.extraRules = with pkgs; ''
+          ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="0955", ATTR{idProduct}=="7321", RUN+="${lib.getExe fusee-nano} /var/lib/fusee-nano/payload.bin"
+        '';
+      };
     })
     (lib.mkIf cfg.enablePlasma {
       services = {
