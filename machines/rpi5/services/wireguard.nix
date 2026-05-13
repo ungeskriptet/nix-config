@@ -99,6 +99,7 @@ in
           iifname "wg2" oifname "end0" meta l4proto { tcp, udp } th dport { 80, 443 } ip daddr != 192.168.0.0/16 accept
           iifname "wg2" oifname "end0" meta l4proto { tcp, udp } th dport { 80, 443 } ip6 daddr != fd00::/16 accept
         '';
+        checkReversePath = "loose";
       };
       nftables.tables.nixos-nat-custom = {
         family = "inet";
