@@ -39,11 +39,13 @@ in
         }
         // lib.optionalAttrs cfg.david.enable {
           c = "${bat} -pp";
-          compress-vid = "${ffmpeg} -vcodec libx264 -crf 28 output.mp4 -i";
-          heimdall = "heimdall-wait-for-device && ${heimdall}";
           rpi5 = "ssh root@rpi5";
           ryuzu = "ssh david@ryuzu";
           tftp-server = "sudo mkdir -p -m a=rwx tftp; sudo in.tftpd --foreground --listen --address :69 --secure --create ./tftp";
+        }
+        // lib.optionalAttrs (!cfg.nixOnDroid.enable && cfg.david.enable) {
+          compress-vid = "${ffmpeg} -vcodec libx264 -crf 28 output.mp4 -i";
+          heimdall = "heimdall-wait-for-device && ${heimdall}";
           yt-dlp-mp4 = "${yt-dlp} -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'";
         }
         // lib.optionalAttrs (!cfg.homeManager.enable) {
