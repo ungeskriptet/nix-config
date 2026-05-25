@@ -19,7 +19,7 @@ stdenv.mkDerivation (finalAttrs: {
     owner = "traccar";
     repo = "traccar";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-PqveNJlONxjmTu8YikEa+6X0nJddvW4jbz1RieM6j/Y=";
+    hash = "sha256-npPD33Vc1luJy7lA0mcvPhNGkoqrbz7e+U0l0AfXTGg=";
     fetchSubmodules = true;
   };
 
