@@ -43,11 +43,14 @@ in
       };
 
       networking = {
-        networkmanager.enable = true;
         firewall = {
           allowedUDPPorts = [ 67 ];
           # Required for WireGuard
           checkReversePath = false;
+        };
+        networkmanager = {
+          enable = true;
+          plugins = with pkgs; [ networkmanager-vpnc ];
         };
       };
 
