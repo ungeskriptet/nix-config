@@ -6,20 +6,32 @@
   makeWrapper,
   npmHooks,
   gradle,
-  nix-update-script,
+  jdk_headless,
+  jre_minimal,
   nodejs,
-  openjdk,
   protobuf,
 }:
+let
+  jre = jre_minimal.override {
+    jdk = jdk_headless;
+    modules = [
+      "java.desktop"
+      "java.logging"
+      "java.management"
+      "java.naming"
+      "java.sql"
+    ];
+  };
+in
 stdenv.mkDerivation (finalAttrs: {
   pname = "traccar";
-  version = "6.13.2";
+  version = "6.13.3";
 
   src = fetchFromGitHub {
     owner = "traccar";
     repo = "traccar";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-npPD33Vc1luJy7lA0mcvPhNGkoqrbz7e+U0l0AfXTGg=";
+    hash = "sha256-oRAO4dbN/HRWcfsC0QnHA4+R3TFZLrZgk3G7E63sXHg=";
     fetchSubmodules = true;
   };
 
@@ -47,7 +59,7 @@ stdenv.mkDerivation (finalAttrs: {
 
   npmDeps = fetchNpmDeps {
     src = "${finalAttrs.src}/traccar-web";
-    hash = "sha256-ghU+Y+TSD/mpFb13epYgxlkkWY/UAWmBsILXaecAig8=";
+    hash = "sha256-zqOCfS7ANwkumXIrR6Gj0sVeyfyhg9V/MhauP6zoPQQ=";
   };
 
   preBuild = ''
@@ -66,12 +78,10 @@ stdenv.mkDerivation (finalAttrs: {
     cp -r {schema,target/*,templates} $out
     cp -r traccar-web/build $out/web
     cp -r traccar-web/src/resources/l10n $out/templates/translations
-    makeWrapper ${openjdk}/bin/java $out/bin/traccar \
+    makeWrapper ${lib.getExe jre} $out/bin/traccar \
       --add-flags "-jar $out/tracker-server.jar"
     runHook postInstall
   '';
-
-  passthru.updateScript = nix-update-script { };
 
   meta = {
     description = "Open source GPS tracking system";
