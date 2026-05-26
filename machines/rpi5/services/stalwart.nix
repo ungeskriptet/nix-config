@@ -144,10 +144,10 @@ in
             catch-all = true;
             script = "'block-aliases'";
           };
-          data.script = "'reverse-reject'";
+          data.script = "'data-script'";
         };
-        sieve.trusted.scripts.reverse-reject = {
-          name = "Reverse-reject";
+        sieve.trusted.scripts.data-script = {
+          name = "Sieve script for DATA stage";
           contents = ''
             require ["envelope", "variables", "reject"];
             if anyof(
@@ -163,6 +163,18 @@ in
                 "Sorry, :( your E-Mail has been rejected because '\${env.helo_domain}'"
                 "blocks my mailserver. This means I won't be able to reply to your"
                 "message. Please contact me from a different E-Mail provider.\";"
+              ]}
+            }
+            if anyof(
+              header :matches "Subject" "*Limited?Time Offer*",
+              header :matches "From" "Luxury*"
+            ) {
+              ${lib.concatStringsSep " " [
+                "reject \"551 5.1.1"
+                "I don't want luxury watches."
+                "(If you're not a spammer, use a different subject"
+                "or change your sender name in case it contains"
+                "the word 'Luxury'.)\";"
               ]}
             }
           '';
