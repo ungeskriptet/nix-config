@@ -220,11 +220,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1778004519,
-        "narHash": "sha256-wX62KKV62fEkUsLjgGPUtJA3Ly7J5+AaJjgV6Uz4/uo=",
+        "lastModified": 1779975213,
+        "narHash": "sha256-BNw/i7/0Hn4eHhd7rBTVprp3Kn690Nu/XnsgjqIpoQI=",
         "ref": "refs/heads/master",
-        "rev": "ec6c43c1b6ded020412e41cac264d6ca91625ef5",
-        "revCount": 178,
+        "rev": "9c3968c90d02349c607c50f9e91d4302ceef4f2c",
+        "revCount": 194,
         "type": "git",
         "url": "https://codeberg.org/ungeskriptet/itg-songpacks-flake.git"
       },
