@@ -79,6 +79,7 @@ in
         egg-carton-4
         eventual-ascension-5
         everlasting-memories
+        everlasting-memories-2
         favorites-2026-january
         fearmix-2023
         fietsemaker-dump-1
@@ -197,6 +198,7 @@ in
         theoretical-zektbach
         total-chaos
         tres
+        turtle-streams
         ultra-party-mixtapes
         undertale
         vocaloid-project-pad-pack
