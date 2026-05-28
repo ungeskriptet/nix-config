@@ -11,43 +11,43 @@ in
   programs.ssh = lib.mkIf config.hm-config.dotfiles {
     enable = true;
     enableDefaultConfig = false;
-    matchBlocks = {
+    settings = {
       "*" = {
-        addKeysToAgent = "yes";
+        AddKeysToAgent = true;
       };
       "iroha" = {
-        hostname = "iroha.${domain}";
-        user = "root";
+        HostName = "iroha.${domain}";
+        User = "root";
       };
       "rimuru" = {
-        hostname = "rimuru.${domain}";
-        user = "root";
+        HostName = "rimuru.${domain}";
+        User = "root";
       };
       "rpi5" = {
-        hostname = "rpi5.${domain}";
-        user = "root";
-        forwardAgent = true;
+        HostName = "rpi5.${domain}";
+        User = "root";
+        ForwardAgent = true;
       };
       "ryuzu" = {
-        hostname = "ryuzu.${domain}";
-        user = "david";
-        forwardAgent = true;
+        HostName = "ryuzu.${domain}";
+        User = "david";
+        ForwardAgent = true;
       };
       "xiatian" = {
-        hostname = "xiatian.${domain}";
-        user = "david";
-        forwardAgent = true;
+        HostName = "xiatian.${domain}";
+        User = "david";
+        ForwardAgent = true;
       };
       "git-ssh.mainlining.org" = {
-        proxyCommand = "${lib.getExe pkgs.cloudflared} access ssh --hostname %h";
+        ProxyCommand = "${lib.getExe pkgs.cloudflared} access ssh --HostName %h";
       };
       "mainlining" = {
-        hostname = "mail.mainlining.org";
-        user = "root";
+        HostName = "mail.mainlining.org";
+        User = "root";
       };
       "postmarketos" = {
-        hostname = "172.16.42.1";
-        userKnownHostsFile = "/dev/null";
+        HostName = "172.16.42.1";
+        UserKnownHostsFile = "/dev/null";
       };
     };
   };
