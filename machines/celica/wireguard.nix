@@ -14,7 +14,7 @@ in
       interfaces."rpi5" = {
         dynamicEndpointRefreshSeconds = 300;
         mtu = 1280;
-        ips = [ "192.168.3.8/24" ];
+        ips = [ "192.168.3.9/24" ];
         privateKeyFile = config.sops.secrets."wireguard/rpi5/privkey".path;
         peers = [
           {
