@@ -11,6 +11,7 @@
     ../modules/caddy-hosts.nix
     ../modules/git/nixos.nix
     ../modules/hardware.nix
+    ../modules/nixpkgs-config.nix
     ../modules/packages-common.nix
     ../modules/popt/nixos.nix
     ../modules/secureboot.nix
@@ -142,7 +143,10 @@
       };
     };
   };
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs = {
+    allowPackages = [ "electron" ];
+    config.allowUnfree = true;
+  };
   documentation.nixos.includeAllModules = true;
   system.stateVersion = "26.05";
 }
