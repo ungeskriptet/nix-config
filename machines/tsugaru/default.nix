@@ -8,7 +8,6 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./wireguard.nix
     ../desktop.nix
   ];
 
@@ -20,6 +19,7 @@
   networking = {
     hostName = "tsugaru";
     firewall.allowedTCPPorts = [ 3389 ];
+    supportVpn.interfaceAddress = "192.168.3.3";
   };
 
   environment = {

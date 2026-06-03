@@ -7,7 +7,6 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./wireguard.nix
     ../desktop.nix
   ];
 
@@ -20,6 +19,7 @@
     hostName = "iroha";
     firewall.allowedTCPPorts = [ 3389 ];
     interfaces.enp3s0.wakeOnLan.enable = true;
+    supportVpn.interfaceAddress = "192.168.3.8";
   };
 
   environment = {
