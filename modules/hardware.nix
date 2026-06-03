@@ -10,6 +10,7 @@ let
 in
 {
   imports = [
+    ./nixpkgs-config.nix
     ./vars.nix
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
@@ -95,9 +96,7 @@ in
         environment.sessionVariables = {
           LIBVA_DRIVER_NAME = "iHD";
         };
-        nixpkgs = {
-          config.allowInsecurePredicate = pkg: builtins.elem (lib.getName pkg) [ "intel-media-sdk" ];
-        };
+        nixpkgs.allowPackages = [ "intel-media-sdk" ];
       })
     ]
   );
