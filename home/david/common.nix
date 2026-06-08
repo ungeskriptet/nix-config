@@ -13,7 +13,12 @@ in
     ./vars.nix
     ./accounts/common.nix
     ../common.nix
-  ];
+  ]
+  ++ lib.map (file: ./. + "/${file}") (
+    lib.attrNames (
+      lib.filterAttrs (dir: type: dir == "custom" && type == "directory") (builtins.readDir ./.)
+    )
+  );
 
   sops = lib.mkIf cfg.trusted {
     defaultSopsFile = ../../secrets/secrets-david.yaml;
