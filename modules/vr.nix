@@ -12,6 +12,7 @@
       enable = true;
       openFirewall = true;
       autoStart = false;
+      steam.enable = false;
     };
     environment.systemPackages = with pkgs; [ wayvr ];
   };
