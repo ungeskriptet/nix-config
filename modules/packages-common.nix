@@ -85,7 +85,7 @@ in
       binwalk
       dtc
       internetarchive
-      samfirm-js
+      samloader-rs
       sops
     ];
 }
