@@ -66,7 +66,10 @@ in
           ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="0955", ATTR{idProduct}=="7321", RUN+="${lib.getExe fusee-nano} /var/lib/fusee-nano/payload.bin"
         '';
       };
-      programs.obs-studio.enable = true;
+      programs.obs-studio = {
+        enable = true;
+        enableVirtualCamera = true;
+      };
     })
     (lib.mkIf cfg.enablePlasma {
       services = {
