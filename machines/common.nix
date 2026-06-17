@@ -12,7 +12,6 @@
     ../modules/git/nixos.nix
     ../modules/hardware.nix
     ../modules/nixpkgs-config.nix
-    ../modules/overlays.nix
     ../modules/packages-common.nix
     ../modules/popt/nixos.nix
     ../modules/secureboot.nix
