@@ -1,8 +1,6 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 {
   boot = {
-    kernelPackages =
-      inputs.nixos-raspberrypi-kernel.packages.${pkgs.stdenv.hostPlatform.system}.linuxPackages_rpi5;
     kernelParams = [ "video=HDMI-A-1:1280x720M@60" ];
     loader.raspberry-pi.bootloader = "kernel";
     kernel.sysctl = {
