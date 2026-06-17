@@ -22,10 +22,12 @@ let
     "gmx.de"
     "gmx.net"
   ]);
-  blockedAliases = sieveList [
-    "info"
-    "sales"
-  ];
+  blockedAliases = sieveList (
+    map (alias: "${alias}@${domain}") [
+      "info"
+      "sales"
+    ]
+  );
 in
 {
   sops.secrets = {
@@ -183,7 +185,7 @@ in
           name = "Block aliases";
           contents = ''
             require ["envelope"];
-            if envelope :is :localpart "to" ${blockedAliases} {
+            if envelope :is :all "to" ${blockedAliases} {
               ${lib.concatStringsSep " " [
                 "reject \"550"
                 "Hi! Deine E-Mail wurde blockiert, aber keine sorge, wenn du mich"
