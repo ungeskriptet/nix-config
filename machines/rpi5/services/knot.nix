@@ -29,7 +29,7 @@ in
             key = "celica";
             action = "update";
             update-owner = "name";
-            update-owner-match = "equal";
+            update-owner-match = "sub-or-equal";
             update-owner-name = [ "celica" ];
           }
           {
@@ -37,7 +37,7 @@ in
             key = "iroha";
             action = "update";
             update-owner = "name";
-            update-owner-match = "equal";
+            update-owner-match = "sub-or-equal";
             update-owner-name = [ "iroha" ];
           }
           {
@@ -50,7 +50,7 @@ in
             key = "rimuru";
             action = "update";
             update-owner = "name";
-            update-owner-match = "equal";
+            update-owner-match = "sub-or-equal";
             update-owner-name = [ "rimuru" ];
           }
           {
@@ -63,7 +63,7 @@ in
             key = "ryuzu";
             action = "update";
             update-owner = "name";
-            update-owner-match = "equal";
+            update-owner-match = "sub-or-equal";
             update-owner-name = [ "ryuzu" ];
           }
           {
@@ -71,7 +71,7 @@ in
             key = "tsugaru";
             action = "update";
             update-owner = "name";
-            update-owner-match = "equal";
+            update-owner-match = "sub-or-equal";
             update-owner-name = [ "tsugaru" ];
           }
           {
@@ -79,7 +79,7 @@ in
             key = "xiatian";
             action = "update";
             update-owner = "name";
-            update-owner-match = "equal";
+            update-owner-match = "sub-or-equal";
             update-owner-name = [ "xiatian" ];
           }
         ];
