@@ -8,6 +8,7 @@
 let
   cfg = config.nix-config;
   selfPkgs = inputs.self.packages.${pkgs.stdenv.hostPlatform.system};
+  dig = lib.removeAttrs pkgs.dig [ "man" ]; # Fix collision with pkgs.host
 in
 {
   programs = {
