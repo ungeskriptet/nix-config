@@ -92,8 +92,12 @@
   systemd.oomd = {
     enable = true;
     enableRootSlice = true;
+    enableSystemSlice = true;
     enableUserSlices = true;
-    settings.OOM.DefaultMemoryPressureDurationSec = "20s";
+    settings.OOM = {
+      DefaultMemoryPressureDurationSec = "20s";
+      DefaultMemoryPressureLimit = "40%";
+    };
   };
 
   environment.sessionVariables = {
