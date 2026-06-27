@@ -22,7 +22,6 @@
     ../modules/zsh/nixos
     inputs.home-manager.nixosModules.home-manager
     inputs.nix-index-database.nixosModules.default
-    inputs.nur.modules.nixos.default
     inputs.sops-nix.nixosModules.sops
   ];
 

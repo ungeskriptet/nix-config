@@ -17,7 +17,6 @@ in
     enable = true;
     profiles."Default" = {
       isDefault = true;
-      extensions = with pkgs.nur.repos.rycee.firefox-addons; [ dictionary-german ];
       settings = {
         "datareporting.healthreport.uploadEnabled" = false;
         "extensions.autoDisableScopes" = 0;
