@@ -18,7 +18,6 @@ in
   );
 
   programs = {
-    thunderbird.enable = true;
     ssh = lib.mkIf cfg.enablePlasma {
       enableAskPassword = true;
       askPassword = lib.getExe pkgs.kdePackages.ksshaskpass;
@@ -34,7 +33,6 @@ in
     with pkgs;
     [
       bitwarden-desktop
-      firefox
       gimp3-with-plugins
       hunspell
       hunspellDicts.de_DE
