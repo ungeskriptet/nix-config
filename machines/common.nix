@@ -11,6 +11,7 @@
     ../modules/caddy-hosts.nix
     ../modules/git/nixos.nix
     ../modules/hardware.nix
+    ../modules/kate.nix
     ../modules/nixpkgs-config.nix
     ../modules/packages-common.nix
     ../modules/popt/nixos.nix
