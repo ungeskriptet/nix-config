@@ -84,6 +84,7 @@ in
             baloo
             baloo-widgets
             elisa
+            kate
             khelpcenter
           ]
         );
