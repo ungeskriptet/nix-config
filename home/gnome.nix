@@ -72,57 +72,55 @@ in
         "extensions/dash-to-panel/trans-panel-opacity" = 0.6;
         "extensions/dash-to-panel/trans-use-custom-opacity" = true;
         "extensions/dash-to-panel/trans-use-dynamic-opacity" = true;
-        "extensions/dash-to-panel/panel-element-positions" = ''
-          {
-            "${cfg.monitorID}": [
-              {
-                "element": "leftBox",
-                "visible": true,
-                "position": "stackedTL"
-              },
-              {
-                "element": "activitiesButton",
-                "visible": true,
-                "position": "stackedTL"
-              },
-              {
-                "element": "showAppsButton",
-                "visible": true,
-                "position": "centerMonitor"
-              },
-              {
-                "element": "taskbar",
-                "visible": true,
-                "position": "centerMonitor"
-              },
-              {
-                "element": "centerBox",
-                "visible": true,
-                "position": "stackedBR"
-              },
-              {
-                "element": "rightBox",
-                "visible": true,
-                "position": "stackedBR"
-              },
-              {
-                "element": "dateMenu",
-                "visible": true,
-                "position": "stackedBR"
-              },
-              {
-                "element": "systemMenu",
-                "visible": true,
-                "position": "stackedBR"
-              },
-              {
-                "element": "desktopButton",
-                "visible": true,
-                "position": "stackedBR"
-              }
-            ]
-          }
-        '';
+        "extensions/dash-to-panel/panel-element-positions" = builtins.toJSON {
+          ${cfg.monitorID} = [
+            {
+              element = "leftBox";
+              visible = true;
+              position = "stackedTL";
+            }
+            {
+              element = "activitiesButton";
+              visible = true;
+              position = "stackedTL";
+            }
+            {
+              element = "showAppsButton";
+              visible = true;
+              position = "centerMonitor";
+            }
+            {
+              element = "taskbar";
+              visible = true;
+              position = "centerMonitor";
+            }
+            {
+              element = "centerBox";
+              visible = true;
+              position = "stackedBR";
+            }
+            {
+              element = "rightBox";
+              visible = true;
+              position = "stackedBR";
+            }
+            {
+              element = "dateMenu";
+              visible = true;
+              position = "stackedBR";
+            }
+            {
+              element = "systemMenu";
+              visible = true;
+              position = "stackedBR";
+            }
+            {
+              element = "desktopButton";
+              visible = true;
+              position = "stackedBR";
+            }
+          ];
+        };
       };
 
       "org/gnome/desktop" = {
