@@ -17,13 +17,23 @@ in
       serverDataDir = "${stateDir}/serverdata";
       extensionsDir = "${stateDir}/extensions";
       telemetryLevel = "off";
-      extraPackages = with pkgs; [ jdk ];
+      extraPackages = with pkgs; [
+        cargo
+        gcc
+        jdk
+        lld
+        pkg-config
+        rust-analyzer
+        rustup
+      ];
       extraEnvironment = with pkgs; {
         NIX_LD_LIBRARY_PATH = lib.makeLibraryPath [
           stdenv.cc.cc
           openssl
         ];
         NIX_LD = lib.fileContents "${stdenv.cc}/nix-support/dynamic-linker";
+        PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
+        RUST_SRC_PATH = "${pkgs.rustPlatform.rustLibSrc}";
       };
     };
     caddy.hosts.${fqdn} = {
