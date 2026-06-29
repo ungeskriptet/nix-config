@@ -28,7 +28,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     itgpacks = {
-      url = "git+https://codeberg.org/ungeskriptet/itg-songpacks-flake.git";
+      url = "https://codeberg.org/ungeskriptet/itg-songpacks-flake/archive/master.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     lanzaboote = {
@@ -45,7 +45,7 @@
       inputs.home-manager.follows = "home-manager";
     };
     nix-shell-collection = {
-      url = "git+https://codeberg.org/ungeskriptet/nix-shell-collection.git";
+      url = "https://codeberg.org/ungeskriptet/nix-shell-collection/archive/master.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-raspberrypi = {
@@ -66,7 +66,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     yuribot = {
-      url = "git+https://codeberg.org/ungeskriptet/yuribot";
+      url = "https://codeberg.org/ungeskriptet/yuribot/archive/master.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
