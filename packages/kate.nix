@@ -3,11 +3,11 @@
   symlinkJoin,
   makeWrapper,
   kdePackages,
-  python3Packages,
   cargo,
   gcc,
   openssl,
   pkg-config-unwrapped,
+  python3,
   rust-analyzer,
   rustc,
   rustPlatform,
@@ -26,9 +26,14 @@ lib.meta.hiPrio (symlinkJoin {
           gcc
           kdePackages.konsole
           pkg-config-unwrapped
-          python3Packages.python-lsp-server
           rust-analyzer
           rustc
+          (python3.withPackages (
+            ps: with ps; [
+              python-lsp-server
+              black
+            ]
+          ))
         ]
       }'
   '';
