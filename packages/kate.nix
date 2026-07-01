@@ -7,7 +7,7 @@
   gcc,
   openssl,
   pkg-config-unwrapped,
-  python3,
+  pyrefly,
   rust-analyzer,
   rustc,
   rustPlatform,
@@ -26,14 +26,9 @@ lib.meta.hiPrio (symlinkJoin {
           gcc
           kdePackages.konsole
           pkg-config-unwrapped
+          pyrefly
           rust-analyzer
           rustc
-          (python3.withPackages (
-            ps: with ps; [
-              python-lsp-server
-              black
-            ]
-          ))
         ]
       }'
   '';
