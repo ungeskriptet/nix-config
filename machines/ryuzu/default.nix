@@ -6,6 +6,7 @@
     ./home-assistant/powerdown.nix
     ./home-assistant/ssh.nix
     ./itgmania.nix
+    ./nginx.nix
     ../desktop.nix
     ../../modules/minecraft-server.nix
   ];
