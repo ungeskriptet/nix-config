@@ -3,12 +3,12 @@
   nixConfig = {
     extra-substituters = [
       "https://cache.thalheim.io"
-      "https://lanzaboote.cachix.org"
+      "https://nix-community.cachix.org"
       "https://nixos-raspberrypi.cachix.org"
     ];
     extra-trusted-public-keys = [
       "cache.thalheim.io-1:R7msbosLEZKrxk/lKxf9BTjOOH7Ax3H0Qj0/6wiHOgc="
-      "lanzaboote.cachix.org-1:Nt9//zGmqkg1k5iu+B3bkj3OmHKjSw9pvf3faffLLNk="
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "nixos-raspberrypi.cachix.org-1:4iMO9LXa8BqhU+Rpg6LQKiGa2lsNh/j2oiYLNOQ5sPI="
     ];
   };
@@ -16,6 +16,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-locked.url = "github:NixOS/nixpkgs/6c9a78c09ff4d6c21d0319114873508a6ec01655";
     itgpacks.url = "https://codeberg.org/ungeskriptet/itg-songpacks-flake/archive/master.tar.gz";
+    lanzaboote.url = "github:nix-community/lanzaboote";
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -26,10 +27,6 @@
     };
     home-manager = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    lanzaboote = {
-      url = "github:nix-community/lanzaboote";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-index-database = {
