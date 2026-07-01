@@ -11,6 +11,7 @@ in
 {
   imports = [
     inputs.plasma-manager.homeModules.plasma-manager
+    ./kate.nix
   ];
 
   options.hm-config.plasma.enable = lib.mkEnableOption "David's Plasma configs" // {
