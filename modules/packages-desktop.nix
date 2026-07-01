@@ -60,6 +60,7 @@ in
       qbittorrent
       remmina
 
+      selfPkgs.kate
       selfPkgs.magisk-install
       selfPkgs.odin4
       selfPkgs.outfox-alpha5

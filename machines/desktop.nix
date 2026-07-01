@@ -72,8 +72,6 @@ in
       };
     })
     (lib.mkIf cfg.enablePlasma {
-      nix-config.kate.enable = true;
-
       services = {
         desktopManager.plasma6.enable = true;
         displayManager.plasma-login-manager.enable = true;
