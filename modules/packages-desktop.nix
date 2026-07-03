@@ -18,6 +18,7 @@ in
   );
 
   programs = {
+    gnupg.agent.enable = lib.mkIf cfg.david true;
     ssh = lib.mkIf cfg.enablePlasma {
       enableAskPassword = true;
       askPassword = lib.getExe pkgs.kdePackages.ksshaskpass;
