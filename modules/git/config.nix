@@ -2,6 +2,8 @@
   alias = {
     "ae" = "commit --amend -s";
     "ane" = "commit --amend --no-edit -s";
+    "r" = "remote -v";
+    "rrm" = "remote remove";
   };
   init = {
     defaultBranch = "master";
