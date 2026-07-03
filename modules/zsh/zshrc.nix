@@ -113,10 +113,12 @@ in
         }
         git-remote () {
           if [ -z "$1" ]; then
-            REMOTE="ungeskriptet/$(basename "$PWD")"
+            REMOTE="ungeskriptet/$(basename $(git rev-parse --show-toplevel))"
           else
             REMOTE="$1"
           fi
+          git remote remove gh 2> /dev/null
+          git remote remove cb 2> /dev/null
           git remote add gh "gh:$REMOTE"
           git remote add cb "cb:$REMOTE"
         }
