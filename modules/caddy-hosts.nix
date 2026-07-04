@@ -53,6 +53,13 @@ let
           '';
           default = "";
         };
+        trustedProxies = lib.mkOption {
+          type = lib.types.listOf lib.types.str;
+          description = ''
+            List of IP ranges to trust.
+          '';
+          default = [ ];
+        };
       };
     }
   );
@@ -202,6 +209,9 @@ in
                         tls_server_name ${v.serverName}
                       ''}
                     }
+                    ${lib.optionalString (v.trustedProxies != [ ]) ''
+                      trusted_proxies ${lib.concatStringsSep " " v.trustedProxies}
+                    ''}
                   }
                 ''
               ) host.reverseProxies
