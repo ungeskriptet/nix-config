@@ -37,6 +37,7 @@
       ipv6AcceptRAConfig = {
         Token = "prefixstable";
         UseDNS = false;
+        PrefixDenyList = "fd00::/8";
       };
     };
   };
