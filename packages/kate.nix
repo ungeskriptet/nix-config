@@ -5,6 +5,7 @@
   kdePackages,
   cargo,
   gcc,
+  nixd,
   openssl,
   pkg-config-unwrapped,
   pyrefly,
@@ -25,6 +26,7 @@ lib.meta.hiPrio (symlinkJoin {
           cargo
           gcc
           kdePackages.konsole
+          nixd
           pkg-config-unwrapped
           pyrefly
           rust-analyzer
