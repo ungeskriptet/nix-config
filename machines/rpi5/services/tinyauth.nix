@@ -43,7 +43,12 @@ in
     };
 
     caddy.hosts."${fqdn}" = {
-      reverseProxies."unix//run/tinyauth/tinyauth.sock" = { };
+      reverseProxies."unix//run/tinyauth/tinyauth.sock" = {
+        trustedProxies = [
+          "fd64::3/128"
+          "192.168.64.3/32"
+        ];
+      };
     };
   };
 
