@@ -40,6 +40,12 @@ in
           fileServers = [ { } ];
           index = "/options.html";
         };
+        "torrent.${domain}" = {
+          reverseProxies."https://[fd64::3]" = {
+            hostHeader = "torrent.${domain}";
+            serverName = "torrent.${domain}";
+          };
+        };
         ${domain} = {
           rootDirs."/var/lib/caddy/www" = { };
           fileServers = [
