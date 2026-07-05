@@ -32,6 +32,11 @@
         install_url = "https://addons.mozilla.org/firefox/downloads/latest/insensitivex/latest.xpi";
         private_browsing = true;
       };
+      "ipvfoo@pmarks.net" = {
+        installation_mode = "force_installed";
+        install_url = "https://addons.mozilla.org/firefox/downloads/latest/ipvfoo/latest.xpi";
+        private_browsing = true;
+      };
       "pl@dictionaries.addons.mozilla.org" = {
         installation_mode = "force_installed";
         install_url = "https://addons.mozilla.org/firefox/downloads/latest/polish-spellchecker-dictionary/latest.xpi";
