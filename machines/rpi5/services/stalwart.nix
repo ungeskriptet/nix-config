@@ -90,6 +90,7 @@ in
           "directory.*"
           "email.*"
           "http.*"
+          "queue.*"
           "report.*"
           "resolver.*"
           "server.*"
@@ -146,7 +147,20 @@ in
             catch-all = true;
             script = "'block-aliases'";
           };
-          data.script = "'data-script'";
+          data = {
+            script = "'data-script'";
+            limits.messages = [
+              {
+                "if" = "!is_empty(authenticated_as)";
+                "then" = "-1";
+              }
+              { "else" = "10"; }
+            ];
+          };
+        };
+        queue.limiter.inbound = {
+          sender.enable = false;
+          ip.enable = false;
         };
         sieve.trusted.scripts.data-script = {
           name = "Sieve script for DATA stage";
