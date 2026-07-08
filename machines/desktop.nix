@@ -44,7 +44,10 @@ in
 
       networking = {
         firewall = {
-          allowedUDPPorts = [ 67 ];
+          allowedUDPPorts = [
+            67
+            8612 # Canon Scanner
+          ];
           # Required for WireGuard
           checkReversePath = false;
         };
