@@ -92,6 +92,9 @@ in
           ]
         );
         systemPackages = with pkgs; [ kdePackages.yakuake ];
+        sessionVariables = {
+          PINENTRY_KDE_USE_WALLET = "1";
+        };
       };
 
       environment = {
