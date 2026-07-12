@@ -41,6 +41,7 @@ in
           # keep-sorted start
           browsery = "https://biskupova.televiziastb.sk/browsery_rss.php";
           cccEvents = "https://events.ccc.de/feed";
+          fdroid = "https://f-droid.org/feed.xml";
           gamo2 = "https://nitter.net/GamoTwo/rss";
           haiku = "https://www.haiku-os.org/index.xml";
           haveibeenpwned = "https://haveibeenpwned.com/feed/breaches";
