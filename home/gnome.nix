@@ -44,11 +44,11 @@ in
         ];
 
         # ArcMenu
-        "extensions/arcmenu/custom-menu-button-icon" =
+        "extensions/arcmenu/menu-button-icon" =
           "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-        "extensions/arcmenu/custom-menu-button-icon-size" = 36.0;
-        "extensions/arcmenu/menu-button-icon" = "Custom_Icon";
-        "extensions/arcmenu/menu-layout" = "Windows";
+        "extensions/arcmenu/menu-button-icon-size" = 36;
+        "extensions/arcmenu/menu-button-appearance" = "Icon";
+        "extensions/arcmenu/menu-layout" = "windows";
         "extensions/arcmenu/show-activities-button" = true;
 
         # Desktop Icons
