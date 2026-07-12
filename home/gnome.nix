@@ -50,6 +50,7 @@ in
         "extensions/arcmenu/menu-button-appearance" = "Icon";
         "extensions/arcmenu/menu-layout" = "windows";
         "extensions/arcmenu/show-activities-button" = true;
+        "extensions/arcmenu/hide-overview-on-arcmenu-open" = true;
 
         # Desktop Icons
         "extensions/gtk4-ding/show-home" = true;
@@ -66,6 +67,7 @@ in
         "extensions/dash-to-panel/animate-appicon-hover" = true;
         "extensions/dash-to-panel/dot-color-dominant" = true;
         "extensions/dash-to-panel/hide-overview-on-startup" = true;
+        "extensions/dash-to-panel/overview-click-to-exit" = true;
         "extensions/dash-to-panel/scroll-icon-action" = "NOTHING";
         "extensions/dash-to-panel/scroll-panel-action" = "NOTHING";
         "extensions/dash-to-panel/trans-dynamic-behavior" = "ALL_WINDOWS";
