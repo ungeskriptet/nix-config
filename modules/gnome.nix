@@ -39,7 +39,10 @@ in
     };
 
     environment = {
-      systemPackages = with pkgs; [ ptyxis ];
+      systemPackages = with pkgs; [
+        file-roller
+        ptyxis
+      ];
       gnome.excludePackages = with pkgs; [
         decibels
         epiphany
