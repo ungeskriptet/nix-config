@@ -20,18 +20,19 @@ let
       "java.management"
       "java.naming"
       "java.sql"
+      "jdk.crypto.ec"
     ];
   };
 in
 stdenv.mkDerivation (finalAttrs: {
   pname = "traccar";
-  version = "6.13.3";
+  version = "6.14.5";
 
   src = fetchFromGitHub {
     owner = "traccar";
     repo = "traccar";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-oRAO4dbN/HRWcfsC0QnHA4+R3TFZLrZgk3G7E63sXHg=";
+    hash = "sha256-WuJYxfZAD+qmKxvX+vk2qaKdsFO2ASCFLP5ZXms/iFM=";
     fetchSubmodules = true;
   };
 
@@ -59,7 +60,7 @@ stdenv.mkDerivation (finalAttrs: {
 
   npmDeps = fetchNpmDeps {
     src = "${finalAttrs.src}/traccar-web";
-    hash = "sha256-zqOCfS7ANwkumXIrR6Gj0sVeyfyhg9V/MhauP6zoPQQ=";
+    hash = "sha256-hKVH2CVTounmnw+SgpSX3IuXYpWMkLzg5uuM6WmMwtI=";
   };
 
   preBuild = ''
@@ -82,6 +83,8 @@ stdenv.mkDerivation (finalAttrs: {
       --add-flags "-jar $out/tracker-server.jar"
     runHook postInstall
   '';
+
+  __darwinAllowLocalNetworking = true;
 
   meta = {
     description = "Open source GPS tracking system";
