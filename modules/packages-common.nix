@@ -85,6 +85,7 @@ in
       b4
       binwalk
       dtc
+      git-crypt
       internetarchive
       samloader-rs
       sops
