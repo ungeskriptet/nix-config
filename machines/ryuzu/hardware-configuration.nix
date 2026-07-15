@@ -3,7 +3,7 @@
   boot = {
     loader.systemd-boot.consoleMode = "max";
     kernel.sysctl = {
-      "vm.swappiness" = 10;
+      "vm.swappiness" = 1;
     };
   };
 
