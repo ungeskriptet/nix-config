@@ -13,6 +13,10 @@ in
         metrics_listen_addr = null;
         tls_cert_path = config.acme.tlsCert;
         tls_key_path = config.acme.tlsKey;
+        trusted_proxies = [
+          "127.0.0.1/32"
+          "::1/128"
+        ];
         prefixes = {
           v4 = "100.64.64.0/24";
           v6 = "fd7a:115c:a1e0:64::/64";
