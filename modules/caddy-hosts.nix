@@ -60,6 +60,13 @@ let
           '';
           default = [ ];
         };
+        extraConfig = lib.mkOption {
+          type = lib.types.lines;
+          description = ''
+            Extra config.
+          '';
+          default = "";
+        };
       };
     }
   );
@@ -211,6 +218,9 @@ in
                     }
                     ${lib.optionalString (v.trustedProxies != [ ]) ''
                       trusted_proxies ${lib.concatStringsSep " " v.trustedProxies}
+                    ''}
+                    ${lib.optionalString (v.extraConfig != "") ''
+                      ${v.extraConfig}
                     ''}
                   }
                 ''
