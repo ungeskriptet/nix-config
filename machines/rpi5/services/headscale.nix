@@ -38,8 +38,6 @@ in
           base_domain = "int.${domain}";
           override_local_dns = true;
           nameservers.global = [
-            config.networking.lanIPv4
-            config.networking.lanIPv6
             "9.9.9.10"
             "2620:fe::10"
           ];
@@ -53,10 +51,22 @@ in
       };
     };
 
-    caddy.hosts.${fqdn} = {
-      reverseProxies."https://${fqdn}:8098" = {
-        hostHeader = "{host}";
+    caddy = {
+      hosts.${fqdn} = {
+        reverseProxies."https://${fqdn}:8098" = {
+          hostHeader = "{host}";
+        };
       };
+      extraConfig = ''
+        http://${fqdn} {
+            handle /generate_204 {
+                respond 204
+            }
+            handle * {
+                redir https://{host}{uri}
+            }
+        }
+      '';
     };
   };
 
