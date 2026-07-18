@@ -45,7 +45,6 @@ in
           gamo2 = "https://nitter.net/GamoTwo/rss";
           haiku = "https://www.haiku-os.org/index.xml";
           haveibeenpwned = "https://haveibeenpwned.com/feed/breaches";
-          iidxOfficial = "https://nitter.net/IIDX_OFFICIAL/rss";
           limob = "https://linmob.net/feed.xml";
           lineageos = "https://lineageos.org/feed.xml";
           lineageosHudson = "https://github.com/LineageOS/hudson/commits/main/lineage-build-targets.atom";
