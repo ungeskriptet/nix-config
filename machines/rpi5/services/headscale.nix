@@ -25,7 +25,7 @@ in
         derp = {
           server = {
             enabled = true;
-            stun_listen_addr = "[::]:3478";
+            stun_listen_addr = "0.0.0.0:3478";
             verify_clients = true;
             region_id = 999;
             region_code = config.networking.hostName;
