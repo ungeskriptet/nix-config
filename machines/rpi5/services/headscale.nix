@@ -31,7 +31,6 @@ in
             region_code = config.networking.hostName;
             region_name = domain;
           };
-          urls = [ ];
         };
         dns = {
           magic_dns = true;
