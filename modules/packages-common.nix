@@ -63,6 +63,7 @@ in
       inetutils
       jq
       killall
+      lsof
       lz4
       ncdu
       openssl
