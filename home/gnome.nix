@@ -55,6 +55,9 @@ in
           "org.gnome.Nautilus.desktop"
         ];
 
+        "keybindings/focus-active-notification" = [ ];
+        "keybindings/toggle-message-tray" = [ "<Super>n" ];
+
         # ArcMenu
         "extensions/arcmenu/menu-button-icon" =
           "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
@@ -63,6 +66,9 @@ in
         "extensions/arcmenu/menu-layout" = "windows";
         "extensions/arcmenu/show-activities-button" = true;
         "extensions/arcmenu/hide-overview-on-arcmenu-open" = true;
+
+        # Clipboard History
+        "extensions/clipboard-history/toggle-menu" = [ "<Super>v" ];
 
         # Desktop Icons
         "extensions/gtk4-ding/show-home" = true;
