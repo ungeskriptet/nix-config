@@ -35,11 +35,7 @@ in
         dns = {
           magic_dns = true;
           base_domain = "int.${domain}";
-          override_local_dns = true;
-          nameservers.global = [
-            "9.9.9.10"
-            "2620:fe::10"
-          ];
+          override_local_dns = false;
         };
         oidc = {
           issuer = "https://auth.${domain}";
