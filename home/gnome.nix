@@ -39,6 +39,7 @@ in
           "appindicatorsupport@rgcjonas.gmail.com"
           "arcmenu@arcmenu.com"
           "caffeine@patapon.info"
+          "clipboard-history@alexsaveau.dev"
           "dash-to-panel@jderose9.github.com"
           "drive-menu@gnome-shell-extensions.gcampax.github.com"
           "gtk4-ding@smedius.gitlab.com"
@@ -194,6 +195,7 @@ in
       appindicator
       arcmenu
       caffeine
+      clipboard-history
       dash-to-panel
       gtk4-desktop-icons-ng-ding
       lock-keys-2
