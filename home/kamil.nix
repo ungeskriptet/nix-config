@@ -2,7 +2,6 @@
 {
   imports = [
     ./common.nix
-    ./desktop.nix
     ./gnome.nix
   ];
 

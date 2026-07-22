@@ -12,7 +12,6 @@ in
     ./firefox
     ./plasma
     ./accounts/desktop.nix
-    ../desktop.nix
   ];
 
   sops = lib.mkIf cfg.trusted {
@@ -28,8 +27,9 @@ in
     enable = true;
     autostart = {
       enable = true;
-      entries = [
-        "${pkgs.signal-desktop}/share/applications/signal.desktop"
+      entries = with pkgs; [
+        "${signal-desktop}/share/applications/signal.desktop"
+        "${bitwarden-desktop}/share/applications/bitwarden.desktop"
       ];
     };
   };
