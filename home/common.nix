@@ -10,6 +10,7 @@ in
   imports = [
     inputs.sops-nix.homeManagerModules.sops
     ./modules/firefox
+    ./modules/thunderbird
   ];
 
   programs = {

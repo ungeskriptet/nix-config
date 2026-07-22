@@ -12,6 +12,10 @@
       preset = "default";
       language = "pl";
     };
+    thunderbird = {
+      preset = "default";
+      language = "pl";
+    };
   };
 
   home = {

@@ -69,6 +69,10 @@
           preset = "default";
           language = "de";
         };
+        thunderbird = {
+          preset = "default";
+          language = "de";
+        };
       };
       home = {
         username = config.users.userName;

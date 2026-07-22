@@ -10,6 +10,7 @@ let
   mainlining = "david.wronek@mainlining.org";
   mainliningHost = "mail.mainlining.org";
   cfg = config.hm-config;
+  defaultProfile = config.nix-config.thunderbird.defaultProfile;
 in
 {
   config = lib.mkIf cfg.trusted {
@@ -66,7 +67,7 @@ in
         };
         thunderbird = {
           enable = true;
-          profiles = [ "Default" ];
+          profiles = [ defaultProfile ];
           color = "#dc8add";
         };
       };
@@ -80,7 +81,7 @@ in
         };
         thunderbird = {
           enable = true;
-          profiles = [ "Default" ];
+          profiles = [ defaultProfile ];
         };
       };
     };
