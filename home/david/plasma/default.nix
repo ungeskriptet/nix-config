@@ -28,52 +28,62 @@ in
         ];
       };
     };
-    programs.plasma = {
-      enable = true;
-      shortcuts = {
-        yakuake.toggle-window-state = "Meta+Esc";
+    programs = {
+      firefox.policies = {
+        ExtensionSettings."plasma-browser-integration@kde.org" = {
+          default_area = "menupanel";
+          installation_mode = "force_installed";
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/plasma-integration/latest.xpi";
+          private_browsing = true;
+        };
       };
-      configFile = {
-        yakuakerc = {
-          Window = {
-            Height = 100;
-            KeepOpen = true;
-            ShowTitleBar = false;
-            Width = 100;
+      plasma = {
+        enable = true;
+        shortcuts = {
+          yakuake.toggle-window-state = "Meta+Esc";
+        };
+        configFile = {
+          yakuakerc = {
+            Window = {
+              Height = 100;
+              KeepOpen = true;
+              ShowTitleBar = false;
+              Width = 100;
+            };
+            Appearance.HideSkinBorders = true;
+            Dialogs.FirstRun = false;
+            "Notification Messages".hinding_title_bar = false;
           };
-          Appearance.HideSkinBorders = true;
-          Dialogs.FirstRun = false;
-          "Notification Messages".hinding_title_bar = false;
+          kcminputrc.Keyboard = {
+            RepeatDelay = 300;
+            RepeatRate = 80;
+          };
+          ksmserverrc.General.loginMode = "emptySession";
         };
-        kcminputrc.Keyboard = {
-          RepeatDelay = 300;
-          RepeatRate = 80;
-        };
-        ksmserverrc.General.loginMode = "emptySession";
+        panels = [
+          {
+            floating = false;
+            location = "top";
+            widgets = [
+              {
+                name = "org.kde.plasma.kickoff";
+                config.General.icon = "nix-snowflake";
+              }
+              "org.kde.plasma.marginsseparator"
+              "org.kde.plasma.pager"
+              "org.kde.plasma.icontasks"
+              "org.kde.plasma.marginsseparator"
+              "org.kde.plasma.systemtray"
+              {
+                digitalClock = {
+                  date.format = "isoDate";
+                  time.format = "24h";
+                };
+              }
+            ];
+          }
+        ];
       };
-      panels = [
-        {
-          floating = false;
-          location = "top";
-          widgets = [
-            {
-              name = "org.kde.plasma.kickoff";
-              config.General.icon = "nix-snowflake";
-            }
-            "org.kde.plasma.marginsseparator"
-            "org.kde.plasma.pager"
-            "org.kde.plasma.icontasks"
-            "org.kde.plasma.marginsseparator"
-            "org.kde.plasma.systemtray"
-            {
-              digitalClock = {
-                date.format = "isoDate";
-                time.format = "24h";
-              };
-            }
-          ];
-        }
-      ];
     };
   };
 }

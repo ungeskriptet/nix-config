@@ -21,6 +21,17 @@ in
       "rdp/tls-key".mode = "0400";
     };
 
+    programs = {
+      firefox.policies = {
+        ExtensionSettings."chrome-gnome-shell@gnome.org" = {
+          default_area = "menupanel";
+          installation_mode = "force_installed";
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/gnome-shell-integration/latest.xpi";
+          private_browsing = true;
+        };
+      };
+    };
+
     dconf.settings = {
       "org/gnome/shell" = {
         enabled-extensions = [

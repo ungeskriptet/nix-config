@@ -59,7 +59,6 @@ in
 
     programs = {
       dconf.enable = true;
-      firefox.enable = true;
       thunderbird.enable = true;
     };
   };

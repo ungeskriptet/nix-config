@@ -1,6 +1,6 @@
 { config, ... }:
 let
-  cfg = config.programs.firefox;
+  cfg = config.nix-config.firefox;
 in
 {
   programs.firefox.profiles.${cfg.defaultProfile}.userChrome = ''

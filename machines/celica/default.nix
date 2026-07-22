@@ -64,6 +64,12 @@
       ];
       gnome.monitorID = "SAM-H9XZA06953";
       sops.defaultSopsFile = ../../secrets/secrets-martin.yaml;
+      nix-config = {
+        firefox = {
+          preset = "default";
+          language = "de";
+        };
+      };
       home = {
         username = config.users.userName;
         homeDirectory = "/home/${config.users.userName}";

@@ -9,10 +9,16 @@ let
 in
 {
   imports = [
-    ./firefox
     ./plasma
     ./accounts/desktop.nix
   ];
+
+  nix-config = {
+    firefox = {
+      preset = "david";
+      language = "en-US";
+    };
+  };
 
   sops = lib.mkIf cfg.trusted {
     secrets."groovestats/apikey" = { };
