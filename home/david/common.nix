@@ -27,6 +27,7 @@ in
         path = "${homeDir}/.android/adbkey";
         mode = "0400";
       };
+      "github/token" = { };
       "patatt/privkey" = {
         path = "${homeDir}/.local/share/patatt/private/20250914.key";
         mode = "0400";
@@ -40,6 +41,9 @@ in
         mode = "0400";
       };
     };
+    templates."nix.conf".content = ''
+      access-tokens = github.com=${config.sops.placeholder."github/token"}
+    '';
   };
 
   programs = {
@@ -70,6 +74,10 @@ in
       {
         ".android/adbkey.pub".source = ./dotfiles/adbkey.pub;
         ".ssh/id_ed25519.pub".source = ./dotfiles/ssh/id_ed25519.pub;
+        ".config/nix/nix.conf" = {
+          source = config.lib.file.mkOutOfStoreSymlink config.sops.templates."nix.conf".path;
+          force = true;
+        };
       }
       // lib.mergeAttrsList (
         map (file: { ".local/share/patatt/public/${file}".source = ./dotfiles/patattkey.pub; }) [
