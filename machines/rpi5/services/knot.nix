@@ -22,6 +22,7 @@ in
           "${lanIpv4}@53"
           "${lanIpv6}@53"
           "${globalIpv6}@53"
+          "::2@53"
         ];
         acl = [
           {
