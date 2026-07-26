@@ -10,7 +10,13 @@ let
   supportVpn = config.networking.supportVpn;
   netflixVpn = config.networking.netflixVpn;
   mkDnsRewrites =
-    domains:
+    {
+      domains,
+      localAAAA ? "::1",
+      localA ? "127.0.0.1",
+      privateAAAA ? config.networking.lanIPv6,
+      privateA ? config.networking.lanIPv4,
+    }:
     builtins.concatLists (
       map (
         domain:
@@ -23,10 +29,10 @@ let
               }"
             )
             {
-              ${config.networking.lanIPv6} = { };
-              ${config.networking.lanIPv4} = { };
-              "::1".local = true;
-              "127.0.0.1".local = true;
+              ${privateAAAA} = { };
+              ${privateA} = { };
+              ${localAAAA}.local = true;
+              ${localA}.local = true;
             }
         ))
       ) domains
@@ -77,13 +83,18 @@ in
             }
           ];
           user_rules =
-            mkDnsRewrites (
-              [
+            mkDnsRewrites {
+              domains = [
                 config.networking.hostName
                 config.networking.fqdn
               ]
-              ++ config.networking.hosts."::1"
-            )
+              ++ config.networking.hosts."::1";
+            }
+            ++ mkDnsRewrites {
+              domains = [ "ns1.${domain}" ];
+              localAAAA = "::2";
+              localA = "127.0.0.2";
+            }
             ++ map (ip: "|localhost^$dnsrewrite=${ip}") [
               "::1"
               "127.0.0.1"
