@@ -23,6 +23,7 @@ in
           "${lanIpv6}@53"
           "${globalIpv6}@53"
           "::2@53"
+          "127.0.0.2@53"
         ];
         acl = [
           # keep-sorted start block=yes
@@ -102,7 +103,7 @@ in
             inherit domain;
             file = util.writeZone domain (
               import (./dns-zones + "/default-zone.nix") {
-                inherit lib config;
+                inherit config;
                 inherit (inputs) dns;
               }
             );
@@ -136,9 +137,9 @@ in
       allowedTCPPorts = [ 53 ];
       allowedUDPPorts = [ 53 ];
     };
-    hosts = {
-      ${lanIpv4} = [ "ns1.${domain}" ];
-      ${lanIpv6} = [ "ns1.${domain}" ];
+    hosts = lib.mkAfter {
+      "::2" = [ "ns1.${domain}" ];
+      "127.0.0.2" = [ "ns1.${domain}" ];
     };
   };
 
