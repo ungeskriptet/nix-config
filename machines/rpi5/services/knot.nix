@@ -25,6 +25,7 @@ in
           "::2@53"
         ];
         acl = [
+          # keep-sorted start block=yes
           {
             id = "celica_acl";
             key = "celica";
@@ -68,6 +69,11 @@ in
             update-owner-name = [ "ryuzu" ];
           }
           {
+            id = "stalwart_acl";
+            key = "stalwart";
+            action = "update";
+          }
+          {
             id = "tsugaru_acl";
             key = "tsugaru";
             action = "update";
@@ -83,6 +89,7 @@ in
             update-owner-match = "sub-or-equal";
             update-owner-name = [ "xiatian" ];
           }
+          # keep-sorted end
         ];
         policy = [
           {
@@ -100,14 +107,17 @@ in
               }
             );
             acl = [
+              # keep-sorted start
               "celica_acl"
               "iroha_acl"
               "misaka_acl"
               "rimuru_acl"
               "rpi5_acl"
               "ryuzu_acl"
+              "stalwart_acl"
               "tsugaru_acl"
               "xiatian_acl"
+              # keep-sorted end
             ];
             dnssec-signing = "on";
             dnssec-policy = "default";
