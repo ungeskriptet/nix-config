@@ -10,31 +10,26 @@ let
   supportVpn = config.networking.supportVpn;
   netflixVpn = config.networking.netflixVpn;
   mkDnsRewrites =
-    entry:
-    lib.mkMerge (
+    domains:
+    builtins.concatLists (
       map (
-        {
-          domains,
-          a ? "",
-          aaaa ? "",
-        }:
-        lib.mkMerge (
-          map
+        domain:
+        (lib.mapAttrsToList (_: v: v) (
+          builtins.mapAttrs
             (
-              answer:
-              lib.mkIf (answer != "") (
-                map (domain: {
-                  inherit answer domain;
-                  enabled = true;
-                }) domains
-              )
+              n: v:
+              "|${domain}^$dnsrewrite=${n},client=${
+                if (v ? local && v.local) then "::1|127.0.0.1" else "~::1|~127.0.0.1"
+              }"
             )
-            [
-              a
-              aaaa
-            ]
-        )
-      ) entry
+            {
+              ${config.networking.lanIPv6} = { };
+              ${config.networking.lanIPv4} = { };
+              "::1".local = true;
+              "127.0.0.1".local = true;
+            }
+        ))
+      ) domains
     );
 in
 {
@@ -81,20 +76,20 @@ in
               password = "$2b$05$PenHlMoSFIXGYPIRJJkNDuk1eEHmi0cI5AgBIglXYj/LmS3zykJwy";
             }
           ];
-          filtering = {
-            rewrites = mkDnsRewrites [
-              {
-                domains = [
-                  config.networking.hostName
-                  config.networking.fqdn
-                ]
-                ++ config.networking.hosts."::1";
-                a = config.networking.lanIPv4;
-                aaaa = config.networking.lanIPv6;
-              }
+          user_rules =
+            mkDnsRewrites (
+              [
+                config.networking.hostName
+                config.networking.fqdn
+              ]
+              ++ config.networking.hosts."::1"
+            )
+            ++ map (ip: "|localhost^$dnsrewrite=${ip}") [
+              "::1"
+              "127.0.0.1"
             ];
-          };
           dns = {
+            hostsfile_enabled = false;
             bind_hosts = [
               "127.0.0.1"
               "::1"
