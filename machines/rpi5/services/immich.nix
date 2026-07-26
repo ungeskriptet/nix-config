@@ -9,34 +9,29 @@ let
 in
 {
   sops = {
+    secrets."immich/smtppass" = { };
     templates."immich.json" = {
       owner = config.users.users.immich.name;
-      content = ''
-        {
-          "newVersionCheck": {
-            "enabled": false
-          },
-          "server": {
-            "externalDomain": "https://${fqdn}"
-          },
-          "notifications": {
-            "smtp": {
-              "enabled": true,
-              "from": "immich@${domain}",
-              "replyTo": "immich@${domain}",
-              "transport": {
-                "ignoreCert": false,
-                "host": "mail.${domain}",
-                "port": 465,
-                "username": "immich@${domain}",
-                "password": "${config.sops.placeholder."immich/smtppass"}"
-              }
-            }
-          },
-        }
-      '';
+      content = builtins.toJSON {
+        newVersionCheck.enabled = false;
+        server.externalDomain = "https://${fqdn}";
+        notifications = {
+          smtp = {
+            enabled = true;
+            from = "immich@${domain}";
+            replyTo = "immich@${domain}";
+            transport = {
+              ignoreCert = false;
+              host = "mail.${domain}";
+              port = 465;
+              secure = true;
+              username = "immich@${domain}";
+              password = config.sops.placeholder."immich/smtppass";
+            };
+          };
+        };
+      };
     };
-    secrets."immich/smtppass" = { };
   };
 
   services = {
