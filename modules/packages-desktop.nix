@@ -53,10 +53,10 @@ in
     ]
     ++ lib.optionals cfg.david [
       extract-dtb
+      git-repo
       heimdall
       llvmPackages.clang-tools
       meld
-      nixd
       prismlauncher
       qbittorrent
       remmina
