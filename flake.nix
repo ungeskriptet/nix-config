@@ -143,6 +143,7 @@
             nix-on-droid-setup = pkgs.${system}.callPackage ./packages/nix-on-droid-setup.nix { };
             openssh-nix-on-droid = pkgs.${system}.callPackage ./packages/openssh-nix-on-droid.nix { };
             rg-uuid = pkgs.${system}.callPackage ./packages/rg-uuid { };
+            sigscan = pkgs.${system}.callPackage ./packages/sigscan.nix { };
             stalwart-spam-filter = pkgs.${system}.callPackage ./packages/stalwart/spam-filter.nix { };
             stalwart-webui = pkgs.${system}.callPackage ./packages/stalwart/webui.nix { };
             switch-nixos = pkgs.${system}.callPackage ./packages/switch-nixos.nix { };
