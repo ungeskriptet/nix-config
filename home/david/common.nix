@@ -74,7 +74,7 @@ in
       {
         ".android/adbkey.pub".source = ./dotfiles/adbkey.pub;
         ".ssh/id_ed25519.pub".source = ./dotfiles/ssh/id_ed25519.pub;
-        ".config/nix/nix.conf" = {
+        ".config/nix/nix.conf" = lib.mkIf cfg.trusted {
           source = config.lib.file.mkOutOfStoreSymlink config.sops.templates."nix.conf".path;
           force = true;
         };
