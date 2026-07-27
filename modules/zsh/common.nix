@@ -32,6 +32,7 @@ in
           yt-dlp = lib.getExe pkgs.yt-dlp;
         in
         {
+          g = "git";
           gr = "cd $(git rev-parse --show-toplevel)";
           ls = "ls --color=auto";
           rp = "realpath";
