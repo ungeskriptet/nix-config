@@ -751,7 +751,7 @@ in
               };
               dkimStrict = true;
               dkimVerify = {
-                "else" = "relaxed";
+                "else" = "strict";
                 match = { };
               };
               dmarcVerify = {
