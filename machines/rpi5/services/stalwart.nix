@@ -722,6 +722,7 @@ in
             value = {
               inboundReportAddresses = {
                 "noreply-dmarc-support@*" = true;
+                "noreply-smtp-tls-reporting@*" = true;
                 "postmaster@*" = true;
               };
               inboundReportForwarding = false;
