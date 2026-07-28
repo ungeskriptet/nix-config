@@ -7,6 +7,9 @@
     "cm" = "commit -sm";
     "d" = "diff";
     "l" = "log";
+    "pcb" = "push cb";
+    "pgh" = "push gh";
+    "p" = "push";
     "r" = "remote -v";
     "rrm" = "remote remove";
     "sh" = "show";
