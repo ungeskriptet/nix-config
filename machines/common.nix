@@ -143,7 +143,6 @@
     };
   };
   nixpkgs = {
-    allowPackages = [ "electron" ];
     config.allowUnfree = true;
   };
   documentation.nixos.includeAllModules = true;
