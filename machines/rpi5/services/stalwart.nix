@@ -721,6 +721,7 @@ in
             object = "ReportSettings";
             value = {
               inboundReportAddresses = {
+                "noreply-dmarc-support@*" = true;
                 "postmaster@*" = true;
               };
               inboundReportForwarding = false;
