@@ -1,19 +1,24 @@
 {
   alias = {
-    "a" = "add -A";
+    # keep-sorted start
+    "a" = "add";
+    "aa" = "add -A";
     "ae" = "commit --amend -s";
     "ane" = "commit --amend --no-edit -s";
     "c" = "commit -s";
+    "cf" = "commit --fixup";
     "cm" = "commit -sm";
     "d" = "diff";
+    "ds" = "diff --staged";
     "l" = "log";
+    "p" = "push";
     "pcb" = "push cb";
     "pgh" = "push gh";
-    "p" = "push";
     "r" = "remote -v";
     "rrm" = "remote remove";
-    "sh" = "show";
     "s" = "status";
+    "sh" = "show";
+    # keep-sorted end
   };
   init = {
     defaultBranch = "master";
