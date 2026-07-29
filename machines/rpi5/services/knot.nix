@@ -44,6 +44,15 @@ in
             update-owner-name = [ "iroha" ];
           }
           {
+            id = "localhost_acl";
+            key = "localhost";
+            action = "update";
+            address = [
+              "::1"
+              "127.0.0.1"
+            ];
+          }
+          {
             id = "misaka_acl";
             key = "misaka";
             action = "update";
@@ -57,22 +66,12 @@ in
             update-owner-name = [ "rimuru" ];
           }
           {
-            id = "rpi5_acl";
-            key = "rpi5";
-            action = "update";
-          }
-          {
             id = "ryuzu_acl";
             key = "ryuzu";
             action = "update";
             update-owner = "name";
             update-owner-match = "sub-or-equal";
             update-owner-name = [ "ryuzu" ];
-          }
-          {
-            id = "stalwart_acl";
-            key = "stalwart";
-            action = "update";
           }
           {
             id = "tsugaru_acl";
@@ -90,6 +89,7 @@ in
             update-owner-match = "sub-or-equal";
             update-owner-name = [ "xiatian" ];
           }
+
           # keep-sorted end
         ];
         policy = [
@@ -111,11 +111,10 @@ in
               # keep-sorted start
               "celica_acl"
               "iroha_acl"
+              "localhost_acl"
               "misaka_acl"
               "rimuru_acl"
-              "rpi5_acl"
               "ryuzu_acl"
-              "stalwart_acl"
               "tsugaru_acl"
               "xiatian_acl"
               # keep-sorted end

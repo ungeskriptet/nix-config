@@ -205,7 +205,7 @@ in
               dnsserver-1 = {
                 "@type" = "Tsig";
                 description = "Knot DNS";
-                keyName = "stalwart";
+                keyName = "localhost";
                 host = "::2";
                 protocol = "udp";
                 tsigAlgorithm = "hmac-sha512";

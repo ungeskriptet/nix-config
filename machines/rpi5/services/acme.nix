@@ -11,8 +11,9 @@ in
   acme = {
     enable = true;
     nameServer = "ns1.${domain}.";
+    tsigAlgorithm = "hmac-sha512.";
     tsigKey = config.sops.secrets."acme/tsig-key".path;
-    tsigKeyName = "rpi5";
+    tsigKeyName = "localhost";
   };
 
   sops.secrets."acme/tsig-key".owner = "root";
