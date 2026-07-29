@@ -2,7 +2,6 @@
   lib,
   config,
   pkgs,
-  inputs,
   ...
 }:
 let
@@ -10,7 +9,6 @@ let
   lanIpv4 = config.networking.lanIPv4;
   lanIpv6 = config.networking.lanIPv6;
   globalIpv6 = config.networking.globalIpv6;
-  util = inputs.dns.util.${pkgs.stdenv.hostPlatform.system};
 in
 {
   services = {
@@ -89,7 +87,6 @@ in
             update-owner-match = "sub-or-equal";
             update-owner-name = [ "xiatian" ];
           }
-
           # keep-sorted end
         ];
         policy = [
@@ -101,12 +98,9 @@ in
         zone = [
           {
             inherit domain;
-            file = util.writeZone domain (
-              import (./dns-zones + "/default-zone.nix") {
-                inherit config;
-                inherit (inputs) dns;
-              }
-            );
+            file = pkgs.writeText "${domain}-zone" ''
+              ${domain}. IN SOA ns1.${domain}. dns.${domain}. (1 86400 600 864000 60)
+            '';
             acl = [
               # keep-sorted start
               "celica_acl"
@@ -125,6 +119,17 @@ in
             semantic-checks = "on";
             zonefile-sync = "-1";
             zonefile-load = "difference-no-serial";
+            zonefile-skip = [
+              "A"
+              "AAAA"
+              "CAA"
+              "CNAME"
+              "MX"
+              "NS"
+              "SRV"
+              "TLSA"
+              "TXT"
+            ];
           }
         ];
       };
