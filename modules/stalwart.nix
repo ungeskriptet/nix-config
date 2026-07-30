@@ -113,6 +113,15 @@ in
     recoveryMode = {
       forceEnable = lib.mkEnableOption "Stalwart's recovery mode";
 
+      url = lib.mkOption {
+        type = lib.types.str;
+        description = ''
+          URL to the Stalwart server while in recovery mode.
+        '';
+        default = "http://localhost";
+        example = "http://[::1]";
+      };
+
       port = lib.mkOption {
         type = lib.types.port;
         description = ''
@@ -299,15 +308,20 @@ in
           after = [ "stalwart.service" ];
           wantedBy = [ "stalwart.service" ];
           environment = {
-            STALWART_URL = "http://localhost:${toString cfg.recoveryMode.port}";
+            STALWART_URL = "${cfg.recoveryMode.url}:${toString cfg.recoveryMode.port}";
           };
           path = [
             cfg.package.cli
             pkgs.curl
             pkgs.systemd
           ];
+          restartTriggers = [
+            (writePlan cfg.plan.sequence)
+            (writePlan defaultPlan)
+          ];
           serviceConfig = {
             Type = "oneshot";
+            RemainAfterExit = true;
             TimeoutSec = "5m";
             User = cfg.user;
             Group = cfg.group;
@@ -323,7 +337,7 @@ in
                     ((count++))
                     if [ $count -ge 10 ]; then
                       echo "Stalwart not up after $count attempts, bailing out."
-                      break
+                      exit 1
                     fi
                     echo "Stalwart is not up yet, retrying in 3 seconds."
                     sleep 3
@@ -371,6 +385,10 @@ in
               "/etc/stalwart/config.json"
             ];
           };
+          restartTriggers = [
+            (writePlan cfg.plan.sequence)
+            (writePlan defaultPlan)
+          ];
           serviceConfig = {
             ExecStart = [
               ""
