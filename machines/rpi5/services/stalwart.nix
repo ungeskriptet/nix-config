@@ -690,36 +690,6 @@ in
           }
           {
             "@type" = "update";
-            object = "MtaStageRcpt";
-            value = {
-              allowRelaying = {
-                "else" = "!is_empty(authenticated_as)";
-                match = { };
-              };
-              maxFailures = {
-                "else" = "5";
-                match = { };
-              };
-              maxRecipients = {
-                "else" = "100";
-                match = { };
-              };
-              rewrite = {
-                "else" = "false";
-                match = { };
-              };
-              script = {
-                "else" = "'rcpt-script'";
-                match = { };
-              };
-              waitOnFail = {
-                "else" = "5s";
-                match = { };
-              };
-            };
-          }
-          {
-            "@type" = "update";
             object = "ReportSettings";
             value = {
               inboundReportAddresses = {
