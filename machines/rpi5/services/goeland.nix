@@ -57,6 +57,7 @@ in
           postmarketos = "https://postmarketos.org/blog/feed.atom";
           postmarketosEdge = "https://postmarketos.org/edge/feed.atom";
           reactos = "https://reactos.org/index.xml";
+          servfail = "https://servfail.network/devlog/atom/";
           # keep-sorted end
         };
         pipes = {
