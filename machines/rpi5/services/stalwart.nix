@@ -78,6 +78,7 @@ in
     "stalwart/dbpass".owner = "root";
     "stalwart/recoverypass".owner = "root";
     "stalwart/tsig-key".owner = "root";
+    "stalwart/vapid-key".owner = "root";
   };
 
   networking.firewall = {
@@ -129,6 +130,7 @@ in
       credentials = {
         dbpass = config.sops.secrets."stalwart/dbpass".path;
         tsig-key = config.sops.secrets."stalwart/tsig-key".path;
+        vapid-key = config.sops.secrets."stalwart/vapid-key".path;
       };
       recoveryMode = {
         port = 8087;
@@ -791,6 +793,45 @@ in
                   };
                 };
               };
+            };
+          }
+          {
+            "@type" = "update";
+            object = "Jmap";
+            value = {
+              changesMaxResults = 5000;
+              eventSourceThrottle = 1000;
+              getMaxResults = 500;
+              maxConcurrentRequests = 4;
+              maxConcurrentUploads = 4;
+              maxMethodCalls = 16;
+              maxRequestSize = 10000000;
+              maxSubscriptions = 15;
+              maxUploadCount = 1000;
+              maxUploadSize = 50000000;
+              parseLimitContact = 10;
+              parseLimitEmail = 10;
+              parseLimitEvent = 10;
+              pushAttemptWait = 60000;
+              pushMaxAttempts = 3;
+              pushRequestTimeout = 10000;
+              pushRetryWait = 1000;
+              pushShardsTotal = 1;
+              pushThrottle = 1000;
+              pushVerifyTimeout = 60000;
+              queryMaxResults = 5000;
+              setMaxObjects = 500;
+              snippetMaxResults = 100;
+              uploadQuota = 50000000;
+              uploadTtl = 3600000;
+              webPushContact = null;
+              webPushKey = {
+                "@type" = "File";
+                filePath = "/run/credentials/stalwart.service/vapid-key";
+              };
+              websocketHeartbeat = 60000;
+              websocketThrottle = 1000;
+              websocketTimeout = 600000;
             };
           }
         ];
