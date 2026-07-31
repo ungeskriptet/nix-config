@@ -602,8 +602,13 @@ in
                 match = { };
               };
               script = {
-                "else" = "'data-script'";
-                match = { };
+                "else" = "false";
+                match = {
+                  "0" = {
+                    "if" = "is_empty(authenticated_as)";
+                    "then" = "'data-script'";
+                  };
+                };
               };
             };
           }
@@ -628,8 +633,13 @@ in
                 match = { };
               };
               script = {
-                "else" = "'rcpt-script'";
-                match = { };
+                "else" = "false";
+                match = {
+                  "0" = {
+                    "if" = "is_empty(authenticated_as)";
+                    "then" = "'rcpt-script'";
+                  };
+                };
               };
               waitOnFail = {
                 "else" = "5s";
@@ -718,8 +728,13 @@ in
               };
               dkimStrict = true;
               dkimVerify = {
-                "else" = "strict";
-                match = { };
+                "else" = "disable";
+                match = {
+                  "0" = {
+                    "if" = "is_empty(authenticated_as)";
+                    "then" = "strict";
+                  };
+                };
               };
               dmarcVerify = {
                 "else" = "disable";
