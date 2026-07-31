@@ -26,49 +26,88 @@ let
     "ionos.de"
     "kundenserver.de"
   ]);
-  blockedAliases = sieveList "envelope :is :all \"to\"" (
-    map (alias: "${alias}@${domain}") [
-      "info"
-      "sales"
-    ]
-  );
-  mkSendOnlyUser =
-    {
-      name,
-      description,
-      secret,
-    }:
-    {
-      "@type" = "User";
-      inherit name description;
-      aliases = { };
-      domainId = "#domain-1";
-      locale = "en_US";
-      memberGroupIds = { };
-      memberTenantId = null;
-      timeZone = null;
-      quotas = { };
-      permissions = {
-        "@type" = "Inherit";
-      };
-      roles = {
-        "@type" = "Custom";
-        roleIds = {
-          "#role-1" = true;
-        };
-      };
-      credentials = {
-        "0" = {
-          "@type" = "Password";
-          allowedIps = {
-            "127.0.0.0/8" = true;
-            "::1" = true;
+  mkAliasList =
+    aliases: sieveList "envelope :is :all \"to\"" (map (alias: "${alias}@${domain}") aliases);
+  blockedAliases = mkAliasList [
+    "info"
+    "sales"
+  ];
+  mkUsers = users: {
+    "@type" = "reconcile";
+    object = "Account";
+    matchOn = [ "name" ];
+    value = lib.mergeAttrsList (
+      lib.imap (i: v: {
+        "account-${toString i}" = {
+          "@type" = "User";
+          inherit (v) description name;
+          aliases = { };
+          domainId = "#domain-1";
+          locale = "en_US";
+          memberGroupIds = { };
+          memberTenantId = null;
+          timeZone = null;
+          quotas = { };
+          permissions = {
+            "@type" = "Inherit";
           };
-          expiresAt = null;
-          inherit secret;
+          roles =
+            if (v ? sendOnly && v.sendOnly) then
+              {
+                "@type" = "Custom";
+                roleIds = {
+                  "#role-1" = true;
+                };
+              }
+            else
+              { "@type" = "Admin"; };
+          credentials = {
+            "0" = {
+              "@type" = "Password";
+              inherit (v) secret;
+              expiresAt = null;
+              allowedIps = lib.optionalAttrs (v ? sendOnly && v.sendOnly) {
+                "127.0.0.0/8" = true;
+                "::1" = true;
+              };
+            };
+          };
         };
-      };
+      }) (lib.mapAttrsToList (name: v: { inherit name; } // v) users)
+    );
+  };
+  users = {
+    # read pass; echo -n "$pass" | nix run nixpkgs#libargon2 -- "$(head -c 20 /dev/random | base64)" -id -k 19456
+    moe = {
+      secret = "$argon2id$v=19$m=19456,t=3,p=1$eDYyaW00K3l1VnMrZmVXTldjeVR3Qlltdm9ZPQ$50ic9c9vZBsilnDNU5G5ddsrYOGhxy+TIN6AUIIVeKE";
+      description = "David Wronek";
     };
+    goeland = {
+      secret = "$argon2id$v=19$m=19456,t=3,p=1$NXo2ak1STm9Ba0tNWFQ0QXNUNHJ4MUw5bkdZPQ$c3GSIvBKOHAz2QVwTTQkZQUKECk6ezihyTc9gTHrtq4";
+      description = "Goeland";
+      sendOnly = true;
+    };
+    immich = {
+      secret = "$argon2id$v=19$m=19456,t=3,p=1$TWdsc2JNbklwTGhwYVVGM2VCMU5vREpITFVvPQ$5b/S0epP+Hp1cEQkrKKvw0MwmdsNzgsb1vDLbiFCdTg";
+      description = "Immich";
+      sendOnly = true;
+    };
+    bakacloud = {
+      secret = "$argon2id$v=19$m=19456,t=3,p=1$T0FLWVYrcU1hUldncFNucGFjeitFVW1reU9zPQ$fDYpWMgr+W1fyX4nVxPJg+dQpK35OP6Ko5ONz9XvZg8";
+      description = "OpenCloud";
+      sendOnly = true;
+    };
+    paperless = {
+      secret = "$argon2id$v=19$m=19456,t=3,p=1$a3ZvY3lqSVJZQ25FSDhHTWVtbWVxQzRCRVIwPQ$xAHk19RThaoKtSBAdyKYBol8cmCb/ODZ8KqBy939PU0";
+      description = "Paperless-ngx";
+      sendOnly = true;
+    };
+    vaultwarden = {
+      secret = "$argon2id$v=19$m=19456,t=3,p=1$OTNlK0o2dnJJVjdqZkh0ckdwcWt5UDU3NTRBPQ$ike/eVShzJgl1evnYcthuWqMb1aY1+ouTSOtVkb4Yoc";
+      description = "Vaultwarden";
+      sendOnly = true;
+    };
+  };
 in
 {
   disabledModules = [ "services/mail/stalwart.nix" ];
@@ -341,52 +380,7 @@ in
               };
             };
           }
-          {
-            "@type" = "reconcile";
-            object = "Account";
-            matchOn = [ "name" ];
-            value = {
-              account-1 = {
-                "@type" = "User";
-                name = "moe";
-                domainId = "#domain-1";
-                description = "David Wronek";
-                roles."@type" = "Admin";
-                credentials = {
-                  # read pass; echo -n "$pass" | nix run nixpkgs#libargon2 -- "$(head -c 20 /dev/random | base64)" -id -k 19456
-                  "0" = {
-                    "@type" = "Password";
-                    secret = "$argon2id$v=19$m=19456,t=3,p=1$eDYyaW00K3l1VnMrZmVXTldjeVR3Qlltdm9ZPQ$50ic9c9vZBsilnDNU5G5ddsrYOGhxy+TIN6AUIIVeKE";
-                  };
-                };
-              };
-              account-2 = mkSendOnlyUser {
-                secret = "$argon2id$v=19$m=19456,t=3,p=1$NXo2ak1STm9Ba0tNWFQ0QXNUNHJ4MUw5bkdZPQ$c3GSIvBKOHAz2QVwTTQkZQUKECk6ezihyTc9gTHrtq4";
-                description = "Goeland";
-                name = "goeland";
-              };
-              account-3 = mkSendOnlyUser {
-                secret = "$argon2id$v=19$m=19456,t=3,p=1$TWdsc2JNbklwTGhwYVVGM2VCMU5vREpITFVvPQ$5b/S0epP+Hp1cEQkrKKvw0MwmdsNzgsb1vDLbiFCdTg";
-                description = "Immich";
-                name = "immich";
-              };
-              account-4 = mkSendOnlyUser {
-                secret = "$argon2id$v=19$m=19456,t=3,p=1$T0FLWVYrcU1hUldncFNucGFjeitFVW1reU9zPQ$fDYpWMgr+W1fyX4nVxPJg+dQpK35OP6Ko5ONz9XvZg8";
-                description = "OpenCloud";
-                name = "bakacloud";
-              };
-              account-5 = mkSendOnlyUser {
-                secret = "$argon2id$v=19$m=19456,t=3,p=1$a3ZvY3lqSVJZQ25FSDhHTWVtbWVxQzRCRVIwPQ$xAHk19RThaoKtSBAdyKYBol8cmCb/ODZ8KqBy939PU0";
-                description = "Paperless-ngx";
-                name = "paperless";
-              };
-              account-6 = mkSendOnlyUser {
-                secret = "$argon2id$v=19$m=19456,t=3,p=1$OTNlK0o2dnJJVjdqZkh0ckdwcWt5UDU3NTRBPQ$ike/eVShzJgl1evnYcthuWqMb1aY1+ouTSOtVkb4Yoc";
-                description = "Vaultwarden";
-                name = "vaultwarden";
-              };
-            };
-          }
+          (mkUsers users)
           {
             "@type" = "reconcile";
             matchOn = [ "name" ];
