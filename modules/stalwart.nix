@@ -28,7 +28,7 @@ let
       "@type" = "update";
       object = "SpamSettings";
       value = {
-        spamFilterRulesUrl = "file://${cfg.package.spam-filter}";
+        spamFilterRulesUrl = "file://${cfg.package.spam-filter}/spam-filter.json.gz";
       };
     }
     {
@@ -38,7 +38,7 @@ let
         webui = {
           enabled = true;
           description = "Stalwart Web Application";
-          resourceUrl = "file://${cfg.package.webui}";
+          resourceUrl = "file://${cfg.package.webui}/webui.zip";
           urlPrefix = {
             "/admin" = true;
             "/account" = true;

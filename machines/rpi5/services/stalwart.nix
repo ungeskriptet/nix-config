@@ -1,8 +1,6 @@
 {
   lib,
-  pkgs,
   config,
-  inputs,
   ...
 }:
 let
@@ -162,10 +160,6 @@ in
 
     stalwart = {
       enable = true;
-      package = {
-        spam-filter = inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.stalwart-spam-filter;
-        webui = inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.stalwart-webui;
-      };
       credentials = {
         dbpass = config.sops.secrets."stalwart/dbpass".path;
         tsig-key = config.sops.secrets."stalwart/tsig-key".path;
