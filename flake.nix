@@ -14,7 +14,6 @@
   };
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-locked.url = "github:NixOS/nixpkgs/6c9a78c09ff4d6c21d0319114873508a6ec01655";
     itgpacks.url = "https://codeberg.org/ungeskriptet/itg-songpacks-flake/archive/master.tar.gz";
     lanzaboote.url = "github:nix-community/lanzaboote";
     disko = {
@@ -140,8 +139,6 @@
             openssh-nix-on-droid = pkgs.${system}.callPackage ./packages/openssh-nix-on-droid.nix { };
             rg-uuid = pkgs.${system}.callPackage ./packages/rg-uuid { };
             sigscan = pkgs.${system}.callPackage ./packages/sigscan.nix { };
-            stalwart-spam-filter = pkgs.${system}.callPackage ./packages/stalwart/spam-filter.nix { };
-            stalwart-webui = pkgs.${system}.callPackage ./packages/stalwart/webui.nix { };
             switch-nixos = pkgs.${system}.callPackage ./packages/switch-nixos.nix { };
             traccar = pkgs.${system}.callPackage ./packages/traccar { };
             ttf-ms-win11 = pkgs.${system}.callPackage ./packages/ttf-ms-win11.nix { };

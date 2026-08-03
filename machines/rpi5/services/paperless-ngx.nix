@@ -1,7 +1,5 @@
 {
   config,
-  pkgs,
-  inputs,
   ...
 }:
 let
@@ -21,7 +19,6 @@ in
 
     paperless = {
       enable = true;
-      package = inputs.nixpkgs-locked.legacyPackages.${pkgs.stdenv.hostPlatform.system}.paperless-ngx;
       port = 8095;
       address = "::1";
       configureTika = true;
