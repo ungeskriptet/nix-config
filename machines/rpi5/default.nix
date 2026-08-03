@@ -1,5 +1,6 @@
 # Raspberry Pi 5
 {
+  pkgs,
   inputs,
   ...
 }:
@@ -19,7 +20,11 @@
 
   users.hashedPassword = "$y$j9T$j8duISvdoesAnqbKGzrDa.$pEPB4Dd3boH7.s7PRaLXPuse2K5OyrO2RHUe4vn2Qs.";
 
-  boot.binfmt.emulatedSystems = [ "x86_64-linux" ];
+  boot = {
+    binfmt.emulatedSystems = [ "x86_64-linux" ];
+    kernelPackages =
+      inputs.nixos-raspberrypi.kernelPackages.${pkgs.stdenv.hostPlatform.system}.linuxPackages_rpi5;
+  };
 
   nix.settings.max-jobs = 1;
 

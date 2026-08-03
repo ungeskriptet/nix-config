@@ -16,6 +16,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     itgpacks.url = "https://codeberg.org/ungeskriptet/itg-songpacks-flake/archive/master.tar.gz";
     lanzaboote.url = "github:nix-community/lanzaboote";
+    nixos-raspberrypi-kernel.url = "github:nvmd/nixos-raspberrypi/develop";
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
