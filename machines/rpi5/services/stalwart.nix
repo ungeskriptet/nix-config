@@ -1,6 +1,8 @@
 {
   lib,
+  pkgs,
   config,
+  inputs,
   ...
 }:
 let
@@ -160,6 +162,7 @@ in
 
     stalwart = {
       enable = true;
+      package.server = inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.stalwart;
       credentials = {
         dbpass = config.sops.secrets."stalwart/dbpass".path;
         tsig-key = config.sops.secrets."stalwart/tsig-key".path;
