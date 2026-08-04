@@ -76,6 +76,17 @@ let
       }) (lib.mapAttrsToList (name: v: { inherit name; } // v) users)
     );
   };
+  mkFolderScript =
+    folders:
+    lib.concatStringsSep "\n" (
+      [ "require [\"fileinto\",\"mailbox\",\"envelope\",\"envelope-dsn\"];" ]
+      ++ (map (folder: ''
+        if envelope :is "orcpt" "rfc822;${folder}@${domain}" {
+          fileinto :create "${folder}";
+          stop;
+        }
+      '') folders)
+    );
   users = {
     # read pass; echo -n "$pass" | nix run nixpkgs#libargon2 -- "$(head -c 20 /dev/random | base64)" -id -k 19456
     moe = {
@@ -431,8 +442,35 @@ in
                       "before the '@').\";"
                     ]}
                   }
-                  set "envelope.to" "moe@${domain}";
                 '';
+              };
+            };
+          }
+          {
+            "@type" = "reconcile";
+            matchOn = [ "name" ];
+            object = "SieveUserScript";
+            value = {
+              script-1 = {
+                name = "tidy-inbox";
+                description = "Sieve script for a tidy inbox";
+                isActive = true;
+                contents =
+                  (mkFolderScript [
+                    "github"
+                    "goeland"
+                    "kleinanzeigen"
+                    "samsungoss"
+                  ])
+                  + ''
+                    if anyof(
+                      envelope :matches "from" "*@mainlining.org",
+                      address :matches "to" "*@mainlining.org"
+                    ) {
+                      fileinto :create "mainlining";
+                      stop;
+                    }
+                  '';
               };
             };
           }
@@ -627,7 +665,18 @@ in
               };
               rewrite = {
                 "else" = "false";
-                match = { };
+                match = {
+                  "0" = {
+                    "if" = lib.concatStringsSep " || " (
+                      lib.filter (x: x != "") (
+                        lib.mapAttrsToList (
+                          n: v: lib.optionalString (v ? sendOnly && v.sendOnly) "rcpt == '${n}@${domain}'"
+                        ) users
+                      )
+                    );
+                    "then" = "'moe@${domain}'";
+                  };
+                };
               };
               script = {
                 "else" = "false";
