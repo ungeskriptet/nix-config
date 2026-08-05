@@ -458,7 +458,6 @@ in
                 contents =
                   (mkFolderScript [
                     "github"
-                    "goeland"
                     "kleinanzeigen"
                     "samsungoss"
                   ])
@@ -468,6 +467,11 @@ in
                       address :matches "to" "*@mainlining.org"
                     ) {
                       fileinto :create "mainlining";
+                      stop;
+                    }
+
+                    if envelope :is "from" "goeland@${domain}" {
+                      fileinto :create "goeland";
                       stop;
                     }
                   '';
