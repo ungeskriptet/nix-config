@@ -88,6 +88,7 @@ in
       binwalk
       dtc
       git-crypt
+      git-lfs
       internetarchive
       samloader-rs
       sops
