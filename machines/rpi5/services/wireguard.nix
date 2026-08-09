@@ -52,6 +52,7 @@ in
           "wireguard/rpi5/psk-1"
           "wireguard/rpi5/psk-2"
           "wireguard/rpi5/psk-3"
+          "wireguard/rpi5/psk-4"
           "wireguard/support/privkey"
           "wireguard/support/psk-1"
           "wireguard/support/psk-2"
@@ -163,6 +164,15 @@ in
               PersistentKeepalive = 25;
               PresharedKeyFile = config.sops.secrets."wireguard/rpi5/psk-3".path;
               PublicKey = "Cc7kMxId0ogkFIHI+AWt7oCi/VXrui+7sklDY1UibU0=";
+            }
+            {
+              AllowedIPs = [
+                "192.168.128.5/32"
+                "fd96::5/128"
+              ]; # e3q
+              PersistentKeepalive = 25;
+              PresharedKeyFile = config.sops.secrets."wireguard/rpi5/psk-4".path;
+              PublicKey = "7+ke0GxXJ9u/GGp0KUKTtywPPnYby62JBdDZWH8xNxQ=";
             }
           ];
         };
