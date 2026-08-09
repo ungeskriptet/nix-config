@@ -32,10 +32,15 @@ in
           yt-dlp = lib.getExe pkgs.yt-dlp;
         in
         {
+          f = "nix fmt";
           g = "git";
           gr = "cd $(git rev-parse --show-toplevel)";
           ls = "ls --color=auto";
+          nb = "nix-build";
+          n = "nix";
+          ns = "nix-shell";
           rp = "realpath";
+          s = "systemctl";
           wineprefix = "export WINEPREFIX=$(mktemp -d --suffix -wine)";
         }
         // lib.optionalAttrs cfg.david.enable {
