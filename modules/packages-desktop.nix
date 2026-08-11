@@ -44,6 +44,7 @@ in
       libreoffice-qt6-fresh
       scrcpy
       signal-desktop
+      simple-scan
       vlc
       wl-clipboard
       xournalpp
