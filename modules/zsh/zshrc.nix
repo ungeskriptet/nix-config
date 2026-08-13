@@ -67,6 +67,7 @@ in
         ssh-add -l &> /dev/null || ssh-add > /dev/null
         trap - INT
 
+        export NIXPKGS_ALLOW_UNFREE=1
         export NIX_SSHOPTS="${
           lib.concatStringsSep " " [
             "-oIdentityAgent=$SSH_AUTH_SOCK"
