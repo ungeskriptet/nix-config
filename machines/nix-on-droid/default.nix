@@ -15,6 +15,7 @@ in
     curl
     dig
     file
+    gawk
     git
     inetutils
     jq
