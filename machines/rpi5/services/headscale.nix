@@ -30,6 +30,8 @@ in
             region_id = 999;
             region_code = config.networking.hostName;
             region_name = domain;
+            ipv6 = config.networking.globalIpv6;
+            ipv4 = config.networking.globalIpv4;
           };
         };
         dns = {
