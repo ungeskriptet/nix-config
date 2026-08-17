@@ -22,8 +22,15 @@
 
   boot = {
     binfmt.emulatedSystems = [ "x86_64-linux" ];
-    kernelPackages =
-      inputs.nixos-raspberrypi.kernelPackages.${pkgs.stdenv.hostPlatform.system}.linuxPackages_rpi5;
+    kernelPackages = pkgs.linuxPackagesFor (
+      inputs.nixos-raspberrypi-kernel.packages.${pkgs.stdenv.hostPlatform.system}.linuxPackages_rpi5.kernel.overrideAttrs
+        (prev: {
+          passthru = prev.passthru // {
+            buildDTBs = true;
+            target = "Image";
+          };
+        })
+    );
   };
 
   nix.settings.max-jobs = 1;
