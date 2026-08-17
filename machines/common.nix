@@ -13,6 +13,7 @@
     ../modules/hardware.nix
     ../modules/knot-nsupdate.nix
     ../modules/nixpkgs-config.nix
+    ../modules/overlays.nix
     ../modules/packages-common.nix
     ../modules/popt/nixos.nix
     ../modules/secureboot.nix
