@@ -9,6 +9,7 @@
     ../modules/acme.nix
     ../modules/caddy-common.nix
     ../modules/caddy-hosts.nix
+    ../modules/fmd-server.nix
     ../modules/git/nixos.nix
     ../modules/hardware.nix
     ../modules/knot-nsupdate.nix
