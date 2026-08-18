@@ -13,7 +13,7 @@
     ];
   };
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.zst";
     itgpacks.url = "https://codeberg.org/ungeskriptet/itg-songpacks-flake/archive/master.tar.gz";
     lanzaboote.url = "github:nix-community/lanzaboote";
     nixos-raspberrypi-kernel.url = "github:nvmd/nixos-raspberrypi/develop";
