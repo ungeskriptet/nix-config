@@ -7,6 +7,7 @@
 {
   imports = [
     ../modules/acme.nix
+    ../modules/bulwark-webmail.nix
     ../modules/caddy-common.nix
     ../modules/caddy-hosts.nix
     ../modules/fmd-server.nix
