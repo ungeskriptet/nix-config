@@ -490,8 +490,22 @@ in
             "@type" = "update";
             object = "Http";
             value = {
+              allowedEndpoints = {
+                "else" = "200";
+                match = { };
+              };
               enableHsts = true;
-              usePermissiveCors = false;
+              rateLimitAnonymous = {
+                count = 100;
+                period = 60000;
+              };
+              rateLimitAuthenticated = {
+                count = 1000;
+                period = 60000;
+              };
+              redirectRoot = "/account";
+              responseHeaders = { };
+              usePermissiveCors = true;
               useXForwarded = true;
             };
           }
