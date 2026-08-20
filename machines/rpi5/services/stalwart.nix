@@ -457,6 +457,7 @@ in
                 isActive = true;
                 contents =
                   (mkFolderScript [
+                    "deutschebahn"
                     "github"
                     "kleinanzeigen"
                     "samsungoss"
