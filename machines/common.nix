@@ -150,5 +150,8 @@
     config.allowUnfree = true;
   };
   documentation.nixos.includeAllModules = true;
-  system.stateVersion = "26.05";
+  system = {
+    stateVersion = "26.05";
+    configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
+  };
 }
