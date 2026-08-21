@@ -5,13 +5,13 @@ writeShellScriptBin "switch-nixos" ''
   Wrapper for nixos-rebuild
 
   Options:
-  -f | --flake    Flake URL (Default: path:/etc/nixos#$(hostname))
+  -f | --flake    Flake URL (Default: /etc/nixos#$(hostname))
   -h | --help     Show help and exit
   EOF
   }
 
   # Defaults
-  flake="path:/etc/nixos#$(hostname)"
+  flake="/etc/nixos#$(hostname)"
 
   while [ $# -gt 0 ]; do
     case "$1" in
