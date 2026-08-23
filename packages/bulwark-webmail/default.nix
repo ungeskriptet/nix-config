@@ -3,6 +3,7 @@
   buildNpmPackage,
   fetchFromGitHub,
   geist-font,
+  nodejs-slim,
 }:
 buildNpmPackage (finalAttrs: {
   pname = "bulwark-webmail";
@@ -24,13 +25,17 @@ buildNpmPackage (finalAttrs: {
   '';
 
   installPhase = ''
-    mkdir -p $out
-    cp -r .next/standalone/. $out
-    cp -r .next/static $out/.next/static
-    cp -r public $out/public
+    mkdir -p $out/share/bulwark-webmail $out/bin
+    cp -r .next/standalone/. $out/share/bulwark-webmail
+    cp -r .next/static $out/share/bulwark-webmail/.next/static
+    cp -r public $out/share/bulwark-webmail/public
+
+    makeWrapper "${lib.getExe nodejs-slim}" "$out/bin/bulwark-webmail" \
+      --add-flags "$out/share/bulwark-webmail/server.js" \
   '';
 
   meta = {
+    mainProgram = "bulwark-webmail";
     description = "Self-hosted JMAP webmail for Stalwart Mail Server.";
     homepage = "https://bulwarkmail.org/";
     changelog = "https://github.com/bulwarkmail/webmail/releases/tag/${finalAttrs.version}";

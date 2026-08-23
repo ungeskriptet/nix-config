@@ -57,15 +57,15 @@ in
         NODE_ENV = "production";
         BULWARK_TELEMETRY = "off";
         BULWARK_UPDATE_CHECK = "off";
-        ADMIN_CONFIG_DIR = lib.mkIf (cfg.dataDir == dataDir) "${dataDir}/admin";
-        ADMIN_STATE_DIR = lib.mkIf (cfg.dataDir == dataDir) "${dataDir}/admin-state";
-        SETTINGS_DATA_DIR = lib.mkIf (cfg.dataDir == dataDir) "${dataDir}/settings";
-        TELEMETRY_DATA_DIR = lib.mkIf (cfg.dataDir == dataDir) "${dataDir}/telemetry";
-        VERSION_CHECK_DATA_DIR = lib.mkIf (cfg.dataDir == dataDir) "${dataDir}/version-check";
+        ADMIN_CONFIG_DIR = "${cfg.dataDir}/admin";
+        ADMIN_STATE_DIR = "${cfg.dataDir}/admin-state";
+        SETTINGS_DATA_DIR = "${cfg.dataDir}/settings";
+        TELEMETRY_DATA_DIR = "${cfg.dataDir}/telemetry";
+        VERSION_CHECK_DATA_DIR = "${cfg.dataDir}/version-check";
       }
       // cfg.environment;
       serviceConfig = {
-        ExecStart = "${lib.getExe pkgs.nodejs} ${cfg.package}/server.js";
+        ExecStart = "${lib.getExe cfg.package}";
         Restart = "always";
         DynamicUser = true;
         StateDirectory = lib.mkIf (cfg.dataDir == dataDir) "bulwark-webmail";
@@ -98,7 +98,19 @@ in
         ];
         RestrictNamespaces = true;
         SystemCallArchitectures = "native";
-        SystemCallFilter = [ ];
+        SystemCallFilter = [
+          "~@clock"
+          "~@cpu-emulation"
+          "~@debug"
+          "~@module"
+          "~@mount"
+          "~@obsolete"
+          "~@privileged"
+          "~@raw-io"
+          "~@reboot"
+          "~@resources"
+          "~@swap"
+        ];
         UMask = "0077";
       };
     };
