@@ -66,6 +66,7 @@ in
       lsof
       lz4
       ncdu
+      nh
       openssl
       p7zip
       parted
