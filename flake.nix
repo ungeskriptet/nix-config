@@ -149,7 +149,6 @@
           {
             x86_64-linux = {
               odin4 = pkgs.x86_64-linux.callPackage ./packages/odin4.nix { };
-              outfox-alpha5 = pkgs.x86_64-linux.callPackage ./packages/outfox-alpha5.nix { };
             };
           };
       formatter = forAllSystems (system: treefmtEval.${system}.config.build.wrapper);
