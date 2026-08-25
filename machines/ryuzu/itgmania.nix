@@ -146,6 +146,7 @@ in
         mawaru-collection
         maxx-simz-1
         maxx-simz-2
+        midtown-timing-square
         minecraft-vol-1
         mungyodance-2
         mungyodance-3
@@ -165,6 +166,7 @@ in
         piece-of-cake-6
         piece-of-cake-7
         piece-of-cake-8
+        polish-charting-contest
         precure-pad-pack-all-stars-dancing
         puyosimfile-1
         recyclables
