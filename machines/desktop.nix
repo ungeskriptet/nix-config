@@ -54,7 +54,10 @@ in
         };
         networkmanager = {
           enable = true;
-          plugins = with pkgs; [ networkmanager-vpnc ];
+          plugins = with pkgs; [
+            networkmanager-openvpn
+            networkmanager-vpnc
+          ];
         };
       };
 
