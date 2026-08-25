@@ -31,6 +31,7 @@ in
       {
         boot = {
           kernelPackages = pkgs.linuxPackages_latest;
+          kernelModules = [ "ntsync" ];
           loader = {
             efi.canTouchEfiVariables = true;
             systemd-boot.enable = lib.mkDefault true;
