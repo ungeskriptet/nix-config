@@ -1,6 +1,6 @@
-{ lib, config, ... }:
+{ ... }:
 {
-  programs.git = lib.mkIf config.hm-config.dotfiles {
+  programs.git = {
     enable = true;
     settings = import ./config.nix;
   };
