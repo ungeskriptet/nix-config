@@ -32,16 +32,23 @@ in
           yt-dlp = lib.getExe pkgs.yt-dlp;
         in
         {
+          # keep-sorted start
           f = "nix fmt";
           g = "git";
           gr = "cd $(git rev-parse --show-toplevel)";
+          jeu = "journalctl -eu";
+          jfu = "journalctl -fu";
           ls = "ls --color=auto";
-          nb = "nix-build";
           n = "nix";
+          nb = "nix-build";
           ns = "nix-shell";
           rp = "realpath";
           s = "systemctl";
+          start = "systemctl start";
+          status = "systemctl status";
+          stop = "systemctl stop";
           wineprefix = "export WINEPREFIX=$(mktemp -d --suffix -wine)";
+          # keep-sorted end
         }
         // lib.optionalAttrs cfg.david.enable {
           c = "${bat} -pp";
