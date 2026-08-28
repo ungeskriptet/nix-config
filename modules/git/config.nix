@@ -5,11 +5,15 @@
     "aa" = "add -A";
     "ae" = "commit --amend -s";
     "ane" = "commit --amend --no-edit -s";
+    "bd" = "branch -D";
+    "bm" = "branch -m";
     "c" = "commit -s";
     "cf" = "commit --fixup";
+    "ch" = "checkout";
     "cm" = "commit -sm";
     "d" = "diff";
     "ds" = "diff --staged";
+    "f" = "fetch";
     "l" = "log";
     "p" = "push";
     "pcb" = "push cb";
@@ -19,6 +23,7 @@
     "ri" = "rebase --autosquash -i";
     "rrm" = "remote remove";
     "s" = "status";
+    "sc" = "switch -c";
     "sh" = "show";
     # keep-sorted end
   };
