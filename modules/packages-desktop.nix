@@ -41,7 +41,7 @@ in
       hunspellDicts.pl_PL
       hyphenDicts.de_DE
       hyphenDicts.en_US
-      libreoffice-qt6-fresh
+      libreoffice-qt-stable
       scrcpy
       signal-desktop
       simple-scan
