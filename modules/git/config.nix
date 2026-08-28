@@ -14,7 +14,9 @@
     "p" = "push";
     "pcb" = "push cb";
     "pgh" = "push gh";
+    "pom" = "pull origin master";
     "r" = "remote -v";
+    "ri" = "rebase --autosquash -i";
     "rrm" = "remote remove";
     "s" = "status";
     "sh" = "show";
