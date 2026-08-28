@@ -41,9 +41,11 @@ in
           ls = "ls --color=auto";
           n = "nix";
           nb = "nix-build";
+          nd = "nix develop";
           ns = "nix-shell";
           rp = "realpath";
           s = "systemctl";
+          sc = "systemctl cat";
           start = "systemctl start";
           status = "systemctl status";
           stop = "systemctl stop";
