@@ -11,6 +11,7 @@ in
       serviceConfig.RuntimeDirectory = "ntfy-sh";
     };
     caddy = {
+      wants = [ config.systemd.services.ntfy-sh.name ];
       serviceConfig.SupplementaryGroups = [ "ntfy-sh" ];
     };
   };
