@@ -144,6 +144,7 @@
         type = "path";
         path = inputs.nix-shell-collection;
       };
+      n.to = config.nix.registry.nixpkgs.to;
     };
   };
   nixpkgs = {
