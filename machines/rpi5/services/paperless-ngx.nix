@@ -35,6 +35,7 @@ in
         PAPERLESS_EMAIL_PORT = 465;
         PAPERLESS_EMAIL_HOST_USER = "paperless@${domain}";
         PAPERLESS_EMAIL_USE_SSL = true;
+        PAPERLESS_ALLAUTH_TRUSTED_PROXY_COUNT = 1;
       };
     };
   };
