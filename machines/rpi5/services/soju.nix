@@ -47,6 +47,7 @@ in
     };
     caddy = {
       serviceConfig.SupplementaryGroups = [ "soju" ];
+      wants = [ config.systemd.services.soju.name ];
     };
   };
 
