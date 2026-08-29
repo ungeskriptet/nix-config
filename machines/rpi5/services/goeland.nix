@@ -39,6 +39,7 @@ in
         };
         sources = mkSources "merged" {
           # keep-sorted start
+          asahi = "https://asahilinux.org/blog/index.xml";
           browsery = "https://biskupova.televiziastb.sk/browsery_rss.php";
           cccEvents = "https://events.ccc.de/feed";
           codeberg = "https://blog.codeberg.org/feeds/all.atom.xml";
