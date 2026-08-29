@@ -42,6 +42,7 @@ in
           n = "nix";
           nb = "nix-build";
           nd = "nix develop";
+          nr = "nix run";
           ns = "nix-shell";
           rp = "realpath";
           s = "systemctl";
