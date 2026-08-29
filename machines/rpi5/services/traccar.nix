@@ -28,6 +28,7 @@ in
         DATABASE_URL = "jdbc:postgresql://localhost/traccar?socketFactory=org.newsclub.net.unix.AFUNIXSocketFactory$FactoryArg&socketFactoryArg=/run/postgresql/.s.PGSQL.5432";
       };
       settings = {
+        protocols.enable = "osmand";
         database = {
           driver = "org.postgresql.Driver";
           user = "traccar";
