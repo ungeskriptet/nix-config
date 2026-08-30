@@ -120,11 +120,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1787661347,
-        "narHash": "sha256-THmnBAdAIV+jT348f3r/vyoeb6ilhcVLwVXkBU7Pai8=",
+        "lastModified": 1787797243,
+        "narHash": "sha256-8+Q7NOB7RPajRjA4pbCDLzqH+MTjnG9x6LUPLfL2joA=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "52c3a5881c821ad7367bbde075e52b76cdb378ab",
+        "rev": "99c9ec63390f1d8c14d95d9e8b17cc29cfbd4e11",
         "type": "github"
       },
       "original": {
@@ -204,11 +204,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1787457452,
-        "narHash": "sha256-FJh4esFS3zqNNuKwvN3t6wrJGewqp1AUF9DAEvoKPD8=",
+        "lastModified": 1788080100,
+        "narHash": "sha256-n14luQo3F/ZLfCEHk1QieiI1nGnW92ZQZeZ0UIb0UMQ=",
         "owner": "nix-community",
         "repo": "nix-index-database",
-        "rev": "c51d5c2ba69c907a34e90c9b6b80cd2b93811745",
+        "rev": "dbb978fa87faf13398e90ccbc52c343d21c7dd6d",
         "type": "github"
       },
       "original": {
@@ -251,11 +251,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1783964700,
-        "narHash": "sha256-UCQzP4bYOqWJ9VLsULmUlCk6ohfJGHGsj/d1OGDV03U=",
-        "rev": "3888b54825f7c5912c5e07d5d7b91b8f3a3002b6",
+        "lastModified": 1787993276,
+        "narHash": "sha256-h8GB/yTqN/nmxMPoiJnqyD/XvRjO2JdhScsfCD4Ph30=",
+        "rev": "679c726487f98c0cc944fccef05d185d289020eb",
         "type": "tarball",
-        "url": "https://codeberg.org/api/v1/repos/ungeskriptet/nix-shell-collection/archive/3888b54825f7c5912c5e07d5d7b91b8f3a3002b6.tar.gz"
+        "url": "https://codeberg.org/api/v1/repos/ungeskriptet/nix-shell-collection/archive/679c726487f98c0cc944fccef05d185d289020eb.tar.gz"
       },
       "original": {
         "type": "tarball",
@@ -346,11 +346,11 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1787400793,
-        "narHash": "sha256-3ll6aFPbSqmMJLaOuI1gyHOWRZCor8J0AZBno+tKgxk=",
+        "lastModified": 1788004452,
+        "narHash": "sha256-MfP4tWQg+9is0yZy1MzrnQj1YODWDNrkJ1akZbhvQnk=",
         "owner": "nvmd",
         "repo": "nixos-raspberrypi",
-        "rev": "84356fb05fa04cc06df45d479e1e3c6a75540f20",
+        "rev": "f2d14c7093f04e7dd6eacf74b6f8fff085f338c4",
         "type": "github"
       },
       "original": {
@@ -442,11 +442,11 @@
     },
     "nixpkgs_4": {
       "locked": {
-        "lastModified": 1787498568,
-        "narHash": "sha256-FoOSoBG7tEvOlGRTpWnVdY506Ner4y7r7UYO3OGgmE8=",
-        "rev": "56c02bc00adcf003215cc4bd996d6efaf4cff188",
+        "lastModified": 1787900134,
+        "narHash": "sha256-5GWj0FI2uOwKNpXkmpWrSFDe1rCaNBCUQ8d+HDtFQPI=",
+        "rev": "83199d0d373dd3ac2b9a1996b1d0263f76ab7a4c",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1060451.56c02bc00adc/nixexprs.tar.zst"
+        "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1063296.83199d0d373d/nixexprs.tar.zst"
       },
       "original": {
         "type": "tarball",
