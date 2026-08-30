@@ -34,7 +34,13 @@ in
           kernelModules = [ "ntsync" ];
           loader = {
             efi.canTouchEfiVariables = true;
-            systemd-boot.enable = lib.mkDefault true;
+            systemd-boot = {
+              enable = lib.mkDefault true;
+              bootCounting = {
+                enable = true;
+                tries = 3;
+              };
+            };
           };
           initrd.availableKernelModules = [
             "ahci"
