@@ -35,6 +35,8 @@ in
           # keep-sorted start
           f = "nix fmt";
           g = "git";
+          gc = "nh clean all";
+          gco = "nh clean all --optimise";
           gr = "cd $(git rev-parse --show-toplevel)";
           jeu = "journalctl -eu";
           jfu = "journalctl -fu";
