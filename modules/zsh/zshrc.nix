@@ -129,6 +129,14 @@ in
         nix-log () {
           nix log --impure --expr "with import <nixpkgs> { }; $1"
         }
+        pull () {
+          git pull gh $1
+          git pull cb $1
+        }
+        push () {
+          git push gh $1
+          git push cb $1
+        }
         ${lib.optionalString cfg.gitinfo.enable ''
           precmd () {
             gitinfo=$(${git} branch --show-current 2> /dev/null)
