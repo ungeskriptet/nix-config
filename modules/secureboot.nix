@@ -23,6 +23,7 @@ in
           allowBrickingMyMachine = true;
           includeMicrosoftKeys = false;
         };
+        bootCounting.initialTries = 3;
         autoGenerateKeys.enable = true;
       };
     };
