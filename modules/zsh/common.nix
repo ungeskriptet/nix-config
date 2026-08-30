@@ -50,6 +50,7 @@ in
           start = "systemctl start";
           status = "systemctl status";
           stop = "systemctl stop";
+          v = "vim";
           wineprefix = "export WINEPREFIX=$(mktemp -d --suffix -wine)";
           # keep-sorted end
         }
