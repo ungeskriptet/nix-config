@@ -142,7 +142,6 @@
             rg-uuid = pkgs.${system}.callPackage ./packages/rg-uuid { };
             sigscan = pkgs.${system}.callPackage ./packages/sigscan.nix { };
             stalwart = pkgs.${system}.callPackage ./packages/stalwart/default.nix { };
-            switch-nixos = pkgs.${system}.callPackage ./packages/switch-nixos.nix { };
             traccar = pkgs.${system}.callPackage ./packages/traccar { };
             ttf-ms-win11 = pkgs.${system}.callPackage ./packages/ttf-ms-win11.nix { };
           }))

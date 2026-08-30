@@ -82,7 +82,6 @@ in
       zip
 
       selfPkgs.rg-uuid
-      selfPkgs.switch-nixos
     ]
     ++ lib.optionals cfg.david [
       b4
