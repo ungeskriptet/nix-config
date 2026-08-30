@@ -98,6 +98,11 @@ let
       description = "Goeland";
       sendOnly = true;
     };
+    grafana = {
+      secret = "$argon2id$v=19$m=19456,t=3,p=1$MkxGdFpSSXluZkE3NW5oUjlCa3ZNMjV5aUs4PQ$q/558y3XcMnwGpLYeoGWYuK53r8l8gM1OYVAQ6DAIuo";
+      description = "Grafana";
+      sendOnly = true;
+    };
     immich = {
       secret = "$argon2id$v=19$m=19456,t=3,p=1$TWdsc2JNbklwTGhwYVVGM2VCMU5vREpITFVvPQ$5b/S0epP+Hp1cEQkrKKvw0MwmdsNzgsb1vDLbiFCdTg";
       description = "Immich";
