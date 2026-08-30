@@ -58,6 +58,7 @@ in
           extraConfig = ''
             redir /files /files/ permanent
             redir /private /private/ permanent
+            redir /tv https://download.teamviewer.com/download/TeamViewerQS_x64.exe temporary
           '';
         };
       };
