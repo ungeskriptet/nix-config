@@ -44,6 +44,7 @@ in
           cccEvents = "https://events.ccc.de/feed";
           codeberg = "https://blog.codeberg.org/feeds/all.atom.xml";
           fdroid = "https://f-droid.org/feed.xml";
+          fosdem = "https://fosdem.org/rss.xml";
           gamo2 = "https://nitter.net/GamoTwo/rss";
           haiku = "https://www.haiku-os.org/index.xml";
           haveibeenpwned = "https://haveibeenpwned.com/feed/breaches";
