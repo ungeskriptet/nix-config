@@ -36,7 +36,7 @@ in
         };
         dns = {
           magic_dns = true;
-          base_domain = "int.${domain}";
+          base_domain = "vpn";
           override_local_dns = false;
         };
         oidc = {
