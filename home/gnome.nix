@@ -69,6 +69,7 @@ in
 
         # Clipboard History
         "extensions/clipboard-history/toggle-menu" = [ "<Super>v" ];
+        "extensions/clipboard-history/cache-only-favorites" = true;
 
         # Desktop Icons
         "extensions/gtk4-ding/show-home" = true;
