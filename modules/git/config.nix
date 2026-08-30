@@ -44,18 +44,30 @@
   };
   url = {
     "ssh://git@github.com/" = {
+      pushInsteadOf = [
+        "https://github.com/"
+        "gh:"
+        "github:"
+      ];
+    };
+    "ssh://git@codeberg.org/" = {
+      pushInsteadOf = [
+        "https://codeberg.org/"
+        "cb:"
+        "codeberg:"
+      ];
+    };
+    "https://github.com/" = {
       insteadOf = [
         "gh:"
         "github:"
       ];
-      pushInsteadOf = [ "https://github.com/" ];
     };
-    "ssh://git@codeberg.org/" = {
+    "https://codeberg.org/" = {
       insteadOf = [
         "cb:"
         "codeberg:"
       ];
-      pushInsteadOf = [ "https://codeberg.org/" ];
     };
   };
 }
