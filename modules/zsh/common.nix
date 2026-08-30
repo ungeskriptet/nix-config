@@ -50,6 +50,7 @@ in
           start = "systemctl start";
           status = "systemctl status";
           stop = "systemctl stop";
+          switch-nixos = "nh os switch /etc/nixos -L --accept-flake-config";
           v = "vim";
           wineprefix = "export WINEPREFIX=$(mktemp -d --suffix -wine)";
           # keep-sorted end
