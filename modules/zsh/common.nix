@@ -38,6 +38,7 @@ in
           gc = "nh clean all";
           gco = "nh clean all --optimise";
           gr = "cd $(git rev-parse --show-toplevel)";
+          j = "journalctl";
           jeu = "journalctl -eu";
           jfu = "journalctl -fu";
           ls = "ls --color=auto";
