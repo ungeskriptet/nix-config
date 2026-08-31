@@ -43,7 +43,9 @@ in
 
   environment.etc."alloy/config.alloy".text = ''
     otelcol.receiver.otlp "default" {
-      grpc {}
+      grpc {
+        endpoint = "[::1]:8076"
+      }
 
       output {
         logs = [otelcol.exporter.loki.default.input]
