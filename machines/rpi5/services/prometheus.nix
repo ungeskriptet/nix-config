@@ -35,6 +35,9 @@ in
       enable = true;
       listenAddress = "[::1]";
       port = 8077;
+      extraFlags = [
+        "--web.enable-remote-write-receiver"
+      ];
       scrapeConfigs = [
         {
           job_name = "stalwart";
