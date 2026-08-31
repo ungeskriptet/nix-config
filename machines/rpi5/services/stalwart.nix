@@ -487,6 +487,30 @@ in
             };
           }
           {
+            "@type" = "upsert";
+            object = "Tracer";
+            matchOn = [ "endpoint" ];
+            value = {
+              tracer-1 = {
+                "@type" = "OtelGrpc";
+                enable = true;
+                enableLogExporter = true;
+                enableSpanExporter = true;
+                endpoint = "http://alloy.${domain}:8076/v1/logs";
+                events = { };
+                eventsPolicy = "exclude";
+                httpAuth = {
+                  "@type" = "Unauthenticated";
+                };
+                httpHeaders = { };
+                level = "info";
+                lossy = false;
+                throttle = 1000;
+                timeout = 10000;
+              };
+            };
+          }
+          {
             "@type" = "update";
             object = "SystemSettings";
             value = {
@@ -892,15 +916,13 @@ in
               metrics = { };
               metricsPolicy = "exclude";
               openTelemetry = {
-                "@type" = "Disabled";
+                "@type" = "Grpc";
+                endpoint = "http://alloy.${domain}:8076/v1/metrics";
+                interval = 60000;
+                timeout = 10000;
               };
               prometheus = {
-                "@type" = "Enabled";
-                authSecret = {
-                  "@type" = "File";
-                  filePath = "/run/credentials/stalwart.service/prometheus-pass";
-                };
-                authUsername = "prometheus";
+                "@type" = "Disabled";
               };
             };
           }
