@@ -16,6 +16,7 @@
     "ds" = "diff --staged";
     "f" = "fetch";
     "l" = "log";
+    "lp" = "log -p";
     "p" = "push";
     "pcb" = "push cb";
     "pgh" = "push gh";
