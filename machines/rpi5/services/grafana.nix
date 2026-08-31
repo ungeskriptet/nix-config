@@ -49,6 +49,7 @@ in
 
       output {
         logs = [otelcol.exporter.loki.default.input]
+        metrics = [otelcol.exporter.prometheus.default.input]
       }
     }
 
@@ -56,9 +57,19 @@ in
       forward_to = [loki.write.local.receiver]
     }
 
+    otelcol.exporter.prometheus "default" {
+      forward_to = [prometheus.remote_write.local.receiver]
+    }
+
     loki.write "local" {
       endpoint {
         url = "https://loki.${domain}:8081/loki/api/v1/push"
+      }
+    }
+
+    prometheus.remote_write "local" {
+      endpoint {
+        url = "http://prometheus.${domain}:${toString config.services.prometheus.port}/api/v1/write"
       }
     }
   '';
