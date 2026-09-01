@@ -131,7 +131,6 @@ in
 
   sops.secrets = {
     "stalwart/dbpass".owner = "root";
-    "stalwart/prometheus-pass".owner = "root";
     "stalwart/recoverypass".owner = "root";
     "stalwart/tsig-key".owner = "root";
     "stalwart/vapid-key".owner = "root";
@@ -182,7 +181,6 @@ in
       package.server = inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.stalwart;
       credentials = {
         dbpass = config.sops.secrets."stalwart/dbpass".path;
-        prometheus-pass = config.sops.secrets."stalwart/prometheus-pass".path;
         tsig-key = config.sops.secrets."stalwart/tsig-key".path;
         vapid-key = config.sops.secrets."stalwart/vapid-key".path;
       };
