@@ -41,6 +41,7 @@ in
           # keep-sorted start
           asahi = "https://asahilinux.org/blog/index.xml";
           browsery = "https://biskupova.televiziastb.sk/browsery_rss.php";
+          calyxos = "https://calyxos.org/feed.xml";
           cccEvents = "https://events.ccc.de/feed";
           codeberg = "https://blog.codeberg.org/feeds/all.atom.xml";
           fdroid = "https://f-droid.org/feed.xml";
