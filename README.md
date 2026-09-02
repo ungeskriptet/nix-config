@@ -1,4 +1,6 @@
 # David's NixOS configs
+![rpi5 uptime](https://status.halveland.sk/api/badge/40/uptime)
+
 Configuration files for my NixOS machines.
 
 ## Installation
