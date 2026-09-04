@@ -161,6 +161,7 @@ in
       }
       ucd () {for i in $(seq 1 $1); do cd ..; done}
       wherebin () {readlink $(which $1)}
+      whoip () {whois "$(dig +short "$1" | head -n1)"}
       ${lib.optionalString config.programs.zoxide.enableZshIntegration ''
         zoxide-widget () { zi; zle reset-prompt }
         zle -N zoxide-widget
