@@ -95,6 +95,13 @@ in
       libneeds () {
         readelf -d $1 |grep '\(NEEDED\)' | sed -r 's/.*\[(.*)\]/\1/'
       }
+      ports () {
+        if [ -n "$1" ]; then
+          ss -tulpn | grep -i "$1"
+        else
+          ss -tulpn
+        fi
+      }
       python-shell () {
         nix-shell -p "python3.withPackages (ps: with ps; [ $* ])"
       }
