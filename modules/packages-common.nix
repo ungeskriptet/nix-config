@@ -23,6 +23,11 @@ in
         "tree_view" = 1;
       };
     };
+    mosh = {
+      enable = true;
+      openFirewall = true;
+      withUtempter = true;
+    };
     neovim = {
       enable = true;
       defaultEditor = true;
