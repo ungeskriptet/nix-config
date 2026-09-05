@@ -130,7 +130,6 @@ in
   imports = [ ../../../modules/stalwart.nix ];
 
   sops.secrets = {
-    "stalwart/dbpass".owner = "root";
     "stalwart/recoverypass".owner = "root";
     "stalwart/tsig-key".owner = "root";
     "stalwart/vapid-key".owner = "root";
@@ -153,24 +152,14 @@ in
       requires = [ "postgresql.target" ];
       after = [ "postgresql.target" ];
     };
-
-    postgresql-setup = {
-      serviceConfig = {
-        LoadCredential = [ "dbpass:${config.sops.secrets."stalwart/dbpass".path}" ];
-      };
-      script = lib.mkAfter ''
-        PASSWORD=$(cat "$CREDENTIALS_DIRECTORY"/dbpass)
-        psql -tAc "ALTER USER \"stalwart-mail\" WITH PASSWORD '$PASSWORD';"
-      '';
-    };
   };
 
   services = {
     postgresql = {
-      ensureDatabases = [ "stalwart-mail" ];
+      ensureDatabases = [ "stalwart" ];
       ensureUsers = [
         {
-          name = "stalwart-mail";
+          name = "stalwart";
           ensureDBOwnership = true;
         }
       ];
@@ -180,7 +169,6 @@ in
       enable = true;
       package.server = inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.stalwart;
       credentials = {
-        dbpass = config.sops.secrets."stalwart/dbpass".path;
         tsig-key = config.sops.secrets."stalwart/tsig-key".path;
         vapid-key = config.sops.secrets."stalwart/vapid-key".path;
       };
@@ -191,14 +179,8 @@ in
       };
       datastore = {
         "@type" = "PostgreSql";
-        host = "localhost";
-        port = 5432;
-        database = "stalwart-mail";
-        authUsername = "stalwart-mail";
-        authSecret = {
-          "@type" = "File";
-          filePath = "/run/credentials/stalwart.service/dbpass";
-        };
+        host = "/run/postgresql";
+        database = "stalwart";
       };
       plan = {
         enableDefaultPlan = true;
