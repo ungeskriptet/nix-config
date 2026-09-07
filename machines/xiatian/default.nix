@@ -52,5 +52,5 @@
     };
   };
 
-  home-manager.users.david.imports = [ ./home.nix ];
+  home-manager.users.david.config.hm-config.trusted = true;
 }
