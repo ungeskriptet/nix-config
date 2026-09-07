@@ -61,6 +61,7 @@ in
       prismlauncher
       qbittorrent
       remmina
+      telegram-desktop
 
       selfPkgs.kate
       selfPkgs.magisk-install
