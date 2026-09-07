@@ -1,7 +1,6 @@
 {
   lib,
   config,
-  pkgs,
   ...
 }:
 let
@@ -17,16 +16,6 @@ in
     thunderbird = {
       preset = "david";
       language = "en-US";
-    };
-  };
-
-  xdg = {
-    enable = true;
-    autostart = {
-      enable = true;
-      entries = with pkgs; [
-        "${thunderbird}/share/applications/thunderbird.desktop"
-      ];
     };
   };
 }
