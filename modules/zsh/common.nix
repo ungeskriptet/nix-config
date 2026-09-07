@@ -56,6 +56,7 @@ in
         ryuzu = "ssh david@ryuzu";
         s = "systemctl";
         sc = "systemctl cat";
+        ssh-ignore = "ssh -oUserKnownHostsFile=/dev/null -oStrictHostKeyChecking=false";
         st = "systemctl status";
         sta = "systemctl start";
         sto = "systemctl stop";
