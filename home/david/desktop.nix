@@ -47,6 +47,5 @@ in
         force = true;
       };
     };
-    packages = with pkgs; [ opencloud-desktop ];
   };
 }
