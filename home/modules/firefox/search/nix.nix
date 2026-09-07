@@ -92,4 +92,24 @@
     icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
     definedAliases = [ ":nc" ];
   };
+  nixpkgs-github = {
+    name = "Nixpkgs (GitHub)";
+    urls = [
+      {
+        template = "https://github.com/search";
+        params = [
+          {
+            name = "q";
+            value = "repo%3ANixOS%2Fnixpkgs+{searchTerms}";
+          }
+          {
+            name = "type";
+            value = "code";
+          }
+        ];
+      }
+    ];
+    icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+    definedAliases = [ ":ng" ];
+  };
 }
