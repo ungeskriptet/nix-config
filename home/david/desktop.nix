@@ -35,7 +35,6 @@ in
       enable = true;
       entries = with pkgs; [
         "${signal-desktop}/share/applications/signal.desktop"
-        "${bitwarden-desktop}/share/applications/bitwarden.desktop"
       ];
     };
   };
