@@ -445,6 +445,7 @@ in
                     "github"
                     "kleinanzeigen"
                     "samsungoss"
+                    "telekom"
                   ])
                   + ''
                     if anyof(
