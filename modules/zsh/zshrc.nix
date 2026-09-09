@@ -126,12 +126,12 @@ in
         nix log --impure --expr "with import <nixpkgs> { }; $1"
       }
       pull () {
-        git pull gh $1
-        git pull cb $1
+        git pull gh ''${1:-master}
+        git pull cb ''${1:-master}
       }
       push () {
-        git push gh $1
-        git push cb $1
+        git push gh ''${1:-master}
+        git push cb ''${1:-master}
       }
       ${lib.optionalString cfg.gitinfo.enable ''
         precmd () {
