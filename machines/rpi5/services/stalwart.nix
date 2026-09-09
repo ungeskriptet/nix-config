@@ -41,7 +41,7 @@ let
           inherit (v) description name;
           aliases = { };
           domainId = "#domain-1";
-          locale = "en_US";
+          locale = "en-US";
           memberGroupIds = { };
           memberTenantId = null;
           timeZone = null;
