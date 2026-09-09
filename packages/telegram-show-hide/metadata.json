@@ -1,0 +1,9 @@
+{
+    "KPlugin": {
+        "Name": "Telegram Show/Hide",
+        "Description": "Toggle visibility of the Telegram window",
+        "Id": "telegram-show-hide"
+    },
+    "X-Plasma-API": "javascript",
+    "KPackageStructure": "KWin/Script"
+}

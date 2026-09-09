@@ -19,6 +19,9 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    home.packages = with inputs.self.packages.${pkgs.stdenv.hostPlatform.system}; [
+      telegram-show-hide
+    ];
     xdg = {
       enable = true;
       autostart = {
@@ -59,6 +62,7 @@ in
             RepeatRate = 80;
           };
           ksmserverrc.General.loginMode = "emptySession";
+          kwinrc.Plugins.telegram-show-hideEnabled = true;
         };
         panels = [
           {
