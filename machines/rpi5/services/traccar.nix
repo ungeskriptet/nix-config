@@ -1,7 +1,5 @@
 {
-  pkgs,
   config,
-  inputs,
   ...
 }:
 let
@@ -9,9 +7,6 @@ let
   domain = config.networking.domain;
 in
 {
-  disabledModules = [ "services/monitoring/traccar.nix" ];
-  imports = [ ../../../modules/traccar.nix ];
-
   systemd.services = {
     traccar = {
       after = [ "postgresql.target" ];
@@ -22,7 +17,6 @@ in
   services = {
     traccar = {
       enable = true;
-      package = inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.traccar;
       environment = {
         CONFIG_USE_ENVIRONMENT_VARIABLES = "true";
         DATABASE_URL = "jdbc:postgresql://localhost/traccar?socketFactory=org.newsclub.net.unix.AFUNIXSocketFactory$FactoryArg&socketFactoryArg=/run/postgresql/.s.PGSQL.5432";

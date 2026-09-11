@@ -141,7 +141,6 @@
             openssh-nix-on-droid = pkgs.${system}.callPackage ./packages/openssh-nix-on-droid.nix { };
             rg-uuid = pkgs.${system}.callPackage ./packages/rg-uuid { };
             sigscan = pkgs.${system}.callPackage ./packages/sigscan.nix { };
-            traccar = pkgs.${system}.callPackage ./packages/traccar { };
             ttf-ms-win11 = pkgs.${system}.callPackage ./packages/ttf-ms-win11.nix { };
             telegram-show-hide = pkgs.${system}.callPackage ./packages/telegram-show-hide { };
           }))
