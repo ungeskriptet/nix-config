@@ -28,6 +28,7 @@ in
         # keep-sorted start block=yes
         c = "bat -pp";
         compress-vid = "ffmpeg -vcodec libx264 -crf 28 output.mp4 -i";
+        d = "df -h -x devtmpfs -x tmpfs -x efivarfs";
         f = "nix fmt";
         g = "git";
         gc = "nh clean all";
