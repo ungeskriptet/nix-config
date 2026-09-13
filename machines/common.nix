@@ -24,6 +24,7 @@
     ../modules/vars.nix
     ../modules/virtualization.nix
     ../modules/zsh/nixos
+    ../modules/plasma-bigscreen.nix
     inputs.home-manager.nixosModules.home-manager
     inputs.nix-index-database.nixosModules.default
     inputs.sops-nix.nixosModules.sops

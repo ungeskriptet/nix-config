@@ -9,6 +9,11 @@
 
   sops.defaultSopsFile = "${inputs.self}/secrets/secrets-misaka.yaml";
 
+  services.desktopManager.plasma-bigscreen = {
+    enable = true;
+    hashedPassword = "$y$j9T$eufLcVdOXLkn8dbB1IQJQ1$e5V3hclkdIjJCzeQNwCDgGzM3jCh7hqr7miZlfBRIG8";
+  };
+
   security.sudo.wheelNeedsPassword = false;
 
   users.hashedPassword = "$y$j9T$26VbxoITETjPIDywpNHi71$8oXX3z.uINvjK0zQnzWoY.OBzHB0fA6C07gCVQ66D19";
