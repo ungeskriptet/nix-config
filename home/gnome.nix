@@ -173,16 +173,10 @@ in
     };
 
     systemd.user = {
-      packages = [
-        (pkgs.runCommand "gnome-remote-desktop" { } ''
-          mkdir -p $out/share/systemd/user
-          ln -s ${pkgs.gnome-remote-desktop}/share/systemd/user/gnome-remote-desktop.service $out/share/systemd/user
-        '')
-      ];
       services = {
-        gnome-remote-desktop-password = {
+        gnome-remote-desktop-setup = {
           Unit = {
-            Description = "Set GNOME remote desktop password";
+            Description = "GNOME remote desktop setup script";
             After = [
               "sops-nix.service"
               "gnome-session.target"
@@ -190,15 +184,25 @@ in
           };
           Service = {
             Type = "oneshot";
-            ExecStart =
-              let
-                grdctl = lib.getExe pkgs.gnome-remote-desktop;
-              in
-              pkgs.writeShellScript "grdctl-set-pass" ''
-                GRD_PASS=$(cat ${config.sops.secrets."rdp/password".path})
-                ${grdctl} rdp set-credentials ${config.home.username} $GRD_PASS
-                ${grdctl} rdp enable
-              '';
+            ExecStart = lib.getExe (
+              pkgs.writeShellApplication {
+                name = "gnome-remote-desktop-setup";
+                runtimeInputs = with pkgs; [
+                  coreutils
+                  findutils
+                  gnome-remote-desktop
+                  systemdMinimal
+                ];
+                inheritPath = false;
+                text = ''
+                  find "$XDG_CONFIG_HOME"/systemd/user -name "gnome-remote-desktop.service" -exec rm {} \;
+                  GRD_PASS=$(<${config.sops.secrets."rdp/password".path})
+                  grdctl rdp set-credentials ${config.home.username} "$GRD_PASS"
+                  grdctl rdp enable
+                  systemctl --user daemon-reload
+                '';
+              }
+            );
           };
           Install.WantedBy = [ "default.target" ];
         };
