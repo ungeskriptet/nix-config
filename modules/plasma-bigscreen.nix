@@ -54,8 +54,14 @@ in
         HandleSuspendKeyLongPress = "ignore";
       };
       udev.extraHwdb = ''
-        evdev:name:PHILIPS MCE USB IR Receiver- Spinel plus Keyboard:*
-          KEYBOARD_KEY_c0224=esc
+        evdev:name:ITE8708 CIR transceiver:*
+          KEYBOARD_KEY_80340458=up
+          KEYBOARD_KEY_80340459=down
+          KEYBOARD_KEY_8034045a=left
+          KEYBOARD_KEY_8034045b=right
+          KEYBOARD_KEY_8034045c=enter
+          KEYBOARD_KEY_8034045d=homepage
+          KEYBOARD_KEY_80340483=back
       '';
     };
 
