@@ -69,7 +69,10 @@ in
         "/uploads/*"
       ];
       rootDirs = {
-        "favicon".dir = toString gamjaIcon;
+        "favicon" = {
+          dir = toString gamjaIcon;
+          paths = [ "/favicon.ico" ];
+        };
         "root".dir = toString pkgs.gamja;
       };
       fileServers = [ { } ];
