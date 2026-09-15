@@ -1,4 +1,4 @@
-{ lib, inputs, ... }:
+{ inputs, ... }:
 {
   imports = [
     ./hardware-configuration.nix
@@ -8,19 +8,6 @@
   ];
 
   sops.defaultSopsFile = "${inputs.self}/secrets/secrets-misaka.yaml";
-
-  boot = {
-    kernelModules = [ "hid-spinelplus" ];
-    kernelPatches = [
-      {
-        name = "spinelplus";
-        patch = ./patches/0001-HID-spinelplus-add-driver-for-Spinel-plus-remotes.patch;
-        structuredExtraConfig = {
-          HID_SPINELPLUS = lib.kernel.module;
-        };
-      }
-    ];
-  };
 
   services.desktopManager.plasma-bigscreen = {
     enable = true;
