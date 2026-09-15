@@ -25,7 +25,14 @@ registerShortcut("Show/Hide Telegram", "Toggle visibility of the Telegram window
                 "Activate",
                 0,
                 0,
-                function () {},
+                function () {
+                  const clients = workspace.stackingOrder;
+                  for (var i = 0; i < clients.length; i++) {
+                    if (clients[i].resourceClass == "org.telegram.desktop") {
+                      workspace.activeWindow = clients[i];
+                    }
+                  }
+                },
               );
             }
           },
@@ -33,11 +40,4 @@ registerShortcut("Show/Hide Telegram", "Toggle visibility of the Telegram window
       }
     },
   );
-
-  const clients = workspace.stackingOrder;
-  for (var i = 0; i < clients.length; i++) {
-    if (clients[i].resourceClass == "org.telegram.desktop") {
-      workspace.raiseWindow(clients[i]);
-    }
-  }
 });
