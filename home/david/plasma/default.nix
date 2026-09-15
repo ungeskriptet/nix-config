@@ -20,6 +20,7 @@ in
 
   config = lib.mkIf cfg.enable {
     home.packages = with inputs.self.packages.${pkgs.stdenv.hostPlatform.system}; [
+      firefox-focus-windows
       telegram-show-hide
     ];
     xdg = {
@@ -62,7 +63,10 @@ in
             RepeatRate = 80;
           };
           ksmserverrc.General.loginMode = "emptySession";
-          kwinrc.Plugins.telegram-show-hideEnabled = true;
+          kwinrc.Plugins = {
+            telegram-show-hideEnabled = true;
+            firefox-focus-windowsEnabled = true;
+          };
         };
         panels = [
           {

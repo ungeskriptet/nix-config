@@ -1,0 +1,9 @@
+{
+    "KPlugin": {
+        "Name": "Focus Firefox",
+        "Description": "Focus all Firefox windows",
+        "Id": "firefox-focus-windows"
+    },
+    "X-Plasma-API": "javascript",
+    "KPackageStructure": "KWin/Script"
+}
