@@ -14,6 +14,8 @@ in
     settings = {
       "*" = {
         AddKeysToAgent = true;
+        HostkeyAlgorithms = "+ssh-rsa";
+        PubkeyAcceptedAlgorithms = "+ssh-rsa";
       };
       "iroha" = {
         HostName = "iroha.${domain}";
