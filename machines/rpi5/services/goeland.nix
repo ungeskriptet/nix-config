@@ -57,6 +57,7 @@ in
           nixosStories = "https://nixos.org/blog/stories-rss.xml";
           phoronix = "https://www.phoronix.com/rss.php";
           plasma = "https://blogs.kde.org/index.xml";
+          plasmaMobile = "https://plasma-mobile.org/index.xml";
           postmarketos = "https://postmarketos.org/blog/feed.atom";
           postmarketosEdge = "https://postmarketos.org/edge/feed.atom";
           reactos = "https://reactos.org/index.xml";
