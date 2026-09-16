@@ -91,6 +91,7 @@
       };
     };
     xserver.xkb.layout = "de";
+    tailscale.enable = true;
   };
 
   systemd.oomd = {

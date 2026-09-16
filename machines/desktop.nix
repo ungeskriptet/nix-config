@@ -28,7 +28,6 @@ in
       services = {
         printing.enable = true;
         pulseaudio.enable = false;
-        tailscale.enable = true;
         nm-nsupdate = {
           enable = true;
           fqdn = config.networking.fqdn;
