@@ -10,7 +10,9 @@
     "bm" = "branch -m";
     "c" = "commit -s";
     "cf" = "commit --fixup";
+    "cfd" = "clean -fd";
     "ch" = "checkout";
+    "cl" = "clone";
     "cm" = "commit -sm";
     "d" = "diff";
     "ds" = "diff --staged";
