@@ -86,13 +86,23 @@ in
       ];
       plasma6.excludePackages = with pkgs.kdePackages; [
         # keep-sorted start
+        ark
+        aurorae
+        baloo-widgets
         discover
+        dolphin
+        dolphin-plugins
         elisa
         gwenview
         kate
         khelpcenter
+        ktexteditor
+        kwin-x11
         okular
+        plasma-desktop
+        print-manager
         qrca
+        spectacle
         # keep-sorted end
       ];
     };
