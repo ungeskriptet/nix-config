@@ -80,10 +80,13 @@ in
     };
 
     environment = {
-      systemPackages = with pkgs.kdePackages; [
-        plasma-bigscreen
-        plasma-nm # Required to fix `"org.kde.plasma.networkmanagement" is not installed`
-      ];
+      systemPackages =
+        with pkgs.kdePackages;
+        [
+          plasma-bigscreen
+          plasma-nm # Required to fix `"org.kde.plasma.networkmanagement" is not installed`
+        ]
+        ++ (with pkgs; [ vacuum-tube ]);
       plasma6.excludePackages = with pkgs.kdePackages; [
         # keep-sorted start
         ark
