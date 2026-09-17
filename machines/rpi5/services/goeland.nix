@@ -47,6 +47,7 @@ in
           fdroid = "https://f-droid.org/feed.xml";
           fosdem = "https://fosdem.org/rss.xml";
           gamo2 = "https://nitter.net/GamoTwo/rss";
+          gnome = "https://release.gnome.org/atom.xml";
           haiku = "https://www.haiku-os.org/index.xml";
           haveibeenpwned = "https://haveibeenpwned.com/feed/breaches";
           limob = "https://linmob.net/feed.xml";
