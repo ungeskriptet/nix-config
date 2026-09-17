@@ -34,12 +34,17 @@ in
     services = {
       desktopManager.plasma6.enable = true;
       displayManager = {
-        plasma-login-manager.enable = true;
         sessionPackages = with pkgs; [ kdePackages.plasma-bigscreen ];
         defaultSession = "plasma-bigscreen-wayland";
         autoLogin = {
           user = config.users.users.htpc.name;
           enable = true;
+        };
+        plasma-login-manager = {
+          enable = true;
+          settings = {
+            Autologin.Relogin = true;
+          };
         };
       };
       pipewire = {
