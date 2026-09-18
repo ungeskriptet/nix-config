@@ -80,26 +80,25 @@ in
       })
 
       (lib.mkIf (cfg.hardware.platform == "intel") {
-        boot.kernelModules = [ "kvm-intel" ];
-        hardware.cpu = {
-          intel.updateMicrocode = true;
-        };
         services.thermald.enable = true;
-      })
-
-      (lib.mkIf (cfg.hardware.platform == "intel" && cfg.deviceType == "desktop") {
         boot = {
           kernelParams = [ "i915.enable_guc=2" ];
+          kernelModules = [ "kvm-intel" ];
           initrd.kernelModules = [ "i915" ];
         };
-        hardware.graphics.extraPackages = with pkgs; [
-          intel-compute-runtime-legacy1
-          intel-media-driver
-          (intel-media-sdk.overrideAttrs (prev: {
-            doCheck = false;
-            cmakeFlags = lib.remove "-DBUILD_TESTS=ON" prev.cmakeFlags;
-          }))
-        ];
+        hardware = {
+          graphics.extraPackages = with pkgs; [
+            intel-compute-runtime-legacy1
+            intel-media-driver
+            (intel-media-sdk.overrideAttrs (prev: {
+              doCheck = false;
+              cmakeFlags = lib.remove "-DBUILD_TESTS=ON" prev.cmakeFlags;
+            }))
+          ];
+          cpu = {
+            intel.updateMicrocode = true;
+          };
+        };
         environment.sessionVariables = {
           LIBVA_DRIVER_NAME = "iHD";
         };
