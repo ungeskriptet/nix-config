@@ -31,6 +31,13 @@ in
       };
     };
 
+    networking = {
+      firewall = {
+        allowedUDPPorts = [ 1900 ];
+        allowedTCPPorts = [ 4040 ];
+      };
+    };
+
     services = {
       desktopManager.plasma6.enable = true;
       displayManager = {
@@ -109,5 +116,18 @@ in
         # keep-sorted end
       ];
     };
+
+    nixpkgs.overlays = [
+      (final: prev: {
+        vacuum-tube = prev.vacuum-tube.overrideAttrs (prevPkg: {
+          postPatch = ''
+            ${if (prevPkg ? postPatch) then prevPkg.postPatch else ""}
+            substituteInPlace src/preload/modules/h5vcc/dial/http.js \
+              --replace-fail \
+              "server.listen(0, (err) => {" "server.listen(4040, (err) => {"
+          '';
+        });
+      })
+    ];
   };
 }
