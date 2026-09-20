@@ -95,6 +95,7 @@ in
       git-crypt
       git-lfs
       internetarchive
+      nix-update
       samloader-rs
       sops
     ];
