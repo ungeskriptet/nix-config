@@ -147,6 +147,7 @@ in
         maxx-simz-1
         maxx-simz-2
         midtown-timing-square
+        mimfilez
         minecraft-vol-1
         mungyodance-2
         mungyodance-3
