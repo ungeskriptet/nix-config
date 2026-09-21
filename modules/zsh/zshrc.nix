@@ -93,6 +93,13 @@ in
         adb -d install "$1.apk"
         [[ $2 = "--no-rm" ]] || rm -f "$1.apk"
       }
+      getenv () {
+        if [ -n "$2" ]; then
+          sudo cat /proc/"''${1:-1}"/environ | tr '\0' '\n' | rg "$2"
+        else
+          sudo cat /proc/"''${1:-1}"/environ | tr '\0' '\n'
+        fi
+      }
       heimdall-wait-for-device () {
         echo "< waiting for any device >"
         while ! heimdall detect > /dev/null 2>&1; do
