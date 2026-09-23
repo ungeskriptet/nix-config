@@ -58,6 +58,7 @@ in
           nixosAnnouncements = "https://nixos.org/blog/announcements-rss.xml";
           nixosNews = "https://nixos.org/blog/newsletters-rss.xml";
           nixosStories = "https://nixos.org/blog/stories-rss.xml";
+          olTelevision = "https://tv.ol-worldwi.de/atom.xml";
           phoronix = "https://www.phoronix.com/rss.php";
           plasma = "https://blogs.kde.org/index.xml";
           plasmaMobile = "https://plasma-mobile.org/index.xml";
