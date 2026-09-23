@@ -26,6 +26,7 @@ in
       enableCompletion = true;
       shellAliases = {
         # keep-sorted start block=yes
+        ",," = ", -s";
         c = "bat -pp";
         compress-vid = "ffmpeg -vcodec libx264 -crf 28 output.mp4 -i";
         d = "df -h -x devtmpfs -x tmpfs -x efivarfs";
