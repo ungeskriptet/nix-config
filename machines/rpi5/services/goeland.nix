@@ -54,6 +54,7 @@ in
           limob = "https://linmob.net/feed.xml";
           lineageos = "https://lineageos.org/feed.xml";
           lineageosHudson = "https://github.com/LineageOS/hudson/commits/main/lineage-build-targets.atom";
+          maemoLeste = "https://maemo-leste.github.io/feeds/all.atom.xml";
           nixosAnnouncements = "https://nixos.org/blog/announcements-rss.xml";
           nixosNews = "https://nixos.org/blog/newsletters-rss.xml";
           nixosStories = "https://nixos.org/blog/stories-rss.xml";
