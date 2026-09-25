@@ -132,6 +132,12 @@ in
       nix-log () {
         nix log --impure --expr "with import <nixpkgs> { }; $1"
       }
+      pubkey () {
+        bat -pp ~/.ssh/id_ed25519.pub
+        if wl-copy < ~/.ssh/id_ed25519.pub; then
+          echo "Copied to clipboard."
+        fi
+      }
       pull () {
         git pull gh ''${1:-master}
         git pull cb ''${1:-master}
