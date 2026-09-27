@@ -59,12 +59,12 @@ in
           nixosAnnouncements = "https://nixos.org/blog/announcements-rss.xml";
           nixosNews = "https://nixos.org/blog/newsletters-rss.xml";
           nixosStories = "https://nixos.org/blog/stories-rss.xml";
+          nura = "https://nura.eco/blog/feed.atom";
+          nuraEdge = "https://nura.eco/edge/feed.atom";
           olTelevision = "https://tv.ol-worldwi.de/atom.xml";
           phoronix = "https://www.phoronix.com/rss.php";
           plasma = "https://blogs.kde.org/index.xml";
           plasmaMobile = "https://plasma-mobile.org/index.xml";
-          postmarketos = "https://postmarketos.org/blog/feed.atom";
-          postmarketosEdge = "https://postmarketos.org/edge/feed.atom";
           reactos = "https://reactos.org/index.xml";
           servfail = "https://servfail.network/devlog/atom/";
           xkcd = "https://xkcd.com/atom.xml";
