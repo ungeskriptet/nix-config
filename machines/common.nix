@@ -6,6 +6,7 @@
 }:
 {
   imports = [
+    # keep-sorted start
     ../modules/acme.nix
     ../modules/bulwark-webmail.nix
     ../modules/caddy-common.nix
@@ -17,6 +18,7 @@
     ../modules/nixpkgs-config.nix
     ../modules/overlays.nix
     ../modules/packages-common.nix
+    ../modules/plasma-bigscreen.nix
     ../modules/popt/nixos.nix
     ../modules/secureboot.nix
     ../modules/support-vpn.nix
@@ -24,7 +26,7 @@
     ../modules/vars.nix
     ../modules/virtualization.nix
     ../modules/zsh/nixos
-    ../modules/plasma-bigscreen.nix
+    # keep-sorted end
     inputs.home-manager.nixosModules.home-manager
     inputs.nix-index-database.nixosModules.default
     inputs.sops-nix.nixosModules.sops
