@@ -22,6 +22,7 @@
     ../modules/popt/nixos.nix
     ../modules/secureboot.nix
     ../modules/support-vpn.nix
+    ../modules/tailscale-nsupdate.nix
     ../modules/users.nix
     ../modules/vars.nix
     ../modules/virtualization.nix
