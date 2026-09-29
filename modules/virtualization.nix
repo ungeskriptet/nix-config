@@ -5,25 +5,29 @@ let
 in
 {
   options.nix-config.enableVirt = lib.mkEnableOption "virtualisation";
-  config = lib.mkIf (cfg.enableVirt && arch == "x86_64-linux") {
-    boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
-    programs.virt-manager.enable = true;
-    virtualisation = {
-      libvirtd.enable = true;
-      spiceUSBRedirection.enable = true;
-      podman = {
-        enable = true;
-        dockerCompat = true;
-        autoPrune.enable = true;
+  config = lib.mkMerge [
+    (lib.mkIf ((cfg.david || cfg.enableVirt) && arch == "x86_64-linux") {
+      boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+    })
+    (lib.mkIf (cfg.enableVirt && arch == "x86_64-linux") {
+      programs.virt-manager.enable = true;
+      virtualisation = {
+        libvirtd.enable = true;
+        spiceUSBRedirection.enable = true;
+        podman = {
+          enable = true;
+          dockerCompat = true;
+          autoPrune.enable = true;
+        };
       };
-    };
-    security.polkit.extraConfig = ''
-      polkit.addRule(function(action, subject) {
-          if (action.id == "org.libvirt.unix.manage" && subject.isInGroup("wheel")) {
-              return polkit.Result.YES;
-          }
-      });
-    '';
-    networking.firewall.trustedInterfaces = [ "virbr0" ];
-  };
+      security.polkit.extraConfig = ''
+        polkit.addRule(function(action, subject) {
+            if (action.id == "org.libvirt.unix.manage" && subject.isInGroup("wheel")) {
+                return polkit.Result.YES;
+            }
+        });
+      '';
+      networking.firewall.trustedInterfaces = [ "virbr0" ];
+    })
+  ];
 }
