@@ -68,6 +68,7 @@ in
       serviceConfig = {
         Type = "oneshot";
         LoadCredential = [ "${cfg.fqdn}-nsupdate:${cfg.tsigKeyFile}" ];
+        RemainAfterExit = true;
       };
     };
   };
