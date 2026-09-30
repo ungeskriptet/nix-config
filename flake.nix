@@ -134,6 +134,7 @@
         in
         nixpkgs.lib.recursiveUpdate
           (forAllSystems (system: {
+            # keep-sorted start block=yes
             bulwark-webmail = pkgs.${system}.callPackage ./packages/bulwark-webmail { };
             firefox-focus-windows = pkgs.${system}.callPackage ./packages/firefox-focus-windows { };
             kate = pkgs.${system}.callPackage ./packages/kate.nix { };
@@ -142,8 +143,9 @@
             openssh-nix-on-droid = pkgs.${system}.callPackage ./packages/openssh-nix-on-droid.nix { };
             rg-uuid = pkgs.${system}.callPackage ./packages/rg-uuid { };
             sigscan = pkgs.${system}.callPackage ./packages/sigscan.nix { };
-            ttf-ms-win11 = pkgs.${system}.callPackage ./packages/ttf-ms-win11.nix { };
             telegram-show-hide = pkgs.${system}.callPackage ./packages/telegram-show-hide { };
+            ttf-ms-win11 = pkgs.${system}.callPackage ./packages/ttf-ms-win11.nix { };
+            # keep-sorted end
           }))
           {
             x86_64-linux = {
