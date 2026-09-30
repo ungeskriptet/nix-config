@@ -44,4 +44,12 @@ rec {
         }
       ) hosts
     );
+  autoArgs =
+    fn: autoArgs:
+    let
+      f = if builtins.isFunction fn then fn else import fn;
+      fargs = builtins.functionArgs f;
+      allArgs = builtins.intersectAttrs fargs autoArgs;
+    in
+    f allArgs;
 }
