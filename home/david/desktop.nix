@@ -2,6 +2,7 @@
   lib,
   config,
   pkgs,
+  inputs,
   ...
 }:
 let
@@ -18,6 +19,10 @@ in
       preset = "david";
       language = "en-US";
     };
+  };
+
+  programs.firefox = {
+    package = inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.firefox-patched;
   };
 
   sops = lib.mkIf cfg.trusted {

@@ -137,6 +137,7 @@
             # keep-sorted start block=yes
             bulwark-webmail = pkgs.${system}.callPackage ./packages/bulwark-webmail { };
             firefox-focus-windows = pkgs.${system}.callPackage ./packages/firefox-focus-windows { };
+            firefox-patched = lib.autoArgs ./packages/firefox-patched.nix pkgs.${system};
             kate = pkgs.${system}.callPackage ./packages/kate.nix { };
             magisk-install = pkgs.${system}.callPackage ./packages/magisk-install.nix { };
             nix-on-droid-setup = pkgs.${system}.callPackage ./packages/nix-on-droid-setup.nix { };
