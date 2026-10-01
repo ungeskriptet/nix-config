@@ -7,7 +7,10 @@ in
   options.nix-config.enableVirt = lib.mkEnableOption "virtualisation";
   config = lib.mkMerge [
     (lib.mkIf ((cfg.david || cfg.enableVirt) && arch == "x86_64-linux") {
-      boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+      boot.binfmt = {
+        emulatedSystems = [ "aarch64-linux" ];
+        preferStaticEmulators = true;
+      };
     })
     (lib.mkIf (cfg.enableVirt && arch == "x86_64-linux") {
       programs.virt-manager.enable = true;
