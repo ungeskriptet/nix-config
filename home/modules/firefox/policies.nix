@@ -82,6 +82,10 @@ in
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/darkreader/latest.xpi";
             private_browsing = true;
           };
+          "anubis-bypass@zipdox.net" = {
+            installation_mode = "force_installed";
+            private_browsing = true;
+          };
           "insensitivex@orca.pet" = {
             default_area = "menupanel";
             installation_mode = "force_installed";
