@@ -21,7 +21,6 @@ in
   );
 
   sops = lib.mkIf cfg.trusted {
-    defaultSopsFile = ../../secrets/secrets-david.yaml;
     secrets = {
       "adb/privkey" = {
         path = "${homeDir}/.android/adbkey";

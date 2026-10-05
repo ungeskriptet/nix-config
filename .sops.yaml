@@ -1,49 +1,79 @@
 keys:
+  # keep-sorted start
   - &bitwarden age1x67zpr06facj4aefzlx0d3nj56qpprm43jpvry8dxf9vn6u44dpqqj7k0f
   - &host_celica age1lp4es82268ctnx96ev0j6hnjeal4hd9sqw2ju4lguktlutl70ddq2vt3q6
   - &host_iroha age19cvea5uvze7ncxm4z2l6z3jnakdj5cuxqryydl40yuvd5w3qu5jq3ll3q0
+  - &host_misaka age1c60rqhp8csf3tqt4gupva3xcjnzcsyx2xa399kz7qkzpverfm3uq570hxr
   - &host_rimuru age1dp06ez6r6c8d7uxgvhmyeu7eemlxsxqa0tgu476rc07a535rydmsqhl7am
+  - &host_rpi5 age1ct348rdgpe8tekjytgh64z9hcuc985xjg2mxs0enduaxrymgsy9surfz7k
+  - &host_ryuzu age1dy9rlqscq9t674kkfhnycx2ffp4eedp0ryzkzun3ajd88vs2ggdq833u44
   - &host_tsugaru age16yr2tnnnw7s9qv34g9lu6gjlrcrm92c6qltfap23dnsd5msqkdwqa8fu0f
+  - &host_xiatian age1vlussvlljnjwp7c9jwkw08s5ghl80k8af5tmgrsr2d8jfzjtnpdqxdmjmh
+  - &user_david age1fjz5xtaslyxpltgg05g8yl09900d4cw9z40ww37levnuesafk5gqj54tk7
   - &user_grazyna age1v4aj5laf9p5ld52746t6le6lfmk6xv7ymn6ystz4sdzqz06t79tsq2jns5
   - &user_martin age1axy75zr0l0qpka0xg48fv3afce9vrl4pc6hx4mz2xxz3uu2aeskqkxpckv
   - &user_omao age1wz43nfrqssvgwg93ljre80p4lv6qyhsnvua8vmd0274cg0l2t4fqkextc9
+  # keep-sorted end
 creation_rules:
-  - path_regex: secrets/secrets-(david|misaka|rpi5|ryuzu|xiatian).yaml
-    key_groups:
-    - age:
-      - *bitwarden
-  - path_regex: secrets/secrets-(kamil|tsugaru).yaml
+  # keep-sorted start
+  - path_regex: secrets/(user-kamil|host-tsugaru).yaml
     key_groups:
     - age:
       - *bitwarden
       - *host_tsugaru
-  - path_regex: secrets/secrets-rimuru.yaml
-    key_groups:
-    - age:
-      - *bitwarden
-      - *host_rimuru
-  - path_regex: secrets/secrets-grazyna.yaml
-    key_groups:
-    - age:
-      - *bitwarden
-      - *user_grazyna
-  - path_regex: secrets/secrets-iroha.yaml
-    key_groups:
-    - age:
-      - *bitwarden
-      - *host_iroha
-  - path_regex: secrets/secrets-omao.yaml
-    key_groups:
-    - age:
-      - *bitwarden
-      - *user_omao
-  - path_regex: secrets/secrets-celica.yaml
+  - path_regex: secrets/host-celica.yaml
     key_groups:
     - age:
       - *bitwarden
       - *host_celica
-  - path_regex: secrets/secrets-martin.yaml
+  - path_regex: secrets/host-iroha.yaml
+    key_groups:
+    - age:
+      - *bitwarden
+      - *host_iroha
+  - path_regex: secrets/host-misaka.yaml
+    key_groups:
+    - age:
+      - *bitwarden
+      - *host_misaka
+  - path_regex: secrets/host-rimuru.yaml
+    key_groups:
+    - age:
+      - *bitwarden
+      - *host_rimuru
+  - path_regex: secrets/host-rpi5.yaml
+    key_groups:
+    - age:
+      - *bitwarden
+      - *host_rpi5
+  - path_regex: secrets/host-ryuzu.yaml
+    key_groups:
+    - age:
+      - *bitwarden
+      - *host_ryuzu
+  - path_regex: secrets/host-xiatian.yaml
+    key_groups:
+    - age:
+      - *bitwarden
+      - *host_xiatian
+  - path_regex: secrets/user-david.yaml
+    key_groups:
+    - age:
+      - *bitwarden
+      - *user_david
+  - path_regex: secrets/user-grazyna.yaml
+    key_groups:
+    - age:
+      - *bitwarden
+      - *user_grazyna
+  - path_regex: secrets/user-martin.yaml
     key_groups:
     - age:
       - *bitwarden
       - *user_martin
+  - path_regex: secrets/user-omao.yaml
+    key_groups:
+    - age:
+      - *bitwarden
+      - *user_omao
+  # keep-sorted end

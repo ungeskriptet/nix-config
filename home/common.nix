@@ -17,9 +17,12 @@ in
     home-manager.enable = true;
   };
 
-  sops.age = {
-    keyFile = "${homeDir}/.config/sops-nix/key.txt";
-    generateKey = true;
+  sops = {
+    defaultSopsFile = "${inputs.self}/secrets/user-${config.home.username}.yaml";
+    age = {
+      keyFile = "${homeDir}/.config/sops-nix/key.txt";
+      generateKey = true;
+    };
   };
 
   home = {

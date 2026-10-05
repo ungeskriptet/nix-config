@@ -1,7 +1,6 @@
 {
   lib,
   config,
-  inputs,
   ...
 }:
 {
@@ -13,7 +12,6 @@
   ];
 
   sops = {
-    defaultSopsFile = "${inputs.self}/secrets/secrets-misaka.yaml";
     secrets."dns/tsig".owner = "root";
   };
 

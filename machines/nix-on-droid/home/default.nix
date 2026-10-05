@@ -25,6 +25,10 @@ in
     trusted = true;
   };
 
+  sops = {
+    defaultSopsFile = lib.mkForce "${inputs.self}/secrets/user-david.yaml";
+  };
+
   home = {
     file = {
       ".ssh/authorized_keys".text = lib.concatStringsSep "\n" config.vars.sshPubKeys;

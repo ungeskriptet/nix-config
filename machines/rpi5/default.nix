@@ -12,8 +12,6 @@
     ../common.nix
   ];
 
-  sops.defaultSopsFile = "${inputs.self}/secrets/secrets-rpi5.yaml";
-
   networking.hostName = "rpi5";
 
   security.sudo.wheelNeedsPassword = false;

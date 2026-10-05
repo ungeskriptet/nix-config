@@ -1,5 +1,4 @@
 {
-  inputs,
   pkgs,
   lib,
   ...
@@ -9,11 +8,6 @@
     ./hardware-configuration.nix
     ../desktop.nix
   ];
-
-  sops = {
-    age.keyFile = lib.mkForce null;
-    defaultSopsFile = "${inputs.self}/secrets/secrets-iroha.yaml";
-  };
 
   networking = {
     hostName = "iroha";

@@ -5,8 +5,6 @@
     ./gnome.nix
   ];
 
-  sops.defaultSopsFile = ../secrets/secrets-grazyna.yaml;
-
   nix-config = {
     firefox = {
       preset = "default";
