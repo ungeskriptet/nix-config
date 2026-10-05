@@ -10,62 +10,64 @@ let
   selfPkgs = inputs.self.packages.${pkgs.stdenv.hostPlatform.system};
 in
 {
-  services.udev.packages = lib.optionals cfg.david (
-    with pkgs;
-    [
-      heimdall.udev
-    ]
-  );
+  config = lib.mkIf (cfg.deviceType == "desktop") {
+    services.udev.packages = lib.optionals cfg.david (
+      with pkgs;
+      [
+        heimdall.udev
+      ]
+    );
 
-  programs = {
-    gnupg.agent.enable = lib.mkIf cfg.david true;
-    ssh = lib.mkIf cfg.enablePlasma {
-      enableAskPassword = true;
-      askPassword = lib.getExe pkgs.kdePackages.ksshaskpass;
+    programs = {
+      gnupg.agent.enable = lib.mkIf cfg.david true;
+      ssh = lib.mkIf cfg.enablePlasma {
+        enableAskPassword = true;
+        askPassword = lib.getExe pkgs.kdePackages.ksshaskpass;
+      };
+      wireshark = lib.mkIf cfg.david {
+        enable = true;
+        package = pkgs.wireshark;
+        usbmon.enable = true;
+      };
     };
-    wireshark = lib.mkIf cfg.david {
-      enable = true;
-      package = pkgs.wireshark;
-      usbmon.enable = true;
-    };
+
+    environment.systemPackages =
+      with pkgs;
+      [
+        bitwarden-desktop
+        gimp3-with-plugins
+        hunspell
+        hunspellDicts.de_DE
+        hunspellDicts.en_US
+        hunspellDicts.pl_PL
+        hyphenDicts.de_DE
+        hyphenDicts.en_US
+        libreoffice-qt-stable
+        scrcpy
+        signal-desktop
+        simple-scan
+        vlc
+        wl-clipboard
+        xournalpp
+        yt-dlp
+
+        selfPkgs.ttf-ms-win11
+      ]
+      ++ lib.optionals cfg.david [
+        extract-dtb
+        git-repo
+        heimdall
+        llvmPackages.clang-tools
+        meld
+        prismlauncher
+        qbittorrent
+        remmina
+        telegram-desktop
+
+        selfPkgs.kate
+        selfPkgs.magisk-install
+        selfPkgs.odin4
+        selfPkgs.sigscan
+      ];
   };
-
-  environment.systemPackages =
-    with pkgs;
-    [
-      bitwarden-desktop
-      gimp3-with-plugins
-      hunspell
-      hunspellDicts.de_DE
-      hunspellDicts.en_US
-      hunspellDicts.pl_PL
-      hyphenDicts.de_DE
-      hyphenDicts.en_US
-      libreoffice-qt-stable
-      scrcpy
-      signal-desktop
-      simple-scan
-      vlc
-      wl-clipboard
-      xournalpp
-      yt-dlp
-
-      selfPkgs.ttf-ms-win11
-    ]
-    ++ lib.optionals cfg.david [
-      extract-dtb
-      git-repo
-      heimdall
-      llvmPackages.clang-tools
-      meld
-      prismlauncher
-      qbittorrent
-      remmina
-      telegram-desktop
-
-      selfPkgs.kate
-      selfPkgs.magisk-install
-      selfPkgs.odin4
-      selfPkgs.sigscan
-    ];
 }
