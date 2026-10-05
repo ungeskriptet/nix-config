@@ -5,7 +5,6 @@
 {
   networking = {
     gatewayIP = "192.168.64.1";
-    hostName = "misaka";
     lanIPv4 = "192.168.64.3";
     lanIPv6 = "fd64::3";
     useDHCP = false;

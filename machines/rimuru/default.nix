@@ -8,7 +8,6 @@
   ];
 
   networking = {
-    hostName = "rimuru";
     firewall.allowedTCPPorts = [ 3389 ];
     interfaces.enp2s0f1.wakeOnLan.enable = true;
     supportVpn.interfaceAddress = "192.168.3.7";

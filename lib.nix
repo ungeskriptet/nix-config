@@ -39,7 +39,10 @@ in
             modules = [
               ./machines/${host}
               ./modules/module-list.nix
-              { nixpkgs.hostPlatform = system; }
+              {
+                nixpkgs.hostPlatform = system;
+                networking.hostName = host;
+              }
             ];
           };
         }

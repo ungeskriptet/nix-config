@@ -10,8 +10,6 @@
     ./hardware-configuration.nix
   ];
 
-  networking.hostName = "xiatian";
-
   environment.systemPackages = with pkgs; [ etterna ];
 
   services = {

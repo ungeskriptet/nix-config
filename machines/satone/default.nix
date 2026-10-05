@@ -7,8 +7,6 @@
     ./networking.nix
   ];
 
-  networking.hostName = "satone";
-
   security.sudo.wheelNeedsPassword = false;
 
   nix-config.david = true;
