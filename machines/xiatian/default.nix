@@ -2,7 +2,6 @@
 {
   config,
   pkgs,
-  lib,
   ...
 }:
 {
@@ -13,7 +12,6 @@
   environment.systemPackages = with pkgs; [ etterna ];
 
   services = {
-    fprintd.enable = true;
     displayManager.autoLogin = {
       enable = true;
       user = config.users.userName;
@@ -24,22 +22,12 @@
     '';
   };
 
-  security.pam.services =
-    lib.genAttrs [ "kde-fingerprint" "polkit-1" "sudo" ] (service: {
-      rules.auth.fprintd.settings = {
-        max-tries = 15;
-        timeout = -1;
-      };
-    })
-    // {
-      login.fprintAuth = false;
-    };
-
   users.hashedPassword = "$y$j9T$kHWkTrrHjPj4oK2P6KeaR.$6EFjpr.XBUR9coMEYixfw5LMzzNQ2mj8jiOesYLBU9A";
 
   nix-config = {
     deviceType = "desktop";
     david = true;
+    fingerprint = true;
     secureboot.enable = true;
     hardware = {
       enable = true;
