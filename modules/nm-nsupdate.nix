@@ -26,12 +26,17 @@ in
       '';
     };
   };
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf (cfg.enable && config.networking.networkmanager.enable) {
+    sops.secrets."dns/tsig".owner = "root";
+    services.nm-nsupdate = {
+      fqdn = config.networking.fqdn;
+      nameServer = "ns1.${config.networking.domain}";
+      tsigKeyFile = config.sops.secrets."dns/tsig".path;
+    };
     systemd.services.NetworkManager-dispatcher.serviceConfig = {
       LoadCredential = [ "${cfg.fqdn}-nsupdate:${cfg.tsigKeyFile}" ];
     };
     networking.networkmanager = {
-      enable = true;
       dispatcherScripts = [
         {
           source =
