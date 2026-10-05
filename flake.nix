@@ -97,6 +97,7 @@
       );
     in
     {
+      inherit lib;
       nixosModules.default = ./modules/module-list.nix;
       nixosConfigurations = {
         rpi5 = nixos-raspberrypi.lib.nixosSystem {
