@@ -12,6 +12,7 @@
     ./common.nix
     ./david.nix
     ./desktop.nix
+    ./fingerprint.nix
     ./fmd-server.nix
     ./git/nixos.nix
     ./gnome.nix
