@@ -7,7 +7,6 @@
     ./home-assistant/ssh.nix
     ./itgmania.nix
     ./nginx.nix
-    ../desktop.nix
     ../../modules/minecraft-server.nix
   ];
 
@@ -30,8 +29,8 @@
   users.hashedPassword = "$y$j9T$sMN/eKYxYfh97dxUFDtzf.$sD76l.o1RyplUGb./VV.m3/qgEOrHIh5MkhLoeDpXUB";
 
   nix-config = {
+    deviceType = "desktop";
     david = true;
-    enablePlasma = true;
     vr = true;
     secureboot.enable = true;
     hardware = {

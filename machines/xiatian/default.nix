@@ -8,7 +8,6 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../desktop.nix
   ];
 
   networking.hostName = "xiatian";
@@ -41,8 +40,8 @@
   users.hashedPassword = "$y$j9T$kHWkTrrHjPj4oK2P6KeaR.$6EFjpr.XBUR9coMEYixfw5LMzzNQ2mj8jiOesYLBU9A";
 
   nix-config = {
+    deviceType = "desktop";
     david = true;
-    enablePlasma = true;
     secureboot.enable = true;
     hardware = {
       enable = true;

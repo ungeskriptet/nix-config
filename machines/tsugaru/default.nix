@@ -7,7 +7,6 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../desktop.nix
   ];
 
   networking = {
@@ -23,6 +22,7 @@
   };
 
   nix-config = {
+    deviceType = "desktop";
     gnome.enable = true;
     secureboot.enable = true;
     hardware = {
