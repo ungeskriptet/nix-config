@@ -1,0 +1,42 @@
+{
+  inputs,
+  ...
+}:
+{
+  imports = [
+    # keep-sorted start
+    ./acme.nix
+    ./bulwark-webmail.nix
+    ./caddy-common.nix
+    ./caddy-hosts.nix
+    ./common.nix
+    ./david.nix
+    ./desktop.nix
+    ./fmd-server.nix
+    ./git/nixos.nix
+    ./gnome.nix
+    ./hardware.nix
+    ./itgmania.nix
+    ./knot-nsupdate.nix
+    ./nixpkgs-config.nix
+    ./nm-nsupdate.nix
+    ./overlays.nix
+    ./packages-common.nix
+    ./packages-desktop.nix
+    ./plasma-bigscreen.nix
+    ./plasma.nix
+    ./popt/nixos.nix
+    ./secureboot.nix
+    ./support-vpn.nix
+    ./tailscale-nsupdate.nix
+    ./users.nix
+    ./vars.nix
+    ./virtualization.nix
+    ./vr.nix
+    ./zsh/nixos
+    inputs.home-manager.nixosModules.home-manager
+    inputs.nix-index-database.nixosModules.default
+    inputs.sops-nix.nixosModules.sops
+    # keep-sorted end
+  ];
+}

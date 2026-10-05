@@ -38,6 +38,7 @@ rec {
             specialArgs = { inherit inputs; };
             modules = [
               ./machines/${host}
+              ./modules/module-list.nix
               { nixpkgs.hostPlatform = system; }
             ];
           };

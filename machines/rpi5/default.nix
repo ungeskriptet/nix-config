@@ -9,7 +9,6 @@
     ./hardware-configuration.nix
     ./networking.nix
     ./services
-    ../common.nix
   ];
 
   networking.hostName = "rpi5";

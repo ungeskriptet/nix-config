@@ -5,7 +5,6 @@
     (modulesPath + "/profiles/qemu-guest.nix")
     ./disk-config.nix
     ./networking.nix
-    ../common.nix
   ];
 
   networking.hostName = "satone";

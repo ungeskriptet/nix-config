@@ -5,34 +5,6 @@
   ...
 }:
 {
-  imports = [
-    # keep-sorted start
-    ../modules/acme.nix
-    ../modules/bulwark-webmail.nix
-    ../modules/caddy-common.nix
-    ../modules/caddy-hosts.nix
-    ../modules/fmd-server.nix
-    ../modules/git/nixos.nix
-    ../modules/hardware.nix
-    ../modules/knot-nsupdate.nix
-    ../modules/nixpkgs-config.nix
-    ../modules/overlays.nix
-    ../modules/packages-common.nix
-    ../modules/plasma-bigscreen.nix
-    ../modules/popt/nixos.nix
-    ../modules/secureboot.nix
-    ../modules/support-vpn.nix
-    ../modules/tailscale-nsupdate.nix
-    ../modules/users.nix
-    ../modules/vars.nix
-    ../modules/virtualization.nix
-    ../modules/zsh/nixos
-    # keep-sorted end
-    inputs.home-manager.nixosModules.home-manager
-    inputs.nix-index-database.nixosModules.default
-    inputs.sops-nix.nixosModules.sops
-  ];
-
   sops.defaultSopsFile = "${inputs.self}/secrets/host-${config.networking.hostName}.yaml";
 
   home-manager = {
@@ -40,9 +12,6 @@
     useUserPackages = true;
     extraSpecialArgs = { inherit inputs; };
     backupFileExtension = "hmbak";
-  }
-  // lib.optionalAttrs (config.users.userName == "david") {
-    users.david.imports = [ ../home/david/common.nix ];
   };
 
   boot = {
@@ -109,7 +78,6 @@
     XDG_CONFIG_HOME = "$HOME/.config";
     XDG_DATA_HOME = "$HOME/.local/share";
     XDG_STATE_HOME = "$HOME/.local/state";
-    PATH = [ "$HOME/.local/bin" ];
   };
 
   time.timeZone = "Europe/Berlin";
