@@ -11,8 +11,6 @@
     ../../modules/minecraft-server.nix
   ];
 
-  sops.defaultSopsFile = ../../secrets/secrets-ryuzu.yaml;
-
   networking = {
     hostName = "ryuzu";
     interfaces.enp5s0.wakeOnLan.enable = true;

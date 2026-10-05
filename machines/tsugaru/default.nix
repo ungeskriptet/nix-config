@@ -1,6 +1,5 @@
 # Acer Aspire V3-771
 {
-  inputs,
   pkgs,
   lib,
   ...
@@ -10,11 +9,6 @@
     ./hardware-configuration.nix
     ../desktop.nix
   ];
-
-  sops = {
-    age.keyFile = lib.mkForce null;
-    defaultSopsFile = "${inputs.self}/secrets/secrets-tsugaru.yaml";
-  };
 
   networking = {
     hostName = "tsugaru";

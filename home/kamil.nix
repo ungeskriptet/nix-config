@@ -5,8 +5,6 @@
     ./gnome.nix
   ];
 
-  sops.defaultSopsFile = ../secrets/secrets-kamil.yaml;
-
   nix-config = {
     firefox = {
       preset = "default";

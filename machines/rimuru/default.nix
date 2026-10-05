@@ -1,5 +1,4 @@
 {
-  inputs,
   lib,
   ...
 }:
@@ -8,11 +7,6 @@
     ./hardware-configuration.nix
     ../desktop.nix
   ];
-
-  sops = {
-    age.keyFile = lib.mkForce null;
-    defaultSopsFile = "${inputs.self}/secrets/secrets-rimuru.yaml";
-  };
 
   networking = {
     hostName = "rimuru";

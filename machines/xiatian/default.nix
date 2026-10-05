@@ -11,8 +11,6 @@
     ../desktop.nix
   ];
 
-  sops.defaultSopsFile = ../../secrets/secrets-xiatian.yaml;
-
   networking.hostName = "xiatian";
 
   environment.systemPackages = with pkgs; [ etterna ];

@@ -33,7 +33,7 @@
     inputs.sops-nix.nixosModules.sops
   ];
 
-  sops.age.keyFile = lib.mkDefault "/var/lib/sops-nix/key.txt";
+  sops.defaultSopsFile = "${inputs.self}/secrets/host-${config.networking.hostName}.yaml";
 
   home-manager = {
     useGlobalPkgs = true;

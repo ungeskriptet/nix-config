@@ -2,7 +2,6 @@
   pkgs,
   lib,
   config,
-  inputs,
   ...
 }:
 {
@@ -10,11 +9,6 @@
     ./hardware-configuration.nix
     ../desktop.nix
   ];
-
-  sops = {
-    age.keyFile = lib.mkForce null;
-    defaultSopsFile = "${inputs.self}/secrets/secrets-celica.yaml";
-  };
 
   networking = {
     hostName = "celica";
@@ -63,7 +57,6 @@
         ../../home/common.nix
       ];
       gnome.monitorID = "SAM-H9XZA06953";
-      sops.defaultSopsFile = ../../secrets/secrets-martin.yaml;
       nix-config = {
         firefox = {
           preset = "default";
