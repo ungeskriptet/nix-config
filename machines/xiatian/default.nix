@@ -20,6 +20,7 @@
       evdev:input:b0011v0001p0001eAB83*
         KEYBOARD_KEY_68=playpause
     '';
+    nm-nsupdate.enable = true;
   };
 
   users.hashedPassword = "$y$j9T$kHWkTrrHjPj4oK2P6KeaR.$6EFjpr.XBUR9coMEYixfw5LMzzNQ2mj8jiOesYLBU9A";
