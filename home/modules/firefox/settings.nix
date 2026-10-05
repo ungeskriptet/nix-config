@@ -13,6 +13,7 @@ in
             "browser.newtabpage.activity-stream.default.sites" = "";
             "browser.newtabpage.activity-stream.feeds.system.topsites" = false;
             "browser.newtabpage.activity-stream.showSponsoredCheckboxes" = false;
+            "browser.nova.enabled" = false;
             "browser.startup.page" = 3;
             "browser.translations.automaticallyPopup" = false;
             "browser.uitour.enabled" = false;
