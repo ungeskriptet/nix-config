@@ -122,7 +122,7 @@
           host = "satone";
           system = "aarch64-linux";
         }
-      ] inputs;
+      ];
       nixOnDroidConfigurations.nix-on-droid = nix-on-droid.lib.nixOnDroidConfiguration {
         pkgs = import nixpkgs { system = "aarch64-linux"; };
         extraSpecialArgs = { inherit inputs; };
