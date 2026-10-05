@@ -1,12 +1,12 @@
 { inputs }:
 let
   lib = inputs.nixpkgs.lib;
-in
-rec {
   defaultSystems = [
     "aarch64-linux"
     "x86_64-linux"
   ];
+in
+{
   forAllSystems = lib.genAttrs defaultSystems;
   mkHomeConfigurations =
     user: attrs:
