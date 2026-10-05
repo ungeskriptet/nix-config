@@ -30,6 +30,7 @@ in
       map (
         {
           host,
+          path ? ./machines/${host},
           system ? "x86_64-linux",
         }:
         {
@@ -37,8 +38,8 @@ in
             inherit system;
             specialArgs = { inherit inputs; };
             modules = [
-              ./machines/${host}
               ./modules/module-list.nix
+              path
               {
                 nixpkgs.hostPlatform = system;
                 networking.hostName = host;
