@@ -39,8 +39,8 @@ wrapFirefox (
     '';
 
   })).override
-  {
-    enableAddonSideload = true;
-    enableAddonSigning = false;
-  }
+    {
+      enableAddonSideload = true;
+      enableAddonSigning = false;
+    }
 ) { }
