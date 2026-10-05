@@ -55,7 +55,6 @@ in
           enable = true;
           plugins = with pkgs; [
             networkmanager-openvpn
-            networkmanager-vpnc
           ];
         };
       };
