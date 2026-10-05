@@ -10,7 +10,6 @@
   ];
 
   networking = {
-    hostName = "celica";
     firewall.allowedTCPPorts = [ 3389 ];
     interfaces.enp5s0.wakeOnLan.enable = true;
     supportVpn.interfaceAddress = "192.168.3.9";
