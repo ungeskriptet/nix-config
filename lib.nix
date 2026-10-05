@@ -25,7 +25,7 @@ in
       }) defaultSystems
     );
   mkNixos =
-    hosts: inputs:
+    hosts:
     lib.mergeAttrsList (
       map (
         {
