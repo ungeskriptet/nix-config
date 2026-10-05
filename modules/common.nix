@@ -5,7 +5,7 @@
   ...
 }:
 {
-  sops.defaultSopsFile = "${inputs.self}/secrets/host-${config.networking.hostName}.yaml";
+  sops.defaultSopsFile = lib.mkDefault "${inputs.self}/secrets/host-${config.networking.hostName}.yaml";
 
   home-manager = {
     useGlobalPkgs = true;
