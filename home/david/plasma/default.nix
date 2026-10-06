@@ -14,8 +14,13 @@ in
     ./kate.nix
   ];
 
-  options.hm-config.plasma.enable = lib.mkEnableOption "David's Plasma configs" // {
-    default = true;
+  options.hm-config.plasma = {
+    enable = lib.mkEnableOption "David's Plasma configs" // {
+      default = true;
+    };
+    nixIcon = lib.mkEnableOption "Nix icon for the application launcher" // {
+      default = true;
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -46,6 +51,7 @@ in
       };
       plasma = {
         enable = true;
+        overrideConfig = true;
         shortcuts = {
           yakuake.toggle-window-state = "Meta+Esc";
         };
@@ -78,7 +84,7 @@ in
             widgets = [
               {
                 name = "org.kde.plasma.kickoff";
-                config.General.icon = "nix-snowflake";
+                config.General.icon = lib.mkIf cfg.nixIcon "nix-snowflake";
               }
               "org.kde.plasma.marginsseparator"
               "org.kde.plasma.pager"
@@ -94,6 +100,10 @@ in
             ];
           }
         ];
+        workspace = {
+          theme = "breeze-dark";
+          lookAndFeel = "org.kde.breezedark.desktop";
+        };
       };
     };
   };
