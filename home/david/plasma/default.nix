@@ -33,12 +33,15 @@ in
       };
     };
     programs = {
-      firefox.policies = {
-        ExtensionSettings."plasma-browser-integration@kde.org" = {
-          default_area = "menupanel";
-          installation_mode = "force_installed";
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/plasma-integration/latest.xpi";
-          private_browsing = true;
+      firefox = {
+        nativeMessagingHosts = with pkgs; [ kdePackages.plasma-browser-integration ];
+        policies = {
+          ExtensionSettings."plasma-browser-integration@kde.org" = {
+            default_area = "menupanel";
+            installation_mode = "force_installed";
+            install_url = "https://addons.mozilla.org/firefox/downloads/latest/plasma-integration/latest.xpi";
+            private_browsing = true;
+          };
         };
       };
       plasma = {
