@@ -32,7 +32,7 @@
     secureboot.enable = true;
     hardware = {
       enable = true;
-      platform = "intel";
+      platform = "oldintel";
     };
   };
 

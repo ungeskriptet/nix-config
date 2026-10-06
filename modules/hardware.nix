@@ -20,7 +20,8 @@ in
     platform = lib.mkOption {
       type = lib.types.enum [
         "amd"
-        "intel"
+        "oldintel"
+        "newintel"
       ];
       description = "The hardware platform.";
     };
@@ -79,30 +80,48 @@ in
         };
       })
 
-      (lib.mkIf (cfg.hardware.platform == "intel") {
+      (lib.mkIf (lib.hasSuffix "intel" cfg.hardware.platform) {
         services.thermald.enable = true;
         boot = {
-          kernelParams = [ "i915.enable_guc=2" ];
           kernelModules = [ "kvm-intel" ];
           initrd.kernelModules = [ "i915" ];
         };
+        environment.sessionVariables = {
+          LIBVA_DRIVER_NAME = "iHD";
+        };
         hardware = {
           graphics.extraPackages = with pkgs; [
-            intel-compute-runtime-legacy1
             intel-media-driver
-            (intel-media-sdk.overrideAttrs (prev: {
-              doCheck = false;
-              cmakeFlags = lib.remove "-DBUILD_TESTS=ON" prev.cmakeFlags;
-            }))
           ];
           cpu = {
             intel.updateMicrocode = true;
           };
         };
-        environment.sessionVariables = {
-          LIBVA_DRIVER_NAME = "iHD";
+      })
+
+      (lib.mkIf (cfg.hardware.platform == "oldintel") {
+        boot = {
+          kernelParams = [ "i915.enable_guc=2" ];
+        };
+        hardware = {
+          graphics.extraPackages = with pkgs; [
+            intel-compute-runtime-legacy1
+            (intel-media-sdk.overrideAttrs (prev: {
+              doCheck = false;
+              cmakeFlags = lib.remove "-DBUILD_TESTS=ON" prev.cmakeFlags;
+            }))
+          ];
         };
         nixpkgs.allowPackages = [ "intel-media-sdk" ];
+      })
+
+      (lib.mkIf (cfg.hardware.platform == "newintel") {
+        hardware = {
+          graphics.extraPackages = with pkgs; [
+            vpl-gpu-rt
+            intel-compute-runtime
+          ];
+        };
       })
     ]
   );
