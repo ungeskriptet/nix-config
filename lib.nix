@@ -32,11 +32,15 @@ in
           host,
           path ? ./machines/${host},
           system ? "x86_64-linux",
+          specialArgs ? null,
         }:
         {
           ${host} = lib.nixosSystem {
             inherit system;
-            specialArgs = { inherit inputs; };
+            specialArgs = {
+              inherit inputs;
+            }
+            // (lib.optionalAttrs (specialArgs != null) specialArgs);
             modules = [
               ./modules/module-list.nix
               path
