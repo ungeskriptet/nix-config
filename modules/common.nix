@@ -38,7 +38,7 @@
   };
 
   networking = {
-    domain = config.vars.domain;
+    domain = lib.mkDefault config.vars.domain;
     nftables.enable = true;
     firewall.filterForward = true;
   };
