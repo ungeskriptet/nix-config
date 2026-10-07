@@ -53,6 +53,7 @@ in
         enable = true;
         overrideConfig = true;
         shortcuts = {
+          kwin."Switch to Desktop 2" = "Ctrl+F2";
           yakuake.toggle-window-state = "Meta+Esc";
         };
         configFile = {
