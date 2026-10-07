@@ -32,14 +32,22 @@ in
       sessionVariables = {
         PINENTRY_KDE_USE_WALLET = "1";
       };
-    };
-
-    environment = {
       etc."xdg/baloofilerc".source = (pkgs.formats.ini { }).generate "baloorc" {
         "Basic Settings" = {
           "Indexing-Enabled" = false;
         };
       };
+    };
+
+    security = {
+      polkit.extraConfig = ''
+        polkit.addRule(function(action, subject) {
+          if (
+            action.id == "org.kde.kcontrol.kcmplasmalogin.sync" &&
+            subject.isInGroup("wheel")
+          ) { return polkit.Result.YES; }
+        });
+      '';
     };
 
     systemd.user.services.ssh-add = {
