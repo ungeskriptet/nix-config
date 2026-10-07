@@ -1,4 +1,5 @@
 {
+  lib,
   config,
   inputs,
   ...
@@ -18,7 +19,7 @@ in
   };
 
   sops = {
-    defaultSopsFile = "${inputs.self}/secrets/user-${config.home.username}.yaml";
+    defaultSopsFile = lib.mkDefault "${inputs.self}/secrets/user-${config.home.username}.yaml";
     age = {
       keyFile = "${homeDir}/.config/sops-nix/key.txt";
       generateKey = true;
