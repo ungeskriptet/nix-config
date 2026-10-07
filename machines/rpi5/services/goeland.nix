@@ -44,6 +44,7 @@ in
           calyxos = "https://calyxos.org/feed.xml";
           cccEvents = "https://events.ccc.de/feed";
           codeberg = "https://blog.codeberg.org/feeds/all.atom.xml";
+          collabora = "https://www.collabora.com/feed";
           fdroid = "https://f-droid.org/feed.xml";
           fexEmu = "https://fex-emu.com/feed.xml";
           fosdem = "https://fosdem.org/rss.xml";
