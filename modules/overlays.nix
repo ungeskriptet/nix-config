@@ -14,6 +14,10 @@
             doCheck = false;
             doInstallCheck = false;
           };
+          torchaudio = pyPrev.torchaudio.overrideAttrs {
+            doCheck = false;
+            doInstallCheck = false;
+          };
         })
       ];
     })
