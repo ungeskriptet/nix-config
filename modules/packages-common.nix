@@ -89,6 +89,7 @@ in
       # keep-sorted end
 
       selfPkgs.rg-uuid
+      selfPkgs.sops-edit
     ]
     ++ lib.optionals cfg.david [
       # keep-sorted start
