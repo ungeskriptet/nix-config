@@ -42,5 +42,17 @@
     };
   };
 
-  home-manager.users.david.config.hm-config.trusted = true;
+  home-manager.users.david = {
+    hm-config.trusted = true;
+    programs = {
+      plasma = {
+        configFile = {
+          kscreenlockerrc.Daemon = {
+            Autolock = false;
+            Timeout = 0;
+          };
+        };
+      };
+    };
+  };
 }
