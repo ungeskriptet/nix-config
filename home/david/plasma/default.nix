@@ -105,6 +105,7 @@ in
           theme = "breeze-dark";
           lookAndFeel = "org.kde.breezedark.desktop";
         };
+        powerdevil.AC.autoSuspend.action = "nothing";
       };
     };
   };
