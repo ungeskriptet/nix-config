@@ -58,6 +58,7 @@ in
   environment.systemPackages =
     with pkgs;
     [
+      # keep-sorted start
       android-tools
       binutils
       dig
@@ -85,10 +86,12 @@ in
       unzip
       usbutils
       zip
+      # keep-sorted end
 
       selfPkgs.rg-uuid
     ]
     ++ lib.optionals cfg.david [
+      # keep-sorted start
       b4
       binwalk
       dtc
@@ -98,5 +101,7 @@ in
       nix-update
       samloader-rs
       sops
+      ssh-to-age
+      # keep-sorted end
     ];
 }
