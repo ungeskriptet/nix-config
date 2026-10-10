@@ -16,6 +16,7 @@ in
       configFile = {
         katerc = {
           General."Show Menu Bar" = true;
+          "KTextEditor View"."Auto Brackets" = false;
           lspclient.AllowedServerCommandLines = lib.concatStringsSep "," [
             "${pyrefly} lsp"
             nixd
