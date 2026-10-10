@@ -18,7 +18,6 @@
     ./gnome.nix
     ./hardware.nix
     ./itgmania.nix
-    ./knot-nsupdate.nix
     ./nixpkgs-config.nix
     ./overlays.nix
     ./packages-common.nix
