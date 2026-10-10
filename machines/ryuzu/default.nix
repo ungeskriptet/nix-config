@@ -25,10 +25,6 @@
     sudo.wheelNeedsPassword = false;
   };
 
-  services = {
-    nm-nsupdate.enable = true;
-  };
-
   users.hashedPassword = "$y$j9T$sMN/eKYxYfh97dxUFDtzf.$sD76l.o1RyplUGb./VV.m3/qgEOrHIh5MkhLoeDpXUB";
 
   nix-config = {
