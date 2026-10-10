@@ -28,7 +28,6 @@
     ./popt/nixos.nix
     ./secureboot.nix
     ./support-vpn.nix
-    ./tailscale-nsupdate.nix
     ./users.nix
     ./vars.nix
     ./virtualization.nix
