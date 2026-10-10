@@ -8,7 +8,6 @@ keys:
   - &host_rpi5 age1ct348rdgpe8tekjytgh64z9hcuc985xjg2mxs0enduaxrymgsy9surfz7k
   - &host_ryuzu age1dy9rlqscq9t674kkfhnycx2ffp4eedp0ryzkzun3ajd88vs2ggdq833u44
   - &host_tsugaru age16yr2tnnnw7s9qv34g9lu6gjlrcrm92c6qltfap23dnsd5msqkdwqa8fu0f
-  - &host_xiatian age1vlussvlljnjwp7c9jwkw08s5ghl80k8af5tmgrsr2d8jfzjtnpdqxdmjmh
   - &user_david age1fjz5xtaslyxpltgg05g8yl09900d4cw9z40ww37levnuesafk5gqj54tk7
   - &user_grazyna age1v4aj5laf9p5ld52746t6le6lfmk6xv7ymn6ystz4sdzqz06t79tsq2jns5
   - &user_martin age1axy75zr0l0qpka0xg48fv3afce9vrl4pc6hx4mz2xxz3uu2aeskqkxpckv
@@ -51,11 +50,6 @@ creation_rules:
     - age:
       - *bitwarden
       - *host_ryuzu
-  - path_regex: secrets/host-xiatian.yaml
-    key_groups:
-    - age:
-      - *bitwarden
-      - *host_xiatian
   - path_regex: secrets/user-david.yaml
     key_groups:
     - age:

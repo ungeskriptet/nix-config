@@ -36,7 +36,6 @@ in
       };
       desktopManager.gnome.enable = true;
       usbmuxd.enable = true;
-      nm-nsupdate.enable = true;
     };
 
     environment = {
