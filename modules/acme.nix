@@ -14,27 +14,17 @@ in
     nameServer = lib.mkOption {
       type = lib.types.str;
       description = "The nameserver to use for the DNS-01 challenge.";
+      default = "ahra.ns.servfail.ax.";
     };
     tlsKey = lib.mkOption {
       type = lib.types.str;
-      description = "Default TLS key";
+      description = "Default TLS key.";
+      readOnly = true;
     };
     tlsCert = lib.mkOption {
       type = lib.types.str;
-      description = "Default TLS certificate";
-    };
-    tsigAlgorithm = lib.mkOption {
-      type = lib.types.str;
-      description = "TSIG key algorithm.";
-      default = "hmac-sha256.";
-    };
-    tsigKey = lib.mkOption {
-      type = lib.types.path;
-      description = "Path to a file containing the TSIG key";
-    };
-    tsigKeyName = lib.mkOption {
-      type = lib.types.str;
-      description = "TSIG key name.";
+      description = "Default TLS certificate.";
+      readOnly = true;
     };
   };
   config = lib.mkIf cfg.enable {
@@ -42,20 +32,22 @@ in
       tlsCert = "${config.security.acme.certs."${domain}".directory}/fullchain.pem";
       tlsKey = "${config.security.acme.certs."${domain}".directory}/key.pem";
     };
+
+    sops.secrets."servfail/token".owner = "root";
+
     security.acme = {
       acceptTerms = true;
       defaults.email = "acme@${domain}";
       defaults.dnsResolver = "9.9.9.9:53";
       certs.${domain} = {
         extraDomainNames = [ "*.${domain}" ];
-        dnsProvider = "rfc2136";
+        dnsProvider = "pdns";
         credentialFiles = {
-          RFC2136_TSIG_SECRET_FILE = cfg.tsigKey;
+          PDNS_API_KEY_FILE = config.sops.secrets."servfail/token".path;
         };
         environmentFile = "${pkgs.writeText "env" ''
-          RFC2136_NAMESERVER=${cfg.nameServer}
-          RFC2136_TSIG_ALGORITHM=${cfg.tsigAlgorithm}
-          RFC2136_TSIG_KEY=${cfg.tsigKeyName}
+          PDNS_SERVER_NAME=${cfg.nameServer}
+          PDNS_API_URL=https://beta.servfail.network/
         ''}";
       };
     };
