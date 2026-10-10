@@ -74,9 +74,12 @@ in
             RepeatRate = 80;
           };
           ksmserverrc.General.loginMode = "emptySession";
-          kwinrc.Plugins = {
-            telegram-show-hideEnabled = true;
-            firefox-focus-windowsEnabled = true;
+          kwinrc = {
+            EdgeBarrier.EdgeBarrier = 0;
+            Plugins = {
+              telegram-show-hideEnabled = true;
+              firefox-focus-windowsEnabled = true;
+            };
           };
         };
         panels = [
