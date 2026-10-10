@@ -54,10 +54,6 @@
             UseDNS = false;
           };
         };
-        "20-lo" = {
-          matchConfig.Name = "lo";
-          address = [ "::2/128" ];
-        };
       };
     };
   };
