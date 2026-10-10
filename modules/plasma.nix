@@ -12,6 +12,10 @@ in
     enablePlasma = lib.mkEnableOption "Plasma";
   };
   config = lib.mkIf cfg.enablePlasma {
+    programs = {
+      kde-pim.enable = false;
+    };
+
     services = {
       desktopManager.plasma6.enable = true;
       displayManager.plasma-login-manager.enable = true;
