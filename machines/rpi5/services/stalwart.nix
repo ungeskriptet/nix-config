@@ -129,7 +129,7 @@ in
 
   sops.secrets = {
     "stalwart/recoverypass".owner = "root";
-    "stalwart/tsig-key".owner = "root";
+    "stalwart/servfail-token".owner = "root";
     "stalwart/vapid-key".owner = "root";
   };
 
@@ -166,7 +166,7 @@ in
     stalwart = {
       enable = true;
       credentials = {
-        tsig-key = config.sops.secrets."stalwart/tsig-key".path;
+        servfail-token = config.sops.secrets."stalwart/servfail-token".path;
         vapid-key = config.sops.secrets."stalwart/vapid-key".path;
       };
       recoveryMode = {
@@ -233,20 +233,23 @@ in
           {
             "@type" = "reconcile";
             object = "DnsServer";
-            matchOn = [ "key" ];
+            matchOn = [ "description" ];
             value = {
               dnsserver-1 = {
-                "@type" = "Tsig";
-                description = "Knot DNS";
-                keyName = "localhost";
-                host = "::2";
-                protocol = "udp";
-                tsigAlgorithm = "hmac-sha512";
-                port = 53;
-                key = {
+                "@type" = "PowerDns";
+                apiKey = {
                   "@type" = "File";
-                  filePath = "/run/credentials/stalwart.service/tsig-key";
+                  filePath = "/run/credentials/stalwart.service/servfail-token";
                 };
+                description = "Project SERVFAIL";
+                endpoint = "https://beta.servfail.network";
+                memberTenantId = null;
+                pollingInterval = 15000;
+                propagationDelay = null;
+                propagationTimeout = 60000;
+                serverId = "ahra.ns.servfail.ax.";
+                timeout = 30000;
+                ttl = 300000;
               };
             };
           }
