@@ -1,6 +1,5 @@
 {
   lib,
-  config,
   ...
 }:
 {
@@ -9,10 +8,6 @@
     ./networking.nix
     ./services
   ];
-
-  sops = {
-    secrets."dns/tsig".owner = "root";
-  };
 
   boot = {
     kernelModules = [ "hid-spinelplus" ];
@@ -31,12 +26,6 @@
     desktopManager.plasma-bigscreen = {
       enable = true;
       hashedPassword = "$y$j9T$eufLcVdOXLkn8dbB1IQJQ1$e5V3hclkdIjJCzeQNwCDgGzM3jCh7hqr7miZlfBRIG8";
-    };
-    tailscale-nsupdate = {
-      enable = true;
-      fqdn = "vpn.${config.networking.fqdn}";
-      nameServer = "ns1.${config.networking.domain}";
-      tsigKeyFile = config.sops.secrets."dns/tsig".path;
     };
   };
 
