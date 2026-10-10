@@ -70,25 +70,32 @@ let
       };
     }
   );
+  fqdnOptions = lib.types.submodule (
+    { ... }:
+    {
+      options = {
+        ipv6 = lib.mkOption {
+          type = lib.types.nullOr lib.types.str;
+          description = "IPv6 address for this host";
+          default = "::1";
+        };
+        ipv4 = lib.mkOption {
+          type = lib.types.nullOr lib.types.str;
+          description = "IPv4 address for this host";
+          default = "127.0.0.1";
+        };
+      };
+    }
+  );
   caddyHostOptions = lib.types.submodule (
     { name, ... }:
     {
       options = {
         fqdns = lib.mkOption {
-          type = lib.types.listOf lib.types.str;
-          description = "List of fully qualified domain names.";
-          default = [ name ];
-        };
-        hostEntry = {
-          ipv6 = lib.mkOption {
-            type = lib.types.str;
-            description = "IPv6 address for this host";
-            default = "::1";
-          };
-          ipv4 = lib.mkOption {
-            type = lib.types.str;
-            description = "IPv4 address for this host";
-            default = "127.0.0.1";
+          type = lib.types.attrsOf fqdnOptions;
+          description = "Attribute set of fully qualified domain names.";
+          default = {
+            ${name} = { };
           };
         };
         enableTLS = lib.mkEnableOption "TLS" // {
@@ -160,13 +167,18 @@ in
         message = "Basic auth requires both user and hash to be set.";
       }
     ];
+
     networking.hosts = lib.mkMerge (
-      lib.mapAttrsToList (
-        _: host:
-        lib.genAttrs [ host.hostEntry.ipv6 host.hostEntry.ipv4 ] (
-          _: builtins.filter (x: x != "*.${config.networking.domain}") host.fqdns
-        )
-      ) cfg.hosts
+      lib.concatLists (
+        lib.mapAttrsToList (
+          n: v:
+          lib.mapAttrsToList (n: v: lib.genAttrs v (_: [ n ])) (
+            lib.mapAttrs (
+              _: v: lib.filter (x: x != null && !(lib.hasPrefix "*." n)) (lib.mapAttrsToList (n: v: v) v)
+            ) v.fqdns
+          )
+        ) cfg.hosts
+      )
     );
 
     services.caddy.virtualHosts = lib.mkMerge (
@@ -174,7 +186,7 @@ in
         _: host:
         let
           scheme = if host.enableTLS then "https://" else "http://";
-          fqdns = lib.concatStringsSep ", " host.fqdns;
+          fqdns = lib.concatStringsSep ", " (lib.attrNames host.fqdns);
           mkMatcher =
             {
               name,

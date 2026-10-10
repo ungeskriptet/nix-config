@@ -913,12 +913,25 @@ in
 
     caddy.hosts = {
       stalwart = {
-        fqdns = [
-          fqdn
-          "autoconfig.${domain}"
-          "autodiscover.${domain}"
-          "mta-sts.${domain}"
-        ];
+        fqdns = {
+          ${fqdn} = { };
+          "autoconfig.${domain}" = {
+            ipv4 = null;
+            ipv6 = null;
+          };
+          "autodiscover.${domain}" = {
+            ipv4 = null;
+            ipv6 = null;
+          };
+          "mta-sts.${domain}" = {
+            ipv4 = null;
+            ipv6 = null;
+          };
+          "ua-auto-config.${domain}" = {
+            ipv4 = null;
+            ipv6 = null;
+          };
+        };
         reverseProxies."https://${fqdn}:8087" = { };
       };
       ${domain} = {
