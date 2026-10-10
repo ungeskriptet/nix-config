@@ -4,16 +4,6 @@
   ...
 }:
 {
-  options.networking = {
-    globalIpv4 = lib.mkOption {
-      description = "Global IPv4 address";
-      default = "178.26.111.244";
-    };
-    globalIpv6 = lib.mkOption {
-      description = "Global IPv6 address";
-      default = "2a02:810d:4795:2d00:4b77:2ad8:ca3d:e6ea";
-    };
-  };
   config = {
     networking = {
       hostName = "rpi5";
@@ -39,7 +29,6 @@
           address = [
             "${config.networking.lanIPv4}/24"
             "${config.networking.lanIPv6}/64"
-            "${config.networking.globalIpv6}/64"
           ]
           ++ lib.optionals config.services.adguardhome.enable [
             "${config.networking.adGuardIpv4}/24"

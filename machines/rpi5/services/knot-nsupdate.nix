@@ -42,16 +42,6 @@ in
       (mkDnsRecord "satone.${domain}" "A" [ "193.122.3.88" ])
       (mkDnsRecord "rpi5.${domain}" "AAAA" [ config.networking.lanIPv6 ])
       (mkDnsRecord "rpi5.${domain}" "A" [ config.networking.lanIPv4 ])
-      (mkIpRecords {
-        domains = [
-          "ns1.${domain}"
-          domain
-          config.networking.fqdn
-        ]
-        ++ config.networking.hosts."::1";
-        ipv6 = config.networking.globalIpv6;
-        ipv4 = config.networking.globalIpv4;
-      })
     ];
   };
 }

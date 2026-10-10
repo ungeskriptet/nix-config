@@ -8,7 +8,6 @@ let
   domain = config.networking.domain;
   lanIpv4 = config.networking.lanIPv4;
   lanIpv6 = config.networking.lanIPv6;
-  globalIpv6 = config.networking.globalIpv6;
 in
 {
   services = {
@@ -19,7 +18,6 @@ in
         server.listen = [
           "${lanIpv4}@53"
           "${lanIpv6}@53"
-          "${globalIpv6}@53"
           "::2@53"
           "127.0.0.2@53"
         ];
