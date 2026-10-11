@@ -68,6 +68,7 @@ in
           plasmaMobile = "https://plasma-mobile.org/index.xml";
           reactos = "https://reactos.org/index.xml";
           servfail = "https://servfail.network/devlog/atom/";
+          vcfb = "https://vcfb.de/rss.xml";
           xkcd = "https://xkcd.com/atom.xml";
           # keep-sorted end
         };
