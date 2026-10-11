@@ -50,7 +50,7 @@
             IPv6PrivacyExtensions = false;
           };
           ipv6AcceptRAConfig = {
-            Token = "prefixstable";
+            Token = "::5";
             UseDNS = false;
           };
         };
