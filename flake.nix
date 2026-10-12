@@ -148,6 +148,7 @@
             nix-on-droid-setup = pkgs.${system}.callPackage ./packages/nix-on-droid-setup.nix { };
             openssh-nix-on-droid = pkgs.${system}.callPackage ./packages/openssh-nix-on-droid.nix { };
             rg-uuid = pkgs.${system}.callPackage ./packages/rg-uuid { };
+            servfail-update = pkgs.${system}.callPackage ./packages/servfail-update { };
             sigscan = pkgs.${system}.callPackage ./packages/sigscan.nix { };
             sops-edit = pkgs.${system}.callPackage ./packages/sops-edit { };
             telegram-show-hide = pkgs.${system}.callPackage ./packages/telegram-show-hide { };
