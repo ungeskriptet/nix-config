@@ -53,6 +53,9 @@
             Token = "::5";
             UseDNS = false;
           };
+          dhcpV6Config = {
+            UseAddress = false;
+          };
         };
       };
     };
