@@ -15,21 +15,10 @@ in
             redir * https://${domain}/ temporary
           '';
         };
-        "7590.${domain}" = {
-          lanOnly.enable = true;
-          reverseProxies."https://192.168.64.15" = {
-            insecureTLS = true;
-          };
-        };
         "drasl.${domain}" = {
           reverseProxies."https://[fd64::3]" = {
             hostHeader = "drasl.${domain}";
             serverName = "drasl.${domain}";
-          };
-        };
-        "fritz.${domain}" = {
-          reverseProxies."https://[fd64::52e6:36ff:fe06:6e73]" = {
-            insecureTLS = true;
           };
         };
         "omao.${domain}" = {
