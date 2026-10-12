@@ -93,8 +93,12 @@ async fn root(
 ) -> Result<(StatusCode, String), (StatusCode, String)> {
     if params.token == state.token {
         tokio::spawn(update_ips(state, params));
-        Ok((StatusCode::OK, "DNS update queued".to_string()))
+        let msg = "DNS update queued";
+        eprintln!("{}", msg);
+        Ok((StatusCode::OK, msg.to_string()))
     } else {
-        Ok((StatusCode::UNAUTHORIZED, "Bad token".to_string()))
+        let msg = "Bad token";
+        eprintln!("{}", msg);
+        Ok((StatusCode::UNAUTHORIZED, msg.to_string()))
     }
 }
