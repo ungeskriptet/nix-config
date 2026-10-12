@@ -26,6 +26,7 @@
     ./plasma.nix
     ./popt/nixos.nix
     ./secureboot.nix
+    ./servfail-update.nix
     ./support-vpn.nix
     ./users.nix
     ./vars.nix
