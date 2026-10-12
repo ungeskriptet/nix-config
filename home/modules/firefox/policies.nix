@@ -86,6 +86,10 @@ in
             installation_mode = "force_installed";
             private_browsing = true;
           };
+          "firefox.container-shortcuts@strategery.io" = {
+            installation_mode = "force_installed";
+            private_browsing = true;
+          };
           "insensitivex@orca.pet" = {
             default_area = "menupanel";
             installation_mode = "force_installed";
