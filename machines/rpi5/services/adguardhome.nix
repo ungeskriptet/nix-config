@@ -90,11 +90,6 @@ in
               ]
               ++ config.networking.hosts."::1";
             }
-            ++ mkDnsRewrites {
-              domains = [ "ns1.${domain}" ];
-              localAAAA = "::2";
-              localA = "127.0.0.2";
-            }
             ++ map (ip: "|localhost^$dnsrewrite=${ip}") [
               "::1"
               "127.0.0.1"
