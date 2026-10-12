@@ -51,16 +51,18 @@ async fn update_ips(state: Arc<AppState>, params: DynDNSParams) -> () {
     let mut client = None;
     let ddns_url = format!("{}/ddns", BASE_URL);
     for ip in [&params.ipaddr, &params.ip6addr].into_iter().flatten() {
-        let client = client.get_or_insert(reqwest::Client::new());
-        match client
-            .get(&ddns_url)
-            .query(&[("ip", ip), ("token", &state.servfail_router_token)])
-            .send()
-            .await
-            .and_then(reqwest::Response::error_for_status)
-        {
-            Err(_) => eprintln!("Failed to update router domain ({})", ip),
-            _ => eprintln!("Router domain updated ({})", ip),
+        if ip != &"".to_string() {
+            let client = client.get_or_insert(reqwest::Client::new());
+            match client
+                .get(&ddns_url)
+                .query(&[("ip", ip), ("token", &state.servfail_router_token)])
+                .send()
+                .await
+                .and_then(reqwest::Response::error_for_status)
+            {
+                Err(_) => eprintln!("Failed to update router domain ({})", ip),
+                _ => eprintln!("Router domain updated ({})", ip),
+            }
         }
     }
     for ip_ver in [
