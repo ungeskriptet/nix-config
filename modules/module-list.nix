@@ -23,7 +23,7 @@
     ./overlays.nix
     ./packages-common.nix
     ./packages-desktop.nix
-    ./plasma-bigscreen.nix
+    ./plasma-bigscreen
     ./plasma.nix
     ./popt/nixos.nix
     ./secureboot.nix
