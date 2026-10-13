@@ -14,7 +14,7 @@ in
 
   config = lib.mkIf cfg.david {
     nix-config = {
-      enableVirt = true;
+      enableVirt = lib.mkIf (cfg.deviceType == "desktop") true;
       enablePlasma = lib.mkIf (cfg.deviceType == "desktop") true;
     };
     # Automatically inject payload when a Nintendo Switch is connected
@@ -24,7 +24,7 @@ in
         ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="0955", ATTR{idProduct}=="7321", RUN+="${lib.getExe fusee-nano} /var/lib/fusee-nano/payload.bin"
       '';
     };
-    programs.obs-studio = {
+    programs.obs-studio = lib.mkIf (cfg.deviceType == "desktop") {
       enable = true;
       enableVirtualCamera = true;
     };
