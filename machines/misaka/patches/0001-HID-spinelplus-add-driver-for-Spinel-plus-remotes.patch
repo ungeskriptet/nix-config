@@ -112,7 +112,7 @@ index 000000000000..843f17ddef9f
 +		unsigned long **bit, int *max)
 +{
 +	switch (usage->hid) {
-+	case 0xffbc000d:	spinelplus_map_key(KEY_MEDIA);		break;
++	case 0xffbc000d:	spinelplus_map_key(KEY_HOMEPAGE);	break;
 +	case 0xffbc0024:	spinelplus_map_key(KEY_MEDIA);		break;
 +	case 0xffbc0027:	spinelplus_map_key(KEY_ZOOM);		break;
 +	case 0xffbc0033:	spinelplus_map_key(KEY_HOME);		break;
