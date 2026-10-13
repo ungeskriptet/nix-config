@@ -32,7 +32,7 @@ in
     home-manager = {
       users.david = {
         imports = [ ../home/david/module-list.nix ];
-        hm-config.desktop = lib.mkIf (cfg.deviceType == "desktop") true;
+        hm-config.desktop.enable = lib.mkIf (cfg.deviceType == "desktop") true;
       };
     };
   };

@@ -9,11 +9,11 @@ let
   cfg = config.hm-config;
 in
 {
-  options.hm-config = {
-    desktop = lib.mkEnableOption "desktop configs";
+  options.hm-config.desktop = {
+    enable = lib.mkEnableOption "desktop configs";
   };
 
-  config = {
+  config = lib.mkIf cfg.desktop.enable {
     nix-config = {
       firefox = {
         preset = "david";
