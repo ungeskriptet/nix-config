@@ -17,6 +17,7 @@ in
       '';
     };
   };
+
   config = lib.mkIf cfg.enable {
     boot = {
       loader.timeout = 0;
@@ -28,6 +29,12 @@ in
         isNormalUser = true;
         description = "HTPC";
         hashedPassword = cfg.hashedPassword;
+      };
+    };
+
+    home-manager = {
+      users.htpc = {
+        imports = [ ./home.nix ];
       };
     };
 
