@@ -91,6 +91,7 @@ in
 
     programs = {
       kdeconnect.enable = true;
+      kde-pim.enable = false;
     };
 
     environment = {
