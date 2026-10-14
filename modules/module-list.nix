@@ -9,6 +9,7 @@
     ./bulwark-webmail.nix
     ./caddy-common.nix
     ./caddy-hosts.nix
+    ./common-vars.nix
     ./common.nix
     ./david.nix
     ./desktop.nix
