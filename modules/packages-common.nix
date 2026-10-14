@@ -93,16 +93,20 @@ in
     ]
     ++ lib.optionals cfg.david.enable [
       # keep-sorted start
-      b4
       binwalk
-      dtc
       git-crypt
       git-lfs
+      sops
+      ssh-to-age
+      # keep-sorted end
+    ]
+    ++ lib.optionals (cfg.david.profile == "personal") [
+      # keep-sorted start
+      b4
+      dtc
       internetarchive
       nix-update
       samloader-rs
-      sops
-      ssh-to-age
       # keep-sorted end
     ];
 }
