@@ -7,6 +7,7 @@ let
   cfg = config.nix-config.networking;
   fqdn = "adguard.${domain}";
   domain = config.networking.domain;
+  mkDnsRewrite = domain: ips: map (ip: "|${domain}^$dnsrewrite=${ip}") ips;
   mkDnsRewrites =
     {
       domains,
@@ -80,9 +81,13 @@ in
               ]
               ++ config.networking.hosts."::1";
             }
-            ++ map (ip: "|localhost^$dnsrewrite=${ip}") [
+            ++ mkDnsRewrite "localhost" [
               "::1"
               "127.0.0.1"
+            ]
+            ++ mkDnsRewrite "fritz.${domain}" [
+              cfg.gatewayIpv6
+              cfg.gatewayIpv4
             ];
           dns = {
             hostsfile_enabled = false;
