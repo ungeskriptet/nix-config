@@ -5,7 +5,6 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./networking.nix
     ./services
   ];
 
@@ -33,6 +32,8 @@
 
   users.hashedPassword = "$y$j9T$26VbxoITETjPIDywpNHi71$8oXX3z.uINvjK0zQnzWoY.OBzHB0fA6C07gCVQ66D19";
 
+  networking.interfaces.eno1.wakeOnLan.enable = true;
+
   nix-config = {
     secureboot.enable = true;
     david = {
@@ -42,6 +43,22 @@
     hardware = {
       enable = true;
       platform = "oldintel";
+    };
+    networking = {
+      enable = true;
+      interface = "eno1";
+      lanDomain = "fritz.box";
+      gatewayIpv4 = "192.168.64.1";
+      gatewayIpv6 = "fd64::464e:6dff:fef4:47b";
+      ipv6InterfaceId = "::3";
+      lanIpv4 = {
+        address = "192.168.64.3";
+        cidr = 24;
+      };
+      dns = [
+        # Use IPv6 DNS from router advertisemets
+        "192.168.64.2"
+      ];
     };
   };
 }
