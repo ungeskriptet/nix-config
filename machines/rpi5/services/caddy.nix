@@ -48,6 +48,7 @@ in
             redir /files /files/ permanent
             redir /private /private/ permanent
             redir /tv https://download.teamviewer.com/download/TeamViewerQS_x64.exe temporary
+            redir /fb https://fritz.david-w.eu:22524/ temporary
           '';
         };
       };
