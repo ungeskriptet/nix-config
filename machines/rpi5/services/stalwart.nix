@@ -96,11 +96,6 @@ let
       description = "Goeland";
       sendOnly = true;
     };
-    grafana = {
-      secret = "$argon2id$v=19$m=19456,t=3,p=1$MkxGdFpSSXluZkE3NW5oUjlCa3ZNMjV5aUs4PQ$q/558y3XcMnwGpLYeoGWYuK53r8l8gM1OYVAQ6DAIuo";
-      description = "Grafana";
-      sendOnly = true;
-    };
     immich = {
       secret = "$argon2id$v=19$m=19456,t=3,p=1$TWdsc2JNbklwTGhwYVVGM2VCMU5vREpITFVvPQ$5b/S0epP+Hp1cEQkrKKvw0MwmdsNzgsb1vDLbiFCdTg";
       description = "Immich";
@@ -464,30 +459,6 @@ in
                       stop;
                     }
                   '';
-              };
-            };
-          }
-          {
-            "@type" = "upsert";
-            object = "Tracer";
-            matchOn = [ "endpoint" ];
-            value = {
-              tracer-1 = {
-                "@type" = "OtelGrpc";
-                enable = true;
-                enableLogExporter = true;
-                enableSpanExporter = true;
-                endpoint = "http://alloy.${domain}:8076/v1/logs";
-                events = { };
-                eventsPolicy = "exclude";
-                httpAuth = {
-                  "@type" = "Unauthenticated";
-                };
-                httpHeaders = { };
-                level = "info";
-                lossy = false;
-                throttle = 1000;
-                timeout = 10000;
               };
             };
           }
@@ -888,23 +859,6 @@ in
               websocketHeartbeat = 60000;
               websocketThrottle = 1000;
               websocketTimeout = 600000;
-            };
-          }
-          {
-            "@type" = "update";
-            object = "Metrics";
-            value = {
-              metrics = { };
-              metricsPolicy = "exclude";
-              openTelemetry = {
-                "@type" = "Grpc";
-                endpoint = "http://alloy.${domain}:8076/v1/metrics";
-                interval = 60000;
-                timeout = 10000;
-              };
-              prometheus = {
-                "@type" = "Disabled";
-              };
             };
           }
         ];
