@@ -91,7 +91,7 @@ in
       selfPkgs.rg-uuid
       selfPkgs.sops-edit
     ]
-    ++ lib.optionals cfg.david [
+    ++ lib.optionals cfg.david.enable [
       # keep-sorted start
       b4
       binwalk

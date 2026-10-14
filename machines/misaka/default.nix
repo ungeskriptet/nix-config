@@ -34,8 +34,11 @@
   users.hashedPassword = "$y$j9T$26VbxoITETjPIDywpNHi71$8oXX3z.uINvjK0zQnzWoY.OBzHB0fA6C07gCVQ66D19";
 
   nix-config = {
-    david = true;
     secureboot.enable = true;
+    david = {
+      enable = true;
+      profile = "personal";
+    };
     hardware = {
       enable = true;
       platform = "oldintel";
