@@ -56,7 +56,10 @@ in
         "network-online.target"
         config.systemd.services.adguardhome.name
       ];
-      wants = [ "network-online.target" ];
+      wants = [
+        "network-online.target"
+        config.systemd.services.adguardhome.name
+      ];
       wantedBy = [ "multi-user.target" ];
       restartTriggers = [
         config.environment.etc."hosts".source
