@@ -1,6 +1,16 @@
-{ config, ... }:
+{ lib, config, ... }:
+let
+  cfg = config.nix-config.networking;
+  domain = config.networking.domain;
+in
 {
-  networking.firewall.allowedTCPPorts = [ 8075 ];
+  networking = {
+    firewall.allowedTCPPorts = [ 8075 ];
+    hosts = {
+      ${cfg.gatewayIpv6} = [ "fritz.${domain}" ];
+      ${cfg.gatewayIpv4} = [ "fritz.${domain}" ];
+    };
+  };
 
   sops.secrets."fritzbox-dyndns-interceptor/env".owner = "root";
 
@@ -9,6 +19,10 @@
     environmentFile = config.sops.secrets."fritzbox-dyndns-interceptor/env".path;
     environment = {
       DYNDNS_LISTEN_ADDR = "[::]:8075";
+      DYNDNS_ALLOWED_IPS = lib.concatStringsSep "," [
+        cfg.gatewayIpv4
+        cfg.gatewayIpv6
+      ];
     };
   };
 }
