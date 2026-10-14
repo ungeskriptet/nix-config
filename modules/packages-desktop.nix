@@ -34,6 +34,7 @@ in
     environment.systemPackages =
       with pkgs;
       [
+        # keep-sorted start
         bitwarden-desktop
         gimp3-with-plugins
         hunspell
@@ -44,27 +45,34 @@ in
         hyphenDicts.en_US
         libreoffice-qt-stable
         scrcpy
-        signal-desktop
         simple-scan
         vlc
         wl-clipboard
-        xournalpp
         yt-dlp
+        # keep-sorted end
 
         selfPkgs.ttf-ms-win11
       ]
       ++ lib.optionals cfg.david.enable [
+        # keep-sorted start
+        llvmPackages.clang-tools
+        meld
+        remmina
+        # keep-sorted end
+
+        selfPkgs.kate
+      ]
+      ++ lib.optionals (cfg.david.profile == "personal") [
+        # keep-sorted start
         extract-dtb
         git-repo
         heimdall
-        llvmPackages.clang-tools
-        meld
         prismlauncher
         qbittorrent
-        remmina
+        signal-desktop
         telegram-desktop
+        # keep-sorted end
 
-        selfPkgs.kate
         selfPkgs.magisk-install
         selfPkgs.odin4
         selfPkgs.sigscan
