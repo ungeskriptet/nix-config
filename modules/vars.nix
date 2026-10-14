@@ -1,8 +1,5 @@
 { lib, ... }:
 {
-  imports = [
-    ./common-vars.nix
-  ];
   options = {
     networking = {
       lanIPv4 = lib.mkOption {
