@@ -37,10 +37,9 @@ in
 
     security.acme = {
       acceptTerms = true;
-      defaults.email = "acme@${domain}";
-      defaults.dnsResolver = "9.9.9.9:53";
-      certs.${domain} = {
-        extraDomainNames = [ "*.${domain}" ];
+      defaults = {
+        email = "acme@${domain}";
+        dnsResolver = "9.9.9.9:53";
         dnsProvider = "pdns";
         credentialFiles = {
           PDNS_API_KEY_FILE = config.sops.secrets."servfail/token".path;
@@ -49,6 +48,9 @@ in
           PDNS_SERVER_NAME=${cfg.nameServer}
           PDNS_API_URL=https://beta.servfail.network/
         ''}";
+      };
+      certs.${domain} = {
+        extraDomainNames = [ "*.${domain}" ];
       };
     };
   };
