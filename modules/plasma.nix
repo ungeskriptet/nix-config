@@ -64,5 +64,7 @@ in
       unitConfig.ConditionUser = "!@system";
       serviceConfig.Restart = "on-failure";
     };
+
+    networking.firewall.allowedTCPPorts = [ 3389 ];
   };
 }
