@@ -6,9 +6,6 @@
 let
   fqdn = "adguard.${domain}";
   domain = config.networking.domain;
-  myVpn = config.networking.myVpn;
-  supportVpn = config.networking.supportVpn;
-  netflixVpn = config.networking.netflixVpn;
   mkDnsRewrites =
     {
       domains,
@@ -39,18 +36,6 @@ let
     );
 in
 {
-  options.networking = {
-    adGuardIpv4 = lib.mkOption {
-      type = lib.types.str;
-      default = "192.168.64.4";
-      description = "IPv4 listen address for AdGuard Home.";
-    };
-    adGuardIpv6 = lib.mkOption {
-      type = lib.types.str;
-      default = "fd64::4";
-      description = "IPv6 listen address for AdGuard Home.";
-    };
-  };
   config = {
     networking.firewall = {
       allowedTCPPorts = [
@@ -96,23 +81,6 @@ in
             ];
           dns = {
             hostsfile_enabled = false;
-            bind_hosts = [
-              "127.0.0.1"
-              "::1"
-              config.networking.adGuardIpv4
-              config.networking.adGuardIpv6
-            ]
-            ++ lib.optionals myVpn.enable [
-              myVpn.ipv4.address
-              myVpn.ipv6.address
-            ]
-            ++ lib.optionals supportVpn.enable [
-              supportVpn.ipv4.address
-            ]
-            ++ lib.optionals netflixVpn.enable [
-              netflixVpn.ipv4.address
-              netflixVpn.ipv6.address
-            ];
             upstream_dns = [
               "[//]${config.networking.gatewayIP}"
               "[/${config.networking.lanDomain}/]${config.networking.gatewayIP}"

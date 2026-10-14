@@ -29,10 +29,6 @@
           address = [
             "${config.networking.lanIPv4}/24"
             "${config.networking.lanIPv6}/64"
-          ]
-          ++ lib.optionals config.services.adguardhome.enable [
-            "${config.networking.adGuardIpv4}/24"
-            "${config.networking.adGuardIpv6}/64"
           ];
           gateway = [ config.networking.gatewayIP ];
           domains = [ config.networking.lanDomain ];
