@@ -15,6 +15,7 @@
     ./desktop.nix
     ./fingerprint.nix
     ./fmd-server.nix
+    ./fritzbox-cert-importer.nix
     ./fritzbox-dyndns-interceptor.nix
     ./git/nixos.nix
     ./gnome.nix
