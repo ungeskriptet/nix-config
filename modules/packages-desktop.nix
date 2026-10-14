@@ -11,7 +11,7 @@ let
 in
 {
   config = lib.mkIf (cfg.deviceType == "desktop") {
-    services.udev.packages = lib.optionals cfg.david (
+    services.udev.packages = lib.optionals cfg.david.enable (
       with pkgs;
       [
         heimdall.udev
@@ -19,12 +19,12 @@ in
     );
 
     programs = {
-      gnupg.agent.enable = lib.mkIf cfg.david true;
+      gnupg.agent.enable = lib.mkIf cfg.david.enable true;
       ssh = lib.mkIf cfg.enablePlasma {
         enableAskPassword = true;
         askPassword = lib.getExe pkgs.kdePackages.ksshaskpass;
       };
-      wireshark = lib.mkIf cfg.david {
+      wireshark = lib.mkIf cfg.david.enable {
         enable = true;
         package = pkgs.wireshark;
         usbmon.enable = true;
@@ -53,7 +53,7 @@ in
 
         selfPkgs.ttf-ms-win11
       ]
-      ++ lib.optionals cfg.david [
+      ++ lib.optionals cfg.david.enable [
         extract-dtb
         git-repo
         heimdall

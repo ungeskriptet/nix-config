@@ -26,9 +26,12 @@
 
   nix-config = {
     deviceType = "desktop";
-    david = true;
     fingerprint = true;
     secureboot.enable = true;
+    david = {
+      enable = true;
+      profile = "personal";
+    };
     hardware = {
       enable = true;
       platform = "oldintel";

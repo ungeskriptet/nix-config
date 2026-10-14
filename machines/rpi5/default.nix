@@ -32,7 +32,10 @@
 
   nix.settings.max-jobs = 1;
 
-  nix-config.david = true;
+  nix-config.david = {
+    enable = true;
+    profile = "personal";
+  };
 
   home-manager.users.david.config.hm-config.trusted = true;
 }

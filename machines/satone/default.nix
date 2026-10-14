@@ -9,7 +9,7 @@
 
   security.sudo.wheelNeedsPassword = false;
 
-  nix-config.david = true;
+  nix-config.david.enable = true;
 
   users.hashedPassword = "$y$j9T$cZHO15OQwSLEWl8NUj/vE0$9xqhvcR51F7lg/jFgZXyHHH3o1ifVjVlPTlSstJtdM/";
 
