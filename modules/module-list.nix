@@ -20,6 +20,7 @@
     ./gnome.nix
     ./hardware.nix
     ./itgmania.nix
+    ./networking.nix
     ./nixpkgs-config.nix
     ./overlays.nix
     ./packages-common.nix
@@ -31,7 +32,6 @@
     ./servfail-update.nix
     ./support-vpn.nix
     ./users.nix
-    ./vars.nix
     ./virtualization.nix
     ./vr.nix
     ./zsh/nixos

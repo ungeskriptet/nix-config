@@ -7,7 +7,6 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./networking.nix
     ./services
   ];
 
@@ -32,9 +31,24 @@
 
   nix.settings.max-jobs = 1;
 
-  nix-config.david = {
-    enable = true;
-    profile = "personal";
+  nix-config = {
+    david = {
+      enable = true;
+      profile = "personal";
+    };
+    networking = {
+      enable = true;
+      interface = "end0";
+      lanDomain = "fritz.box";
+      gatewayIpv4 = "192.168.64.1";
+      gatewayIpv6 = "fd64::464e:6dff:fef4:47b";
+      ipv6InterfaceId = "::2";
+      lanIpv6.address = "fd64::2";
+      lanIpv4 = {
+        address = "192.168.64.2";
+        cidr = 24;
+      };
+    };
   };
 
   home-manager.users.david.config.hm-config.trusted = true;

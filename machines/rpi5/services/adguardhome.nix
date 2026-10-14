@@ -4,6 +4,7 @@
   ...
 }:
 let
+  cfg = config.nix-config.networking;
   fqdn = "adguard.${domain}";
   domain = config.networking.domain;
   mkDnsRewrites =
@@ -11,8 +12,8 @@ let
       domains,
       localAAAA ? "::1",
       localA ? "127.0.0.1",
-      privateAAAA ? config.networking.lanIPv6,
-      privateA ? config.networking.lanIPv4,
+      privateAAAA ? cfg.lanIpv6.address,
+      privateA ? cfg.lanIpv4.address,
     }:
     builtins.concatLists (
       map (
@@ -55,6 +56,10 @@ in
     };
 
     services = {
+      resolved.settings.Resolve = {
+        DNSStubListener = false;
+      };
+
       adguardhome = {
         enable = true;
         mutableSettings = true;
@@ -82,8 +87,8 @@ in
           dns = {
             hostsfile_enabled = false;
             upstream_dns = [
-              "[//]${config.networking.gatewayIP}"
-              "[/${config.networking.lanDomain}/]${config.networking.gatewayIP}"
+              "[//]${cfg.gatewayIpv6} ${cfg.gatewayIpv4}"
+              "[/${cfg.lanDomain}/]${cfg.gatewayIpv6} ${cfg.gatewayIpv4}"
               "tls://dot.ffmuc.net"
               "https://dns10.quad9.net/dns-query"
             ];
