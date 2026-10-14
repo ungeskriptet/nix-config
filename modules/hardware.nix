@@ -11,7 +11,6 @@ in
 {
   imports = [
     ./nixpkgs-config.nix
-    ./vars.nix
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
