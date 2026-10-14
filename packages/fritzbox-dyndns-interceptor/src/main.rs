@@ -1,13 +1,13 @@
 use axum::{
     Router,
-    extract::{Query, State},
+    extract::{ConnectInfo, Query, State},
     http::StatusCode,
     routing::get,
 };
 use serde::Deserialize;
 use std::{
     env,
-    net::{IpAddr, Ipv4Addr, Ipv6Addr},
+    net::{IpAddr, Ipv4Addr, Ipv6Addr, SocketAddr},
     sync::Arc,
 };
 
@@ -15,14 +15,13 @@ const BASE_URL: &str = "https://beta.servfail.network";
 
 #[derive(Clone)]
 struct AppState {
-    token: String,
+    allowed_ips: Vec<IpAddr>,
     servfail_router_token: String,
     servfail_main_token: String,
 }
 
 #[derive(Deserialize)]
 struct DynDNSParams {
-    token: String,
     ipaddr: Option<String>,
     ip6addr: Option<String>,
 }
@@ -30,16 +29,35 @@ struct DynDNSParams {
 #[tokio::main]
 async fn main() {
     let shared_state = Arc::new(AppState {
-        token: get_config("TOKEN"),
+        allowed_ips: get_config("ALLOWED_IPS")
+            .split(",")
+            .map(|s| s.to_string().parse().expect("Invalid ALLOWED_IPS"))
+            .collect(),
         servfail_main_token: get_config("SERVFAIL_MAIN_TOKEN"),
         servfail_router_token: get_config("SERVFAIL_ROUTER_TOKEN"),
     });
-    let app = Router::new().route("/", get(root)).with_state(shared_state);
-    let listener = tokio::net::TcpListener::bind(get_config("LISTEN_ADDR"))
+
+    let addr: SocketAddr = get_config("LISTEN_ADDR")
+        .parse()
+        .expect("Invalid LISTEN_ADDR");
+
+    let listener = tokio::net::TcpListener::bind(addr)
         .await
-        .unwrap();
+        .expect("Failed to bind to address");
+
     eprintln!("Server started");
-    axum::serve(listener, app).await.unwrap();
+    for ip in &shared_state.clone().allowed_ips {
+        eprintln!("Allowed IP: {}", ip.to_string())
+    }
+
+    let app = Router::new().route("/", get(root)).with_state(shared_state);
+
+    axum::serve(
+        listener,
+        app.into_make_service_with_connect_info::<SocketAddr>(),
+    )
+    .await
+    .expect("Server error");
 }
 
 fn get_config(name: &str) -> String {
@@ -92,15 +110,17 @@ async fn update_ips(state: Arc<AppState>, params: DynDNSParams) -> () {
 async fn root(
     State(state): State<Arc<AppState>>,
     Query(params): Query<DynDNSParams>,
+    ConnectInfo(addr): ConnectInfo<SocketAddr>,
 ) -> Result<(StatusCode, String), (StatusCode, String)> {
-    if params.token == state.token {
+    let ip = &addr.ip().to_canonical();
+    if state.allowed_ips.contains(ip) {
         tokio::spawn(update_ips(state, params));
-        let msg = "DNS update queued";
+        let msg = format!("DNS update queued from {}", ip);
         eprintln!("{}", msg);
-        Ok((StatusCode::OK, msg.to_string()))
+        Ok((StatusCode::OK, msg))
     } else {
-        let msg = "Bad token";
+        let msg = format!("Unauthorized IP: {}", ip);
         eprintln!("{}", msg);
-        Ok((StatusCode::UNAUTHORIZED, msg.to_string()))
+        Ok((StatusCode::UNAUTHORIZED, msg))
     }
 }
