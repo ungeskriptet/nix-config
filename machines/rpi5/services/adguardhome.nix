@@ -7,7 +7,18 @@ let
   cfg = config.nix-config.networking;
   fqdn = "adguard.${domain}";
   domain = config.networking.domain;
-  mkDnsRewrite = domain: ips: map (ip: "|${domain}^$dnsrewrite=${ip}") ips;
+  mkDnsRewrite =
+    {
+      domain,
+      ips,
+      extraRules ? null,
+    }:
+    map (
+      ip:
+      "|${domain}^$dnsrewrite=${ip}${
+        lib.optionalString (extraRules != null) ("," + lib.concatStringsSep "," extraRules)
+      }"
+    ) ips;
   mkDnsRewrites =
     {
       domains,
@@ -81,14 +92,23 @@ in
               ]
               ++ config.networking.hosts."::1";
             }
-            ++ mkDnsRewrite "localhost" [
-              "::1"
-              "127.0.0.1"
-            ]
-            ++ mkDnsRewrite "fritz.${domain}" [
-              cfg.gatewayIpv6
-              cfg.gatewayIpv4
-            ];
+            ++ (mkDnsRewrite {
+              domain = "localhost";
+              ips = [
+                "::1"
+                "127.0.0.1"
+              ];
+            })
+            ++ (mkDnsRewrite {
+              domain = "fritz.${domain}";
+              ips = [
+                cfg.gatewayIpv6
+                cfg.gatewayIpv4
+              ];
+              extraRules = [
+                "client=~${cfg.gatewayIpv6}|~${cfg.gatewayIpv4}"
+              ];
+            });
           dns = {
             hostsfile_enabled = false;
             upstream_dns = [
