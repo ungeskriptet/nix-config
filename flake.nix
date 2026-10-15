@@ -144,6 +144,7 @@
             firefox-patched = lib.autoArgs ./packages/firefox-patched.nix pkgs.${system};
             fritzbox-cert-importer = pkgs.${system}.callPackage ./packages/fritzbox-cert-importer { };
             fritzbox-dyndns-interceptor = pkgs.${system}.callPackage ./packages/fritzbox-dyndns-interceptor { };
+            get-execstart = pkgs.${system}.callPackage ./packages/get-execstart { };
             kate = pkgs.${system}.callPackage ./packages/kate.nix { };
             magisk-install = pkgs.${system}.callPackage ./packages/magisk-install.nix { };
             nix-on-droid-setup = pkgs.${system}.callPackage ./packages/nix-on-droid-setup.nix { };
