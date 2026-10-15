@@ -45,6 +45,7 @@ in
           cccEvents = "https://events.ccc.de/feed";
           codeberg = "https://blog.codeberg.org/feeds/all.atom.xml";
           collabora = "https://www.collabora.com/feed";
+          crtsh = "https://crt.sh/atom?q=${domain}";
           fdroid = "https://f-droid.org/feed.xml";
           fexEmu = "https://fex-emu.com/feed.xml";
           fosdem = "https://fosdem.org/rss.xml";
