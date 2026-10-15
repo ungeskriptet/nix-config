@@ -39,7 +39,6 @@ in
       acceptTerms = true;
       defaults = {
         email = "acme@${domain}";
-        dnsResolver = "9.9.9.9:53";
         dnsProvider = "pdns";
         credentialFiles = {
           PDNS_API_KEY_FILE = config.sops.secrets."servfail/token".path;
