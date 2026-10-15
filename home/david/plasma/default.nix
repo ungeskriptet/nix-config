@@ -81,6 +81,10 @@ in
               firefox-focus-windowsEnabled = true;
             };
           };
+          kxkbrc.Layout = {
+            Options = "compose:rctrl";
+            ResetOldOptions = true;
+          };
         };
         panels = [
           {
