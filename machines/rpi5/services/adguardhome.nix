@@ -23,7 +23,7 @@ let
           builtins.mapAttrs
             (
               n: v:
-              "|${domain}^$dnsrewrite=${n},client=${
+              "|${domain}^$dnsrewrite=${n},dnstype=AAAA|A,client=${
                 if (v ? local && v.local) then "::1|127.0.0.1" else "~::1|~127.0.0.1"
               }"
             )
