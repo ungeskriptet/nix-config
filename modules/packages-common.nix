@@ -99,6 +99,8 @@ in
       sops
       ssh-to-age
       # keep-sorted end
+
+      selfPkgs.get-execstart
     ]
     ++ lib.optionals (cfg.david.profile == "personal") [
       # keep-sorted start
