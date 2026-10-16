@@ -97,9 +97,11 @@ let
     );
   users = {
     # read pass; echo -n "$pass" | nix run nixpkgs#libargon2 -- "$(head -c 20 /dev/random | base64)" -id -k 19456
-    moe = {
-      secret = "$argon2id$v=19$m=19456,t=3,p=1$eDYyaW00K3l1VnMrZmVXTldjeVR3Qlltdm9ZPQ$50ic9c9vZBsilnDNU5G5ddsrYOGhxy+TIN6AUIIVeKE";
-      description = "David Wronek";
+    # keep-sorted start block=yes
+    bakacloud = {
+      secret = "$argon2id$v=19$m=19456,t=3,p=1$T0FLWVYrcU1hUldncFNucGFjeitFVW1reU9zPQ$fDYpWMgr+W1fyX4nVxPJg+dQpK35OP6Ko5ONz9XvZg8";
+      description = "OpenCloud";
+      sendOnly = true;
     };
     goeland = {
       secret = "$argon2id$v=19$m=19456,t=3,p=1$NXo2ak1STm9Ba0tNWFQ0QXNUNHJ4MUw5bkdZPQ$c3GSIvBKOHAz2QVwTTQkZQUKECk6ezihyTc9gTHrtq4";
@@ -111,10 +113,9 @@ let
       description = "Immich";
       sendOnly = true;
     };
-    bakacloud = {
-      secret = "$argon2id$v=19$m=19456,t=3,p=1$T0FLWVYrcU1hUldncFNucGFjeitFVW1reU9zPQ$fDYpWMgr+W1fyX4nVxPJg+dQpK35OP6Ko5ONz9XvZg8";
-      description = "OpenCloud";
-      sendOnly = true;
+    moe = {
+      secret = "$argon2id$v=19$m=19456,t=3,p=1$eDYyaW00K3l1VnMrZmVXTldjeVR3Qlltdm9ZPQ$50ic9c9vZBsilnDNU5G5ddsrYOGhxy+TIN6AUIIVeKE";
+      description = "David Wronek";
     };
     paperless = {
       secret = "$argon2id$v=19$m=19456,t=3,p=1$a3ZvY3lqSVJZQ25FSDhHTWVtbWVxQzRCRVIwPQ$xAHk19RThaoKtSBAdyKYBol8cmCb/ODZ8KqBy939PU0";
@@ -126,6 +127,7 @@ let
       description = "Vaultwarden";
       sendOnly = true;
     };
+    # keep-sorted end
   };
 in
 {
