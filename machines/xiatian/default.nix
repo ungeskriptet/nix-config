@@ -1,15 +1,12 @@
 # HP EliteBook 840 G7
 {
   config,
-  pkgs,
   ...
 }:
 {
   imports = [
     ./hardware-configuration.nix
   ];
-
-  environment.systemPackages = with pkgs; [ etterna ];
 
   services = {
     displayManager.autoLogin = {
