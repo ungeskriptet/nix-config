@@ -103,6 +103,12 @@ let
       description = "OpenCloud";
       sendOnly = true;
     };
+    fritz = {
+      secret = "$argon2id$v=19$m=19456,t=3,p=1$aTZBTHQ3dlVrekpudEpwVlpLVTBJZmwyNTc4PQ$68g3O6PmuSwOVSbWZ6P8M/PmVwSQnPAN6CftgLDVsDQ";
+      description = "FRITZ!Box";
+      sendOnly = true;
+      localhostOnly = false;
+    };
     goeland = {
       secret = "$argon2id$v=19$m=19456,t=3,p=1$NXo2ak1STm9Ba0tNWFQ0QXNUNHJ4MUw5bkdZPQ$c3GSIvBKOHAz2QVwTTQkZQUKECk6ezihyTc9gTHrtq4";
       description = "Goeland";
