@@ -35,43 +35,53 @@ let
     object = "Account";
     matchOn = [ "name" ];
     value = lib.mergeAttrsList (
-      lib.imap (i: v: {
-        "account-${toString i}" = {
-          "@type" = "User";
-          inherit (v) description name;
-          aliases = { };
-          domainId = "#domain-1";
-          locale = "en-US";
-          memberGroupIds = { };
-          memberTenantId = null;
-          timeZone = null;
-          quotas = { };
-          permissions = {
-            "@type" = "Inherit";
-          };
-          roles =
-            if (v ? sendOnly && v.sendOnly) then
-              {
-                "@type" = "Custom";
-                roleIds = {
-                  "#role-1" = true;
+      lib.imap (
+        i:
+        {
+          description,
+          name,
+          secret,
+          sendOnly ? false,
+          localhostOnly ? true,
+        }:
+        {
+          "account-${toString i}" = {
+            "@type" = "User";
+            inherit description name;
+            aliases = { };
+            domainId = "#domain-1";
+            locale = "en-US";
+            memberGroupIds = { };
+            memberTenantId = null;
+            timeZone = null;
+            quotas = { };
+            permissions = {
+              "@type" = "Inherit";
+            };
+            roles =
+              if sendOnly then
+                {
+                  "@type" = "Custom";
+                  roleIds = {
+                    "#role-1" = true;
+                  };
+                }
+              else
+                { "@type" = "Admin"; };
+            credentials = {
+              "0" = {
+                "@type" = "Password";
+                inherit secret;
+                expiresAt = null;
+                allowedIps = lib.optionalAttrs (sendOnly && localhostOnly) {
+                  "127.0.0.0/8" = true;
+                  "::1" = true;
                 };
-              }
-            else
-              { "@type" = "Admin"; };
-          credentials = {
-            "0" = {
-              "@type" = "Password";
-              inherit (v) secret;
-              expiresAt = null;
-              allowedIps = lib.optionalAttrs (v ? sendOnly && v.sendOnly) {
-                "127.0.0.0/8" = true;
-                "::1" = true;
               };
             };
           };
-        };
-      }) (lib.mapAttrsToList (name: v: { inherit name; } // v) users)
+        }
+      ) (lib.mapAttrsToList (name: v: { inherit name; } // v) users)
     );
   };
   mkFolderScript =
