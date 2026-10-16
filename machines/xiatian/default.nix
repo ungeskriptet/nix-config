@@ -39,7 +39,10 @@
     hm-config.trusted = true;
     programs.plasma = {
       configFile = {
-        kcminputrc."Libinput/1739/52744/SYNA30B3:00 06CB:CE08".NaturalScroll = true;
+        kcminputrc."Libinput/1739/52744/SYNA30B3:00 06CB:CE08" = {
+          MiddleButtonEmulation = true;
+          NaturalScroll = true;
+        };
       };
     };
   };
