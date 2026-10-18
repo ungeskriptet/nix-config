@@ -1,8 +1,11 @@
 { pkgs, inputs, ... }:
 let
   itgPacks = inputs.itgpacks.itgPacks.${pkgs.stdenv.hostPlatform.system};
+  _573-nix = inputs._573-nix.packages.${pkgs.stdenv.hostPlatform.system};
 in
 {
+  environment.systemPackages = with _573-nix; [ iidx-33-sparkle-shower ];
+
   programs.itgmania = {
     enable = true;
     audioDevice = "alsa_output.pci-0000_0b_00.4.analog-stereo";
