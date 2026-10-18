@@ -1,5 +1,24 @@
 {
   "nodes": {
+    "_573-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "treefmt-nix": "treefmt-nix"
+      },
+      "locked": {
+        "lastModified": 1792246636,
+        "narHash": "sha256-WrFOjMY/W4s5ghaTKTqVTaYI/b3Qsv7fY0fXy3su1B8=",
+        "rev": "6c752adfe40fcc1e65974ef335cd0f5cb265ff60",
+        "type": "tarball",
+        "url": "https://codeberg.org/api/v1/repos/ungeskriptet/573-nix/archive/6c752adfe40fcc1e65974ef335cd0f5cb265ff60.tar.gz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://codeberg.org/ungeskriptet/573-nix/archive/master.tar.gz"
+      }
+    },
     "argononed": {
       "flake": false,
       "locked": {
@@ -136,7 +155,7 @@
     "itgpacks": {
       "inputs": {
         "nixpkgs": "nixpkgs",
-        "treefmt-nix": "treefmt-nix"
+        "treefmt-nix": "treefmt-nix_2"
       },
       "locked": {
         "lastModified": 1787392658,
@@ -538,6 +557,7 @@
     },
     "root": {
       "inputs": {
+        "_573-nix": "_573-nix",
         "disko": "disko",
         "home-manager": "home-manager",
         "itgpacks": "itgpacks",
@@ -550,7 +570,7 @@
         "nixpkgs": "nixpkgs_4",
         "plasma-manager": "plasma-manager",
         "sops-nix": "sops-nix",
-        "treefmt-nix": "treefmt-nix_2",
+        "treefmt-nix": "treefmt-nix_3",
         "yuribot": "yuribot"
       }
     },
@@ -614,6 +634,27 @@
     "treefmt-nix": {
       "inputs": {
         "nixpkgs": [
+          "_573-nix",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1791885023,
+        "narHash": "sha256-C3alQ2MEt0zVrUSho5NUDo3jmhbff72++bfwoqT9Omo=",
+        "owner": "numtide",
+        "repo": "treefmt-nix",
+        "rev": "0d6d739a833ba9a9c93034862e4a7b061a062a1c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "treefmt-nix",
+        "type": "github"
+      }
+    },
+    "treefmt-nix_2": {
+      "inputs": {
+        "nixpkgs": [
           "itgpacks",
           "nixpkgs"
         ]
@@ -632,7 +673,7 @@
         "type": "github"
       }
     },
-    "treefmt-nix_2": {
+    "treefmt-nix_3": {
       "inputs": {
         "nixpkgs": [
           "nixpkgs"

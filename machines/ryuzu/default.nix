@@ -2,10 +2,10 @@
 { ... }:
 {
   imports = [
+    ./games.nix
     ./hardware-configuration.nix
     ./home-assistant/powerdown.nix
     ./home-assistant/ssh.nix
-    ./itgmania.nix
     ./nginx.nix
     ../../modules/minecraft-server.nix
   ];
