@@ -11,7 +11,6 @@ in
   imports = [
     ./ssh
     ./vars.nix
-    ./accounts/common.nix
     ../common.nix
   ];
 

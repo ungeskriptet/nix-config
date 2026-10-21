@@ -19,6 +19,10 @@ in
         preset = "david";
         language = "en-US";
       };
+      thunderbird = {
+        preset = "david";
+        language = "en-US";
+      };
     };
 
     programs.firefox = {
