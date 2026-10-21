@@ -4,10 +4,10 @@
   ...
 }:
 let
-  cfg = config.hm-config;
+  cfg = config.hm-config.david;
 in
 {
-  accounts.email.accounts = lib.mkIf cfg.trusted {
+  accounts.email.accounts = lib.mkIf (cfg.profile == "personal") {
     myEmail.thunderbird.enable = true;
     mainlining.thunderbird.enable = true;
   };

@@ -20,9 +20,8 @@ in
     };
   };
 
-  hm-config = {
-    dotfiles = true;
-    trusted = true;
+  hm-config.david = {
+    profile = "personal";
   };
 
   sops = {

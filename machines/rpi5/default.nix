@@ -50,6 +50,4 @@
       };
     };
   };
-
-  home-manager.users.david.config.hm-config.trusted = true;
 }

@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ ... }:
 {
   imports = [
     ../../modules/git/home-manager.nix
@@ -17,10 +17,5 @@
       david.enable = true;
       homeManager.enable = true;
     };
-  };
-
-  hm-config = {
-    trusted = lib.mkDefault false;
-    dotfiles = lib.mkDefault false;
   };
 }

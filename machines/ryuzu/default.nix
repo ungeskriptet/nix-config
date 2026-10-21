@@ -42,7 +42,6 @@
   };
 
   home-manager.users.david = {
-    hm-config.trusted = true;
     programs = {
       plasma = {
         configFile = {
