@@ -6,7 +6,7 @@
   ...
 }:
 let
-  cfg = config.hm-config.plasma;
+  cfg = config.hm-config.david.plasma;
 in
 {
   imports = [
@@ -14,10 +14,8 @@ in
     ./kate.nix
   ];
 
-  options.hm-config.plasma = {
-    enable = lib.mkEnableOption "David's Plasma configs" // {
-      default = true;
-    };
+  options.hm-config.david.plasma = {
+    enable = lib.mkEnableOption "David's Plasma configs";
     nixIcon = lib.mkEnableOption "Nix icon for the application launcher" // {
       default = true;
     };
