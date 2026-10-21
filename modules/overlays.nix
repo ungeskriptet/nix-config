@@ -1,4 +1,4 @@
-{ ... }:
+{ lib, ... }:
 {
   nixpkgs.overlays = [
     (final: prev: {
@@ -8,17 +8,26 @@
         doInstallCheck = false;
       };
       pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
-        (pyFinal: pyPrev: {
-          ocrmypdf = pyPrev.ocrmypdf.overrideAttrs {
-            # Checks take a long time
-            doCheck = false;
-            doInstallCheck = false;
-          };
-          torchaudio = pyPrev.torchaudio.overrideAttrs {
-            doCheck = false;
-            doInstallCheck = false;
-          };
-        })
+        (
+          pyFinal: pyPrev:
+          lib.genAttrs
+            [
+              "llama-index-embeddings-huggingface"
+              "ocrmypdf"
+              "plotly"
+              "spacy"
+              "sweeps"
+              "torchaudio"
+              "wandb"
+            ]
+            (
+              pkg:
+              pyPrev.${pkg}.overrideAttrs {
+                doCheck = false;
+                doInstallCheck = false;
+              }
+            )
+        )
       ];
     })
   ];
