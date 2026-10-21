@@ -38,6 +38,11 @@ in
           enableVirt = true;
           enablePlasma = true;
         };
+        home-manager.users.david = {
+          hm-config.david = {
+            plasma.enable = true;
+          };
+        };
         programs.obs-studio = {
           enable = true;
           enableVirtualCamera = true;

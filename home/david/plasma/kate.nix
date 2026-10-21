@@ -5,7 +5,7 @@
   ...
 }:
 let
-  cfg = config.hm-config.plasma;
+  cfg = config.hm-config.david.plasma;
   pyrefly = lib.getExe pkgs.pyrefly;
   rust-analyzer = lib.getExe pkgs.rust-analyzer;
   nixd = lib.getExe pkgs.nixd;
