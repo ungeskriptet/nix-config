@@ -6,7 +6,7 @@
   ...
 }:
 let
-  cfg = config.hm-config.david.plasma;
+  cfg = config.hm-config.david;
 in
 {
   imports = [
@@ -21,10 +21,10 @@ in
     };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf cfg.plasma.enable {
     home.packages = with inputs.self.packages.${pkgs.stdenv.hostPlatform.system}; [
       firefox-focus-windows
-      telegram-show-hide
+      (lib.mkIf (cfg.profile == "personal") telegram-show-hide)
     ];
     xdg = {
       enable = true;
@@ -75,7 +75,7 @@ in
           kwinrc = {
             EdgeBarrier.EdgeBarrier = 0;
             Plugins = {
-              telegram-show-hideEnabled = true;
+              telegram-show-hideEnabled = lib.mkIf (cfg.profile == "personal") true;
               firefox-focus-windowsEnabled = true;
             };
           };
@@ -91,7 +91,7 @@ in
             widgets = [
               {
                 name = "org.kde.plasma.kickoff";
-                config.General.icon = lib.mkIf cfg.nixIcon "nix-snowflake";
+                config.General.icon = lib.mkIf cfg.plasma.nixIcon "nix-snowflake";
               }
               "org.kde.plasma.marginsseparator"
               "org.kde.plasma.pager"
