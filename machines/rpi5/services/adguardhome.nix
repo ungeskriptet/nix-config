@@ -75,9 +75,8 @@ in
       adguardhome = {
         enable = true;
         mutableSettings = true;
-        host = "127.0.0.1";
-        port = 8086;
         settings = {
+          http.address = "[::1]:8086";
           users = [
             {
               name = "david";
