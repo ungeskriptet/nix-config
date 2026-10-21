@@ -27,7 +27,6 @@ in
       environmentFile = config.sops.secrets."paperless/env".path;
       settings = {
         PAPERLESS_URL = "https://${fqdn}";
-        PAPERLESS_OCR_LANGUAGE = "deu+eng+pol";
         PAPERLESS_TRUSTED_PROXIES = "127.0.0.0/8, ::1/128";
         PAPERLESS_ADMIN_USER = "david";
         PAPERLESS_ADMIN_MAIL = "paperless-admin@${domain}";
