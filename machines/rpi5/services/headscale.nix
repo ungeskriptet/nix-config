@@ -72,8 +72,14 @@ in
   sops.secrets."headscale/oidc_secret".owner = "root";
 
   systemd.services.headscale = {
-    after = [ "tinyauth.service" ];
-    wants = [ "tinyauth.service" ];
+    after = [
+      config.systemd.services.adguardhome.name
+      config.systemd.services.tinyauth.name
+    ];
+    wants = [
+      config.systemd.services.adguardhome.name
+      config.systemd.services.tinyauth.name
+    ];
     serviceConfig = {
       SupplementaryGroups = [ "acme" ];
       LoadCredential = [ "oidc_secret:${config.sops.secrets."headscale/oidc_secret".path}" ];
