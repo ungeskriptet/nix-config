@@ -9,11 +9,11 @@ let
   myEmailHost = "mail.${domain}";
   mainlining = "david.wronek@mainlining.org";
   mainliningHost = "mail.mainlining.org";
-  cfg = config.hm-config;
+  cfg = config.hm-config.david;
   defaultProfile = config.nix-config.thunderbird.defaultProfile;
 in
 {
-  config = lib.mkIf cfg.trusted {
+  config = lib.mkIf (cfg.profile == "personal") {
     sops.secrets = lib.mergeAttrsList (
       map (email: { "email/${email}".mode = "0400"; }) [
         myEmail

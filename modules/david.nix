@@ -27,7 +27,9 @@ in
         home-manager = {
           users.david = {
             imports = [ ../home/david/module-list.nix ];
-            hm-config.desktop.enable = lib.mkIf (cfg.deviceType == "desktop") true;
+            hm-config.david = {
+              desktop.enable = lib.mkIf (cfg.deviceType == "desktop") true;
+            };
           };
         };
       }
@@ -48,6 +50,9 @@ in
           udev.extraRules = with pkgs; ''
             ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="0955", ATTR{idProduct}=="7321", RUN+="${lib.getExe fusee-nano} /var/lib/fusee-nano/payload.bin"
           '';
+        };
+        home-manager.users.david = {
+          hm-config.david.profile = "personal";
         };
       })
     ]

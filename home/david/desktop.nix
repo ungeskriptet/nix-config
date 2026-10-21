@@ -6,10 +6,10 @@
   ...
 }:
 let
-  cfg = config.hm-config;
+  cfg = config.hm-config.david;
 in
 {
-  options.hm-config.desktop = {
+  options.hm-config.david.desktop = {
     enable = lib.mkEnableOption "desktop configs";
   };
 
@@ -25,7 +25,7 @@ in
       package = inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.firefox-patched;
     };
 
-    sops = lib.mkIf cfg.trusted {
+    sops = lib.mkIf (cfg.profile == "personal") {
       secrets."groovestats/apikey" = { };
       templates."GrooveStats.ini".content = ''
         [GrooveStats]
@@ -39,14 +39,14 @@ in
       autostart = {
         enable = true;
         entries = with pkgs; [
-          (lib.mkIf cfg.trusted "${signal-desktop}/share/applications/signal.desktop")
+          (lib.mkIf (cfg.profile == "personal") "${signal-desktop}/share/applications/signal.desktop")
         ];
       };
     };
 
     home = {
       file = {
-        ".itgmania/Save/LocalProfiles/00000000/GrooveStats.ini" = lib.mkIf cfg.trusted {
+        ".itgmania/Save/LocalProfiles/00000000/GrooveStats.ini" = lib.mkIf (cfg.profile == "personal") {
           source = config.lib.file.mkOutOfStoreSymlink config.sops.templates."GrooveStats.ini".path;
           force = true;
         };

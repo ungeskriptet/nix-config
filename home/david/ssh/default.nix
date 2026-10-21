@@ -5,10 +5,11 @@
   ...
 }:
 let
+  cfg = config.hm-config.david;
   domain = config.vars.domain;
 in
 {
-  programs.ssh = lib.mkIf config.hm-config.dotfiles {
+  programs.ssh = lib.mkIf (cfg.profile == "personal") {
     enable = true;
     enableDefaultConfig = false;
     settings = {

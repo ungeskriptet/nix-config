@@ -20,9 +20,9 @@ in
     };
   };
 
-  hm-config = {
-    dotfiles = true;
-    trusted = true;
+  hm-config.david = {
+    enable = true;
+    profile = "personal";
   };
 
   home = {
