@@ -1,0 +1,9 @@
+{
+    "KPlugin": {
+        "Name": "Bitwarden Show/Hide",
+        "Description": "Toggle visibility of the Bitwarden window",
+        "Id": "bitwarden-show-hide"
+    },
+    "X-Plasma-API": "javascript",
+    "KPackageStructure": "KWin/Script"
+}

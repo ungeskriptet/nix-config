@@ -23,6 +23,7 @@ in
 
   config = lib.mkIf cfg.plasma.enable {
     home.packages = with inputs.self.packages.${pkgs.stdenv.hostPlatform.system}; [
+      bitwarden-show-hide
       firefox-focus-windows
       (lib.mkIf (cfg.profile == "personal") telegram-show-hide)
     ];
@@ -53,6 +54,7 @@ in
         shortcuts = {
           kwin."Switch to Desktop 1" = "Ctrl+F1";
           kwin."Switch to Desktop 2" = "Ctrl+F2";
+          kwin."Switch to Desktop 3" = "Ctrl+F3";
           yakuake.toggle-window-state = "Meta+Esc";
         };
         configFile = {
@@ -76,6 +78,7 @@ in
             EdgeBarrier.EdgeBarrier = 0;
             Plugins = {
               telegram-show-hideEnabled = lib.mkIf (cfg.profile == "personal") true;
+              bitwarden-show-hideEnabled = true;
               firefox-focus-windowsEnabled = true;
             };
           };
