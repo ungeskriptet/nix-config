@@ -23,6 +23,7 @@ in
   services = {
     opencloud = {
       enable = true;
+      package = pkgs.opencloud;
       port = 8096;
       address = "[::1]";
       url = "https://${fqdn}";
