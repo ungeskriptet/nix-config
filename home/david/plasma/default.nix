@@ -50,7 +50,6 @@ in
       };
       plasma = {
         enable = true;
-        overrideConfig = true;
         shortcuts = {
           kwin."Switch to Desktop 1" = "Ctrl+F1";
           kwin."Switch to Desktop 2" = "Ctrl+F2";
