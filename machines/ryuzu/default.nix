@@ -29,7 +29,6 @@
 
   nix-config = {
     deviceType = "desktop";
-    vr = true;
     secureboot.enable = true;
     david = {
       enable = true;
