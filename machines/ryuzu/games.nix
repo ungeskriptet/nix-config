@@ -4,7 +4,7 @@ let
   _573-nix = inputs._573-nix.packages.${pkgs.stdenv.hostPlatform.system};
 in
 {
-  environment.systemPackages = with _573-nix; [ iidx-33-sparkle-shower ];
+  environment.systemPackages = with _573-nix; [ iidx-34-zinrai ];
 
   programs.itgmania = {
     enable = true;
