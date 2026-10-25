@@ -11,9 +11,12 @@ in
       nssmdns6 = true;
       openFirewall = true;
       allowInterfaces = [ "end0" ];
-      publish = {
-        enable = true;
-        userServices = true;
+      settings = {
+        publish = {
+          disable-publishing = false;
+          disable-user-service-publishing = false;
+          publish-addresses = true;
+        };
       };
     };
 

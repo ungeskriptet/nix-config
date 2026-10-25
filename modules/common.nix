@@ -57,9 +57,11 @@
       nssmdns4 = true;
       nssmdns6 = true;
       openFirewall = true;
-      publish = {
-        enable = true;
-        addresses = true;
+      settings = {
+        publish = {
+          publish-addresses = true;
+          disable-publishing = false;
+        };
       };
     };
     xserver.xkb.layout = "de";
