@@ -34,7 +34,6 @@
     ./support-vpn.nix
     ./users.nix
     ./virtualization.nix
-    ./vr.nix
     ./zsh/nixos
     inputs.disko.nixosModules.disko
     inputs.home-manager.nixosModules.home-manager
