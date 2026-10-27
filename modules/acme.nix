@@ -44,6 +44,7 @@ in
           PDNS_API_KEY_FILE = config.sops.secrets."servfail/token".path;
         };
         environmentFile = "${pkgs.writeText "env" ''
+          LEGO_DNS_PROPAGATION_DISABLE_RNS=true
           PDNS_SERVER_NAME=${cfg.nameServer}
           PDNS_API_URL=https://beta.servfail.network/
         ''}";
