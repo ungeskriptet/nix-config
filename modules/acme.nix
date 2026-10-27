@@ -47,6 +47,10 @@ in
           PDNS_SERVER_NAME=${cfg.nameServer}
           PDNS_API_URL=https://beta.servfail.network/
         ''}";
+        extraLegoFlags = [
+          "--profile"
+          "shortlived"
+        ];
       };
       certs.${domain} = {
         extraDomainNames = [ "*.${domain}" ];
