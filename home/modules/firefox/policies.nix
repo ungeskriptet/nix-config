@@ -112,6 +112,12 @@ in
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/terrakok-fuzzytabs/latest.xpi";
             private_browsing = true;
           };
+          # Certificate expiration
+          "{d68d2e5b-8d6c-4867-b566-f3034b6164f7}" = {
+            default_area = "navbar";
+            installation_mode = "force_installed";
+            private_browsing = true;
+          };
           # keep-sorted end
         };
         OfferToSaveLogins = false;
