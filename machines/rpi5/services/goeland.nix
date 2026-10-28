@@ -52,6 +52,7 @@ in
           haiku = "https://www.haiku-os.org/index.xml";
           haveibeenpwned = "https://haveibeenpwned.com/feed/breaches";
           heiseSecurity = "https://www.heise.de/security/Alerts/feed.xml";
+          letsEncrypt = "https://letsencrypt.org/feed.xml";
           limob = "https://linmob.net/feed.xml";
           lineageos = "https://lineageos.org/feed.xml";
           lineageosHudson = "https://github.com/LineageOS/hudson/commits/main/lineage-build-targets.atom";
