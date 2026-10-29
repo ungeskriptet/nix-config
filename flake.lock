@@ -1,6 +1,6 @@
 {
   "nodes": {
-    "_573-nix": {
+    "573-nix": {
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
@@ -8,11 +8,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1792921535,
-        "narHash": "sha256-nGV56O81CuCcvzcqhsus4Whn2oI9cnLZdf7lchMvJok=",
-        "rev": "a385b240bd5a627c42e90d246e6e4b14ea88f718",
+        "lastModified": 1793291329,
+        "narHash": "sha256-9z+ZzyAS3XuHW6xEvK2mgeUjxbdCR3ms6ZpywOCnRAU=",
+        "rev": "9dc353d064fe2cca1c81d98722cfb17a83bbaa6b",
         "type": "tarball",
-        "url": "https://codeberg.org/api/v1/repos/ungeskriptet/573-nix/archive/a385b240bd5a627c42e90d246e6e4b14ea88f718.tar.gz"
+        "url": "https://codeberg.org/api/v1/repos/ungeskriptet/573-nix/archive/9dc353d064fe2cca1c81d98722cfb17a83bbaa6b.tar.gz"
       },
       "original": {
         "type": "tarball",
@@ -557,7 +557,7 @@
     },
     "root": {
       "inputs": {
-        "_573-nix": "_573-nix",
+        "573-nix": "573-nix",
         "disko": "disko",
         "home-manager": "home-manager",
         "itgpacks": "itgpacks",
@@ -634,7 +634,7 @@
     "treefmt-nix": {
       "inputs": {
         "nixpkgs": [
-          "_573-nix",
+          "573-nix",
           "nixpkgs"
         ]
       },

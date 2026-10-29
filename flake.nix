@@ -17,7 +17,7 @@
     itgpacks.url = "https://codeberg.org/ungeskriptet/itg-songpacks-flake/archive/master.tar.gz";
     lanzaboote.url = "github:nix-community/lanzaboote";
     nixos-raspberrypi-kernel.url = "github:nvmd/nixos-raspberrypi/develop";
-    _573-nix = {
+    "573-nix" = {
       url = "https://codeberg.org/ungeskriptet/573-nix/archive/master.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };

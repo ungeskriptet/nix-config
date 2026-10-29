@@ -1,7 +1,7 @@
 { pkgs, inputs, ... }:
 let
   itgPacks = inputs.itgpacks.itgPacks.${pkgs.stdenv.hostPlatform.system};
-  _573-nix = inputs._573-nix.packages.${pkgs.stdenv.hostPlatform.system};
+  _573-nix = inputs."573-nix".packages.${pkgs.stdenv.hostPlatform.system};
 in
 {
   environment.systemPackages = with _573-nix; [ iidx-34-zinrai ];
