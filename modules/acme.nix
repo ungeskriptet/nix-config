@@ -35,6 +35,8 @@ in
 
     sops.secrets."servfail/token".owner = "root";
 
+    environment.systemPackages = with pkgs; [ lego ];
+
     security.acme = {
       acceptTerms = true;
       defaults = {
