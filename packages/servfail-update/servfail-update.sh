@@ -37,6 +37,7 @@ base_url="https://beta.servfail.network"
 curl_args=(
   -sS
   --max-time 3
+  --retry 10
   --fail
   --user-agent "ungeskriptet/servfail-update"
 )
