@@ -9,9 +9,17 @@ in
   security.acme.defaults.reloadServices = [ "vaultwarden.service" ];
 
   systemd.services.vaultwarden = {
-    serviceConfig.SupplementaryGroups = [ "acme" ];
     requires = [ "postgresql.target" ];
     after = [ "postgresql.target" ];
+    environment = {
+      ROCKET_TLS = ''{certs="%d/tlsCert",key="%d/tlsKey"}'';
+    };
+    serviceConfig = {
+      LoadCredential = [
+        "tlsCert:${config.acme.tlsCert}"
+        "tlsKey:${config.acme.tlsKey}"
+      ];
+    };
   };
 
   services = {
@@ -46,7 +54,6 @@ in
         IP_HEADER = "X-Forwarded-For";
         ROCKET_ADDRESS = "127.0.0.1";
         ROCKET_PORT = 8082;
-        ROCKET_TLS = ''{certs="${config.acme.tlsCert}",key="${config.acme.tlsKey}"}'';
         SIGNUPS_ALLOWED = false;
         SMTP_FROM = "vaultwarden@${domain}";
         SMTP_HOST = domain;
