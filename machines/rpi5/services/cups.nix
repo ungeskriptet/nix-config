@@ -10,7 +10,6 @@ in
       nssmdns4 = true;
       nssmdns6 = true;
       openFirewall = true;
-      allowInterfaces = [ "end0" ];
       settings = {
         publish = {
           disable-publishing = false;
