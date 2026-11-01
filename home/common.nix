@@ -12,6 +12,7 @@ in
     inputs.sops-nix.homeManagerModules.sops
     ./modules/firefox
     ./modules/thunderbird
+    ./modules/twinkle.nix
   ];
 
   programs = {

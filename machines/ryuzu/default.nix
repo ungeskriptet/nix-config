@@ -50,6 +50,9 @@
           };
         };
       };
+      twinkle = {
+        enable = true;
+      };
     };
   };
 }
