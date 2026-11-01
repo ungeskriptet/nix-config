@@ -11,8 +11,8 @@ in
         server_url = "https://${fqdn}";
         listen_addr = "[::1]:8098";
         metrics_listen_addr = null;
-        tls_cert_path = config.acme.tlsCert;
-        tls_key_path = config.acme.tlsKey;
+        tls_cert_path = "/run/credentials/headscale.service/tlsCert";
+        tls_key_path = "/run/credentials/headscale.service/tlsKey";
         trusted_proxies = [
           "127.0.0.1/32"
           "::1/128"
@@ -84,8 +84,11 @@ in
       config.systemd.services.tinyauth.name
     ];
     serviceConfig = {
-      SupplementaryGroups = [ "acme" ];
-      LoadCredential = [ "oidc_secret:${config.sops.secrets."headscale/oidc_secret".path}" ];
+      LoadCredential = [
+        "oidc_secret:${config.sops.secrets."headscale/oidc_secret".path}"
+        "tlsCert:${config.acme.tlsCert}"
+        "tlsKey:${config.acme.tlsKey}"
+      ];
     };
   };
 
