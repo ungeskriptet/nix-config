@@ -121,7 +121,7 @@ in
             ${if (prevPkg ? postPatch) then prevPkg.postPatch else ""}
             substituteInPlace src/preload/modules/h5vcc/dial/http.js \
               --replace-fail \
-              "server.listen(0, (err) => {" "server.listen(4040, (err) => {"
+              "server.listen(0, '0.0.0.0', () => {" "server.listen(4040, '0.0.0.0', () => {"
           '';
         });
       })
