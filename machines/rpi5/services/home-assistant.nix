@@ -27,8 +27,9 @@ in
 
   systemd.services.home-assistant = {
     serviceConfig.SupplementaryGroups = [ "acme" ];
-    requires = [ "postgresql.target" ];
-    after = [ "postgresql.target" ];
+    requires = [ config.systemd.targets.postgresql.name ];
+    after = [ config.systemd.targets.postgresql.name ];
+    before = [ config.systemd.services.caddy.name ];
   };
 
   services = {
