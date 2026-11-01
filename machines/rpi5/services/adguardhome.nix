@@ -64,7 +64,12 @@ in
     security.acme.defaults.reloadServices = [ "adguardhome.service" ];
 
     systemd.services.adguardhome = {
-      serviceConfig.SupplementaryGroups = [ "acme" ];
+      serviceConfig = {
+        LoadCredential = [
+          "tlsCert:${config.acme.tlsCert}"
+          "tlsKey:${config.acme.tlsKey}"
+        ];
+      };
     };
 
     services = {
@@ -134,8 +139,8 @@ in
           tls = {
             enabled = true;
             server_name = fqdn;
-            certificate_path = config.acme.tlsCert;
-            private_key_path = config.acme.tlsKey;
+            certificate_path = "/run/credentials/adguardhome.service/tlsCert";
+            private_key_path = "/run/credentials/adguardhome.service/tlsKey";
             force_https = true;
             port_dns_over_tls = 853;
             port_dns_over_quic = 853;
