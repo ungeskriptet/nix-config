@@ -105,7 +105,6 @@ in
         kate
         khelpcenter
         ktexteditor
-        kwin-x11
         okular
         plasma-desktop
         print-manager
