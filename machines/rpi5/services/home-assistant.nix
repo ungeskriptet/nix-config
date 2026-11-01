@@ -26,7 +26,10 @@ in
   security.acme.defaults.reloadServices = [ "home-assistant.service" ];
 
   systemd.services.home-assistant = {
-    serviceConfig.SupplementaryGroups = [ "acme" ];
+    serviceConfig.LoadCredential = [
+      "tlsCert:${config.acme.tlsCert}"
+      "tlsKey:${config.acme.tlsKey}"
+    ];
     requires = [ config.systemd.targets.postgresql.name ];
     after = [ config.systemd.targets.postgresql.name ];
     before = [ config.systemd.services.caddy.name ];
@@ -89,8 +92,8 @@ in
         };
         http = {
           server_port = 8083;
-          ssl_key = config.acme.tlsKey;
-          ssl_certificate = config.acme.tlsCert;
+          ssl_key = "/run/credentials/home-assistant.service/tlsKey";
+          ssl_certificate = "/run/credentials/home-assistant.service/tlsCert";
           use_x_forwarded_for = true;
           trusted_proxies = [
             "::1"
