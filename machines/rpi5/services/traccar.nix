@@ -9,8 +9,9 @@ in
 {
   systemd.services = {
     traccar = {
-      after = [ "postgresql.target" ];
-      requires = [ "postgresql.target" ];
+      after = [ config.systemd.targets.postgresql.name ];
+      before = [ config.systemd.services.caddy.name ];
+      wants = [ config.systemd.targets.postgresql.name ];
     };
   };
 
