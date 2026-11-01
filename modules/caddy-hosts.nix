@@ -99,7 +99,8 @@ let
           };
         };
         enableTLS = lib.mkEnableOption "TLS" // {
-          default = true;
+          default = config.acme.enable;
+          defaultText = lib.literalExpression "config.acme.enable";
         };
         lanOnly = {
           inherit paths;
@@ -181,6 +182,15 @@ in
       )
     );
 
+    systemd.services.caddy = {
+      serviceConfig = {
+        LoadCredential = lib.mkIf config.acme.enable [
+          "tlsCert:${config.acme.tlsCert}"
+          "tlsKey:${config.acme.tlsKey}"
+        ];
+      };
+    };
+
     services.caddy.virtualHosts = lib.mkMerge (
       lib.mapAttrsToList (
         _: host:
@@ -203,7 +213,7 @@ in
         {
           "${scheme}${fqdns}".extraConfig = ''
             ${lib.optionalString host.enableTLS ''
-              tls ${config.acme.tlsCert} ${config.acme.tlsKey}
+              tls /run/credentials/caddy.service/tlsCert /run/credentials/caddy.service/tlsKey
             ''}
             ${lib.concatStringsSep "\n" (
               lib.mapAttrsToList (
