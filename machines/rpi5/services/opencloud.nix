@@ -15,7 +15,12 @@ let
 in
 {
   systemd.services.opencloud = {
-    serviceConfig.SupplementaryGroups = [ "acme" ];
+    serviceConfig = {
+      LoadCredential = [
+        "tlsCert:${config.acme.tlsCert}"
+        "tlsKey:${config.acme.tlsKey}"
+      ];
+    };
   };
 
   sops.secrets."opencloud/env".owner = config.users.users.root.name;
@@ -50,8 +55,8 @@ in
       settings = {
         proxy = {
           http = {
-            tls_cert = config.acme.tlsCert;
-            tls_key = config.acme.tlsKey;
+            tls_cert = "/run/credentials/opencloud.service/tlsCert";
+            tls_key = "/run/credentials/opencloud.service/tlsKey";
             tls = true;
           };
         };
