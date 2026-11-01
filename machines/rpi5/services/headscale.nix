@@ -76,6 +76,9 @@ in
       config.systemd.services.adguardhome.name
       config.systemd.services.tinyauth.name
     ];
+    before = [
+      config.systemd.services.caddy.name
+    ];
     wants = [
       config.systemd.services.adguardhome.name
       config.systemd.services.tinyauth.name
