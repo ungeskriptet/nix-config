@@ -43,7 +43,12 @@ in
         done
         chmod 660 /run/soju/socket
       '';
-      serviceConfig.SupplementaryGroups = [ "acme" ];
+      serviceConfig = {
+        LoadCredential = [
+          "tlsCert:${config.acme.tlsCert}"
+          "tlsKey:${config.acme.tlsKey}"
+        ];
+      };
     };
     caddy = {
       serviceConfig.SupplementaryGroups = [ "soju" ];
@@ -88,7 +93,7 @@ in
         listen ircs://:6697
         listen unix+admin:///run/soju/admin
         hostname ${fqdn}
-        tls ${config.acme.tlsCert} ${config.acme.tlsKey}
+        tls /run/credentials/soju.service/tlsCert /run/credentials/soju.service/tlsKey
         db postgres "host=/run/postgresql dbname=soju"
         message-store db
         accept-proxy-ip localhost
