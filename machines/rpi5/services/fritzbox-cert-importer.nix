@@ -20,7 +20,7 @@ in
     fullPemFile = config.security.acme.certs."fritz.${domain}".directory + "/full.pem";
     environmentFile = config.sops.secrets."fritzbox-cert-importer/env".path;
     environment = {
-      FRITZ_USERNAME = "david";
+      FRITZ_USERNAME = "certimport";
       FRITZ_URL = "https://${fqdn}";
     };
   };
