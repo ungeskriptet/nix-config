@@ -21,9 +21,6 @@ in
             serverName = "drasl.${domain}";
           };
         };
-        "omao.${domain}" = {
-          reverseProxies."https://51kmze6tyra6b5gb.myfritz.net:40555" = { };
-        };
         "options.${domain}" = {
           rootDirs.manual.dir = "${config.system.build.manual.manualHTML}/share/doc/nixos";
           fileServers = [ { } ];
@@ -49,6 +46,7 @@ in
             redir /private /private/ permanent
             redir /tv https://download.teamviewer.com/download/TeamViewerQS_x64.exe temporary
             redir /fb https://fritz.david-w.eu:22524/ temporary
+            redir /omao https://omao.david-w.eu:40555/ temporary
           '';
         };
       };
