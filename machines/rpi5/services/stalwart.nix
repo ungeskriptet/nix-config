@@ -159,7 +159,10 @@ in
 
   systemd.services = {
     stalwart = {
-      serviceConfig.SupplementaryGroups = [ "acme" ];
+      serviceConfig.LoadCredential = [
+        "tlsCert:${config.acme.tlsCert}"
+        "tlsKey:${config.acme.tlsKey}"
+      ];
       requires = [ config.systemd.targets.postgresql.name ];
       after = [ config.systemd.targets.postgresql.name ];
       before = [ config.systemd.services.caddy.name ];
@@ -231,11 +234,11 @@ in
               cert-1 = {
                 certificate = {
                   "@type" = "File";
-                  filePath = config.acme.tlsCert;
+                  filePath = "/run/credentials/stalwart.service/tlsCert";
                 };
                 privateKey = {
                   "@type" = "File";
-                  filePath = config.acme.tlsKey;
+                  filePath = "/run/credentials/stalwart.service/tlsKey";
                 };
                 subjectAlternativeNames = {
                   "*.${domain}" = true;
