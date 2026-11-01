@@ -90,16 +90,6 @@ in
           poweroff_ryuzu = ryuzuCmd "poweroff";
           start_itgmania = ryuzuCmd "itgmania";
         };
-        http = {
-          server_port = 8083;
-          ssl_key = "/run/credentials/home-assistant.service/tlsKey";
-          ssl_certificate = "/run/credentials/home-assistant.service/tlsCert";
-          use_x_forwarded_for = true;
-          trusted_proxies = [
-            "::1"
-            "127.0.0.1"
-          ];
-        };
         wake_on_lan = { };
         homeassistant.time_zone = null;
         recorder.db_url = "postgresql://@/hass";
