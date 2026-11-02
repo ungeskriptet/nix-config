@@ -5,11 +5,13 @@
       "https://cache.thalheim.io"
       "https://nix-community.cachix.org"
       "https://nixos-raspberrypi.cachix.org"
+      "https://nixpkgs-update-cache.nixos.org"
     ];
     extra-trusted-public-keys = [
       "cache.thalheim.io-1:R7msbosLEZKrxk/lKxf9BTjOOH7Ax3H0Qj0/6wiHOgc="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "nixos-raspberrypi.cachix.org-1:4iMO9LXa8BqhU+Rpg6LQKiGa2lsNh/j2oiYLNOQ5sPI="
+      "nixpkgs-update-cache.nix-community.org-1:U8d6wiQecHUPJFSqHN9GSSmNkmdiFW7GW7WNAnHW0SM="
     ];
   };
   inputs = {
