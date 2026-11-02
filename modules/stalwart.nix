@@ -36,7 +36,7 @@ let
       object = "Application";
       value = {
         webui = {
-          enabled = true;
+          enable = true;
           description = "Stalwart Web Application";
           resourceUrl = "file://${cfg.package.webui}/webui.zip";
           urlPrefix = {
@@ -81,9 +81,9 @@ in
 
     package = {
       cli = lib.mkPackageOption pkgs "stalwart-cli" { };
-      server = lib.mkPackageOption pkgs "stalwart_0_16" { };
-      spam-filter = lib.mkPackageOption pkgs [ "stalwart_0_16" "spam-filter" ] { };
-      webui = lib.mkPackageOption pkgs [ "stalwart_0_16" "webui" ] { };
+      server = lib.mkPackageOption pkgs "stalwart_1_0" { };
+      spam-filter = lib.mkPackageOption pkgs [ "stalwart_1_0" "spam-filter" ] { };
+      webui = lib.mkPackageOption pkgs [ "stalwart_1_0" "webui" ] { };
     };
 
     dataDir = lib.mkOption {
@@ -299,8 +299,6 @@ in
       };
     };
 
-    environment.etc."stalwart/config.json".source = configFile;
-
     systemd = {
       packages = [ cfg.package.server ];
       services = {
@@ -331,18 +329,6 @@ in
             ExecStart = [
               (pkgs.writeShellScript "stalwart-apply-plan-start" ''
                 if ${needsRecoveryMode}; then
-                  # https://github.com/stalwartlabs/stalwart/issues/283
-                  count=0
-                  while ! curl --fail --max-time 60 $STALWART_URL/healthz/ready; do
-                    ((count++))
-                    if [ $count -ge 10 ]; then
-                      echo "Stalwart not up after $count attempts, bailing out."
-                      exit 1
-                    fi
-                    echo "Stalwart is not up yet, retrying in 3 seconds."
-                    sleep 3
-                  done
-
                   export STALWART_USER='${cfg.recoveryMode.user}'
                   export STALWART_PASSWORD=$(cat $CREDENTIALS_DIRECTORY/recovery-password)
 
@@ -382,7 +368,7 @@ in
           unitConfig = {
             ConditionPathExists = [
               ""
-              "/etc/stalwart/config.json"
+              configFile
             ];
           };
           restartTriggers = [
@@ -390,6 +376,7 @@ in
             (writePlan defaultPlan)
           ];
           serviceConfig = {
+            Type = "notify";
             ExecStart = [
               ""
               (pkgs.writeShellScript "stalwart-start" ''
@@ -398,7 +385,7 @@ in
                   export STALWART_RECOVERY_MODE=true
                   export STALWART_RECOVERY_ADMIN="${cfg.recoveryMode.user}:$(cat $CREDENTIALS_DIRECTORY/recovery-password)"
                 fi
-                exec stalwart --config /etc/stalwart/config.json
+                exec stalwart --config ${configFile}
               '')
             ];
             LoadCredential = lib.mapAttrsToList (key: value: "${key}:${value}") (

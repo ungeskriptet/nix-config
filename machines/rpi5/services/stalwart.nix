@@ -52,7 +52,6 @@ let
             domainId = "#domain-1";
             locale = "en-US";
             memberGroupIds = { };
-            memberTenantId = null;
             timeZone = null;
             quotas = { };
             permissions = {
@@ -259,9 +258,8 @@ in
                   filePath = "/run/credentials/stalwart.service/servfail-token";
                 };
                 description = "Project SERVFAIL";
-                endpoint = "https://beta.servfail.network";
-                memberTenantId = null;
-                pollingInterval = 15000;
+                url = "https://beta.servfail.network";
+                pollInterval = 15000;
                 propagationDelay = null;
                 propagationTimeout = 60000;
                 serverId = "ahra.ns.servfail.ax.";
@@ -281,7 +279,6 @@ in
                 aliases = { };
                 allowRelaying = false;
                 catchAllAddress = "moe@${domain}";
-                directoryId = null;
                 dkimManagement = {
                   "@type" = "Automatic";
                   algorithms = {
@@ -315,9 +312,7 @@ in
                 certificateManagement = {
                   "@type" = "Manual";
                 };
-                isEnabled = true;
-                logo = null;
-                memberTenantId = null;
+                enable = true;
                 reportAddressUri = "mailto:postmaster";
                 subAddressing = {
                   "@type" = "Enabled";
@@ -337,7 +332,7 @@ in
                 };
                 protocol = "http";
                 useTls = true;
-                tlsImplicit = true;
+                implicitTls = true;
               };
               listener-2 = {
                 name = "smtp";
@@ -354,7 +349,7 @@ in
                 };
                 protocol = "smtp";
                 useTls = true;
-                tlsImplicit = true;
+                implicitTls = true;
               };
               listener-4 = {
                 name = "imaps";
@@ -363,7 +358,7 @@ in
                 };
                 protocol = "imap";
                 useTls = true;
-                tlsImplicit = true;
+                implicitTls = true;
               };
               listener-5 = {
                 name = "sieve";
@@ -372,7 +367,7 @@ in
                 };
                 protocol = "manageSieve";
                 useTls = true;
-                tlsImplicit = true;
+                implicitTls = true;
               };
             };
           }
@@ -512,7 +507,8 @@ in
               redirectRoot = "/account";
               responseHeaders = { };
               usePermissiveCors = true;
-              useXForwarded = true;
+              clientIpSource = "xForwardedFor";
+              forwardedHops = 1;
             };
           }
           {
@@ -641,6 +637,15 @@ in
                   "0" = {
                     "if" = "local_port == 25";
                     "then" = "true";
+                  };
+                };
+              };
+              dkimSignDomain = {
+                "else" = "false";
+                match = {
+                  "0" = {
+                    "if" = "is_local_domain(sender_domain) && !is_empty(authenticated_as)";
+                    "then" = "sender_domain";
                   };
                 };
               };
@@ -787,15 +792,6 @@ in
                 "else" = "disable";
                 match = { };
               };
-              dkimSignDomain = {
-                "else" = "false";
-                match = {
-                  "0" = {
-                    "if" = "is_local_domain(sender_domain) && !is_empty(authenticated_as)";
-                    "then" = "sender_domain";
-                  };
-                };
-              };
               dkimStrict = true;
               dkimVerify = {
                 "else" = "disable";
@@ -848,9 +844,9 @@ in
             "@type" = "update";
             object = "Jmap";
             value = {
-              changesMaxResults = 5000;
+              maxChangesResults = 5000;
               eventSourceThrottle = 1000;
-              getMaxResults = 500;
+              maxGetResults = 500;
               maxConcurrentRequests = 4;
               maxConcurrentUploads = 4;
               maxMethodCalls = 16;
@@ -862,15 +858,16 @@ in
               parseLimitEmail = 10;
               parseLimitEvent = 10;
               pushAttemptWait = 60000;
-              pushMaxAttempts = 3;
+              maxPushAttempts = 3;
               pushRequestTimeout = 10000;
               pushRetryWait = 1000;
               pushShardsTotal = 1;
               pushThrottle = 1000;
               pushVerifyTimeout = 60000;
-              queryMaxResults = 5000;
-              setMaxObjects = 500;
-              snippetMaxResults = 100;
+              maxPushSize = 4096;
+              maxQueryResults = 5000;
+              maxSetObjects = 500;
+              maxSnippetResults = 100;
               uploadQuota = 50000000;
               uploadTtl = 3600000;
               webPushContact = null;
