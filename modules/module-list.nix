@@ -6,7 +6,6 @@
   imports = [
     # keep-sorted start
     ./acme.nix
-    ./bulwark-webmail.nix
     ./caddy-common.nix
     ./caddy-hosts.nix
     ./common-vars.nix
