@@ -146,7 +146,6 @@
           (forAllSystems (system: {
             # keep-sorted start block=yes
             bitwarden-show-hide = pkgs.${system}.callPackage ./packages/bitwarden-show-hide { };
-            bulwark-webmail = pkgs.${system}.callPackage ./packages/bulwark-webmail { };
             firefox-focus-windows = pkgs.${system}.callPackage ./packages/firefox-focus-windows { };
             firefox-patched = lib.autoArgs ./packages/firefox-patched.nix pkgs.${system};
             fritzbox-cert-importer = pkgs.${system}.callPackage ./packages/fritzbox-cert-importer { };
