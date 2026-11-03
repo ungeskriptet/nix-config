@@ -388,6 +388,7 @@ in
                 exec stalwart --config ${configFile}
               '')
             ];
+            RefreshOnReload = true;
             LoadCredential = lib.mapAttrsToList (key: value: "${key}:${value}") (
               cfg.credentials // { recovery-password = cfg.recoveryMode.passwordFile; }
             );
