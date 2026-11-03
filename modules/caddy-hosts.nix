@@ -184,6 +184,7 @@ in
 
     systemd.services.caddy = {
       serviceConfig = {
+        RefreshOnReload = true;
         LoadCredential = lib.mkIf config.acme.enable [
           "tlsCert:${config.acme.tlsCert}"
           "tlsKey:${config.acme.tlsKey}"
