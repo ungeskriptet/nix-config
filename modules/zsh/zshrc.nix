@@ -80,9 +80,10 @@ in
       };
       certinfo () {
         if [ -z "$1" ]; then
-          echo "Usage: certinfo <host:port>"
+          echo "Usage: certinfo <host:port> [servername]"
         else
-          echo -n | openssl s_client -connect "$1" 2> /dev/null | openssl x509 -text | \
+          echo -n | openssl s_client -connect "$1" "''${2:+-servername}" "''${2:+"$2"}" 2> /dev/null | \
+            openssl x509 -text | \
             rg --passthru "Subject: .*|DNS:.*|Not Before:.*|Not After :.*"
         fi
       }
