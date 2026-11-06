@@ -110,6 +110,31 @@ in
       '';
     };
 
+    certReload = {
+      url = lib.mkOption {
+        type = lib.types.str;
+        description = ''
+          URL to the Stalwart server.
+        '';
+        default = "";
+      };
+      user = lib.mkOption {
+        type = lib.types.str;
+        description = ''
+          User to reload the certificates with.
+        '';
+        default = "";
+      };
+      passwordFile = lib.mkOption {
+        type = lib.types.str;
+        description = ''
+          Path to a file containing the password
+          for the user to reload certificates with.
+        '';
+        default = "";
+      };
+    };
+
     recoveryMode = {
       forceEnable = lib.mkEnableOption "Stalwart's recovery mode";
 
@@ -278,6 +303,15 @@ in
           - 'services.stalwart.recoveryMode.passwordFile'
         '';
       }
+      {
+        assertion =
+          cfg.certReload.passwordFile != "" -> (cfg.certReload.user != "" && cfg.certReload.url != "");
+        message = ''
+          The following options must be set:
+          - 'services.stalwart.certReload.url'
+          - 'services.stalwart.certReload.user'
+        '';
+      }
     ];
 
     # This service stores a potentially large amount of data.
@@ -361,7 +395,8 @@ in
           wantedBy = [ "multi-user.target" ];
           path = [
             cfg.package.server
-          ];
+          ]
+          ++ lib.optional (cfg.certReload != "") pkgs.stalwart-cli;
           environment = {
             STALWART_RECOVERY_MODE_PORT = toString cfg.recoveryMode.port;
           };
@@ -388,9 +423,20 @@ in
                 exec stalwart --config ${configFile}
               '')
             ];
+            ExecReload = lib.mkIf (cfg.certReload.passwordFile != "") (
+              pkgs.writeShellScript "stalwart-reload" ''
+                export STALWART_PASSWORD=$(<"$CREDENTIALS_DIRECTORY"/reload-password)
+                stalwart-cli --url "${cfg.certReload.url}" --user ${cfg.certReload.user} \
+                  create Action/ReloadTlsCertificates
+              ''
+            );
             RefreshOnReload = true;
             LoadCredential = lib.mapAttrsToList (key: value: "${key}:${value}") (
-              cfg.credentials // { recovery-password = cfg.recoveryMode.passwordFile; }
+              cfg.credentials
+              // {
+                recovery-password = cfg.recoveryMode.passwordFile;
+                reload-password = cfg.certReload.passwordFile;
+              }
             );
             EnvironmentFile = lib.mkIf (cfg.environmentFile != "") cfg.environmentFile;
             StateDirectory = stalwartIdentifier;
