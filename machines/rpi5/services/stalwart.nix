@@ -42,7 +42,8 @@ let
           name,
           secret,
           sendOnly ? false,
-          localhostOnly ? true,
+          localAdmin ? false,
+          localhostOnly ? if (sendOnly || localAdmin) then true else false,
         }:
         {
           "account-${toString i}" = {
@@ -65,6 +66,13 @@ let
                     "#role-1" = true;
                   };
                 }
+              else if localAdmin then
+                {
+                  "@type" = "Custom";
+                  roleIds = {
+                    "#role-2" = true;
+                  };
+                }
               else
                 { "@type" = "Admin"; };
             credentials = {
@@ -72,7 +80,7 @@ let
                 "@type" = "Password";
                 inherit secret;
                 expiresAt = null;
-                allowedIps = lib.optionalAttrs (sendOnly && localhostOnly) {
+                allowedIps = lib.optionalAttrs localhostOnly {
                   "127.0.0.0/8" = true;
                   "::1" = true;
                 };
@@ -118,6 +126,11 @@ let
       description = "Immich";
       sendOnly = true;
     };
+    localadmin = {
+      secret = "$argon2id$v=19$m=19456,t=3,p=1$Ty8zeFJkYkhjL0ErVWp1YXlRaTJTR2FjNVo0PQ$BisDjvy2qSIpJdC/RQ4H+L1DX1d+X0/uzPabdGU6uc0";
+      description = "Localhost-Only Administrator";
+      localAdmin = true;
+    };
     moe = {
       secret = "$argon2id$v=19$m=19456,t=3,p=1$eDYyaW00K3l1VnMrZmVXTldjeVR3Qlltdm9ZPQ$50ic9c9vZBsilnDNU5G5ddsrYOGhxy+TIN6AUIIVeKE";
       description = "David Wronek";
@@ -141,6 +154,7 @@ in
 
   sops.secrets = {
     "stalwart/recoverypass".owner = "root";
+    "stalwart/reloadpass".owner = "root";
     "stalwart/servfail-token".owner = "root";
     "stalwart/vapid-key".owner = "root";
   };
@@ -184,6 +198,11 @@ in
       credentials = {
         servfail-token = config.sops.secrets."stalwart/servfail-token".path;
         vapid-key = config.sops.secrets."stalwart/vapid-key".path;
+      };
+      certReload = {
+        url = "https://${fqdn}:8087";
+        user = "localadmin@${domain}";
+        passwordFile = config.sops.secrets."stalwart/reloadpass".path;
       };
       recoveryMode = {
         port = 8087;
@@ -384,6 +403,16 @@ in
                   calendarSchedulingSend = true;
                   emailSend = true;
                 };
+              };
+              role-2 = {
+                description = "Localhost-Only Administrator";
+                disabledPermissions = { };
+                enabledPermissions = {
+                  actionReloadTlsCertificates = true;
+                  authenticate = true;
+                  sysActionCreate = true;
+                };
+                roleIds = { };
               };
             };
           }
@@ -699,7 +728,10 @@ in
                     "if" = lib.concatStringsSep " || " (
                       lib.filter (x: x != "") (
                         lib.mapAttrsToList (
-                          n: v: lib.optionalString (v ? sendOnly && v.sendOnly) "rcpt == '${n}@${domain}'"
+                          n: v:
+                          lib.optionalString (
+                            v ? sendOnly && v.sendOnly || v ? localAdmin && v.localAdmin
+                          ) "rcpt == '${n}@${domain}'"
                         ) users
                       )
                     );
