@@ -6,7 +6,7 @@ in
 {
   sops.secrets."vaultwarden/env".owner = config.users.users.root.name;
 
-  security.acme.defaults.reloadServices = [ "vaultwarden.service" ];
+  security.acme.certs.${domain}.reloadServices = [ "vaultwarden.service" ];
 
   systemd.services.vaultwarden = {
     requires = [ "postgresql.target" ];

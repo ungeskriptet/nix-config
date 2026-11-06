@@ -23,7 +23,7 @@ in
     firewall.allowedUDPPorts = [ 5353 ];
   };
 
-  security.acme.defaults.reloadServices = [ "home-assistant.service" ];
+  security.acme.certs.${domain}.reloadServices = [ "home-assistant.service" ];
 
   systemd.services.home-assistant = {
     serviceConfig.LoadCredential = [

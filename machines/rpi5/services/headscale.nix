@@ -92,5 +92,5 @@ in
     };
   };
 
-  security.acme.defaults.reloadServices = [ "headscale.service" ];
+  security.acme.certs.${domain}.reloadServices = [ "headscale.service" ];
 }

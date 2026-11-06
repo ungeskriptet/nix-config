@@ -81,5 +81,5 @@ in
     };
   };
 
-  security.acme.defaults.reloadServices = [ "opencloud.service" ];
+  security.acme.certs.${domain}.reloadServices = [ "opencloud.service" ];
 }

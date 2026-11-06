@@ -1,6 +1,7 @@
 { lib, config, ... }:
 let
   cfg = config.services.caddy;
+  domain = config.networking.domain;
 in
 {
   config = lib.mkIf cfg.enable {
@@ -12,7 +13,7 @@ in
       };
     };
 
-    security.acme.defaults.reloadServices = [ "caddy.service" ];
+    security.acme.certs.${domain}.reloadServices = [ "caddy.service" ];
 
     networking = {
       firewall = {
