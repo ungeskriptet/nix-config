@@ -60,6 +60,14 @@ let
           '';
           default = [ ];
         };
+        stripLocalhost = lib.mkOption {
+          type = lib.types.bool;
+          description = ''
+            Whether to strip the X-Forwarded-* headers for
+            requests coming from localhost.
+          '';
+          default = false;
+        };
         extraConfig = lib.mkOption {
           type = lib.types.lines;
           description = ''
@@ -203,11 +211,13 @@ in
               name,
               paths,
               lanOnly ? false,
+              stripLocalhost ? false,
             }:
             ''
               @${name} {
                 ${lib.concatStringsSep "\n" (map (path: "path ${path}") paths)}
                 ${lib.optionalString lanOnly "not remote_ip private_ranges"}
+                ${lib.optionalString stripLocalhost "remote_ip ::1 127.0.0.0/8"}
               }
             '';
         in
@@ -219,34 +229,40 @@ in
             ${lib.concatStringsSep "\n" (
               lib.mapAttrsToList (
                 _: v:
-                let
-                  name = lib.strings.sanitizeDerivationName v.address;
-                in
-                ''
-                  ${mkMatcher {
-                    inherit name;
-                    paths = v.paths;
-                  }}
-                  reverse_proxy @${name} ${v.address} {
-                    ${lib.optionalString (v.hostHeader != "") ''
-                      header_up Host ${v.hostHeader}
-                    ''}
-                    transport http {
-                      ${lib.optionalString v.insecureTLS ''
-                        tls_insecure_skip_verify
+                lib.concatMapStringsSep "\n" (
+                  stripLocalhost:
+                  let
+                    name = lib.strings.sanitizeDerivationName v.address + lib.optionalString stripLocalhost "-local";
+                  in
+                  ''
+                    ${mkMatcher {
+                      inherit name stripLocalhost;
+                      paths = v.paths;
+                    }}
+                    reverse_proxy @${name} ${v.address} {
+                      ${lib.optionalString (v.hostHeader != "") ''
+                        header_up Host ${v.hostHeader}
                       ''}
-                      ${lib.optionalString (v.serverName != "") ''
-                        tls_server_name ${v.serverName}
+                      ${lib.optionalString stripLocalhost ''
+                        header_up -X-Forwarded-*
+                      ''}
+                      transport http {
+                        ${lib.optionalString v.insecureTLS ''
+                          tls_insecure_skip_verify
+                        ''}
+                        ${lib.optionalString (v.serverName != "") ''
+                          tls_server_name ${v.serverName}
+                        ''}
+                      }
+                      ${lib.optionalString (v.trustedProxies != [ ]) ''
+                        trusted_proxies ${lib.concatStringsSep " " v.trustedProxies}
+                      ''}
+                      ${lib.optionalString (v.extraConfig != "") ''
+                        ${v.extraConfig}
                       ''}
                     }
-                    ${lib.optionalString (v.trustedProxies != [ ]) ''
-                      trusted_proxies ${lib.concatStringsSep " " v.trustedProxies}
-                    ''}
-                    ${lib.optionalString (v.extraConfig != "") ''
-                      ${v.extraConfig}
-                    ''}
-                  }
-                ''
+                  ''
+                ) (lib.optional v.stripLocalhost true ++ [ false ])
               ) host.reverseProxies
             )}
             ${lib.optionalString host.lanOnly.enable ''
