@@ -50,6 +50,7 @@ in
           fosdem = "https://fosdem.org/rss.xml";
           gnome = "https://release.gnome.org/atom.xml";
           haiku = "https://www.haiku-os.org/index.xml";
+          halalBeef = "https://halal-beef.github.io/steakhouse/index.xml";
           haveibeenpwned = "https://haveibeenpwned.com/feed/breaches";
           heiseSecurity = "https://www.heise.de/security/Alerts/feed.xml";
           letsEncrypt = "https://letsencrypt.org/feed.xml";
