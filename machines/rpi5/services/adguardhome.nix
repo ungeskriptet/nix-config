@@ -61,7 +61,7 @@ in
       ];
     };
 
-    security.acme.defaults.reloadServices = [ "adguardhome.service" ];
+    security.acme.certs.${domain}.reloadServices = [ "adguardhome.service" ];
 
     systemd.services.adguardhome = {
       serviceConfig = {

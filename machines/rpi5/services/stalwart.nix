@@ -168,7 +168,7 @@ in
     ];
   };
 
-  security.acme.defaults.reloadServices = [ "stalwart.service" ];
+  security.acme.certs.${domain}.reloadServices = [ "stalwart.service" ];
 
   systemd.services = {
     stalwart = {
