@@ -197,7 +197,7 @@ in
         _: host:
         let
           scheme = if host.enableTLS then "https://" else "http://";
-          fqdns = lib.concatStringsSep ", " (lib.attrNames host.fqdns);
+          siteAddrs = lib.concatMapStringsSep ", " (fqdn: scheme + fqdn) (lib.attrNames host.fqdns);
           mkMatcher =
             {
               name,
@@ -212,7 +212,7 @@ in
             '';
         in
         {
-          "${scheme}${fqdns}".extraConfig = ''
+          ${siteAddrs}.extraConfig = ''
             ${lib.optionalString host.enableTLS ''
               tls /run/credentials/caddy.service/tlsCert /run/credentials/caddy.service/tlsKey
             ''}
