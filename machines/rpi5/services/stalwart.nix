@@ -937,10 +937,13 @@ in
             ipv6 = null;
           };
         };
-        reverseProxies."https://${fqdn}:8087" = { };
+        reverseProxies."https://${fqdn}:8087" = {
+          stripLocalhost = true;
+        };
       };
       ${domain} = {
         reverseProxies."https://${fqdn}:8087" = {
+          stripLocalhost = true;
           paths = [
             "/dav/*"
             "/jmap/*"
