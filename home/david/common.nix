@@ -77,7 +77,7 @@ in
       file = lib.mkIf (cfg.profile == "personal") (
         {
           ".android/adbkey.pub".source = ./dotfiles/adbkey.pub;
-          ".ssh/id_ed25519.pub".source = ./dotfiles/ssh/id_ed25519.pub;
+          ".ssh/id_ed25519.pub".source = ./dotfiles/id_ed25519.pub;
           ".config/nix/nix.conf" = {
             source = config.lib.file.mkOutOfStoreSymlink config.sops.templates."nix.conf".path;
             force = true;
