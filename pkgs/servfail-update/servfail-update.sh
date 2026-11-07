@@ -116,4 +116,5 @@ then
   echo "Zone successfully updated"
 else
   echo "Failed to update zone"
+  exit 1
 fi
