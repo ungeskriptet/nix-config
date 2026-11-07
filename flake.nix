@@ -145,27 +145,27 @@
         nixpkgs.lib.recursiveUpdate
           (forAllSystems (system: {
             # keep-sorted start block=yes
-            bitwarden-show-hide = pkgs.${system}.callPackage ./packages/bitwarden-show-hide { };
-            firefox-focus-windows = pkgs.${system}.callPackage ./packages/firefox-focus-windows { };
-            firefox-patched = lib.autoArgs ./packages/firefox-patched.nix pkgs.${system};
-            fritzbox-cert-importer = pkgs.${system}.callPackage ./packages/fritzbox-cert-importer { };
-            fritzbox-dyndns-interceptor = pkgs.${system}.callPackage ./packages/fritzbox-dyndns-interceptor { };
-            get-execstart = pkgs.${system}.callPackage ./packages/get-execstart { };
-            kate = pkgs.${system}.callPackage ./packages/kate.nix { };
-            magisk-install = pkgs.${system}.callPackage ./packages/magisk-install.nix { };
-            nix-on-droid-setup = pkgs.${system}.callPackage ./packages/nix-on-droid-setup.nix { };
-            openssh-nix-on-droid = pkgs.${system}.callPackage ./packages/openssh-nix-on-droid.nix { };
-            rg-uuid = pkgs.${system}.callPackage ./packages/rg-uuid { };
-            servfail-update = pkgs.${system}.callPackage ./packages/servfail-update { };
-            sigscan = pkgs.${system}.callPackage ./packages/sigscan.nix { };
-            sops-edit = pkgs.${system}.callPackage ./packages/sops-edit { };
-            telegram-show-hide = pkgs.${system}.callPackage ./packages/telegram-show-hide { };
-            ttf-ms-win11 = pkgs.${system}.callPackage ./packages/ttf-ms-win11.nix { };
+            bitwarden-show-hide = pkgs.${system}.callPackage ./pkgs/bitwarden-show-hide { };
+            firefox-focus-windows = pkgs.${system}.callPackage ./pkgs/firefox-focus-windows { };
+            firefox-patched = lib.autoArgs ./pkgs/firefox-patched pkgs.${system};
+            fritzbox-cert-importer = pkgs.${system}.callPackage ./pkgs/fritzbox-cert-importer { };
+            fritzbox-dyndns-interceptor = pkgs.${system}.callPackage ./pkgs/fritzbox-dyndns-interceptor { };
+            get-execstart = pkgs.${system}.callPackage ./pkgs/get-execstart { };
+            kate = pkgs.${system}.callPackage ./pkgs/kate { };
+            magisk-install = pkgs.${system}.callPackage ./pkgs/magisk-install { };
+            nix-on-droid-setup = pkgs.${system}.callPackage ./pkgs/nix-on-droid-setup { };
+            openssh-nix-on-droid = pkgs.${system}.callPackage ./pkgs/openssh-nix-on-droid { };
+            rg-uuid = pkgs.${system}.callPackage ./pkgs/rg-uuid { };
+            servfail-update = pkgs.${system}.callPackage ./pkgs/servfail-update { };
+            sigscan = pkgs.${system}.callPackage ./pkgs/sigscan { };
+            sops-edit = pkgs.${system}.callPackage ./pkgs/sops-edit { };
+            telegram-show-hide = pkgs.${system}.callPackage ./pkgs/telegram-show-hide { };
+            ttf-ms-win11 = pkgs.${system}.callPackage ./pkgs/ttf-ms-win11 { };
             # keep-sorted end
           }))
           {
             x86_64-linux = {
-              odin4 = pkgs.x86_64-linux.callPackage ./packages/odin4.nix { };
+              odin4 = pkgs.x86_64-linux.callPackage ./pkgs/odin4 { };
             };
           };
       formatter = forAllSystems (system: treefmtEval.${system}.config.build.wrapper);
