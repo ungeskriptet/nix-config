@@ -1,6 +1,5 @@
 {
   lib,
-  pkgs,
   config,
   ...
 }:
@@ -40,9 +39,6 @@ in
         HostName = "xiatian.${domain}";
         User = "david";
         ForwardAgent = true;
-      };
-      "git-ssh.mainlining.org" = {
-        ProxyCommand = "${lib.getExe pkgs.cloudflared} access ssh --HostName %h";
       };
       "mainlining" = {
         HostName = "mail.mainlining.org";
