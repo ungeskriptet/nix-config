@@ -91,7 +91,21 @@ in
       openssh.authorizedKeys.keys = lib.mkIf (cfg.clients != { }) (
         lib.concatLists (
           lib.mapAttrsToList (
-            hostname: keys: map (key: "restrict,command=\"${sshScript} ${hostname}\" ${key}") keys
+            hostname: keys:
+            let
+              command = lib.concatStringsSep " " [
+                (lib.getExe' pkgs.systemdMinimal "systemd-run")
+                "--pipe"
+                "--collect"
+                "--property=TimeoutStartSec=60"
+                "--description='Update IPs for ${hostname}'"
+                "--service-type=oneshot"
+                "--setenv=SSH_ORIGINAL_COMMAND"
+                sshScript
+                hostname
+              ];
+            in
+            map (key: "restrict,command=\"${command}\" ${key}") keys
           ) cfg.clients
         )
       );
