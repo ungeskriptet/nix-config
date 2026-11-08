@@ -39,27 +39,36 @@ EOF
 }
 
 build_rrset () {
-  rrsets="${1:-"[]"}"
-  name="$2"
-  record_type="$3"
-  contents="$4"
+  while [ $# -gt 0 ]; do
+    case "$1" in
+      --rrsets) rrsets="$2"; shift 2 ;;
+      --name) name="$2"; shift 2 ;;
+      --type) record_type="$2"; shift 2 ;;
+      --contents) contents="$2"; shift 2 ;;
+      --changetype) changetype="$2"; shift 2 ;;
+      *) echo "$0: invalid argument" 1>&2; return 1 ;;
+    esac
+  done
 
   # shellcheck disable=SC2162
-  IFS=',' read -a contents <<< "$contents"
+  IFS=',' read -a contents <<< "${contents:-}"
   for content in "${contents[@]}"; do
     records=$(echo "${records:-"[]"}" | jq -rc ". +=
       [{\"content\":\"$content\"}]
     ")
   done
 
-  echo "$rrsets" | jq -rc ". +=
+  [[ -z "${changetype:-}" && ${#contents[@]} -le 0 ]] && \
+   changetype="DELETE" || changetype="REPLACE"
+
+  echo "${rrsets:-"[]"}" | jq -rc ". +=
     [
       {
         \"name\":\"$name.\",
         \"type\":\"$record_type\",
         \"ttl\":300,
-        \"changetype\":\"REPLACE\",
-        \"records\": $records
+        \"changetype\":\"$changetype\",
+        \"records\": ${records:-"[]"}
       }
     ]
   "
@@ -129,14 +138,44 @@ if [[ -n "${dyndns:-}" ]]; then
   done < /etc/hosts
 
   for entry in "${entries[@]}"; do
-    rrsets=$(build_rrset "${rrsets:-}" "$entry" "ALIAS" "$zone.")
+    rrsets=$(build_rrset \
+      --rrsets "${rrsets:-}" \
+      --name "$entry" \
+      --type "ALIAS" \
+      --contents "$zone."
+    )
   done
 elif [[ -n "${hostname:-}" ]]; then
+  name="$hostname.$zone"
+
   if [[ -n "${ipv6:-}" ]]; then
-    rrsets=$(build_rrset "${rrsets:-}" "$hostname.$zone" "AAAA" "$ipv6")
+    rrsets=$(build_rrset \
+      --rrsets "${rrsets:-}" \
+      --name "$name" \
+      --type "AAAA" \
+      --contents "$ipv6"
+    )
+  else
+    rrsets=$(build_rrset \
+      --rrsets "${rrsets:-}" \
+      --name "$name" \
+      --type "AAAA"
+    )
   fi
+
   if [[ -n "${ipv4:-}" ]]; then
-    rrsets=$(build_rrset "${rrsets:-}" "$hostname.$zone" "A" "$ipv4")
+    rrsets=$(build_rrset \
+      --rrsets "${rrsets:-}" \
+      --name "$name" \
+      --type "A" \
+      --contents "$ipv4"
+    )
+  else
+    rrsets=$(build_rrset \
+      --rrsets "${rrsets:-}" \
+      --name "$name" \
+      --type "A"
+    )
   fi
 fi
 
