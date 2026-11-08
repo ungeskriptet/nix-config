@@ -9,6 +9,35 @@ let
   cfg = config.services.servfail-update;
   format = pkgs.formats.json { };
   extraRRSetsFile = format.generate "servfail-rrsets.json" cfg.extraRRSets;
+  sshScript = pkgs.writeShellScript "servfail-update-ssh" ''
+    set -euo pipefail
+
+    hostname="$1"
+
+    [[ -z "''${SSH_ORIGINAL_COMMAND:-}" ]] && \
+      echo "Please specify IP addresses to update." 2>&1 \
+      && exit 1
+
+    IFS=" " read -a args <<< "$SSH_ORIGINAL_COMMAND"
+    while [[ ''${#args[@]} -gt 0 ]]; do
+      case "$args" in
+       ipv6) ipv6="''${args[1]}"; args=(''${args[@]:2}) ;;
+       ipv4) ipv4="''${args[1]}"; args=(''${args[@]:2}) ;;
+       *) echo "Access denied for unknown argument" 1>&2; exit 1
+      esac
+    done
+
+    args=(
+      --zone ${lib.strings.escapeShellArg cfg.zone}
+      --nameserver ${lib.strings.escapeShellArg cfg.nameserver}
+      --token ${lib.strings.escapeShellArg cfg.tokenFile}
+      --hostname "$hostname"
+    )
+    [[ -n "''${ipv6:-}" ]] && args+=(--ipv6 "$ipv6")
+    [[ -n "''${ipv4:-}" ]] && args+=(--ipv4 "$ipv4")
+
+    ${lib.getExe cfg.package} "''${args[@]}"
+  '';
 in
 {
   options.services.servfail-update = {
@@ -48,8 +77,25 @@ in
       '';
       default = { };
     };
+    clients = lib.mkOption {
+      type = lib.types.attrsOf (lib.types.listOf lib.types.str);
+      description = ''
+        Attribute set of hostnames and public SSH keys
+        as a list for remote clients to update records.
+      '';
+      default = { };
+    };
   };
   config = lib.mkIf cfg.enable {
+    users.users.root = {
+      openssh.authorizedKeys.keys = lib.mkIf (cfg.clients != { }) (
+        lib.concatLists (
+          lib.mapAttrsToList (
+            hostname: keys: map (key: "restrict,command=\"${sshScript} ${hostname}\" ${key}") keys
+          ) cfg.clients
+        )
+      );
+    };
     systemd.services.servfail-update = {
       description = "Project SERVFAIL DNS zone updater";
       after = [
