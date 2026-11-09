@@ -12,6 +12,7 @@ in
   imports = [
     inputs.plasma-manager.homeModules.plasma-manager
     ./kate.nix
+    ./kdeconnect.nix
   ];
 
   options.hm-config.david.plasma = {

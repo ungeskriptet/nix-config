@@ -11,6 +11,7 @@ in
   imports = [
     inputs.sops-nix.homeManagerModules.sops
     ./modules/firefox
+    ./modules/kdeconnect.nix
     ./modules/thunderbird
     ./modules/twinkle.nix
   ];
