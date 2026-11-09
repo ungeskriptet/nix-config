@@ -14,6 +14,7 @@ in
   config = lib.mkIf cfg.enablePlasma {
     programs = {
       kde-pim.enable = false;
+      kdeconnect.enable = true;
     };
 
     services = {
