@@ -18,12 +18,13 @@ let
   cli = lib.getExe' pkgs.kdePackages.kdeconnect-kde "kdeconnect-cli";
   homeDir = config.home.homeDirectory;
   script = pkgs.writeShellScript "kdeconnect-config-setup" ''
-    ${cli} --list-available --id-name-only | while IFS=" " read -ra line; do
+    ${cli} --list-devices --id-name-only | while IFS=" " read -ra line; do
       ${lib.concatStringsSep "\n" (
         lib.mapAttrsToList (_: device: ''
-          if [[ "''${line[1]}" == "${device.name}" ]]; then
+          basedir="''${XDG_CONFIG_HOME:-"${homeDir}/.config"}"/kdeconnect/"''${line[0]}"
+          if [[ "''${line[1]}" == "${device.name}" && -e "$basedir" ]]; then
             ln -sf ${mkCommandConfig device.commands} \
-              "''${XDG_CONFIG_HOME:-"${homeDir}/.config"}"/kdeconnect/"''${line[0]}"/kdeconnect_runcommand/config
+              "$basedir"/kdeconnect_runcommand/config
           fi
         '') cfg.devices
       )}
