@@ -69,6 +69,7 @@ in
           plasmaMobile = "https://plasma-mobile.org/index.xml";
           reactos = "https://reactos.org/index.xml";
           servfail = "https://servfail.network/devlog/atom/";
+          stalwart = "https://stalw.art/blog/rss.xml";
           vcfb = "https://vcfb.de/rss.xml";
           xkcd = "https://xkcd.com/atom.xml";
           # keep-sorted end
