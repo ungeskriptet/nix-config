@@ -48,6 +48,7 @@ in
           ++ lib.optionals config.networking.networkmanager.enable [ "networkmanager" ]
           ++ lib.optionals config.programs.tcpdump.enable [ "pcap" ]
           ++ lib.optionals config.programs.wireshark.enable [ "wireshark" ]
+          ++ lib.optionals (config.users.groups ? uinput && config.hardware.uinput.enable) [ "uinput" ]
           ++ lib.optionals config.virtualisation.libvirtd.enable [ "libvirt" ]
           ++ lib.optionals config.virtualisation.podman.enable [ "podman" ];
           hashedPassword = cfg.hashedPassword;
