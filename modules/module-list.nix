@@ -22,6 +22,7 @@
     ./itgmania.nix
     ./networking.nix
     ./nixpkgs-config.nix
+    ./nm-nsupdate.nix
     ./overlays.nix
     ./packages-common.nix
     ./packages-desktop.nix
