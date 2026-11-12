@@ -62,6 +62,7 @@ in
       description = ''
         Path to a file containing the API token.
       '';
+      readOnly = true;
     };
     dyndnsTokenFile = lib.mkOption {
       type = lib.types.str;
@@ -69,6 +70,7 @@ in
         Path to a file containg the dynamic DNS token.
         This token should point to your root domain.
       '';
+      readOnly = true;
     };
     extraRRSets = lib.mkOption {
       type = format.type;
@@ -87,14 +89,35 @@ in
     };
   };
   config = lib.mkIf cfg.enable {
-    users.users.root = {
-      openssh.authorizedKeys.keys = lib.mkIf (cfg.clients != { }) (
-        lib.concatLists (
+    services.servfail-update = {
+      tokenFile = config.sops.secrets."servfail-update/token".path;
+      dyndnsTokenFile = config.sops.secrets."servfail-update/dyndns".path;
+    };
+    sops.secrets = {
+      "servfail-update/token" = {
+        owner = "root";
+        group = config.users.groups.nsupdate.name;
+        mode = "0440";
+      };
+      "servfail-update/dyndns" = {
+        owner = "root";
+        group = config.users.groups.nsupdate.name;
+        mode = "0440";
+      };
+    };
+    users = lib.mkIf (cfg.clients != { }) {
+      groups.nsupdate = { };
+      users.nsupdate = {
+        isSystemUser = true;
+        shell = pkgs.bashInteractive;
+        group = config.users.groups.nsupdate.name;
+        openssh.authorizedKeys.keys = lib.concatLists (
           lib.mapAttrsToList (
             hostname: keys:
             let
               command = lib.concatStringsSep " " [
                 (lib.getExe' pkgs.systemdMinimal "systemd-run")
+                "--user"
                 "--pipe"
                 "--collect"
                 "--property=TimeoutStartSec=60"
@@ -107,8 +130,8 @@ in
             in
             map (key: "restrict,command=\"${command}\" ${key}") keys
           ) cfg.clients
-        )
-      );
+        );
+      };
     };
     systemd.services.servfail-update = {
       description = "Project SERVFAIL DNS zone updater";
