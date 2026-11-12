@@ -48,6 +48,11 @@ in
     nameserver = "ahra.ns.servfail.ax";
     tokenFile = config.sops.secrets."servfail-update/token".path;
     dyndnsTokenFile = config.sops.secrets."servfail-update/dyndns".path;
+    clients = {
+      ryuzu = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIJDpAD1xX6wlyZfhisku9+EVjtXkzxXJAlhAXEQ8nD3 nsupdate@ryuzu"
+      ];
+    };
     extraRRSets = mkDnsRecords {
       inherit (config.services.servfail-update) zone;
       ttl = 300;
