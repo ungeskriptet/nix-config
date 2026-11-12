@@ -26,7 +26,7 @@ in
   };
   config = lib.mkIf cfg.enable {
     services.nm-nsupdate = {
-      user = lib.mkDefault "root";
+      user = lib.mkDefault "nsupdate";
       server = lib.mkDefault domain;
     };
     sops.secrets."nm-nsupdate/privkey".owner = "root";
