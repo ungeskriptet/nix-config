@@ -72,6 +72,7 @@ in
         };
         CNAME = {
           "*" = domain + ".";
+          stb = "biskupova.televiziastb.sk.";
         };
       };
     };
