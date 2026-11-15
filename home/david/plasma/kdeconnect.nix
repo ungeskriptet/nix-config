@@ -14,6 +14,14 @@ let
       command = "loginctl lock-session";
       name = "Lock Screen";
     };
+    "56420291_48fb_488b_8b27_fc2cfd0a46a4" = {
+      command = "poweroff";
+      name = "Shut Down";
+    };
+    "7ebd1b53_32d1_4034_9175_7f517a5bbee4" = {
+      command = "reboot";
+      name = "Restart";
+    };
   };
 in
 {
