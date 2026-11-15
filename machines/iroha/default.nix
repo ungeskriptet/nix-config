@@ -14,6 +14,13 @@
     supportVpn.interfaceAddress = "192.168.3.8";
   };
 
+  services = {
+    printing = {
+      drivers = with pkgs; [ hplip ];
+      browsing = true;
+    };
+  };
+
   environment = {
     systemPackages = with pkgs; [
       aisleriot
