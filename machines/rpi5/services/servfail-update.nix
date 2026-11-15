@@ -43,6 +43,9 @@ in
     nameserver = "ahra.ns.servfail.ax";
     clients = {
       # keep-sorted start block=yes
+      iroha = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBmKBCxjlb21m3CzgJjrXbymdbc7+SuqxtCQTZzJYqhQ nsupdate@iroha"
+      ];
       ryuzu = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIJDpAD1xX6wlyZfhisku9+EVjtXkzxXJAlhAXEQ8nD3 nsupdate@ryuzu"
       ];
