@@ -25,8 +25,14 @@ writeShellApplication {
     esac
 
     if ! (sops edit "$1" || [ $? -eq 200 ]); then
+      decrypt () {
+        read -rp "Password: " pass
+        echo -n "$pass" |
+          ssh-to-age -stdinpass -private-key -i "$HOME"/.ssh/id_ed25519
+      }
       unset SOPS_AGE_KEY_FILE
-      export SOPS_AGE_KEY_CMD="ssh-to-age -private-key -i $HOME/.ssh/id_ed25519"
+      SOPS_AGE_KEY="$(decrypt)"
+      export SOPS_AGE_KEY
       sops edit "$1"
     fi
   '';
