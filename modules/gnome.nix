@@ -22,7 +22,6 @@ in
         "udev.log_level=3"
       ];
       loader.timeout = 0;
-      initrd.verbose = false;
       plymouth.enable = true;
     };
 
