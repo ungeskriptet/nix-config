@@ -42,9 +42,14 @@ in
     zone = domain;
     nameserver = "ahra.ns.servfail.ax";
     clients = {
+      # keep-sorted start block=yes
       ryuzu = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIJDpAD1xX6wlyZfhisku9+EVjtXkzxXJAlhAXEQ8nD3 nsupdate@ryuzu"
       ];
+      xiatian = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICTIOtULKLTJcVqZA4hk4LhkbseqeNcc6F3IW3jWYeBI nsupdate@xiatian"
+      ];
+      # keep-sorted end
     };
     extraRRSets = mkDnsRecords {
       inherit (config.services.servfail-update) zone;
