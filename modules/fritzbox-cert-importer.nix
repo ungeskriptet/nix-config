@@ -60,6 +60,13 @@ in
                 '';
               };
               insecureTls = lib.mkEnableOption "insecure TLS";
+              serverName = lib.mkOption {
+                type = lib.types.str;
+                description = ''
+                  TLS server hostname to verify the certificate against.
+                '';
+                default = "";
+              };
             };
           }
         )
@@ -82,8 +89,9 @@ in
           environment = {
             FRITZ_URL = v.url;
             FRITZ_USERNAME = v.username;
-          }
-          // lib.optionalAttrs v.insecureTls { FRITZ_INSECURE_TLS = "1"; };
+            FRITZ_INSECURE_TLS = lib.mkIf v.insecureTls "1";
+            FRITZ_SERVER_HOSTNAME = lib.mkIf (v.serverName != "") v.serverName;
+          };
           serviceConfig = {
             Type = "oneshot";
             ExecStart = "${lib.getExe cfg.package} %d/full.pem";
