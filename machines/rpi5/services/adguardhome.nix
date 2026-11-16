@@ -10,15 +10,15 @@ let
   mkDnsRewrite =
     {
       domain,
-      ips,
+      hosts,
       extraRules ? null,
     }:
     map (
-      ip:
-      "|${domain}^$dnsrewrite=${ip}${
+      host:
+      "|${domain}^$dnsrewrite=${host}${
         lib.optionalString (extraRules != null) ("," + lib.concatStringsSep "," extraRules)
       }"
-    ) ips;
+    ) hosts;
   mkDnsRewrites =
     {
       domains,
@@ -98,20 +98,24 @@ in
             }
             ++ (mkDnsRewrite {
               domain = "localhost";
-              ips = [
+              hosts = [
                 "::1"
                 "127.0.0.1"
               ];
             })
             ++ (mkDnsRewrite {
               domain = "fritz.${domain}";
-              ips = [
+              hosts = [
                 cfg.gatewayIpv6
                 cfg.gatewayIpv4
               ];
               extraRules = [
                 "client=~${cfg.gatewayIpv6}|~${cfg.gatewayIpv4}"
               ];
+            })
+            ++ (mkDnsRewrite {
+              domain = "bakabox.${domain}";
+              hosts = [ "bakabox.${cfg.lanDomain}" ];
             });
           dns = {
             hostsfile_enabled = false;
