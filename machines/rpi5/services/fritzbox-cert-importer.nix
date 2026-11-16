@@ -10,6 +10,7 @@ lib.mkMerge (
         url ? "https://${box}.${domain}",
         username ? "certimport",
         insecureTls ? false,
+        serverName ? "",
       }:
       let
         serviceName = config.systemd.services."fritzbox-cert-importer-${box}".name;
@@ -29,7 +30,12 @@ lib.mkMerge (
           enable = true;
           boxes = {
             ${box} = {
-              inherit url username insecureTls;
+              inherit
+                url
+                username
+                insecureTls
+                serverName
+                ;
               fullPemFile = config.security.acme.certs."${box}.${domain}".directory + "/full.pem";
               environmentFile = config.sops.secrets."fritzbox-cert-importer/${box}".path;
             };
@@ -38,6 +44,7 @@ lib.mkMerge (
       }
     )
     {
+      bakabox = { };
       fritz = { };
       omao = {
         url = "https://omao.${domain}:40555";
