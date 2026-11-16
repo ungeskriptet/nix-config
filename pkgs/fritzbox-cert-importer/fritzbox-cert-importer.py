@@ -11,8 +11,20 @@ import xml.etree.ElementTree as ET
 URL = environ["FRITZ_URL"] if getenv("FRITZ_URL") else "https://fritz.box"
 USERNAME = environ["FRITZ_USERNAME"]
 PASSWORD = environ["FRITZ_PASSWORD"]
+HOSTNAME = getenv("FRITZ_SERVER_HOSTNAME")
 
-ctx = ssl.create_default_context()
+if HOSTNAME:
+    print(f"FRITZ_SERVER_HOSTNAME set: Checking TLS hostname against '{HOSTNAME}'")
+
+
+class WrapSSLContext(ssl.SSLContext):
+    def wrap_socket(self, *args, **kwargs):
+        kwargs["server_hostname"] = HOSTNAME if HOSTNAME else kwargs["server_hostname"]
+        return super().wrap_socket(*args, **kwargs)
+
+
+ctx = WrapSSLContext(ssl.PROTOCOL_TLS_CLIENT)
+ctx.load_default_certs()
 if getenv("FRITZ_INSECURE_TLS"):
     print("FRITZ_INSECURE_TLS set: Not verifying TLS certificates")
     ctx.check_hostname = False
