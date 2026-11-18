@@ -33,6 +33,8 @@ in
     };
   };
 
+  security.acme.certs.${domain}.reloadServices = [ config.systemd.services.soju.name ];
+
   systemd.services = {
     soju = {
       requires = [ "postgresql.target" ];
@@ -44,6 +46,7 @@ in
         chmod 660 /run/soju/socket
       '';
       serviceConfig = {
+        RefreshOnReload = true;
         LoadCredential = [
           "tlsCert:${config.acme.tlsCert}"
           "tlsKey:${config.acme.tlsKey}"
