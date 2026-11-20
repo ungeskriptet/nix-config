@@ -57,6 +57,9 @@ def main():
             with open(sys.argv[1], "r") as file:
                 data = (
                     "------BoxCertBoundary\n"
+                    'Content-Disposition: form-data; name="sid"\n\n'
+                    + sid
+                    + "\n------BoxCertBoundary\n"
                     'Content-Disposition: form-data; name="BoxCertImportFile"\n'
                     "Content-Type: application/octet-stream\n\n"
                     + file.read()
