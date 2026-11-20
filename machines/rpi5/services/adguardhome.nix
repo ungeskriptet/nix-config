@@ -116,6 +116,10 @@ in
             ++ (mkDnsRewrite {
               domain = "bakabox.${domain}";
               hosts = [ "bakabox.${cfg.lanDomain}" ];
+            })
+            ++ (mkDnsRewrite {
+              domain = "grandbox.${domain}";
+              hosts = [ "grandbox.${cfg.lanDomain}" ];
             });
           dns = {
             hostsfile_enabled = false;
