@@ -46,6 +46,7 @@ lib.mkMerge (
     {
       bakabox = { };
       fritz = { };
+      grandbox = { };
       omao = {
         url = "https://omao.${domain}:40555";
         username = "david";
