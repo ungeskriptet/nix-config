@@ -344,7 +344,6 @@ in
           };
           path = [
             cfg.package.cli
-            pkgs.curl
             pkgs.systemd
           ];
           restartTriggers = [
