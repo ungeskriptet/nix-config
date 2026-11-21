@@ -6,11 +6,6 @@
         # Checks take a long time
         doCheck = false;
         doInstallCheck = false;
-        pythonRelaxDeps =
-          if (builtins.any (x: x == "torch") prev.paperless-ngx.pythonRelaxDeps) then
-            throw "paperless-ngx: 'torch' already relaxed"
-          else
-            prev.paperless-ngx.pythonRelaxDeps ++ [ "torch" ];
       };
       pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
         (
