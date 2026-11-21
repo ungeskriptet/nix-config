@@ -909,6 +909,29 @@ in
               websocketTimeout = 600000;
             };
           }
+          {
+            "@type" = "reconcile";
+            matchOn = [ "clientId" ];
+            object = "OAuthClient";
+            value = {
+              oauthclient-1 = {
+                clientId = "headscale";
+                contacts = { };
+                description = "Headscale";
+                expiresAt = null;
+                logo = null;
+                postLogoutRedirectUris = { };
+                scopes = { };
+                grantTypes = {
+                  authorizationCode = true;
+                };
+                redirectUris = {
+                  "https://vpn.${domain}/oidc/callback" = true;
+                };
+              };
+            };
+          }
+
         ];
       };
     };
