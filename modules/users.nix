@@ -24,6 +24,12 @@ in
       default = null;
       description = "Hashed password for the default user.";
     };
+    rootUser = lib.mkOption {
+      type = lib.types.str;
+      default = "root";
+      description = "Name of the root user.";
+      readOnly = true;
+    };
   };
 
   config = {
@@ -55,6 +61,7 @@ in
           openssh.authorizedKeys.keys = config.vars.sshPubKeys;
         };
         root = {
+          name = cfg.rootUser;
           openssh.authorizedKeys.keys = config.vars.sshPubKeys;
         };
       };
