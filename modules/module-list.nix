@@ -31,6 +31,7 @@
     ./popt/nixos.nix
     ./secureboot.nix
     ./servfail-update.nix
+    ./sudo.nix
     ./support-vpn.nix
     ./users.nix
     ./virtualization.nix
