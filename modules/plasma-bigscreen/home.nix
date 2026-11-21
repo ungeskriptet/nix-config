@@ -22,6 +22,6 @@
   home = {
     username = "htpc";
     homeDirectory = "/home/htpc";
-    stateVersion = "26.05";
+    stateVersion = "26.11";
   };
 }
