@@ -49,6 +49,7 @@ in
           fexEmu = "https://fex-emu.com/feed.xml";
           fosdem = "https://fosdem.org/rss.xml";
           gnome = "https://release.gnome.org/atom.xml";
+          gnomeTwig = "https://thisweek.gnome.org/index.xml";
           haiku = "https://www.haiku-os.org/index.xml";
           halalBeef = "https://halal-beef.github.io/steakhouse/index.xml";
           haveibeenpwned = "https://haveibeenpwned.com/feed/breaches";
