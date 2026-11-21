@@ -62,6 +62,7 @@ in
         st = "systemctl status";
         sta = "systemctl start";
         sto = "systemctl stop";
+        sudo = "sudo --preserve-env=NIX_SSHOPTS,SSH_AUTH_SOCK";
         switch-nixos = "sudo nh os switch /etc/nixos -LR --accept-flake-config --show-activation-logs";
         tftp-server = "sudo mkdir -p -m a=rwx tftp; sudo in.tftpd --foreground --listen --address :69 --secure --create ./tftp";
         v = "vim";
