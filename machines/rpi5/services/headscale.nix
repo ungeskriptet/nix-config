@@ -38,9 +38,9 @@ in
           override_local_dns = false;
         };
         oidc = {
-          issuer = "https://auth.${domain}";
-          client_id = "6ae8c236-d562-4f2e-8ce7-164bbf608d71";
-          client_secret_path = "\${CREDENTIALS_DIRECTORY}/oidc_secret";
+          issuer = "https://mail.${domain}";
+          client_id = "headscale";
+          client_secret = "headscale";
           pkce.enabled = true;
         };
       };
@@ -69,23 +69,20 @@ in
     firewall.allowedUDPPorts = [ 3478 ];
   };
 
-  sops.secrets."headscale/oidc_secret".owner = "root";
-
   systemd.services.headscale = {
     after = [
       config.systemd.services.adguardhome.name
-      config.systemd.services.tinyauth.name
+      config.systemd.services.stalwart.name
     ];
     before = [
       config.systemd.services.caddy.name
     ];
     wants = [
       config.systemd.services.adguardhome.name
-      config.systemd.services.tinyauth.name
+      config.systemd.services.stalwart.name
     ];
     serviceConfig = {
       LoadCredential = [
-        "oidc_secret:${config.sops.secrets."headscale/oidc_secret".path}"
         "tlsCert:${config.acme.tlsCert}"
         "tlsKey:${config.acme.tlsKey}"
       ];
