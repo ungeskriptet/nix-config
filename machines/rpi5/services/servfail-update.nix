@@ -46,6 +46,9 @@ in
       iroha = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBmKBCxjlb21m3CzgJjrXbymdbc7+SuqxtCQTZzJYqhQ nsupdate@iroha"
       ];
+      rimuru = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPJ98H94fF+wAn3ncNp02wLRE09i0Y9i5xl7e9Jtd+Mh nsupdate@rimuru"
+      ];
       ryuzu = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIJDpAD1xX6wlyZfhisku9+EVjtXkzxXJAlhAXEQ8nD3 nsupdate@ryuzu"
       ];
