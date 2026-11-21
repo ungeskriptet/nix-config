@@ -24,14 +24,6 @@
 
   security = {
     rtkit.enable = true;
-    polkit.extraConfig = ''
-      polkit.addRule(function(action, subject) {
-        if (
-          action.id == "org.freedesktop.udisks2.encrypted-unlock-system" &&
-          subject.isInGroup("wheel")
-        ) { return polkit.Result.YES; }
-      });
-    '';
     sudo.extraConfig = ''
       Defaults env_keep+="NIX_SSHOPTS SSH_AUTH_SOCK"
     '';
