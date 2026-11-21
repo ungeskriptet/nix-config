@@ -66,9 +66,5 @@
           language = "de";
         };
       };
-      home = {
-        username = config.users.userName;
-        homeDirectory = "/home/${config.users.userName}";
-      };
     };
 }
