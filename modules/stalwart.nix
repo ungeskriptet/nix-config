@@ -82,9 +82,9 @@ in
 
     package = {
       cli = lib.mkPackageOption pkgs "stalwart-cli" { };
-      server = lib.mkPackageOption pkgs "stalwart_1_0" { };
-      spam-filter = lib.mkPackageOption pkgs [ "stalwart_1_0" "spam-filter" ] { };
-      webui = lib.mkPackageOption pkgs [ "stalwart_1_0" "webui" ] { };
+      server = lib.mkPackageOption pkgs "stalwart_1" { };
+      spam-filter = lib.mkPackageOption pkgs [ "stalwart_1" "spam-filter" ] { };
+      webui = lib.mkPackageOption pkgs [ "stalwart_1" "webui" ] { };
     };
 
     dataDir = lib.mkOption {
