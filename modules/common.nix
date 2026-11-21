@@ -24,9 +24,6 @@
 
   security = {
     rtkit.enable = true;
-    sudo.extraConfig = ''
-      Defaults env_keep+="NIX_SSHOPTS SSH_AUTH_SOCK"
-    '';
   };
 
   networking = {
