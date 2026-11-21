@@ -44,17 +44,6 @@ in
       };
     };
 
-    security = {
-      polkit.extraConfig = ''
-        polkit.addRule(function(action, subject) {
-          if (
-            action.id == "org.kde.kcontrol.kcmplasmalogin.sync" &&
-            subject.isInGroup("wheel")
-          ) { return polkit.Result.YES; }
-        });
-      '';
-    };
-
     systemd.user.services.ssh-add = {
       wantedBy = [ "default.target" ];
       requires = [ "ssh-agent.service" ];
