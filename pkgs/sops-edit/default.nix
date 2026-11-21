@@ -26,7 +26,7 @@ writeShellApplication {
 
     if ! (sops edit "$1" || [ $? -eq 200 ]); then
       decrypt () {
-        read -rp "Password: " pass
+        read -srp "Password: " pass
         echo -n "$pass" |
           ssh-to-age -stdinpass -private-key -i "$HOME"/.ssh/id_ed25519
       }
