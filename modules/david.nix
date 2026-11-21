@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
 let
@@ -22,44 +23,49 @@ in
   };
 
   config = lib.mkIf cfg.david.enable (
-    lib.mkMerge [
-      {
-        home-manager = {
-          users.david = {
-            imports = [ ../home/david/module-list.nix ];
+    lib.mkMerge (
+      [
+        (lib.mkIf (cfg.deviceType == "desktop") {
+          nix-config = {
+            enableVirt = true;
+            enablePlasma = true;
+          };
+          home-manager.users.david = {
             hm-config.david = {
-              desktop.enable = lib.mkIf (cfg.deviceType == "desktop") true;
+              desktop.enable = true;
+              plasma.enable = true;
             };
           };
-        };
-      }
-      (lib.mkIf (cfg.deviceType == "desktop") {
-        nix-config = {
-          enableVirt = true;
-          enablePlasma = true;
-        };
-        home-manager.users.david = {
-          hm-config.david = {
-            plasma.enable = true;
+          programs.obs-studio = {
+            enable = true;
+            enableVirtualCamera = true;
           };
-        };
-        programs.obs-studio = {
-          enable = true;
-          enableVirtualCamera = true;
-        };
-      })
-      (lib.mkIf (cfg.david.profile == "personal") {
-        # Automatically inject payload when a Nintendo Switch is connected
-        systemd.tmpfiles.rules = [ "d /var/lib/fusee-nano 0777 root root -" ];
-        services = {
-          udev.extraRules = with pkgs; ''
-            ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="0955", ATTR{idProduct}=="7321", RUN+="${lib.getExe fusee-nano} /var/lib/fusee-nano/payload.bin"
-          '';
-        };
-        home-manager.users.david = {
-          hm-config.david.profile = "personal";
-        };
-      })
-    ]
+        })
+        (lib.mkIf (cfg.david.profile == "personal") {
+          # Automatically inject payload when a Nintendo Switch is connected
+          systemd.tmpfiles.rules = [ "d /var/lib/fusee-nano 0777 root root -" ];
+          services = {
+            udev.extraRules = with pkgs; ''
+              ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="0955", ATTR{idProduct}=="7321", RUN+="${lib.getExe fusee-nano} /var/lib/fusee-nano/payload.bin"
+            '';
+          };
+        })
+      ]
+      ++ (map
+        (user: {
+          home-manager.users.${user} = {
+            imports = [ ../home/david/module-list.nix ];
+            hm-config.david.profile = lib.mkIf (cfg.david.profile == "personal") "personal";
+            sops = {
+              defaultSopsFile = "${inputs.self}/secrets/user-${config.users.userName}.yaml";
+            };
+          };
+        })
+        [
+          config.users.userName
+          config.users.rootUser
+        ]
+      )
+    )
   );
 }
