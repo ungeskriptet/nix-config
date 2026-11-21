@@ -23,13 +23,6 @@ in
           autoPrune.enable = true;
         };
       };
-      security.polkit.extraConfig = ''
-        polkit.addRule(function(action, subject) {
-            if (action.id == "org.libvirt.unix.manage" && subject.isInGroup("wheel")) {
-                return polkit.Result.YES;
-            }
-        });
-      '';
       networking.firewall.trustedInterfaces = [ "virbr0" ];
     })
   ];
