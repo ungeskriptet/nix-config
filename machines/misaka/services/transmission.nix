@@ -27,11 +27,10 @@ in
 
     caddy.hosts.${fqdn} = {
       reverseProxies."unix/${cfg.home}/transmission.sock" = { };
-      extraConfig = ''
-        forward_auth https://auth.${domain} {
-          uri /api/auth/caddy
-        }
-      '';
+      basicAuth = {
+        user = "david";
+        hash = "$2b$05$tFLIJTnvtIVo1Brliz5K7.mZdzbS.xNygXbtzbJd79UNFHld3byT.";
+      };
     };
   };
 }
