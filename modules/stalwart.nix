@@ -76,6 +76,7 @@ let
     ];
 in
 {
+  disabledModules = [ "services/mail/stalwart.nix" ];
   options.services.stalwart = {
     enable = lib.mkEnableOption "the all-in-one collaboration and mail server, Stalwart";
 

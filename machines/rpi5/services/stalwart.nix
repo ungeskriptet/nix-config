@@ -149,9 +149,6 @@ let
   };
 in
 {
-  disabledModules = [ "services/mail/stalwart.nix" ];
-  imports = [ ../../../modules/stalwart.nix ];
-
   sops.secrets = {
     "stalwart/recoverypass".owner = "root";
     "stalwart/reloadpass".owner = "root";
