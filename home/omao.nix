@@ -15,9 +15,4 @@
       language = "de";
     };
   };
-
-  home = {
-    username = "omao";
-    homeDirectory = "/home/omao";
-  };
 }

@@ -15,9 +15,4 @@
       language = "de";
     };
   };
-
-  home = {
-    username = "grazyna";
-    homeDirectory = "/home/grazyna";
-  };
 }

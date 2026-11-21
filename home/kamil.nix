@@ -15,9 +15,4 @@
       language = "pl";
     };
   };
-
-  home = {
-    username = "kamil";
-    homeDirectory = "/home/kamil";
-  };
 }

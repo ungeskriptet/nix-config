@@ -72,8 +72,6 @@ in
     };
 
     home = {
-      username = lib.mkDefault "david";
-      homeDirectory = lib.mkDefault "/home/david";
       file = lib.mkIf (cfg.profile == "personal") (
         {
           ".android/adbkey.pub".source = ./dotfiles/adbkey.pub;
