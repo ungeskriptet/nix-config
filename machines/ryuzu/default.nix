@@ -7,7 +7,6 @@
     ./home-assistant/powerdown.nix
     ./home-assistant/ssh.nix
     ./nginx.nix
-    ../../modules/minecraft-server.nix
   ];
 
   networking = {
