@@ -15,13 +15,6 @@
   };
 
   security = {
-    polkit.extraConfig = ''
-      polkit.addRule(function(action, subject) {
-          if (action.id == "com.bitwarden.Bitwarden.unlock" && subject.isInGroup("wheel")) {
-              return polkit.Result.YES;
-          }
-      });
-    '';
     sudo.wheelNeedsPassword = false;
   };
 
