@@ -5,38 +5,6 @@
 {
   imports = [
     # keep-sorted start
-    ./acme.nix
-    ./caddy-common.nix
-    ./caddy-hosts.nix
-    ./common-vars.nix
-    ./common.nix
-    ./david.nix
-    ./desktop.nix
-    ./fingerprint.nix
-    ./fmd-server.nix
-    ./fritzbox-cert-importer.nix
-    ./fritzbox-dyndns-interceptor.nix
-    ./git/nixos.nix
-    ./gnome.nix
-    ./hardware.nix
-    ./itgmania.nix
-    ./networking.nix
-    ./nixpkgs-config.nix
-    ./nm-nsupdate.nix
-    ./overlays.nix
-    ./packages-common.nix
-    ./packages-desktop.nix
-    ./plasma-bigscreen
-    ./plasma.nix
-    ./popt/nixos.nix
-    ./secureboot.nix
-    ./servfail-update.nix
-    ./stalwart.nix
-    ./sudo.nix
-    ./support-vpn.nix
-    ./users.nix
-    ./virtualization.nix
-    ./zsh/nixos
     inputs.disko.nixosModules.disko
     inputs.home-manager.nixosModules.home-manager
     inputs.nix-index-database.nixosModules.default

@@ -105,13 +105,13 @@
     in
     {
       inherit lib;
-      nixosModules.default = ./modules/module-list.nix;
+      nixosModules.default = ./modules;
       nixosConfigurations = {
         rpi5 = nixos-raspberrypi.lib.nixosSystem {
           specialArgs = { inherit inputs nixos-raspberrypi; };
           modules = [
             ./machines/rpi5
-            ./modules/module-list.nix
+            ./modules
             inputs.nixos-raspberrypi.nixosModules.raspberry-pi-5.base
             inputs.nixos-raspberrypi.nixosModules.raspberry-pi-5.bluetooth
           ];

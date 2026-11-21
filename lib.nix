@@ -42,7 +42,7 @@ in
             }
             // (lib.optionalAttrs (specialArgs != null) specialArgs);
             modules = [
-              ./modules/module-list.nix
+              ./modules
               path
               {
                 nixpkgs.hostPlatform = system;
