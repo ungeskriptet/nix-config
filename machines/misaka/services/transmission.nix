@@ -22,6 +22,7 @@ in
         rpc-host-whitelist-enabled = true;
         rpc-host-whitelist = fqdn;
         rpc-url = "/";
+        watch-dir-enabled = true;
       };
     };
 
