@@ -1,15 +1,21 @@
 {
   writeShellApplication,
+  keep-sorted,
   sops,
   ssh-to-age,
 }:
 writeShellApplication {
   name = "sops-edit";
   runtimeInputs = [
+    keep-sorted
     sops
     ssh-to-age
   ];
   text = ''
+    unset SOPS_AGE_KEY_FILE
+    unset SOPS_AGE_KEY_CMD
+    unset SOPS_AGE_KEY
+
     file="''${1##*/}"
 
     case "$file" in
@@ -24,7 +30,7 @@ writeShellApplication {
         exit
     esac
 
-    if ! (sops edit "$1" || [ $? -eq 200 ]); then
+    if ! (sops edit "$1" || [[ $? -eq 200 ]]); then
       decrypt () {
         read -srp "Password: " pass
         echo -n "$pass" |
@@ -33,7 +39,19 @@ writeShellApplication {
       unset SOPS_AGE_KEY_FILE
       SOPS_AGE_KEY="$(decrypt)"
       export SOPS_AGE_KEY
-      sops edit "$1"
+      sops edit "$1" || [[ $? -eq 200 ]]
     fi
+
+    add-keep-sorted-tags () {
+      echo "# keep-sorted start block=yes"
+      sops decrypt "$1"
+      echo "# keep-sorted end"
+    }
+    readarray secrets < <(add-keep-sorted-tags "$1" | keep-sorted -)
+    unset "secrets[0]"
+    unset "secrets[-1]"
+    IFS=
+    # shellcheck disable=SC2094
+    sops encrypt --filename-override "$1" <<<"''${secrets[*]}" > "$1"
   '';
 }
