@@ -14,7 +14,10 @@ in
   };
   config = lib.mkIf cfg.enable {
     boot = {
-      loader.systemd-boot.enable = lib.mkForce false;
+      loader = {
+        systemd-boot.enable = lib.mkForce false;
+        timeout = 0;
+      };
       lanzaboote = {
         enable = true;
         pkiBundle = "/var/lib/sbctl";
