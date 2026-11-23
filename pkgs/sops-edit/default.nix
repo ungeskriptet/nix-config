@@ -43,9 +43,11 @@ writeShellApplication {
     fi
 
     add-keep-sorted-tags () {
-      echo "# keep-sorted start block=yes"
+      echo -n "# keep-sorted"
+      echo " start block=yes"
       sops decrypt "$1"
-      echo "# keep-sorted end"
+      echo -n "# keep-sorted"
+      echo " end"
     }
     readarray secrets < <(add-keep-sorted-tags "$1" | keep-sorted -)
     unset "secrets[0]"
