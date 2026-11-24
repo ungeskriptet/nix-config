@@ -399,6 +399,7 @@ in
           ++ lib.optional (cfg.certReload != "") pkgs.stalwart-cli;
           environment = {
             STALWART_RECOVERY_MODE_PORT = toString cfg.recoveryMode.port;
+            STALWART_UPDATE_ROLE_PERMISSIONS = "true";
           };
           unitConfig = {
             ConditionPathExists = [
