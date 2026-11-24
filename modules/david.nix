@@ -57,7 +57,7 @@ in
             imports = [ ../home/david/module-list.nix ];
             hm-config.david.profile = lib.mkIf (cfg.david.profile == "personal") "personal";
             sops = {
-              defaultSopsFile = "${inputs.self}/secrets/user-${config.users.userName}.yaml";
+              defaultSopsFile = lib.mkOverride 900 "${inputs.self}/secrets/user-${config.users.userName}.yaml";
             };
           };
         })
