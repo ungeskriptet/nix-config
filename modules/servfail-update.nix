@@ -148,6 +148,9 @@ in
         config.environment.etc."hosts".source
         (lib.mkIf (cfg.extraRRSets != { }) extraRRSetsFile)
       ];
+      path = with pkgs; [
+        openssh
+      ];
       serviceConfig = {
         Type = "oneshot";
         LoadCredential = [
