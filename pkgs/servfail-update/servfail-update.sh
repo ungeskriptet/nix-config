@@ -80,7 +80,7 @@ curl_args=(
   --max-time 3
   --retry 10
   --fail
-  --user-agent "ungeskriptet/servfail-update"
+  --user-agent "david-w.eu/servfail-update"
 )
 
 # Register the argument first and set the value in the second loop iteration.
