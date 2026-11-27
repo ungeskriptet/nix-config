@@ -46,7 +46,7 @@ build_rrset () {
       --type) record_type="$2"; shift 2 ;;
       --contents) contents="$2"; shift 2 ;;
       --changetype) changetype="$2"; shift 2 ;;
-      *) echo "$0: invalid argument" 1>&2; return 1 ;;
+      *) echo "${FUNCNAME[0]}: invalid argument" 1>&2; return 1 ;;
     esac
   done
 
