@@ -47,6 +47,7 @@ in
             redir /tv https://download.teamviewer.com/download/TeamViewerQS_x64.exe temporary
             redir /fb https://fritz.david-w.eu:22524/ temporary
             redir /omao https://omao.david-w.eu:40555/ temporary
+            redir /servfail-update https://codeberg.org/ungeskriptet/nix-config/src/branch/master/pkgs/servfail-update/servfail-update.sh temporary
           '';
         };
       };
