@@ -145,6 +145,29 @@ if [[ -n "${dyndns:-}" ]]; then
       --contents "$zone."
     )
   done
+
+  sshfp=$(ssh-keygen -r "$zone" || true)
+  if [[ -n "${sshfp:-}" ]]; then
+    contents=""
+    while IFS=" " read -ra line; do
+      if [[ -n "${contents:-}" ]]; then
+        contents+=","
+      fi
+      if [[ ${#line[@]} -eq 6 ]]; then
+        unset -v "line[0]" "line[1]" "line[2]"
+        contents+="${line[*]}"
+      fi
+    done <<<"$sshfp"
+    if [[ -n "${contents:-}" ]]; then
+      rrsets=$(build_rrset \
+        --rrsets "${rrsets:-}" \
+        --name "$zone" \
+        --type "SSHFP" \
+        --changetype "REPLACE" \
+        --contents "$contents"
+      )
+    fi
+  fi
 elif [[ -n "${hostname:-}" ]]; then
   name="$hostname.$zone"
 
