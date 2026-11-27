@@ -4,7 +4,7 @@
 set -eou pipefail
 
 help () {
-  cat <<EOF
+  { read -r -d "" || printf '%s' "$REPLY"; }<<EOF
 DNS updater for Project SERVFAIL.
 
 Usage:
